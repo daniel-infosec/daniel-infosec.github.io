@@ -1,50 +1,39 @@
-baseURL = "https://example.com/"
+baseURL = "https://dweezy.net/"
 languageCode = "en-us"
-title = "Eddie Webb"
+title = "Daniel Wyleczuk-Stern"
 theme = "hugo-resume"
 
 [params]
-    firstName = "Eddie"
-    lastName = "Webb"
-    address = "Rollinsford, NH"
-    phone = "1-555-555-1234"
-    contactNote = "Dev Tools Engineer"
-    profileImage = "img/TechChat.png"
-    email = "email@domain.com"
-    description = "Software Platform Engineer with experience leveraging agile, DevOps, and CI/CD to manage large scale distributed platforms both on prem and in public cloud."
+    firstName = "Daniel"
+    lastName = "Wyleczuk-Stern"
+    address = "Washington, DC"
+    contactNote = "Principal Security Engineer"
+    profileImage = "img/profile1.jpg"
+    email = "dweezy.netsec@gmail.com"
+    description = "Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response."
     favicon = "images/favicon.ico"
     # what sections
     showSkills = true
-    showProjects = true
-    showOpenSource = true
-    showPublications = true
+    showProjects = false
+    showOpenSource = false
+    showPublications = false
     showExperience = true
     showEducation = true
 
-    showQr = true
+    showQr = false
 
 [[params.handles]]
     name = "LinkedIn"
-    link = "https://www.linkedin.com/in/edwardwebb/"
+    link = "https://www.linkedin.com/in/danielwyleczukstern/"
 
 
 [[params.handles]]
     name = "GitHub"
-    link = "https://github.com/eddiewebb/"
+    link = "https://github.com/dweezy-netsec"
 
 [[params.handles]]
-    name = "Bitbucket"
-    link = "https://bitbucket.org/eddiewebb/"
-
-[[params.handles]]
-    name = "Stack Overflow"
-    link = "https://stackoverflow.com/users/story/82880"
-    icon = "stack-overflow"
-
-[[params.handles]]
-    name = "Keybase"
-    link = "https://keybase.io/edwardawebb"
-    icon = "keybase"
+    name = "Twitter"
+    link = "https://twitter.com/Daniel_Cybersec"
 
 [params.google.analytics]
     trackerID = "XX-123446-01"

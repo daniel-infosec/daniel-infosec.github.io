@@ -9,4 +9,4 @@ outputs:
 - rss
 - json
 ---
-<p>Proven Software Platform Engineer with experience leveraging agile, DevOps, and CI/CD to manage large scale distributed platforms both on prem and in public cloud.</p>
+<p>Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.</p>

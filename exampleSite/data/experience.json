@@ -1,20 +1,20 @@
 [
     {
-        "role":"Boss man",
-        "company":"Current Company LTD",
-        "summary":"Led in development of fast paced software teams.",
-        "range":"February 2016 - Present"
+        "role":"Principal Security Engineer",
+        "company":"Praetorian",
+        "summary":"Purple Team lead and offensive security engineer.",
+        "range":"Nov 2017 - Present"
     },
     {
-        "role":"Developer",
-        "company":"Current Company LTD",
-        "summary":"Expedited the synergies of collaborative agile tooling.",
-        "range":"March 2014 - February 2016"
+        "role":"Mission Command and Penetration Tester",
+        "company":"US Air Force - 92d Cyberspace Operations Squadron",
+        "summary":"Performed and lead security assessments of Air Force systems undergoing Operational Test & Evaluation (OTE).",
+        "range":"Oct 2015 - Oct 2017"
     },
     {
-        "role":"Developer",
-        "company":"Previous Company Inc.",
-        "summary":"Implemented continuous devops pipelines automationing",
-        "range":"February 2013 - March 2014"
+        "role":"Cyber Threat Emulation Network Defense Manager and Operator",
+        "company":"US Air Force - 92d Cyberspace Operations Squadron",
+        "summary":"Conducted security tests to emulate known Advanced Persistent Threats (APTs) to assess the detectio nand response capabilities of operational networks.",
+        "range":"Dec 2013 - Oct 2015"
     }
 ]
