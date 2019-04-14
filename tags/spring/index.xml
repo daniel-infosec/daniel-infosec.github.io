@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring on Daniel Wyleczuk-Stern</title>
-    <link>https://dweezy-netsec.github.io/index.html/tags/spring/</link>
+    <link>https://dweezy-netsec.github.io/tags/spring/</link>
     <description>Recent content in Spring on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://dweezy-netsec.github.io/index.html/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dweezy-netsec.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Atlassian Marketplace Plugins</title>
-      <link>https://dweezy-netsec.github.io/index.html/projects/creations/marketplace/</link>
+      <link>https://dweezy-netsec.github.io/projects/creations/marketplace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dweezy-netsec.github.io/index.html/projects/creations/marketplace/</guid>
+      <guid>https://dweezy-netsec.github.io/projects/creations/marketplace/</guid>
       <description>Multiple plugins used by thousands of teams that provide enhanced functionality of Atlassian’s core products (primarily JIRA and Bamboo) to enrich CI/CD capabilities, DevOps automation, or productivity. Functionality spans user interface, web services and persistence.</description>
     </item>
     
