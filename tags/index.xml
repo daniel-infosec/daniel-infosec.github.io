@@ -6,10 +6,46 @@
     <description>Recent content in Tags on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Feb 2018 12:41:05 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://dweezy-netsec.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adversary Emulation</title>
+      <link>https://dweezy-netsec.github.io/tags/adversary-emulation/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dweezy-netsec.github.io/tags/adversary-emulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C2</title>
+      <link>https://dweezy-netsec.github.io/tags/c2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dweezy-netsec.github.io/tags/c2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>https://dweezy-netsec.github.io/tags/demo/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dweezy-netsec.github.io/tags/demo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>https://dweezy-netsec.github.io/tags/security/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dweezy-netsec.github.io/tags/security/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Atlassian Ecosystem</title>

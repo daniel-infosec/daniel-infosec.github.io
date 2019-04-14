@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
+      <link>https://dweezy-netsec.github.io/blog/wikipediac2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://dweezy-netsec.github.io/blog/wikipediac2/</guid>
+      <description>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</description>
+    </item>
+    
+    <item>
       <title>Organically DevOps: Building Quality and Security into the Software Supply Chain at Liberty Mutual</title>
       <link>https://dweezy-netsec.github.io/publications/alldaydevops/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
