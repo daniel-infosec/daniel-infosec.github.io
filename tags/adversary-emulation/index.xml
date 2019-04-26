@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Adversary Emulation on Daniel Wyleczuk-Stern</title>
-    <link>https://dweezy-netsec.github.io/tags/adversary-emulation/</link>
+    <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
     <description>Recent content in Adversary Emulation on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dweezy-netsec.github.io/tags/adversary-emulation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://daniel-infosec.github.io/tags/adversary-emulation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Demonstrating the Future of Command and Control with Wikipedia</title>
-      <link>https://dweezy-netsec.github.io/blog/wikipediac2/</link>
+      <link>https://daniel-infosec.github.io/blog/wikipediac2/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://dweezy-netsec.github.io/blog/wikipediac2/</guid>
+      <guid>https://daniel-infosec.github.io/blog/wikipediac2/</guid>
       <description>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</description>
     </item>
     
