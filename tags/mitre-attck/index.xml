@@ -6,7 +6,7 @@
     <description>Recent content in MITRE ATT&amp;CK on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://daniel-infosec.github.io/tags/mitre-attck/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
       <link>https://daniel-infosec.github.io/blog/attackbenchmark/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/blog/attackbenchmark/</guid>
       <description>I wrote a blog post on Praetorian&amp;rsquo;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;amp;CK™. You can check out the blog here.</description>

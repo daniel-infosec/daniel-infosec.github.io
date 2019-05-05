@@ -19,13 +19,13 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/wikipediac2/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <loc>https://daniel-infosec.github.io/blog/attackbenchmark/</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/attackbenchmark/</loc>
+    <loc>https://daniel-infosec.github.io/blog/wikipediac2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
@@ -48,13 +48,31 @@
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/adversary-emulation/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/blog/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/mitre-attck/</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/security/</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -66,24 +84,6 @@
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/demo/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/mitre-attck/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/security/</loc>
-    <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -106,6 +106,12 @@
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/tags/devops/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
@@ -118,25 +124,19 @@
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/tags/python/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/tags/rest-apis/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://daniel-infosec.github.io/tags/monit/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/python/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
   </url>
