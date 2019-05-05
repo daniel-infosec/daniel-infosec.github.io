@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
+      <link>https://daniel-infosec.github.io/blog/attackbenchmark/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/blog/attackbenchmark/</guid>
+      <description>I wrote a blog post on Praetorian&amp;rsquo;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;amp;CK™. You can check out the blog here.</description>
+    </item>
+    
+    <item>
       <title>Organically DevOps: Building Quality and Security into the Software Supply Chain at Liberty Mutual</title>
       <link>https://daniel-infosec.github.io/publications/alldaydevops/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
