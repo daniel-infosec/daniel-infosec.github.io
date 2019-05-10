@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MITRE ATT&amp;CK on Daniel Wyleczuk-Stern</title>
-    <link>https://daniel-infosec.github.io/tags/mitre-attck/</link>
-    <description>Recent content in MITRE ATT&amp;CK on Daniel Wyleczuk-Stern</description>
+    <title>automation on Daniel Wyleczuk-Stern</title>
+    <link>https://daniel-infosec.github.io/tags/automation/</link>
+    <description>Recent content in automation on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://daniel-infosec.github.io/tags/mitre-attck/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://daniel-infosec.github.io/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</guid>
       <description>We&amp;rsquo;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&amp;rsquo;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module. You can check out the blog here or watch the YouTube video.</description>
-    </item>
-    
-    <item>
-      <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
-      <link>https://daniel-infosec.github.io/blog/attackbenchmark/</link>
-      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/blog/attackbenchmark/</guid>
-      <description>I wrote a blog post on Praetorian&amp;rsquo;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;amp;CK™. You can check out the blog here.</description>
     </item>
     
   </channel>
