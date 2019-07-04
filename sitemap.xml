@@ -19,7 +19,7 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/</loc>
+    <loc>https://daniel-infosec.github.io/blog/saassubdomainrecon/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
@@ -142,12 +142,6 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://daniel-infosec.github.io/tags/devops/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
@@ -160,19 +154,25 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/python/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://daniel-infosec.github.io/tags/rest-apis/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/tags/monit/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/python/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0</priority>
   </url>

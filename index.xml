@@ -21,11 +21,11 @@
     </item>
     
     <item>
-      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
-      <link>https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/</link>
+      <title>SaaS Reconnaissance Utilizing Subdomains</title>
+      <link>https://daniel-infosec.github.io/blog/saassubdomainrecon/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/</guid>
+      <guid>https://daniel-infosec.github.io/blog/saassubdomainrecon/</guid>
       <description>On a recent Purple Team engagement, I was accessing the client&amp;rsquo;s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
     </item>
     
