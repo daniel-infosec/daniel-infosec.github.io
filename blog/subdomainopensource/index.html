@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Demonstrating the Future of Command and Control with Wikipedia</title>
+  <meta property="og:title" content="Demonstrating the Future of Command and Control with Wikipedia" />
+  <meta property="og:image" content="https://daniel-infosec.github.io/img/profile1.jpg" />
+  <meta name="description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
+Thanks to https://github.com/eddiewebb/hugo-resume for the website theme.">
+  <meta property="og:description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
+Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
+  <meta name="author" content="Daniel Wyleczuk-Stern">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+  
+  <link href="https://daniel-infosec.github.io/css/resume.css" rel="stylesheet">
+  <link href="https://daniel-infosec.github.io/css/tweaks.css" rel="stylesheet">
+  <meta name="generator" content="Hugo 0.55.0" />
+  
+   
+  
+</head>
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+  <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    <span class="d-block d-lg-none">Daniel Wyleczuk-Stern</span>
+    <span class="d-none d-lg-block">
+      <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/img/profile1.jpg" alt="">
+    </span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="/#about">About</a>
+      </li>
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#skills">Skills</a>
+          </li>
+      
+      
+      
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#experience">Experience</a>
+          </li>
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#education">Education</a>
+          </li>
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#blog">Blog</a>
+          </li>
+      
+    </ul>
+  </div>
+</nav>
+
+  <div class="container-fluid p-0">
+    
+<nav aria-label="breadcrumb">
+  <ol  class="breadcrumb">
+    
+
+
+
+
+
+<li class="breadcrumb-item">
+  <a href="https://daniel-infosec.github.io/">Home</a>
+</li>
+
+
+<li class="breadcrumb-item">
+  <a href="https://daniel-infosec.github.io/blog/">Blogs</a>
+</li>
+
+
+<li class="breadcrumb-item active">
+  <a href="https://daniel-infosec.github.io/blog/wikipediac2/">Demonstrating the Future of Command and Control with Wikipedia</a>
+</li>
+
+  </ol>
+</nav>
+
+
+
+
+<section class="resume-section p-3 p-lg-5 d-flex d-column">
+  <div class="my-auto">
+    <h2 class="mb-0"><span class="text-primary">Demonstrating the Future of Command and Control with Wikipedia</span></h2>
+    <span class="text-primary">April 14, 2019</span>
+    <p>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</p>
+
+<p>This work was inspired by my coworker&rsquo;s (<a href="https://twitter.com/Jabra">Josh Abraham</a>) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.</p>
+
+<p>In addition, there was a recent Twitter post from <a href="https://twitter.com/randomuserid/status/1113088976263569408">@randomuserid</a> that got me thinking about what other sites besides Slack could be utilized. So, I browsed through the <a href="https://www.alexa.com/topsites">Alexa top sites</a> and started seeing what features could be abused to facilitate C2 traffic. The first few were all linked in @randomuserid&rsquo;s Google sheet, so I moved onto <a href="wikipedia.org">wikipedia.org</a>. It didn&rsquo;t take me long to stumble onto the <a href="https://en.wikipedia.org/w/api.php">Wikipedia API</a> page.</p>
+
+<p>When determining what API to use, I had two goals: I wanted my traffic to be private (so no public pages) and I wanted to be able to send a not insignificant amount of data. I started with the <a href="https://en.wikipedia.org/w/api.php?action=help&amp;modules=options">options</a> API as it seemed that setting options for the current user (perhaps <a href="https://en.wikipedia.org/wiki/Steganography">steganography</a> via a user profile picture?) would be a plausible solution. Browsing the list of <a href="https://www.mediawiki.org/wiki/API:Options#Available_Options">user options</a>, one immediately stood out: <code>userjs-arbitraryKeyName</code>. After a bit of experimentation, it proved trivial to set the value of this option. In addition, testing revealed that the maximum size was 65535 characters - more than enough for a useful C2 channel.</p>
+
+<p>As an attacker, I would be hesitant to use this method as my primary C2 channel. A well-positioned defender could potentially notice the spike in traffic to Wikipedia. Instead, I would use this similar to the way that Red Teams utilize C2 over DNS - a backup channel in case the primary method is blocked.</p>
+
+<p>As a defender, I would continue with standard methods for identifying unusual spikes in traffic. Play with the POC and see how much data has to be transferred to cause a spike in traffic to Wikipedia. If you&rsquo;re doing HTTPS interception, it&rsquo;s unlikely that standard users are using the Wikipedia API. All that being said, I believe this technique would be incredibly difficult to detect for your average Blue Team. I&rsquo;m a firm believer in focusing security on the endpoint, and demonstrations like this continue to confirm that belief.</p>
+
+    <p>Project link: <a href="https://github.com/dweezy-netsec/wikipedia-c2">https://github.com/dweezy-netsec/wikipedia-c2</a></p>
+    <ul class="tags">
+    
+      <li><a class="tag" href="/tags/c2">C2</a></li>
+    
+      <li><a class="tag" href="/tags/adversary-emulation">Adversary Emulation</a></li>
+    
+      <li><a class="tag" href="/tags/security">Security</a></li>
+    
+      <li><a class="tag" href="/tags/demo">Demo</a></li>
+    
+</ul>
+
+  </div>
+</section>
+
+
+    
+    
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  
+  <script src="/js/resume.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '');
+  </script>
+  
+
+  
+</body>
+</html>

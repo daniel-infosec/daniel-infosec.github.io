@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://daniel-infosec.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,36 @@
     <item>
       <title>Adversary Emulation</title>
       <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/adversary-emulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C2</title>
+      <link>https://daniel-infosec.github.io/tags/c2/</link>
+      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/c2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>https://daniel-infosec.github.io/tags/demo/</link>
+      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/demo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>https://daniel-infosec.github.io/tags/security/</link>
+      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/security/</guid>
       <description></description>
     </item>
     
@@ -26,15 +53,6 @@
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/mitre-attck/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Security</title>
-      <link>https://daniel-infosec.github.io/tags/security/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/security/</guid>
       <description></description>
     </item>
     
@@ -53,24 +71,6 @@
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/metasploit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C2</title>
-      <link>https://daniel-infosec.github.io/tags/c2/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/c2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Demo</title>
-      <link>https://daniel-infosec.github.io/tags/demo/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/demo/</guid>
       <description></description>
     </item>
     

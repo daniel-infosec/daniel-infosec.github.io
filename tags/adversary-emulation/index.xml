@@ -6,10 +6,19 @@
     <description>Recent content in Adversary Emulation on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://daniel-infosec.github.io/tags/adversary-emulation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+      <link>https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/</link>
+      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/</guid>
+      <description>On a recent Purple Team engagement, I was accessing the client&amp;rsquo;s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the appropraite client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
+    </item>
     
     <item>
       <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>

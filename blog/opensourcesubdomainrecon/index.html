@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+  <meta property="og:title" content="Open Source SaaS Reconnaissance Utilizing Subdomains" />
+  <meta property="og:image" content="https://daniel-infosec.github.io/img/profile1.jpg" />
+  <meta name="description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
+Thanks to https://github.com/eddiewebb/hugo-resume for the website theme.">
+  <meta property="og:description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
+Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
+  <meta name="author" content="Daniel Wyleczuk-Stern">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+  
+  <link href="https://daniel-infosec.github.io/css/resume.css" rel="stylesheet">
+  <link href="https://daniel-infosec.github.io/css/tweaks.css" rel="stylesheet">
+  <meta name="generator" content="Hugo 0.55.0" />
+  
+   
+  
+</head>
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+  <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    <span class="d-block d-lg-none">Daniel Wyleczuk-Stern</span>
+    <span class="d-none d-lg-block">
+      <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/img/profile1.jpg" alt="">
+    </span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="/#about">About</a>
+      </li>
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#skills">Skills</a>
+          </li>
+      
+      
+      
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#experience">Experience</a>
+          </li>
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#education">Education</a>
+          </li>
+      
+      
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/#blog">Blog</a>
+          </li>
+      
+    </ul>
+  </div>
+</nav>
+
+  <div class="container-fluid p-0">
+    
+<nav aria-label="breadcrumb">
+  <ol  class="breadcrumb">
+    
+
+
+
+
+
+<li class="breadcrumb-item">
+  <a href="https://daniel-infosec.github.io/">Home</a>
+</li>
+
+
+<li class="breadcrumb-item">
+  <a href="https://daniel-infosec.github.io/blog/">Blogs</a>
+</li>
+
+
+<li class="breadcrumb-item active">
+  <a href="https://daniel-infosec.github.io/blog/opensourcesubdomainrecon/">Open Source SaaS Reconnaissance Utilizing Subdomains</a>
+</li>
+
+  </ol>
+</nav>
+
+
+
+
+<section class="resume-section p-3 p-lg-5 d-flex d-column">
+  <div class="my-auto">
+    <h2 class="mb-0"><span class="text-primary">Open Source SaaS Reconnaissance Utilizing Subdomains</span></h2>
+    <span class="text-primary">July 3, 2019</span>
+    <p>On a recent Purple Team engagement, I was accessing the client&rsquo;s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the appropraite client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</p>
+
+<p>To backup a little, a key part of an offensive campaign (and many say the most critical part) is recon. During this phase, the Red Team or malicious actor tries to obtain as much information about the target as possible. Key items of interest include organizational charts, employee lists, email formats, external address space, and technologies utilized by the organization. During this phase, the attacker wants to limit their interaction with the target as much as possible in order to avoid tipping off defenders. So most attackers avoid active scanning or interaction with the target during this phase.</p>
+
+<p>So back to my story. I wanted to answer two questions: 1. could this technique be applied to identify other organizations that are using Splunk Cloud? 2. What other SaaS applications could I enumerate in this way?</p>
+
+<p>To answer the first question, I pulled a CSV of the Fortune 500 companies and ran a very rudimentary bash loop to curl sites based on the company names.</p>
+
+<p><code>while read p; do echo $p; curl $p.splunkcloud.com; done &lt; ~/f500.txt &gt; ~/f500_splunkcloud.txt</code></p>
+
+<p>Surprisingly, this returned 29 results. I then built a better wordlist for the first 150 companies and compared that with what was returned for the top 150 from the basic list. As an example, for &ldquo;Capital One Financial&rdquo;, I also included &ldquo;capitalone&rdquo;. This yieled 14 companies in the top 150 utilizing slunkcloud.com whereas the basic search had returned only 9 in the top 150. My basic search of the Fortune 500 yielded 29 companies using splunkcloud.com, though I&rsquo;m sure that would yield more if I build a better wordlist.</p>
+
+<p>My next goal was to see if this worked for other SaaS applications. In a few minutes of digging, I identified that Okta, Zoom, Atlassian, Slack, Box, and Zendesk also offer the same opportunities for open source recon (I&rsquo;m intentionally avoiding the word &ldquo;vulnerability&rdquo; as I don&rsquo;t believe this qualifies). A few of these sites were a bit more difficult to figure out. As an example, entering an invalid Okta url will still land you on a valid sign-in page. Fortunately, most organization upload their logo when making an Okta login page and we can grep for logoText and identify which of these pages are actually valid.</p>
+
+<p><code>while read p; do echo $p; curl -L $p.okta.com | grep logoText; done &lt; ~/top150.txt &gt; top150_okta.txt</code></p>
+
+<p>Utilizing my same top 150 list with some adjustments, I foudn that 31 of the top 150 Fortune 500 companies are using Okta. (Some false positives may be in there.)</p>
+
+<p>For Slack, I simply had to look for the phrase &ldquo;There&rsquo;s been a glitch&rdquo; which was returned on invalid subdomains. My list yielded quite a few false positives so I had to grep based on email addresses ot ensure I had the right organization.</p>
+
+<pre><code>while read p; do echo $p; curl -L $p.slack.com | tr -d '\n' | grep -v &quot;There's been a glitch&quot; ; done &lt; ~/top150.txt &gt; top150_slack.txt
+cat top150_slack.txt | grep -o 'data-team-email-domains-formatted.\{0,30\}'
+</code></pre>
+
+<p>I&rsquo;d like to give a special shotout to the folks at 1password.com. As far as I could tell, valid and invalid login pages presented the exact same content.</p>
+
+<p>So what should you take away from this? As an attacker, build a list of SaaS applications to check prior to each engagement and add that to part of your playbook. As a defender, unless the vendor makes changes, I don&rsquo;t see many options for addressing this. I&rsquo;d be happy to receive emails if you have ideas. Make sure to monitor for logins to all your SaaS applications. You could also consider setting up honey services. Say your a Microsoft Teams organization (some do exist, trust me), you could register for a basic Slack account and monitor for attempted logins. I haven&rsquo;t done the research, but I&rsquo;d bet that most failed logins would likely be a part of an advanced campaign as opposed to merely bots.</p>
+
+<p>If you have experience in this area (either defending against this or using it on your Red Teams), I&rsquo;d be happy to hear your stories!</p>
+
+    
+    <ul class="tags">
+    
+      <li><a class="tag" href="/tags/c2">C2</a></li>
+    
+      <li><a class="tag" href="/tags/adversary-emulation">Adversary Emulation</a></li>
+    
+      <li><a class="tag" href="/tags/security">Security</a></li>
+    
+      <li><a class="tag" href="/tags/demo">Demo</a></li>
+    
+</ul>
+
+  </div>
+</section>
+
+
+    
+    
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  
+  <script src="/js/resume.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '');
+  </script>
+  
+
+  
+</body>
+</html>
