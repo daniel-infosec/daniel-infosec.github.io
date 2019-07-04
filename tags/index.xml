@@ -12,29 +12,20 @@
     
     
     <item>
-      <title>Adversary Emulation</title>
-      <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
+      <title>OSINT</title>
+      <link>https://daniel-infosec.github.io/tags/osint/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/adversary-emulation/</guid>
+      <guid>https://daniel-infosec.github.io/tags/osint/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>C2</title>
-      <link>https://daniel-infosec.github.io/tags/c2/</link>
+      <title>SaaS</title>
+      <link>https://daniel-infosec.github.io/tags/saas/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/c2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Demo</title>
-      <link>https://daniel-infosec.github.io/tags/demo/</link>
-      <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/demo/</guid>
+      <guid>https://daniel-infosec.github.io/tags/saas/</guid>
       <description></description>
     </item>
     
@@ -44,6 +35,15 @@
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Adversary Emulation</title>
+      <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/adversary-emulation/</guid>
       <description></description>
     </item>
     
@@ -75,6 +75,24 @@
     </item>
     
     <item>
+      <title>C2</title>
+      <link>https://daniel-infosec.github.io/tags/c2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/c2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>https://daniel-infosec.github.io/tags/demo/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/demo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Atlassian Ecosystem</title>
       <link>https://daniel-infosec.github.io/tags/atlassian-ecosystem/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
@@ -89,6 +107,15 @@
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/bosh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bash/Shell</title>
+      <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
       <description></description>
     </item>
     
@@ -111,6 +138,15 @@
     </item>
     
     <item>
+      <title>Python</title>
+      <link>https://daniel-infosec.github.io/tags/python/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>REST APIs</title>
       <link>https://daniel-infosec.github.io/tags/rest-apis/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
@@ -120,29 +156,11 @@
     </item>
     
     <item>
-      <title>bash/shell</title>
-      <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>monit</title>
       <link>https://daniel-infosec.github.io/tags/monit/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/monit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://daniel-infosec.github.io/tags/python/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/python/</guid>
       <description></description>
     </item>
     
