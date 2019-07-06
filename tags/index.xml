@@ -111,6 +111,15 @@
     </item>
     
     <item>
+      <title>Bash/Shell</title>
+      <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>DevOps</title>
       <link>https://daniel-infosec.github.io/tags/devops/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
@@ -129,6 +138,15 @@
     </item>
     
     <item>
+      <title>Python</title>
+      <link>https://daniel-infosec.github.io/tags/python/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>REST APIs</title>
       <link>https://daniel-infosec.github.io/tags/rest-apis/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
@@ -138,29 +156,11 @@
     </item>
     
     <item>
-      <title>bash/shell</title>
-      <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>monit</title>
       <link>https://daniel-infosec.github.io/tags/monit/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/monit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://daniel-infosec.github.io/tags/python/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/python/</guid>
       <description></description>
     </item>
     
