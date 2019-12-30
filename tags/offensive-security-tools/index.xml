@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Offensive Security Tools on Daniel Wyleczuk-Stern</title>
+    <link>https://daniel-infosec.github.io/tags/offensive-security-tools/</link>
+    <description>Recent content in Offensive Security Tools on Daniel Wyleczuk-Stern</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://daniel-infosec.github.io/tags/offensive-security-tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
+      <link>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</guid>
+      <description>Twitter is a complicated social networking platform. Then again, which platform isn&amp;rsquo;t? I&amp;rsquo;m fairly new to the platform, but I&amp;rsquo;ve already found that it can be a tremendous resource when it comes to receiving up-to-date information on new techniques, upcoming talks, or nifty vulnerabilities. What I haven&amp;rsquo;t found it useful for is having discussions, especially those surrounding a controversial idea. This has manifested in my feed over the past month with the discussion around the release of Offensive Security Tools, primarily ignited by Andrew Thompson (@QW5kcmV3).</description>
+    </item>
+    
+  </channel>
+</rss>

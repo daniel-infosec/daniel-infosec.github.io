@@ -6,10 +6,46 @@
     <description>Recent content in Tags on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://daniel-infosec.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Offensive Security Tools</title>
+      <link>https://daniel-infosec.github.io/tags/offensive-security-tools/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/offensive-security-tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OST</title>
+      <link>https://daniel-infosec.github.io/tags/ost/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/ost/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Safe Space</title>
+      <link>https://daniel-infosec.github.io/tags/safe-space/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/safe-space/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Twitter</title>
+      <link>https://daniel-infosec.github.io/tags/twitter/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/twitter/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>OSINT</title>
@@ -48,15 +84,6 @@
     </item>
     
     <item>
-      <title>MITRE ATT&amp;CK</title>
-      <link>https://daniel-infosec.github.io/tags/mitre-attck/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/mitre-attck/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>automation</title>
       <link>https://daniel-infosec.github.io/tags/automation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
@@ -71,6 +98,15 @@
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/metasploit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MITRE ATT&amp;CK</title>
+      <link>https://daniel-infosec.github.io/tags/mitre-attck/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/mitre-attck/</guid>
       <description></description>
     </item>
     
@@ -102,20 +138,20 @@
     </item>
     
     <item>
-      <title>BOSH</title>
-      <link>https://daniel-infosec.github.io/tags/bosh/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/bosh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Bash/Shell</title>
       <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BOSH</title>
+      <link>https://daniel-infosec.github.io/tags/bosh/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/bosh/</guid>
       <description></description>
     </item>
     
@@ -138,24 +174,6 @@
     </item>
     
     <item>
-      <title>Python</title>
-      <link>https://daniel-infosec.github.io/tags/python/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>REST APIs</title>
-      <link>https://daniel-infosec.github.io/tags/rest-apis/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/rest-apis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>monit</title>
       <link>https://daniel-infosec.github.io/tags/monit/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
@@ -165,11 +183,38 @@
     </item>
     
     <item>
+      <title>Python</title>
+      <link>https://daniel-infosec.github.io/tags/python/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rest APIs</title>
+      <link>https://daniel-infosec.github.io/tags/rest-apis/</link>
+      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/rest-apis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>xml/xslt</title>
       <link>https://daniel-infosec.github.io/tags/xml/xslt/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/xml/xslt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>agile</title>
+      <link>https://daniel-infosec.github.io/tags/agile/</link>
+      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/agile/</guid>
       <description></description>
     </item>
     
@@ -206,15 +251,6 @@
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/culture/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>agile</title>
-      <link>https://daniel-infosec.github.io/tags/agile/</link>
-      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/agile/</guid>
       <description></description>
     </item>
     
@@ -264,25 +300,7 @@
     </item>
     
     <item>
-      <title>JIRA</title>
-      <link>https://daniel-infosec.github.io/tags/jira/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/jira/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JSON</title>
-      <link>https://daniel-infosec.github.io/tags/json/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/json/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
+      <title>JavaScript</title>
       <link>https://daniel-infosec.github.io/tags/javascript/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -291,20 +309,11 @@
     </item>
     
     <item>
-      <title>Maven</title>
-      <link>https://daniel-infosec.github.io/tags/maven/</link>
+      <title>JIRA</title>
+      <link>https://daniel-infosec.github.io/tags/jira/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/maven/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spring</title>
-      <link>https://daniel-infosec.github.io/tags/spring/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/spring/</guid>
+      <guid>https://daniel-infosec.github.io/tags/jira/</guid>
       <description></description>
     </item>
     
@@ -318,11 +327,38 @@
     </item>
     
     <item>
+      <title>JSON</title>
+      <link>https://daniel-infosec.github.io/tags/json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maven</title>
+      <link>https://daniel-infosec.github.io/tags/maven/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/maven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>node.js</title>
       <link>https://daniel-infosec.github.io/tags/node.js/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://daniel-infosec.github.io/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://daniel-infosec.github.io/tags/spring/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://daniel-infosec.github.io/tags/spring/</guid>
       <description></description>
     </item>
     

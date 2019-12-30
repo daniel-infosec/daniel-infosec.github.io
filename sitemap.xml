@@ -19,6 +19,11 @@
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/blog/saassubdomainrecon/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
@@ -60,80 +65,92 @@
   
   <url>
     <loc>https://daniel-infosec.github.io/blog/</loc>
-    <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/offensive-security-tools/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/ost/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/safe-space/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/twitter/</loc>
+    <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/osint/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/saas/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/security/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/</loc>
-    <lastmod>2019-07-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/adversary-emulation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/mitre-attck/</loc>
-    <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/automation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/metasploit/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/mitre-attck/</loc>
+    <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/c2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/demo/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/atlassian-ecosystem/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/bosh/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -142,45 +159,33 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://daniel-infosec.github.io/tags/devops/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/java/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/python/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/rest-apis/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/monit/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/python/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/rest-apis/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/xml/xslt/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -190,27 +195,28 @@
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/tags/agile/</loc>
+    <lastmod>2016-11-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/tags/ci/cd-pipelines/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/continuous-delivery/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/continuous-integration/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/culture/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -220,14 +226,7 @@
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/agile/</loc>
-    <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://daniel-infosec.github.io/tags/atlassian-developer-ecosystem/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -236,27 +235,22 @@
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/bamboo/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/bitbucket/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/confluence/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/docker/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -264,23 +258,27 @@
   </url>
   
   <url>
+    <loc>https://daniel-infosec.github.io/tags/javascript/</loc>
+  </url>
+  
+  <url>
     <loc>https://daniel-infosec.github.io/tags/jira/</loc>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/jquery/</loc>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/json/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/javascript/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/maven/</loc>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://daniel-infosec.github.io/tags/node.js/</loc>
   </url>
   
   <url>
@@ -295,17 +293,6 @@
   
   <url>
     <loc>https://daniel-infosec.github.io/tags/spring/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/jquery/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/node.js/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>
