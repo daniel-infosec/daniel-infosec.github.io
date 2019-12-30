@@ -106,6 +106,8 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
     <span class="text-primary">December 24, 2019</span>
     
 
+<p>Update 1 - I&rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</p>
+
 <p>Twitter is a complicated social networking platform. Then again, which platform isn&rsquo;t? I&rsquo;m fairly new to tweeting, but I&rsquo;ve already found that it can be a tremendous resource when it comes to receiving up-to-date information on new techniques, upcoming talks, or nifty vulnerabilities. What I haven&rsquo;t found it useful for is having discussions, especially those surrounding a controversial idea. This has manifested in my feed over the past month with the discussion around the release of Offensive Security Tools, primarily ignited by Andrew Thompson (@QW5kcmV3).</p>
 
 <p><a href="https://twitter.com/ItsReallyNick/status/1171145995050205185/photo/1">https://twitter.com/ItsReallyNick/status/1171145995050205185/photo/1</a></p>
@@ -138,8 +140,8 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
 <li>The problem is blown out of proportion. There are two components to this.
 
 <ul>
-<li>APTs aren&rsquo;t using public OSTs.</li>
-<li>If OST wasn&rsquo;t released, APTs would develop their own.</li>
+<li>FMAs aren&rsquo;t using public OSTs.</li>
+<li>If OST wasn&rsquo;t released, FMAs would develop their own.</li>
 </ul></li>
 <li>Restricting the release of OST will gatekeep the offensive security community.</li>
 </ul>
@@ -183,7 +185,7 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
 <h4 id="texas-sharpshooter-fallacy">Texas Sharpshooter Fallacy,</h4>
 
 <blockquote>
-<p>APT XYZ, Government ABC, and Red Team 123 do not use OST. Therefore, your argument that these tools are a problem is invalid.</p>
+<p>APT XYZ, Government ABC, and FMA 123 do not use OST. Therefore, your argument that these tools are a problem is invalid.</p>
 </blockquote>
 
 <p>This argument is cherry picking data and ignores the other adversaries that are using OST as part of their activities.</p>
@@ -201,7 +203,7 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
 <blockquote>
 <p>No real hacker would argue for the restriction of OST. Hackers break down systems - they don&rsquo;t create them!</p>
 
-<p>No true APT would use OSTs.</p>
+<p>No true APT or FMA would use OSTs.</p>
 </blockquote>
 
 <p>This is one of my favorite logical fallacies. It relies on universal generalizations to &ldquo;inaccurately deflect counterexamples&rdquo;.</p>
@@ -223,23 +225,23 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
 <li>Things change. While your decisions may have been correct when they were made, we cannot conclude that every decision will remain true for eternity. We must continuously question our assumptions and pressure test our decisions to see if they continue to stand up. It may have been that economies have changed and more attackers are relying on OST than before, and thus this conversation is worth revisiting.</li>
 </ol>
 
-<h3 id="apts-aren-t-using-ost">APTs Aren&rsquo;t Using OST</h3>
+<h3 id="apts-and-fmas-aren-t-using-ost">APTs and FMAs Aren&rsquo;t Using OST</h3>
 
 <p>The data speaks for itself. Very few organizations have access to the volume and quality of data that Andrew has. While I&rsquo;m trying to avoid the &ldquo;appeal to authority&rdquo; fallacy, I do believe Andrew when he states APT33 is using Empire, Metasploit, and Mimikatz. I address the logical fallacy regarding &ldquo;no true APT&rdquo; earlier. I do not believe this argument holds weight, but I would appreciate a fresh perspective if you disagree.</p>
 
-<h3 id="if-ost-wasn-t-released-apts-would-just-develop-their-own">If OST Wasn&rsquo;t Released, APTs Would Just Develop Their Own</h3>
+<h3 id="if-ost-wasn-t-released-fmas-would-just-develop-their-own">If OST Wasn&rsquo;t Released, FMAs Would Just Develop Their Own</h3>
 
 <p>This is my favorite argument because I think it is the most valid. I&rsquo;ll decompose it into the various sub-arguments. Let us hold that this argument is valid. From that, people who hold this position draw a number of conclusions.</p>
 
 <ol>
-<li>Since APTs would just develop their own OSTs, I would rather they use publicly released ones so that I can develop signatures from tools I am aware of.</li>
-<li>Since APTs would just develop their own OSTs, the harm I do in releasing a OST is minimal since the capability would exist anyways.</li>
+<li>Since FMAs would just develop their own OSTs, I would rather they use publicly released ones so that I can develop signatures from tools I am aware of.</li>
+<li>Since FMAs would just develop their own OSTs, the harm I do in releasing a OST is minimal since the capability would exist anyways.</li>
 <li>(If you have another reason that I missed, please reach out and I&rsquo;ll update the article.)</li>
 </ol>
 
 <p>The first argument supposes that organizations as a whole will be able to improve their  security. Don&rsquo;t forget the anecdotal evidence fallacy. Just because your organization is equipped to quickly respond and detect new threats does not mean the majority (or even 25%) of organizations have those capabilities. <a href="https://twitter.com/GossiTheDog/status/1209213629695975424">I think one thing the security industry doesn’t yet universally understand is a VAST majority of companies can barely manage basic security compliance.</a> I agree with GossiTheDog based on my years of working with a number of organizations as well as from anecdotes I&rsquo;ve heard from peers in the industry. That does not mean I&rsquo;m correct. I believe the correct approach would be for a survey of a large number of organizations across a variety of sizes and verticals to assess if they have the capability to respond to new tools and signatures as well as how quickly they deploy them. I foresee that very few will have this capability.</p>
 
-<p>The second argument contends that these tools would exist anyways, so there is no harm in releasing them. The first argument is partially correct - APTs would invest in developing OST if they were not publicly released. However, they would HAVE to invest in developing OST if these tools were not released. As Andrew states in his article, adversaries, just like blue teams, have finite resources. If they invest in developing these capabilities, it inherently means that they&rsquo;re not investing in other areas. The relationship between information security and risk management is inextricable. Our goal, as security professionals, should be to make it as difficult as possible for adversaries to achieve their goals. We can do that by not only making our defenses better but by reducing their capabilities.</p>
+<p>The second argument contends that these tools would exist anyways, so there is no harm in releasing them. The first argument is partially correct - FMAs would invest in developing OST if they were not publicly released. However, they would HAVE to invest in developing OST if these tools were not released. As Andrew states in his article, adversaries, just like blue teams, have finite resources. If they invest in developing these capabilities, it inherently means that they&rsquo;re not investing in other areas. The relationship between information security and risk management is inextricable. Our goal, as security professionals, should be to make it as difficult as possible for adversaries to achieve their goals. We can do that by not only making our defenses better but by reducing their capabilities.</p>
 
 <h3 id="restricting-the-release-of-ost-will-gatekeep-the-offensive-security-community">Restricting the Release of OST Will Gatekeep the Offensive Security Community</h3>
 
