@@ -1,137 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Daniel Wyleczuk-Stern</title>
-    <link>https://daniel-infosec.github.io/</link>
+    <link>https://catscrdl.io/</link>
     <description>Recent content in Home on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Feb 2018 18:56:13 -0500</lastBuildDate>
     
-	<atom:link href="https://daniel-infosec.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://catscrdl.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Atlassian Deployment Triggers</title>
-      <link>https://daniel-infosec.github.io/projects/contributions/deploy-triggers/</link>
+      <link>https://catscrdl.io/projects/contributions/deploy-triggers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/contributions/deploy-triggers/</guid>
+      <guid>https://catscrdl.io/projects/contributions/deploy-triggers/</guid>
       <description>Addressed pretty significant page load performance issue founde in larger deployments. Eliminates uses of intensive backend query, replacing it with an asynchronous API call against a lucene index. This change reduces page load from from 2+ minutes to nearly instant, with an incredibly responsive UI.</description>
     </item>
     
     <item>
       <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
-      <link>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</link>
+      <link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</guid>
+      <guid>https://catscrdl.io/blog/opensourceredteamtooling/</guid>
       <description>Update 1 - I&amp;rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</description>
     </item>
     
     <item>
       <title>SaaS Reconnaissance Utilizing Subdomains</title>
-      <link>https://daniel-infosec.github.io/blog/saassubdomainrecon/</link>
+      <link>https://catscrdl.io/blog/saassubdomainrecon/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/saassubdomainrecon/</guid>
+      <guid>https://catscrdl.io/blog/saassubdomainrecon/</guid>
       <description>On a recent Purple Team engagement, I was accessing the client&amp;rsquo;s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
     </item>
     
     <item>
       <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
-      <link>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</link>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</guid>
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
       <description>We&amp;rsquo;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&amp;rsquo;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module. You can check out the blog here or watch the YouTube video.</description>
     </item>
     
     <item>
       <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
-      <link>https://daniel-infosec.github.io/blog/attackbenchmark/</link>
+      <link>https://catscrdl.io/blog/attackbenchmark/</link>
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/attackbenchmark/</guid>
+      <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
       <description>I wrote a blog post on Praetorian&amp;rsquo;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;amp;CK™. You can check out the blog here.</description>
     </item>
     
     <item>
       <title>Demonstrating the Future of Command and Control with Wikipedia</title>
-      <link>https://daniel-infosec.github.io/blog/wikipediac2/</link>
+      <link>https://catscrdl.io/blog/wikipediac2/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/wikipediac2/</guid>
+      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
       <description>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</description>
     </item>
     
     <item>
       <title>Organically DevOps: Building Quality and Security into the Software Supply Chain at Liberty Mutual</title>
-      <link>https://daniel-infosec.github.io/publications/alldaydevops/</link>
+      <link>https://catscrdl.io/publications/alldaydevops/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/publications/alldaydevops/</guid>
+      <guid>https://catscrdl.io/publications/alldaydevops/</guid>
       <description>This talk looked at Liberty Mutual’s transformation to Continuous Integration, Continuous Delivery, and DevOps. For a large, heavily regulated industry, this task can not only be daunting, but viewed by many as impossible. Often, organizations try to reduce the friction through micro-fixes, but Eddie’s team asked how to change the culture to reduce the friction and concluded with the following final points:
  Don’t mandate DevOps. Give employees the chance to master their discipline with examples to set and follow.</description>
     </item>
     
     <item>
       <title>Added Docker Build Status Badge to shields.io</title>
-      <link>https://daniel-infosec.github.io/projects/contributions/shields-docker/</link>
+      <link>https://catscrdl.io/projects/contributions/shields-docker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/contributions/shields-docker/</guid>
+      <guid>https://catscrdl.io/projects/contributions/shields-docker/</guid>
       <description>Shields.io is a massive library of badges that can be inserted into project README&amp;rsquo;s or websites displaying various statuses (code coverage, health, version, etc). Support for docker was missing the current build health, and was a pretty trivial addition.</description>
     </item>
     
     <item>
       <title>Schema.org Structured Data documentation fixes</title>
-      <link>https://daniel-infosec.github.io/projects/contributions/schema-org/</link>
+      <link>https://catscrdl.io/projects/contributions/schema-org/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/contributions/schema-org/</guid>
+      <guid>https://catscrdl.io/projects/contributions/schema-org/</guid>
       <description>While adding Structured Data to a client&amp;rsquo;s website I found some example JSON that was invalid. Simple contribution to cleanup the user documentation providing syntactically valid JSON documents.</description>
     </item>
     
     <item>
       <title>BOSH release for Bamboo &amp; Remote Agents</title>
-      <link>https://daniel-infosec.github.io/projects/creations/bosh-agents/</link>
+      <link>https://catscrdl.io/projects/creations/bosh-agents/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/creations/bosh-agents/</guid>
-      <description>BOSH (Bosh Outer SHell) &amp;ldquo;&amp;hellip; is an open source tool for release engineering, deployment, lifecycle management, and monitoring of distributed systems.&amp;rdquo; And it&amp;rsquo;s amazingly powerful. This examples uses BOSH to provision an Alassian vendor app running on JDK along with the support Postgres database and agents to support it. The releases manages the health of services and will automatically provision, start/stop processes across the various services.</description>
+      <guid>https://catscrdl.io/projects/creations/bosh-agents/</guid>
+      <description>BOSH (Bosh Outer SHell) &amp;ldquo;&amp;hellip;is an open source tool for release engineering, deployment, lifecycle management, and monitoring of distributed systems.&amp;rdquo; And it&amp;rsquo;s amazingly powerful. This examples uses BOSH to provision an Alassian vendor app running on JDK along with the support Postgres database and agents to support it. The releases manages the health of services and will automatically provision, start/stop processes across the various services.</description>
     </item>
     
     <item>
       <title>Atlassian Marketplace Plugins</title>
-      <link>https://daniel-infosec.github.io/projects/creations/marketplace/</link>
+      <link>https://catscrdl.io/projects/creations/marketplace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/creations/marketplace/</guid>
+      <guid>https://catscrdl.io/projects/creations/marketplace/</guid>
       <description>Multiple plugins used by thousands of teams that provide enhanced functionality of Atlassian’s core products (primarily JIRA and Bamboo) to enrich CI/CD capabilities, DevOps automation, or productivity. Functionality spans user interface, web services and persistence.</description>
     </item>
     
     <item>
       <title>Docker image for Bitbucket CI/CD Pipelines  &#34;shipit&#34;</title>
-      <link>https://daniel-infosec.github.io/projects/creations/docker-marketplace/</link>
+      <link>https://catscrdl.io/projects/creations/docker-marketplace/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/projects/creations/docker-marketplace/</guid>
-      <description>Provides required dependencies and additional utilities to simplify and codify the process of building, testing and delivering Atlassian plugins all the way to the live marketplace. Executes integration/AUT level tests against all stated compatible versions for the productUploads generated artifact to Atlassian marketplaceProvides corresponding metadata indicating version, release notes, and compatibility</description>
+      <guid>https://catscrdl.io/projects/creations/docker-marketplace/</guid>
+      <description>Provides required dependencies and additional utilities to simplify and codify the process of building, testing and delivering Atlassian plugins all the way to the live marketplace.Executes integration/AUT level tests against all stated compatible versions for the productUploads generated artifact to Atlassian marketplaceProvides corresponding metadata indicating version, release notes, and compatibility</description>
     </item>
     
     <item>
       <title>Search Results</title>
-      <link>https://daniel-infosec.github.io/search/</link>
+      <link>https://catscrdl.io/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/search/</guid>
+      <guid>https://catscrdl.io/search/</guid>
       <description>This file exists solely to respond to /search URL with the related search layout template.
 No content shown here is rendered, all content is based in the template layouts/page/search.html
 Setting a very low sitemap priority will tell search engines this is not important content.
 This implementation uses Fusejs, jquery and mark.js
 Initial setup Search depends on additional output content type of JSON in config.toml
-[outputs] home = [&amp;quot;HTML&amp;quot;, &amp;quot;JSON&amp;quot;]  Searching additional fileds To search additional fields defined in front matter, you must add it in 2 places.</description>
+[outputs] home = [&amp;quot;HTML&amp;quot;, &amp;quot;JSON&amp;quot;] Searching additional fileds To search additional fields defined in front matter, you must add it in 2 places.</description>
     </item>
     
   </channel>

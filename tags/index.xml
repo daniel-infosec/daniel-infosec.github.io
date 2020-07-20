@@ -1,364 +1,364 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Daniel Wyleczuk-Stern</title>
-    <link>https://daniel-infosec.github.io/tags/</link>
+    <link>https://catscrdl.io/tags/</link>
     <description>Recent content in Tags on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://daniel-infosec.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://catscrdl.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Offensive Security Tools</title>
-      <link>https://daniel-infosec.github.io/tags/offensive-security-tools/</link>
+      <link>https://catscrdl.io/tags/offensive-security-tools/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/offensive-security-tools/</guid>
+      <guid>https://catscrdl.io/tags/offensive-security-tools/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OST</title>
-      <link>https://daniel-infosec.github.io/tags/ost/</link>
+      <link>https://catscrdl.io/tags/ost/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/ost/</guid>
+      <guid>https://catscrdl.io/tags/ost/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Safe Space</title>
-      <link>https://daniel-infosec.github.io/tags/safe-space/</link>
+      <link>https://catscrdl.io/tags/safe-space/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/safe-space/</guid>
+      <guid>https://catscrdl.io/tags/safe-space/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Twitter</title>
-      <link>https://daniel-infosec.github.io/tags/twitter/</link>
+      <link>https://catscrdl.io/tags/twitter/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/twitter/</guid>
+      <guid>https://catscrdl.io/tags/twitter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OSINT</title>
-      <link>https://daniel-infosec.github.io/tags/osint/</link>
+      <link>https://catscrdl.io/tags/osint/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/osint/</guid>
+      <guid>https://catscrdl.io/tags/osint/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SaaS</title>
-      <link>https://daniel-infosec.github.io/tags/saas/</link>
+      <link>https://catscrdl.io/tags/saas/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/saas/</guid>
+      <guid>https://catscrdl.io/tags/saas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Security</title>
-      <link>https://daniel-infosec.github.io/tags/security/</link>
+      <link>https://catscrdl.io/tags/security/</link>
       <pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/security/</guid>
+      <guid>https://catscrdl.io/tags/security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Adversary Emulation</title>
-      <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
+      <link>https://catscrdl.io/tags/adversary-emulation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/adversary-emulation/</guid>
+      <guid>https://catscrdl.io/tags/adversary-emulation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>automation</title>
-      <link>https://daniel-infosec.github.io/tags/automation/</link>
+      <link>https://catscrdl.io/tags/automation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/automation/</guid>
+      <guid>https://catscrdl.io/tags/automation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>metasploit</title>
-      <link>https://daniel-infosec.github.io/tags/metasploit/</link>
+      <link>https://catscrdl.io/tags/metasploit/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/metasploit/</guid>
+      <guid>https://catscrdl.io/tags/metasploit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MITRE ATT&amp;CK</title>
-      <link>https://daniel-infosec.github.io/tags/mitre-attck/</link>
+      <link>https://catscrdl.io/tags/mitre-attck/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/mitre-attck/</guid>
+      <guid>https://catscrdl.io/tags/mitre-attck/</guid>
       <description></description>
     </item>
     
     <item>
       <title>C2</title>
-      <link>https://daniel-infosec.github.io/tags/c2/</link>
+      <link>https://catscrdl.io/tags/c2/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/c2/</guid>
+      <guid>https://catscrdl.io/tags/c2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Demo</title>
-      <link>https://daniel-infosec.github.io/tags/demo/</link>
+      <link>https://catscrdl.io/tags/demo/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/demo/</guid>
+      <guid>https://catscrdl.io/tags/demo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Atlassian Ecosystem</title>
-      <link>https://daniel-infosec.github.io/tags/atlassian-ecosystem/</link>
+      <link>https://catscrdl.io/tags/atlassian-ecosystem/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/atlassian-ecosystem/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bash/Shell</title>
-      <link>https://daniel-infosec.github.io/tags/bash/shell/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/bash/shell/</guid>
+      <guid>https://catscrdl.io/tags/atlassian-ecosystem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>BOSH</title>
-      <link>https://daniel-infosec.github.io/tags/bosh/</link>
+      <link>https://catscrdl.io/tags/bosh/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/bosh/</guid>
+      <guid>https://catscrdl.io/tags/bosh/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DevOps</title>
-      <link>https://daniel-infosec.github.io/tags/devops/</link>
+      <link>https://catscrdl.io/tags/devops/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/devops/</guid>
+      <guid>https://catscrdl.io/tags/devops/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://daniel-infosec.github.io/tags/java/</link>
+      <link>https://catscrdl.io/tags/java/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/java/</guid>
+      <guid>https://catscrdl.io/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>monit</title>
-      <link>https://daniel-infosec.github.io/tags/monit/</link>
+      <link>https://catscrdl.io/tags/monit/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/monit/</guid>
+      <guid>https://catscrdl.io/tags/monit/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python</title>
-      <link>https://daniel-infosec.github.io/tags/python/</link>
+      <title>python</title>
+      <link>https://catscrdl.io/tags/python/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/python/</guid>
+      <guid>https://catscrdl.io/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Rest APIs</title>
-      <link>https://daniel-infosec.github.io/tags/rest-apis/</link>
+      <title>REST APIs</title>
+      <link>https://catscrdl.io/tags/rest-apis/</link>
       <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/rest-apis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>xml/xslt</title>
-      <link>https://daniel-infosec.github.io/tags/xml/xslt/</link>
-      <pubDate>Sun, 11 Feb 2018 12:41:05 -0500</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/xml/xslt/</guid>
+      <guid>https://catscrdl.io/tags/rest-apis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>agile</title>
-      <link>https://daniel-infosec.github.io/tags/agile/</link>
+      <link>https://catscrdl.io/tags/agile/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/agile/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CI/CD pipelines</title>
-      <link>https://daniel-infosec.github.io/tags/ci/cd-pipelines/</link>
-      <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://daniel-infosec.github.io/tags/ci/cd-pipelines/</guid>
+      <guid>https://catscrdl.io/tags/agile/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Continuous Delivery</title>
-      <link>https://daniel-infosec.github.io/tags/continuous-delivery/</link>
+      <link>https://catscrdl.io/tags/continuous-delivery/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/continuous-delivery/</guid>
+      <guid>https://catscrdl.io/tags/continuous-delivery/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Continuous Integration</title>
-      <link>https://daniel-infosec.github.io/tags/continuous-integration/</link>
+      <link>https://catscrdl.io/tags/continuous-integration/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/continuous-integration/</guid>
+      <guid>https://catscrdl.io/tags/continuous-integration/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Culture</title>
-      <link>https://daniel-infosec.github.io/tags/culture/</link>
+      <link>https://catscrdl.io/tags/culture/</link>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/culture/</guid>
+      <guid>https://catscrdl.io/tags/culture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Atlassian Developer Ecosystem</title>
-      <link>https://daniel-infosec.github.io/tags/atlassian-developer-ecosystem/</link>
+      <link>https://catscrdl.io/tags/atlassian-developer-ecosystem/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/atlassian-developer-ecosystem/</guid>
+      <guid>https://catscrdl.io/tags/atlassian-developer-ecosystem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bamboo</title>
-      <link>https://daniel-infosec.github.io/tags/bamboo/</link>
+      <link>https://catscrdl.io/tags/bamboo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/bamboo/</guid>
+      <guid>https://catscrdl.io/tags/bamboo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash/shell</title>
+      <link>https://catscrdl.io/tags/bash/shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/bash/shell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bitbucket</title>
-      <link>https://daniel-infosec.github.io/tags/bitbucket/</link>
+      <link>https://catscrdl.io/tags/bitbucket/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/bitbucket/</guid>
+      <guid>https://catscrdl.io/tags/bitbucket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI/CD pipelines</title>
+      <link>https://catscrdl.io/tags/ci/cd-pipelines/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/ci/cd-pipelines/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Confluence</title>
-      <link>https://daniel-infosec.github.io/tags/confluence/</link>
+      <link>https://catscrdl.io/tags/confluence/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/confluence/</guid>
+      <guid>https://catscrdl.io/tags/confluence/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://daniel-infosec.github.io/tags/docker/</link>
+      <link>https://catscrdl.io/tags/docker/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/docker/</guid>
+      <guid>https://catscrdl.io/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JavaScript</title>
-      <link>https://daniel-infosec.github.io/tags/javascript/</link>
+      <link>https://catscrdl.io/tags/javascript/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/javascript/</guid>
+      <guid>https://catscrdl.io/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JIRA</title>
-      <link>https://daniel-infosec.github.io/tags/jira/</link>
+      <link>https://catscrdl.io/tags/jira/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/jira/</guid>
+      <guid>https://catscrdl.io/tags/jira/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jQuery</title>
-      <link>https://daniel-infosec.github.io/tags/jquery/</link>
+      <link>https://catscrdl.io/tags/jquery/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/jquery/</guid>
+      <guid>https://catscrdl.io/tags/jquery/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JSON</title>
-      <link>https://daniel-infosec.github.io/tags/json/</link>
+      <link>https://catscrdl.io/tags/json/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/json/</guid>
+      <guid>https://catscrdl.io/tags/json/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Maven</title>
-      <link>https://daniel-infosec.github.io/tags/maven/</link>
+      <link>https://catscrdl.io/tags/maven/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/maven/</guid>
+      <guid>https://catscrdl.io/tags/maven/</guid>
       <description></description>
     </item>
     
     <item>
       <title>node.js</title>
-      <link>https://daniel-infosec.github.io/tags/node.js/</link>
+      <link>https://catscrdl.io/tags/node.js/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/node.js/</guid>
+      <guid>https://catscrdl.io/tags/node.js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Spring</title>
-      <link>https://daniel-infosec.github.io/tags/spring/</link>
+      <link>https://catscrdl.io/tags/spring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/tags/spring/</guid>
+      <guid>https://catscrdl.io/tags/spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xml/xslt</title>
+      <link>https://catscrdl.io/tags/xml/xslt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/xml/xslt/</guid>
       <description></description>
     </item>
     

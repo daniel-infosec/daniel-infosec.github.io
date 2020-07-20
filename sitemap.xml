@@ -1,298 +1,296 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/creations/</loc>
+    <loc>https://catscrdl.io/projects/creations/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/contributions/</loc>
+    <loc>https://catscrdl.io/projects/contributions/</loc>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/contributions/deploy-triggers/</loc>
+    <loc>https://catscrdl.io/projects/contributions/deploy-triggers/</loc>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/opensourceredteamtooling/</loc>
+    <loc>https://catscrdl.io/blog/opensourceredteamtooling/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/saassubdomainrecon/</loc>
+    <loc>https://catscrdl.io/blog/saassubdomainrecon/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</loc>
+    <loc>https://catscrdl.io/blog/gettingstartedwithautomation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/attackbenchmark/</loc>
+    <loc>https://catscrdl.io/blog/attackbenchmark/</loc>
     <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/wikipediac2/</loc>
+    <loc>https://catscrdl.io/blog/wikipediac2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/publications/alldaydevops/</loc>
+    <loc>https://catscrdl.io/publications/alldaydevops/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/contributions/shields-docker/</loc>
+    <loc>https://catscrdl.io/projects/contributions/shields-docker/</loc>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/contributions/schema-org/</loc>
+    <loc>https://catscrdl.io/projects/contributions/schema-org/</loc>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/blog/</loc>
+    <loc>https://catscrdl.io/blog/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/offensive-security-tools/</loc>
+    <loc>https://catscrdl.io/tags/offensive-security-tools/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/ost/</loc>
+    <loc>https://catscrdl.io/tags/ost/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/safe-space/</loc>
+    <loc>https://catscrdl.io/tags/safe-space/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/</loc>
+    <loc>https://catscrdl.io/tags/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/twitter/</loc>
+    <loc>https://catscrdl.io/tags/twitter/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/osint/</loc>
+    <loc>https://catscrdl.io/tags/osint/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/saas/</loc>
+    <loc>https://catscrdl.io/tags/saas/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/security/</loc>
+    <loc>https://catscrdl.io/tags/security/</loc>
     <lastmod>2019-07-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/adversary-emulation/</loc>
+    <loc>https://catscrdl.io/tags/adversary-emulation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/automation/</loc>
+    <loc>https://catscrdl.io/tags/automation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/metasploit/</loc>
+    <loc>https://catscrdl.io/tags/metasploit/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/mitre-attck/</loc>
+    <loc>https://catscrdl.io/tags/mitre-attck/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/c2/</loc>
+    <loc>https://catscrdl.io/tags/c2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/demo/</loc>
+    <loc>https://catscrdl.io/tags/demo/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/atlassian-ecosystem/</loc>
+    <loc>https://catscrdl.io/tags/atlassian-ecosystem/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bash/shell/</loc>
+    <loc>https://catscrdl.io/tags/bosh/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bosh/</loc>
+    <loc>https://catscrdl.io/projects/creations/bosh-agents/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/creations/bosh-agents/</loc>
+    <loc>https://catscrdl.io/tags/devops/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/devops/</loc>
+    <loc>https://catscrdl.io/tags/java/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/java/</loc>
+    <loc>https://catscrdl.io/tags/monit/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/monit/</loc>
+    <loc>https://catscrdl.io/projects/</loc>
+    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/tags/python/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/python/</loc>
+    <loc>https://catscrdl.io/tags/rest-apis/</loc>
     <lastmod>2018-02-11T12:41:05-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/rest-apis/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/tags/xml/xslt/</loc>
-    <lastmod>2018-02-11T12:41:05-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/</loc>
+    <loc>https://catscrdl.io/</loc>
     <lastmod>2018-02-10T18:56:13-05:00</lastmod>
     <priority>1</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/agile/</loc>
+    <loc>https://catscrdl.io/tags/agile/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/ci/cd-pipelines/</loc>
+    <loc>https://catscrdl.io/tags/continuous-delivery/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/continuous-delivery/</loc>
+    <loc>https://catscrdl.io/tags/continuous-integration/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/continuous-integration/</loc>
+    <loc>https://catscrdl.io/tags/culture/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/culture/</loc>
-    <lastmod>2016-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://daniel-infosec.github.io/publications/</loc>
+    <loc>https://catscrdl.io/publications/</loc>
     <lastmod>2016-11-08T00:00:00+00:00</lastmod>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/atlassian-developer-ecosystem/</loc>
+    <loc>https://catscrdl.io/tags/atlassian-developer-ecosystem/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/creations/marketplace/</loc>
+    <loc>https://catscrdl.io/projects/creations/marketplace/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bamboo/</loc>
+    <loc>https://catscrdl.io/tags/bamboo/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/bitbucket/</loc>
+    <loc>https://catscrdl.io/tags/bash/shell/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/categories/</loc>
+    <loc>https://catscrdl.io/tags/bitbucket/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/confluence/</loc>
+    <loc>https://catscrdl.io/categories/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/docker/</loc>
+    <loc>https://catscrdl.io/tags/ci/cd-pipelines/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/creations/docker-marketplace/</loc>
+    <loc>https://catscrdl.io/tags/confluence/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/javascript/</loc>
+    <loc>https://catscrdl.io/tags/docker/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/jira/</loc>
+    <loc>https://catscrdl.io/projects/creations/docker-marketplace/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/jquery/</loc>
+    <loc>https://catscrdl.io/tags/javascript/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/json/</loc>
+    <loc>https://catscrdl.io/tags/jira/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/maven/</loc>
+    <loc>https://catscrdl.io/tags/jquery/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/node.js/</loc>
+    <loc>https://catscrdl.io/tags/json/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/projects/</loc>
-    <priority>0.9</priority>
+    <loc>https://catscrdl.io/tags/maven/</loc>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/search/</loc>
+    <loc>https://catscrdl.io/tags/node.js/</loc>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/search/</loc>
     <priority>0.1</priority>
   </url>
   
   <url>
-    <loc>https://daniel-infosec.github.io/tags/spring/</loc>
+    <loc>https://catscrdl.io/tags/spring/</loc>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/tags/xml/xslt/</loc>
   </url>
   
 </urlset>

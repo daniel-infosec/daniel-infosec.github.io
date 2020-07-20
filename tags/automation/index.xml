@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>automation on Daniel Wyleczuk-Stern</title>
-    <link>https://daniel-infosec.github.io/tags/automation/</link>
+    <link>https://catscrdl.io/tags/automation/</link>
     <description>Recent content in automation on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://daniel-infosec.github.io/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://catscrdl.io/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
-      <link>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</link>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</guid>
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
       <description>We&amp;rsquo;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&amp;rsquo;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module. You can check out the blog here or watch the YouTube video.</description>
     </item>
     

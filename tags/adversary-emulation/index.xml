@@ -1,40 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Adversary Emulation on Daniel Wyleczuk-Stern</title>
-    <link>https://daniel-infosec.github.io/tags/adversary-emulation/</link>
+    <link>https://catscrdl.io/tags/adversary-emulation/</link>
     <description>Recent content in Adversary Emulation on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://daniel-infosec.github.io/tags/adversary-emulation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://catscrdl.io/tags/adversary-emulation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
-      <link>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</link>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/gettingstartedwithautomation/</guid>
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
       <description>We&amp;rsquo;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&amp;rsquo;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module. You can check out the blog here or watch the YouTube video.</description>
     </item>
     
     <item>
       <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
-      <link>https://daniel-infosec.github.io/blog/attackbenchmark/</link>
+      <link>https://catscrdl.io/blog/attackbenchmark/</link>
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/attackbenchmark/</guid>
+      <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
       <description>I wrote a blog post on Praetorian&amp;rsquo;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;amp;CK™. You can check out the blog here.</description>
     </item>
     
     <item>
       <title>Demonstrating the Future of Command and Control with Wikipedia</title>
-      <link>https://daniel-infosec.github.io/blog/wikipediac2/</link>
+      <link>https://catscrdl.io/blog/wikipediac2/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://daniel-infosec.github.io/blog/wikipediac2/</guid>
+      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
       <description>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</description>
     </item>
     

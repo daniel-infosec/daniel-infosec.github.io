@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>SaaS Reconnaissance Utilizing Subdomains</title>
   <meta property="og:title" content="SaaS Reconnaissance Utilizing Subdomains" />
-  <meta property="og:image" content="https://daniel-infosec.github.io/img/profile1.jpg" />
+  <meta property="og:image" content="https://catscrdl.io/img/profile1.jpg" />
   <meta name="description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
 Thanks to https://github.com/eddiewebb/hugo-resume for the website theme.">
   <meta property="og:description" content="Senior Network Security Engineer with experience in Penetration Testing, enterprise security framework design, and detection and response.
@@ -20,9 +20,9 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
   <link href='https://cdnjs.cloudflare.com/ajax/libs/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
   
-  <link href="https://daniel-infosec.github.io/css/resume.css" rel="stylesheet">
-  <link href="https://daniel-infosec.github.io/css/tweaks.css" rel="stylesheet">
-  <meta name="generator" content="Hugo 0.58.1" />
+  <link href="https://catscrdl.io/css/resume.css" rel="stylesheet">
+  <link href="https://catscrdl.io/css/tweaks.css" rel="stylesheet">
+  <meta name="generator" content="Hugo 0.74.2" />
   
    
   
@@ -81,17 +81,17 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
 
 
 <li class="breadcrumb-item">
-  <a href="https://daniel-infosec.github.io/">Home</a>
+  <a href="https://catscrdl.io/">Home</a>
 </li>
 
 
 <li class="breadcrumb-item">
-  <a href="https://daniel-infosec.github.io/blog/">Blogs</a>
+  <a href="https://catscrdl.io/blog/">Blogs</a>
 </li>
 
 
 <li class="breadcrumb-item active">
-  <a href="https://daniel-infosec.github.io/blog/saassubdomainrecon/">SaaS Reconnaissance Utilizing Subdomains</a>
+  <a href="https://catscrdl.io/blog/saassubdomainrecon/">SaaS Reconnaissance Utilizing Subdomains</a>
 </li>
 
   </ol>
@@ -105,39 +105,25 @@ Thanks to https://github.com/eddiewebb/hugo-resume for the website theme." />
     <h2 class="mb-0"><span class="text-primary">SaaS Reconnaissance Utilizing Subdomains</span></h2>
     <span class="text-primary">July 3, 2019</span>
     <p>On a recent <a href="https://www.praetorian.com/corporate-security/purple-team-detection-response">Purple Team</a> engagement, I was accessing the client&rsquo;s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</p>
-
 <p>To backup a little, a key part of an offensive campaign (and many say the most critical part) is recon. During this phase, the Red Team or malicious actor tries to obtain as much information about the target as possible. Key items of interest include organizational charts, employee lists, email formats, external address space, and technologies utilized by the organization. During this phase, the attacker wants to limit their interaction with the target as much as possible in order to avoid tipping off defenders. Most attackers avoid active scanning or interaction with the target during this phase.</p>
-
-<p>So back to my story. I wanted to answer two questions:
-1. Could this technique be applied to identify other organizations that are using Splunk Cloud?
-2. What other SaaS applications could I enumerate in this way?</p>
-
+<p>So back to my story. I wanted to answer two questions:</p>
+<ol>
+<li>Could this technique be applied to identify other organizations that are using Splunk Cloud?</li>
+<li>What other SaaS applications could I enumerate in this way?</li>
+</ol>
 <p>To answer the first question, I pulled a CSV of the Fortune 500 companies and ran a very rudimentary bash loop to curl sites based on the company names.</p>
-
 <p><code>while read p; do echo $p; curl $p.splunkcloud.com; done &lt; ~/f500.txt &gt; ~/f500_splunkcloud.txt</code></p>
-
 <p>Surprisingly, this returned 29 results. I then built a better wordlist for the first 150 companies and compared that with what was returned for the top 150 from the basic list. As an example, for &ldquo;Capital One Financial&rdquo;, my first list only contained &ldquo;capitalonefinancial&rdquo;. In the second list, I also included &ldquo;capitalone&rdquo;. This yieled 14 companies in the top 150 utilizing slunkcloud.com whereas the basic search had returned only 9 in the top 150. My basic search of the Fortune 500 yielded 29 companies using splunkcloud.com, though I&rsquo;m sure that would return more results if I built a better wordlist.</p>
-
 <p>My next goal was to see if this worked for other SaaS applications. In a few minutes of digging, I identified that Okta, Zoom, Atlassian, Slack, Box, and Zendesk also offer the same opportunities for open source recon (I&rsquo;m intentionally avoiding the word &ldquo;vulnerability&rdquo; as I don&rsquo;t believe this qualifies). A few of these sites were a bit more difficult to figure out. As an example, entering an invalid Okta url will still land you on a valid sign-in page. Fortunately, most organization upload their logo when making an Okta login page and we can grep for logoText and identify which of these pages are actually valid.</p>
-
 <p><code>while read p; do echo $p; curl -L $p.okta.com | grep logoText; done &lt; ~/top150.txt &gt; top150_okta.txt</code></p>
-
 <p>Utilizing my same top 150 list with some adjustments, I foudn that 31 of the top 150 Fortune 500 companies are using Okta. (Some false positives may be in there.)</p>
-
 <p>For Slack, I simply had to look for the phrase &ldquo;There&rsquo;s been a glitch&rdquo; which was returned on invalid subdomains. My list yielded quite a few false positives so I had to grep based on email addresses to ensure I had the right organization.</p>
-
 <pre><code>while read p; do echo $p; curl -L $p.slack.com | tr -d '\n' | grep -v &quot;There's been a glitch&quot; ; done &lt; ~/top150.txt &gt; top150_slack.txt
 cat top150_slack.txt | grep -o 'data-team-email-domains-formatted.\{0,30\}'
-</code></pre>
-
-<p>I&rsquo;d like to give a special shout-out to the folks at 1password.com. As far as I could tell, valid and invalid login pages presented the exact same content.</p>
-
+</code></pre><p>I&rsquo;d like to give a special shout-out to the folks at 1password.com. As far as I could tell, valid and invalid login pages presented the exact same content.</p>
 <p>So what should you take away from this? As an attacker, build a list of SaaS applications to check prior to each engagement and add that to your playbook. As a defender, unless the vendor makes changes, I don&rsquo;t see many options for preventing this type of recon. I&rsquo;d be happy to receive emails if you have ideas. Make sure to monitor for logins to all your SaaS applications. Utilize a robust IAM solution. You could also consider setting up honey services. Say your a Microsoft Teams organization (some do exist, trust me), you could register for a basic Slack account and monitor for attempted logins. I haven&rsquo;t done the research, but I&rsquo;d bet that most failed logins would likely be a part of an advanced campaign as opposed to merely bots.</p>
-
 <p>If you have experience in this area (either defending against this or using it on your Red Teams), I&rsquo;d be happy to hear your stories!</p>
-
 <p>All opinions in this article are my own.</p>
-
 <p>Update: I felt like this work needed a POC and I wanted to practice some basic Go, so I coded this up! I added a few more SaaS applications (SalesForce and Adobe Creative Cloud) and removed Zendesk as I felt there were too many false posities. Check it out <a href="https://github.com/daniel-infosec/subsaas">https://github.com/daniel-infosec/subsaas</a>.</p>
 
     <p>Project link: <a href="https://github.com/daniel-infosec/subsaas">https://github.com/daniel-infosec/subsaas</a></p>
