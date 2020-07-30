@@ -21,6 +21,16 @@
     </item>
     
     <item>
+      <title>Regarding SMS 2FA</title>
+      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+      <description>Tavis Ormandy, a security researcher I really respect, recently published a blog post stating his opinions on SMS 2FA. I highly encourage you to read his post first so that you&amp;rsquo;ll have the necessary context. For brevity, I&amp;rsquo;ll assume you&amp;rsquo;re aware what 2FA is and how SMS 2FA works. In general, I believe I can summarize Tavis&amp;rsquo; argument as follows:
+ SMS 2FA can by bypassed by advanced phishing attacks Even if SMS 2FA raises the bar, the effort spent implementing SMS 2FA can be spent on other things  I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;.</description>
+    </item>
+    
+    <item>
       <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
       <link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>

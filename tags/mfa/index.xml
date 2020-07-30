@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MFA on Daniel Wyleczuk-Stern</title>
+    <link>https://catscrdl.io/tags/mfa/</link>
+    <description>Recent content in MFA on Daniel Wyleczuk-Stern</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://catscrdl.io/tags/mfa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Regarding SMS 2FA</title>
+      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+      <description>Tavis Ormandy, a security researcher I really respect, recently published a blog post stating his opinions on SMS 2FA. I highly encourage you to read his post first so that you&amp;rsquo;ll have the necessary context. For brevity, I&amp;rsquo;ll assume you&amp;rsquo;re aware what 2FA is and how SMS 2FA works. In general, I believe I can summarize Tavis&amp;rsquo; argument as follows:
+ SMS 2FA can by bypassed by advanced phishing attacks Even if SMS 2FA raises the bar, the effort spent implementing SMS 2FA can be spent on other things  I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;.</description>
+    </item>
+    
+  </channel>
+</rss>

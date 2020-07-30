@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Daniel Wyleczuk-Stern</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2FA</title>
+      <link>https://catscrdl.io/tags/2fa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/2fa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MFA</title>
+      <link>https://catscrdl.io/tags/mfa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/mfa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SMS</title>
+      <link>https://catscrdl.io/tags/sms/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/tags/sms/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Offensive Security Tools</title>
