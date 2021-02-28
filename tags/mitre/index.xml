@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mitre on Catscrdl</title>
+    <link>https://catscrdl.io/tags/mitre/</link>
+    <description>Recent content in mitre on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/mitre/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
+      <link>https://catscrdl.io/blog/attackbenchmark/</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
+      <description>Project link: https://p16.praetorian.com/blog/why-praetorian-benchmarks-to-mitre-attack</description>
+    </item>
+    
+  </channel>
+</rss>

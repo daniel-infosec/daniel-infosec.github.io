@@ -293,6 +293,7 @@
 <p>When determining what API to use, I had two goals: I wanted my traffic to be private (so no public pages) and I wanted to be able to send a not insignificant amount of data. I started with the <a href="https://en.wikipedia.org/w/api.php?action=help&amp;modules=options">options</a> API as it seemed that setting options for the current user (perhaps <a href="https://en.wikipedia.org/wiki/Steganography">steganography</a> via a user profile picture?) would be a plausible solution. Browsing the list of <a href="https://www.mediawiki.org/wiki/API:Options#Available_Options">user options</a>, one immediately stood out: <code>userjs-arbitraryKeyName</code>. After a bit of experimentation, it proved trivial to set the value of this option. In addition, testing revealed that the maximum size was 65535 characters - more than enough for a useful C2 channel.</p>
 <p>As an attacker, I would be hesitant to use this method as my primary C2 channel. A well-positioned defender could potentially notice the spike in traffic to Wikipedia. Instead, I would use this similar to the way that Red Teams utilize C2 over DNS - a backup channel in case the primary method is blocked.</p>
 <p>As a defender, I would continue with standard methods for identifying unusual spikes in traffic. Play with the POC and see how much data has to be transferred to cause a spike in traffic to Wikipedia. If you&rsquo;re doing HTTPS interception, it&rsquo;s unlikely that standard users are using the Wikipedia API. All that being said, I believe this technique would be incredibly difficult to detect for your average Blue Team. I&rsquo;m a firm believer in focusing security on the endpoint, and demonstrations like this continue to confirm that belief.</p>
+<p>Project link: <a href="https://github.com/dweezy-netsec/wikipedia-c2"><a href="https://github.com/dweezy-netsec/wikipedia-c2">https://github.com/dweezy-netsec/wikipedia-c2</a></a></p>
 
     </div>
     <footer>
@@ -375,7 +376,7 @@
   
   <div class="pagination">
     
-      <a href="/blog/regardingsms2fa/" class="button left"><span>Regarding SMS 2FA</span></a>
+      <a href="/blog/attackbenchmark/" class="button left"><span>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</span></a>
     
     
       <a href="/blog/markdown-syntax/" class="button right"><span>Markdown Syntax Guide</span></a>
@@ -397,6 +398,16 @@
         <header>
           <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
           <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/attackbenchmark/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/attack-logo-bold.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/attack-logo-bold.png" alt="Wikipedia">
+  </a>
+        <header>
+          <h2><a href="/blog/attackbenchmark/">Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</a></h2>
+          <time class="published" datetime="2019-05-01 00:00:00 &#43;0000 UTC">May 1, 2019</time>
         </header>
       </article>
       
@@ -430,16 +441,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-          <a href="/blog/placeholder-text/" class="image" style="--bg-image: url('https://catscrdl.io/img/2019/03/pic03.jpg');">
-    <img class="stretchH" src="https://catscrdl.io/img/2019/03/pic03.jpg" alt="Valley">
-  </a>
-        <header>
-          <h2><a href="/blog/placeholder-text/">Placeholder Text</a></h2>
-          <time class="published" datetime="2019-03-09 00:00:00 &#43;0000 UTC">March 9, 2019</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -459,7 +460,7 @@
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">2</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">3</span></a>
           
           <li>
               <a href="/categories/syntax/">syntax<span class="count">1</span></a>
