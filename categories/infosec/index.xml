@@ -16,5 +16,15 @@
       <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
     </item>
     
+    <item>
+      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
+      <link>https://catscrdl.io/blog/wikipediac2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
+      <description>This work was inspired by my coworker&amp;rsquo;s (Josh Abraham) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.
+In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
+    </item>
+    
   </channel>
 </rss>

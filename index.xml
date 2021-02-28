@@ -26,6 +26,16 @@
     </item>
     
     <item>
+      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
+      <link>https://catscrdl.io/blog/wikipediac2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
+      <description>This work was inspired by my coworker&amp;rsquo;s (Josh Abraham) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.
+In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
+    </item>
+    
+    <item>
       <title>Markdown Syntax Guide</title>
       <link>https://catscrdl.io/blog/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
