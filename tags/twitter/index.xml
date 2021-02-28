@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>twitter on Catscrdl</title>
+    <link>https://catscrdl.io/tags/twitter/</link>
+    <description>Recent content in twitter on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/twitter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Regarding SMS 2FA</title>
+      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+      <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Regarding SMS 2FA - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.81.0" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Regarding SMS 2FA">
+  <meta property="og:description" content="Responding to Tavis Ormandy&#39;s comments on SMS 2FA">
+  <meta property="description" content="Responding to Tavis Ormandy&#39;s comments on SMS 2FA">
+  <meta property="og:url" content="https://catscrdl.io/blog/regardingsms2fa/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/img/2021/02/2fa.jpg">
+      <meta property="og:image:alt" content="Two Factor Authentication">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.7af44880fa8f2867fbbf1b1e6758774b791bf321699b23f84be69e26e842c64a.css" integrity="sha256-evRIgPqPKGf7vxseZ1h3S3kb8yFpmyP4S&#43;aeJuhCxko="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Regarding%20SMS%202FA&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;title=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;title=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;description=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/img/main/logo.jpg" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec and trading</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+    
+    
+      <p>Responding to Tavis Ormandy&#39;s comments on SMS 2FA</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>4-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Regarding%20SMS%202FA&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;title=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;title=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f&amp;description=Regarding%20SMS%202FA" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fregardingsms2fa%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/img/2021/02/2fa.jpg');">
+    <img class="stretchH" src="https://catscrdl.io/img/2021/02/2fa.jpg" alt="Two Factor Authentication">
+  </a>
+      <p>I think an important question that Tavis either explicitly or accidentally omitted is &ldquo;for whom&rdquo;. I am not sure why he did not include this as it&rsquo;s a critical component to his argument. If Tavis is stating that &ldquo;SMS 2FA is ineffective for an enterprise&rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm. However, if Tavis is instead simply stating &ldquo;SMS 2FA is ineffective&rdquo; with no caveats, I would disagree.</p>
+<p>When considering SMS 2FA, one needs to look at their threat model and personal risk. To argue this point, I will attempt to address his points from the perspective of a technologically immature individual looking to secure their bank account. In this context, one&rsquo;s threat model changes from &ldquo;I need to protect all the accounts&rdquo; to &ldquo;I simply need to make sure my account is more secure than someone else&rsquo;s&rdquo;. From this perspective, SMS 2FA provides significantly more protection from credential stuffing than a username/password combination. In addition, the argument of &ldquo;an attacker can simply move to a different service&rdquo; no longer holds as not all accounts for this user are of equal importance. Access to their neopets account is significantly less valuable than their bank account.</p>
+<p>Another one of Tavis' arguments is &ldquo;Instead, why not simply randomly generate a good password for them, and instruct them to write it down or save it in their web browser? If they lose it, they can use your existing password reset procedure.&rdquo; I think this argument ignores the reality of today&rsquo;s world in that, if a commercial service forced that kind of policy, it would not be adopted by users. Anyone who has worked with a technologically immature user can attest to how common it is for users to forget or lose their password. While, again, I can see such a service working for an enterprise product, I do not see such an authentication scheme being acceptable for a B2C product.</p>
+<p>I&rsquo;d also like to discuss his point of &ldquo;We have a finite pool of good will with which we can advocate for the implementation of new security technologies. If we spend all that good will on irritating attackers, then by the time we’re ready to actually implement a solution, developers are not going to be interested.&rdquo; As far as I can tell, Tavis is arguing that if one invests their time in implementing 2FA, then developers will not be interested in allowing or enforcing more secure options. Coming from the perspective of someone who has worked with numerous developers during my time with consulting, I do not feel that this is true. Security is top of mind for numerous companies. Account compromise not only has a cost to a user, but also has a cost the service provider. This can be in terms of refunds, time spent restoring access, or other direct resource cost. Additionally, I think Tavis is oversimplifying the argument. His statement of &ldquo;all that good will&rdquo; implies that implementing SMS 2FA will &ldquo;use up&rdquo; security&rsquo;s ability to influence the security features a product will implement. He exhibits a false dichotomy logical fallacy where he represents the decision as either all or nothing.</p>
+<p>Security is ultimately a risk calculation. SMS 2FA doesn&rsquo;t prevent malware and it doesn&rsquo;t prevent phishing. However, risk is about using your resources to make the impact or likelihood of a failure event. SMS 2FA does just that by efficiently reducing the likelihood of credential stuffing attacks. Do I wish that all sites supported U2F for 2FA and do I encourage everyone to use a password manager to generate random passwords? Yes. Will I continue to recommend that enterprises not support SMS 2FA for SSO and other solutions? Yes. However, I recognize the reality that we live in that password-based authentication is a bandaid for the larger identity problem for the world wide web and B2C services. And I will continue to tell my friends and family that SMS 2FA is better than nothing. If you have counterarguments, please feel free to reach out via email or twitter, and I&rsquo;d be happy to respond in an addendum to this post. Have a great weekend and remember to be respectful in your discourse.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/twitter/">twitter</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/sms/">sms</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/2fa/">2fa</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/mfa/">mfa</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="b7298c2b6a531a6befd34d827516585b">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/markdown-syntax/" class="button right"><span>Markdown Syntax Guide</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/img/2021/02/2fa.jpg');">
+    <img class="stretchH" src="https://catscrdl.io/img/2021/02/2fa.jpg" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+          <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/markdown-syntax/" class="image" style="--bg-image: url('https://catscrdl.io/img/2019/03/pic01.jpg');">
+    <img class="stretchH" src="https://catscrdl.io/img/2019/03/pic01.jpg" alt="Mountain Range Through Clouds">
+  </a>
+        <header>
+          <h2><a href="/blog/markdown-syntax/">Markdown Syntax Guide</a></h2>
+          <time class="published" datetime="2019-03-11 00:00:00 &#43;0000 UTC">March 11, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/rich-content/" class="image" style="--bg-image: url('https://catscrdl.io/img/main/logo.jpg');">
+    <img class="stretchV" src="https://catscrdl.io/img/main/logo.jpg" alt="Fox">
+  </a>
+        <header>
+          <h2><a href="/blog/rich-content/">Rich Content</a></h2>
+          <time class="published" datetime="2019-03-10 00:00:00 &#43;0000 UTC">March 10, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/placeholder-text/" class="image" style="--bg-image: url('https://catscrdl.io/img/2019/03/pic03.jpg');">
+    <img class="stretchH" src="https://catscrdl.io/img/2019/03/pic03.jpg" alt="Valley">
+  </a>
+        <header>
+          <h2><a href="/blog/placeholder-text/">Placeholder Text</a></h2>
+          <time class="published" datetime="2019-03-09 00:00:00 &#43;0000 UTC">March 9, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/emoji-support/" class="image" style="--bg-image: url('https://catscrdl.io/img/2019/03/pic02.jpg');">
+    <img class="" src="https://catscrdl.io/img/2019/03/pic02.jpg" alt="Desert Scene">
+  </a>
+        <header>
+          <h2><a href="/blog/emoji-support/">Emoji Support</a></h2>
+          <time class="published" datetime="2019-03-05 00:00:00 &#43;0000 UTC">March 5, 2019</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/syntax/">syntax<span class="count">1</span></a>
+          
+          <li>
+              <a href="/categories/themes/">themes<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity and finance.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2020 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.81.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.3636570d13f0810e9f3329e953a3f542a2628b6fb86b986c1962fda162cb74d7.js" integrity="sha256-NjZXDRPwgQ6fMynpU6P1QqJii2&#43;4a5hsGWL9oWLLdNc="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>
