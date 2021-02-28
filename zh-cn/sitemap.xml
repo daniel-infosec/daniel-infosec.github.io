@@ -157,5 +157,27 @@
                 hreflang="zh-cn"
                 href="https://catscrdl.io/zh-cn/tags/"
                 />
+  </url><url>
+    <loc>https://catscrdl.io/zh-cn/contact/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://catscrdl.io/de/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://catscrdl.io/es/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://catscrdl.io/zh-cn/contact/"
+                />
   </url>
 </urlset>

@@ -106,6 +106,28 @@
                 href="https://catscrdl.io/de/"
                 />
   </url><url>
+    <loc>https://catscrdl.io/de/contact/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://catscrdl.io/es/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://catscrdl.io/zh-cn/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://catscrdl.io/de/contact/"
+                />
+  </url><url>
     <loc>https://catscrdl.io/de/tags/</loc>
     <xhtml:link
                 rel="alternate"

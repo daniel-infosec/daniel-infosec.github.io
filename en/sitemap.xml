@@ -2,7 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://catscrdl.io/about/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://catscrdl.io/pt/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/about/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/blog/"
+                />
+  </url><url>
     <loc>https://catscrdl.io/categories/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -55,6 +92,7 @@
                 />
   </url><url>
     <loc>https://catscrdl.io/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -106,7 +144,73 @@
                 href="https://catscrdl.io/"
                 />
   </url><url>
+    <loc>https://catscrdl.io/tags/css/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/css/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/css/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/html/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/html/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/html/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/markdown/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/markdown/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/markdown/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/markdown-syntax/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/blog/markdown-syntax/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/blog/markdown-syntax/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/categories/syntax/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/categories/syntax/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/categories/syntax/"
+                />
+  </url><url>
     <loc>https://catscrdl.io/tags/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -156,6 +260,125 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://catscrdl.io/tags/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/themes/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/themes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/themes/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/categories/themes/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/categories/themes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/categories/themes/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/privacy/</loc>
+    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/privacy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/privacy/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/rich-content/</loc>
+    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/blog/rich-content/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/blog/rich-content/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/shortcodes/</loc>
+    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/shortcodes/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/shortcodes/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/placeholder-text/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/text/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/emoji/</loc>
+    <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/emoji/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/emoji/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/emoji-support/</loc>
+    <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/blog/emoji-support/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/blog/emoji-support/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/contact/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://catscrdl.io/de/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://catscrdl.io/es/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://catscrdl.io/zh-cn/contact/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/contact/"
                 />
   </url>
 </urlset>
