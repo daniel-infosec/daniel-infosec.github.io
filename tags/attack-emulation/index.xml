@@ -6,14 +6,23 @@
     <description>Recent content in attack emulation on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/attack-emulation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/attack-emulation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
+      <description>Blog link: Getting Started with Praetorian&amp;rsquo;s ATT&amp;amp;CK Automation</description>
+    </item>
+    
     <item>
       <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
       <link>https://catscrdl.io/blog/attackbenchmark/</link>
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
-      <description>Project link: https://p16.praetorian.com/blog/why-praetorian-benchmarks-to-mitre-attack</description>
+      <description>Blog link: Why Praetorian Benchmarks to MITRE ATT&amp;amp;CK™ and Why You Should Too</description>
     </item>
     
   </channel>
