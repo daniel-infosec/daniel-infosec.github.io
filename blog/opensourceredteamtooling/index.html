@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST) - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.81.0" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Adding to the Dialogue - On the Release of Offensive Security Tools (OST)">
+  <meta property="og:description" content="After a lot of dialogue recently on the release of Offensive Security Tools, I thought I would add to the dialogue in a more long-form format.">
+  <meta property="description" content="After a lot of dialogue recently on the release of Offensive Security Tools, I thought I would add to the dialogue in a more long-form format.">
+  <meta property="og:url" content="https://catscrdl.io/blog/opensourceredteamtooling/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/img/main/logo.jpg">
+  
+  <link rel="stylesheet" href="/css/bundle.min.7af44880fa8f2867fbbf1b1e6758774b791bf321699b23f84be69e26e842c64a.css" integrity="sha256-evRIgPqPKGf7vxseZ1h3S3kb8yFpmyP4S&#43;aeJuhCxko="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;title=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;title=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;description=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/img/main/logo.jpg" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec and trading</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/opensourceredteamtooling/">Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</a></h2>
+    
+    
+      <p>After a lot of dialogue recently on the release of Offensive Security Tools, I thought I would add to the dialogue in a more long-form format.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2019-12-24 00:00:00 &#43;0000 UTC">December 24, 2019</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>13-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;title=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;title=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f&amp;description=Adding%20to%20the%20Dialogue%20-%20On%20the%20Release%20of%20Offensive%20Security%20Tools%20%28OST%29" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourceredteamtooling%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>Update 1 - I’m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</p>
+<p>Twitter is a complicated social networking platform. Then again, which platform isn’t? I’m fairly new to tweeting, but I’ve already found that it can be a tremendous resource when it comes to receiving up-to-date information on new techniques, upcoming talks, or nifty vulnerabilities. What I haven’t found it useful for is having discussions, especially those surrounding a controversial idea. This has manifested in my feed over the past month with the discussion around the release of Offensive Security Tools, primarily ignited by Andrew Thompson (@QW5kcmV3).</p>
+<p><a href="https://twitter.com/ItsReallyNick/status/1171145995050205185/photo/1">https://twitter.com/ItsReallyNick/status/1171145995050205185/photo/1</a></p>
+<h1 id="offensive-security-tools">Offensive Security Tools</h1>
+<p>Before you read anymore, please read Andrew’s blog post on the Unrestricted Release of Offensive Security Tools as I’ll be using verbiage defined in that article. (Based on some of the discussions on Twitter where people have straw manned Microsoft’s operating system as an Offensive Security Tool (OST), I have confidence that not many people have actually read the article.) Andrew’s primary argument is that the unrestricted release of OST is causing more harm than good to the world. He’s passionately championed this idea on Twitter, pointing to data such as that available from his employer (FireEye/Mandiant) about actual breaches. Reaction to his argument has ranged from agreement to vitriolic outrage. (I do concede that some of the negative feedback may be due to his tone, which has not always been the friendliest.) Opposition has accused him of gatekeeping, exaggerating the magnitude of the problem, or just being plain wrong. Others have argued that this is a solved problem and wonder why it’s even being discussed. Later in this article, I will attempt to address and refute some of those arguments.</p>
+<h1 id="safe-spaces">Safe Spaces</h1>
+<p>The second article I’d like you to read is, on the surface, unrelated to the discussion at hand. It’s a recently published piece by James Hatch titled My semester with the snowflakes. In the article, James discusses some of the assumptions he made about the students of Yale University prior to his first semester at the institution and how these assumptions were summarily shattered. One of these assumptions regarded the term “safe space”. James had long regarded the term to mean a place to discuss ideas without having one’s feelings hurt. He learned the truth is quite the opposite. “What she [his fellow student meant by ‘safe space’ was that she was happy to be in an environment where difficult subjects can be discussed openly, without the risk of disrespect or harsh judgement.” Throughout the rest of this post, I’d like to adopt the same definition.</p>
+<h1 id="twitter-is-not-a-safe-space">Twitter is Not a Safe Space</h1>
+<p>At this point, I’m hoping you can see where I’m going with this section. The recent tone of the dialogue surrounding Andrew’s argument shows me that we are more likely moving further from a solution than towards one. Individuals on both sides of the argument have been quick to judge each other’s motives and credentials and have sometimes done so with a healthy dollop of disrespect. Twitter is not a “safe space”. Your most likely reaction to that sentence is “well, no shit”. Why, then, is so much of this discussion happening on Twitter? It clearly is not the place to discuss a topic that is clearly controversial. It is true that one can reach a global audience instantly; however, it encourages short, witty responses instead of a deep dialogue. Where then, do we turn? Conferences are another common vehicle for presenting ideas. Unfortunately, they too do not lend themselves to the idea of having a dialogue. Conferences are primarily unidirectional communication: a speaker lectures an audience. There may be time for questions, but its brevity does not encourage in depth dialogue. Additionally, conferences artificially restrict themselves to those with the resources (time, money, influence) to attend.</p>
+<p>At this point in time, I am not aware of a currently existing solution for having such discussions. During my time in the Air Force, teams would sponsor “working groups” with attendees from a variety of squadrons with different perspectives to gather and discuss complicated and controversial ideas. Such a solution in the commercial space would require significant sponsorship and buy-in from employers who would lose valuable resources for a period of time as they worked on a problem affecting a community. But it’s an idea.</p>
+<h1 id="gatekeeping">Gatekeeping</h1>
+<p>Another term I want to define as I’ve seen it come up quite a bit is “gatekeeping”. I’ll go with the Urban Dictionary definition which is “when someone takes it upon themselves to decide who does or does not have access or rights to a community or identity.” I’ll address gatekeeping later in this article, but I wanted to clarify the definition I’ll be using.</p>
+<h1 id="arguments-against-the-restriction-of-ost-release">Arguments Against the Restriction of OST Release</h1>
+<p>At this point in time, I’ve seen a number of arguments against Andrew’s position. I’ll be addressing each of these in their own section.</p>
+<ul>
+<li>The problem of restricting OST is too difficult.</li>
+<li>We have already solved this problem.</li>
+<li>The problem is blown out of proportion. There are two components to this.
+<ul>
+<li>FMAs aren’t using public OSTs.</li>
+<li>If OST wasn’t released, FMAs would develop their own.</li>
+</ul>
+</li>
+<li>Restricting the release of OST will gatekeep the offensive security community.</li>
+</ul>
+<h1 id="logical-fallacies">Logical Fallacies</h1>
+<p>In addressing Andrew’s arguments, I’ve seen quite a few logical fallacies. I’ll address some examples I’ve seen here, so that others can be aware. For those who have used these arguments, I would encourage you to review the list and think to yourself if you’re committing one of these fallacies when engaging in debates.</p>
+<h2 id="straw-man-fallacy">Straw Man Fallacy</h2>
+<p>Windows is used by attackers - therefore you’re proposing we restrict the release of Operating Systems. This is obviously ludicrous, therefore, the argument to restrict OST is invalid.</p>
+<p>Here, someone is misrepresenting Andrew’s argument by providing an easy to refute example. It is “superficially similar but ultimately not equal version of [Andrew’s] real stance”.</p>
+<h2 id="bandwagon-fallacy">Bandwagon Fallacy</h2>
+<p>The majority of the community thinks restricting OST is wrong. Therefore, your proposition is invalid.</p>
+<p>Just because the majority agrees on something, doesn’t mean it’s correct.</p>
+<h2 id="the-false-dilemma-fallacy">The False Dilemma Fallacy</h2>
+<p>Either we restrict all tools that can be used for attackers (including Empire, BloodHound, and SysInternals) or we restrict none of them.</p>
+<p>Again, this misrepresents Andrew’s argument. If you read his earlier article and his recent postings, there is a spectrum of a tool classes that could be considered for restriction. It’s not an all-or-nothing argument.</p>
+<h2 id="anecdotal-evidence-fallacy">Anecdotal Evidence Fallacy</h2>
+<p>I haven’t seen attackers use publicly released OSTs; therefore, it’s not a problem.</p>
+<p>A personal anecdote does not provide a preponderance of evidence to refute an argument.</p>
+<h2 id="texas-sharpshooter-fallacy">Texas Sharpshooter Fallacy,</h2>
+<p>APT XYZ, Government ABC, and FMA 123 do not use OST. Therefore, your argument that these tools are a problem is invalid.</p>
+<p>This argument is cherry picking data and ignores the other adversaries that are using OST as part of their activities.</p>
+<h2 id="personal-incredulity-fallacy">Personal Incredulity Fallacy</h2>
+<p>I don’t understand the various aspects of OST release. It’s too complicated and can’t be correct.</p>
+<p>One’s ability to understand an argument does not affect the validity of the claim.</p>
+<h2 id="no-true-scotsman-fallacy">&ldquo;No True Scotsman&rdquo; Fallacy</h2>
+<p>No real hacker would argue for the restriction of OST. Hackers break down systems - they don’t create them!</p>
+<p>No true APT or FMA would use OSTs.</p>
+<p>This is one of my favorite logical fallacies. It relies on universal generalizations to “inaccurately deflect counterexamples”.</p>
+<h1 id="the-problem-of-restricting-ost-is-too-difficult">The Problem of Restricting OST is too Difficult</h1>
+<p>This argument supposes that Andrew is correct with regards to the problem of releasing OSTs in that attackers are using them, and it is negatively impacting the security community. They contend that setting up a system to control the release of OST is too difficult. “Pandora’s box has been opened.” Therefore, it is not worth pursuing solutions.</p>
+<p>While I do agree with these individuals that the problem is difficult, I disagree with their conclusion that it is not worth pursuing a solution. I argue that, in information security, our responsibility is to reduce the number of attacks and how costly those attacks are as much as possible. If the data shows that OST is being used on a high number of high-impact attacks, we thus have a responsibility to reduce that as much as possible.</p>
+<p>“Just because something is hard doesn’t mean it’s impossible.” - Lysa TerKeurst</p>
+<h1 id="we-have-already-solved-the-problem">We Have Already Solved the Problem</h1>
+<p>I’ve seen this from a number of users replying to Andrew’s article. Their comments are something along the lines of “Imagine talking about the release of OST in 2019…” or “Are we really talking about this gain?”. I have two responses.</p>
+<ol>
+<li>I would consider this gatekeeping. You’re creating an old guard and saying “we have previously decided the answer. You, not a member of the old guard, have no right to question our previous decisions.” Instead of being excluding, be open. Explain your decisions and why those decisions were made. Invite people to the conversation.</li>
+<li>Things change. While your decisions may have been correct when they were made, we cannot conclude that every decision will remain true for eternity. We must continuously question our assumptions and pressure test our decisions to see if they continue to stand up. It may have been that economies have changed and more attackers are relying on OST than before, and thus this conversation is worth revisiting.</li>
+</ol>
+<h1 id="apts-and-fmas-arent-using-ost">APTs and FMAs Aren’t Using OST</h1>
+<p>The data speaks for itself. Very few organizations have access to the volume and quality of data that Andrew has. While I’m trying to avoid the “appeal to authority” fallacy, I do believe Andrew when he states APT33 is using Empire, Metasploit, and Mimikatz. I address the logical fallacy regarding “no true APT” earlier. I do not believe this argument holds weight, but I would appreciate a fresh perspective if you disagree.</p>
+<h1 id="if-ost-wasnt-released-fmas-would-just-develop-their-own">If OST Wasn’t Released, FMAs Would Just Develop Their Own</h1>
+<p>This is my favorite argument because I think it is the most valid. I’ll decompose it into the various sub-arguments. Let us hold that this argument is valid. From that, people who hold this position draw a number of conclusions.</p>
+<ol>
+<li>Since FMAs would just develop their own OSTs, I would rather they use publicly released ones so that I can develop signatures from tools I am aware of.</li>
+<li>Since FMAs would just develop their own OSTs, the harm I do in releasing a OST is minimal since the capability would exist anyways.</li>
+<li>(If you have another reason that I missed, please reach out and I’ll update the article.)</li>
+</ol>
+<p>The first argument supposes that organizations as a whole will be able to improve their security. Don’t forget the anecdotal evidence fallacy. Just because your organization is equipped to quickly respond and detect new threats does not mean the majority (or even 25%) of organizations have those capabilities. I think one thing the security industry doesn’t yet universally understand is a VAST majority of companies can barely manage basic security compliance. I agree with GossiTheDog based on my years of working with a number of organizations as well as from anecdotes I’ve heard from peers in the industry. That does not mean I’m correct. I believe the correct approach would be for a survey of a large number of organizations across a variety of sizes and verticals to assess if they have the capability to respond to new tools and signatures as well as how quickly they deploy them. I foresee that very few will have this capability.</p>
+<p>The second argument contends that these tools would exist anyways, so there is no harm in releasing them. The first argument is partially correct - FMAs would invest in developing OST if they were not publicly released. However, they would HAVE to invest in developing OST if these tools were not released. As Andrew states in his article, adversaries, just like blue teams, have finite resources. If they invest in developing these capabilities, it inherently means that they’re not investing in other areas. The relationship between information security and risk management is inextricable. Our goal, as security professionals, should be to make it as difficult as possible for adversaries to achieve their goals. We can do that by not only making our defenses better but by reducing their capabilities.</p>
+<h1 id="restricting-the-release-of-ost-will-gatekeep-the-offensive-security-community">Restricting the Release of OST Will Gatekeep the Offensive Security Community</h1>
+<p>This group argues that releasing OST helps with inclusion for the offensive security community. They argue, from what I can tell, that restricting these tools creates artificial barriers where those with the tools arbitrarily decide who and who does not have access to these capabilities.</p>
+<p>What follows is probably my most controversial opinion. I agree with this argument, but I also do not believe that this is a bad thing. I believe that offensive security professionals do not currently exist. To quote Wikipedia, “Major milestones which may mark an occupation being identified as a profession include:</p>
+<p>an occupation becomes a full-time occupation
+the establishment of a training school
+the establishment of a university school
+the establishment of a local association
+the establishment of a national association of professional ethics
+the establishment of state licensing laws”</p>
+<p>While one could argue that some certifications (such as CISSP) can define an information security professional, offensive security does not currently meet these definitions. The bar to declare yourself an offensive security professional, start a company, and begin selling services is very low.</p>
+<p>When we look at some examples of professions, we may begin to notice a trend: medicine, accounting, law, architecture, etc. Mistakes are not tolerated in these professions. People could die or go to jail (or both). I believe that information security (to include offensive security) meets this same bar. Incorrect and misinformed judgements and decisions can result in disastrous effects. I am not proposing that “the haves” wall themselves off in an ivory castle from the “have nots”. I am saying that gatekeeping in and of itself is not bad especially when it is done to protect the quality of work, so consumers have confidence in the product and services they are procuring. An organization purchasing the services of an MSSP or Red Team should have confidence that the company and its employees have adequate experience and capabilities to provide the services they are describing. There also does not need to be just one gate. Just like in medicine there are a variety of paths, certifications, schools, and specialties, so too could a system exist in information security. Just as some medicines are over-the-counter and some are “gatekept” by prescribing physicians, so too could certain tools be restricted to those who have shown the technical and ethical capacity to responsible exercise them.</p>
+<p>If you agree or disagree, I’d really appreciate thoughts and discussions on this point.</p>
+<h1 id="you-didnt-address-my-argument">You Didn’t Address my Argument</h1>
+<p>Please reach out and I’ll update my article accordingly.</p>
+<h1 id="final-thoughts">Final Thoughts</h1>
+<p>We can’t move towards a solution for a problem until we agree that there’s a problem. Andrew clearly has data that shows that tools such as PowerShell Empire, Responder, etc. are being used in real-world breaches and costing companies time and money. If you rush to conclude that that’s an acceptable cost, then I encourage you to reconsider - not that you’re wrong, but that you refuse to even have your beliefs challenge. We are engineers, scientists, operators, analysts, managers, leaders, and executives. But we are not zealots and no idea should beyond question.</p>
+<p>Finally, we are on the same side. Offensive security or defensive security - if you consider yourself a white hat, we have the same objective: making the world a more secure place. Please keep that in mind when discussing tough ideas with your peers. Mutural respect goes a long way.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/mitre/">mitre</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/attck/">att&amp;ck</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/benchmark/">benchmark</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/attack-emulation/">attack emulation</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/metasploit/">metasploit</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/automation/">automation</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="2049e0ce45edced15268ea1a4f25c0ca">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/regardingsms2fa/" class="button left"><span>Regarding SMS 2FA</span></a>
+    
+    
+      <a href="/blog/gettingstartedwithautomation/" class="button right"><span>Getting Started with Praetorian’s ATT&amp;CK™ Automation</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2021/02/2fa.png');">
+    <img src="https://catscrdl.io/static/img/2021/02/2fa.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+          <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/opensourceredteamtooling/">Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</a></h2>
+          <time class="published" datetime="2019-12-24 00:00:00 &#43;0000 UTC">December 24, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/gettingstartedwithautomation/">Getting Started with Praetorian’s ATT&amp;CK™ Automation</a></h2>
+          <time class="published" datetime="2019-05-10 00:00:00 &#43;0000 UTC">May 10, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/attackbenchmark/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/attack-logo-bold.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/attack-logo-bold.png" alt="Wikipedia">
+  </a>
+        <header>
+          <h2><a href="/blog/attackbenchmark/">Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</a></h2>
+          <time class="published" datetime="2019-05-01 00:00:00 &#43;0000 UTC">May 1, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/wikipediac2/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/wikipedia.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/wikipedia.png" alt="Wikipedia">
+  </a>
+        <header>
+          <h2><a href="/blog/wikipediac2/">Demonstrating the Future of Command and Control with Wikipedia</a></h2>
+          <time class="published" datetime="2019-04-14 00:00:00 &#43;0000 UTC">April 14, 2019</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Category</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">5</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity and finance.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2020 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.81.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.3636570d13f0810e9f3329e953a3f542a2628b6fb86b986c1962fda162cb74d7.js" integrity="sha256-NjZXDRPwgQ6fMynpU6P1QqJii2&#43;4a5hsGWL9oWLLdNc="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

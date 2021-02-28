@@ -5,25 +5,6 @@
     <link>https://catscrdl.io/fr/categories/</link>
     <description>Recent content in Categories on Hugo Future Imperfect Slim en français</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>fr</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/fr/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>syntax</title>
-      <link>https://catscrdl.io/fr/categories/syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/fr/categories/syntax/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>themes</title>
-      <link>https://catscrdl.io/fr/categories/themes/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/fr/categories/themes/</guid>
-      <description></description>
-    </item>
-    
+    <language>fr</language><atom:link href="https://catscrdl.io/fr/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
