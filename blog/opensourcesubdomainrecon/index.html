@@ -2,20 +2,20 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>Demonstrating the Future of Command and Control with Wikipedia - Catscrdl</title>
+<title>Open Source SaaS Reconnaissance Utilizing Subdomains - Catscrdl</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 <meta name="generator" content="Hugo 0.81.0" /><meta property="og:site_name" content="Catscrdl">
-  <meta property="og:title" content="Demonstrating the Future of Command and Control with Wikipedia">
-  <meta property="og:description" content="This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?">
-  <meta property="description" content="This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?">
-  <meta property="og:url" content="https://catscrdl.io/blog/wikipediac2/">
+  <meta property="og:title" content="Open Source SaaS Reconnaissance Utilizing Subdomains">
+  <meta property="og:description" content="Investigations into enumeration of an organization&#39;s SaaS tooling">
+  <meta property="description" content="Investigations into enumeration of an organization&#39;s SaaS tooling">
+  <meta property="og:url" content="https://catscrdl.io/blog/opensourcesubdomainrecon/">
   <meta property="og:type" content="article">
   
     
-      <meta property="og:image" content="https://catscrdl.io/static/img/oldblog/wikipedia.png">
-      <meta property="og:image:alt" content="Wikipedia">
+      <meta property="og:image" content="https://catscrdl.io/static/img/oldblog/saas.png">
+      <meta property="og:image:alt" content="SaaS">
     
   
   <link rel="stylesheet" href="/css/bundle.min.7af44880fa8f2867fbbf1b1e6758774b791bf321699b23f84be69e26e842c64a.css" integrity="sha256-evRIgPqPKGf7vxseZ1h3S3kb8yFpmyP4S&#43;aeJuhCxko="><link rel="stylesheet" href="/css/add-on.css">
@@ -119,37 +119,37 @@
 
   
     
-    <a href="//twitter.com/share?text=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+    <a href="//twitter.com/share?text=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
         <p>Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
         <p>Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;title=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;title=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn reddit">
           <p>Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;title=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;title=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn linkedin">
             <p>LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;description=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;description=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn pinterest">
           <p>Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <p>Email</p>
         </a>
   
@@ -226,16 +226,16 @@
     <header>
   <div class="title">
     
-      <h2><a href="/blog/wikipediac2/">Demonstrating the Future of Command and Control with Wikipedia</a></h2>
+      <h2><a href="/blog/opensourcesubdomainrecon/">Open Source SaaS Reconnaissance Utilizing Subdomains</a></h2>
     
     
-      <p>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</p>
+      <p>Investigations into enumeration of an organization&#39;s SaaS tooling</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-04-14 00:00:00 &#43;0000 UTC">April 14, 2019</time>
+    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">January 1, 0001</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>2-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -247,37 +247,37 @@
 
   
     
-    <a href="//twitter.com/share?text=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+    <a href="//twitter.com/share?text=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
         <p>Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
         <p>Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;title=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;title=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn reddit">
           <p>Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;title=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;title=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn linkedin">
             <p>LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f&amp;description=Demonstrating%20the%20Future%20of%20Command%20and%20Control%20with%20Wikipedia" target="_blank" rel="noopener" class="nav share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f&amp;description=Open%20Source%20SaaS%20Reconnaissance%20Utilizing%20Subdomains" target="_blank" rel="noopener" class="nav share-btn pinterest">
           <p>Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fwikipediac2%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fopensourcesubdomainrecon%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <p>Email</p>
         </a>
   
@@ -285,15 +285,25 @@
 
     </div>
     <div class="content">
-      <a href="/blog/wikipediac2/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/wikipedia.png');">
-    <img src="https://catscrdl.io/static/img/oldblog/wikipedia.png" alt="Wikipedia">
+      <a href="/blog/opensourcesubdomainrecon/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/saas.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/saas.png" alt="SaaS">
   </a>
-      <p>This work was inspired by my coworker&rsquo;s (<a href="https://twitter.com/Jabra">Josh Abraham</a>) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.</p>
-<p>In addition, there was a recent Twitter post from <a href="https://twitter.com/randomuserid/status/1113088976263569408">@randomuserid</a> that got me thinking about what other sites besides Slack could be utilized. So, I browsed through the <a href="https://www.alexa.com/topsites">Alexa top sites</a> and started seeing what features could be abused to facilitate C2 traffic. The first few were all linked in @randomuserid&rsquo;s Google sheet, so I moved onto <a href="wikipedia.org">wikipedia.org</a>. It didn&rsquo;t take me long to stumble onto the <a href="https://en.wikipedia.org/w/api.php">Wikipedia API</a> page.</p>
-<p>When determining what API to use, I had two goals: I wanted my traffic to be private (so no public pages) and I wanted to be able to send a not insignificant amount of data. I started with the <a href="https://en.wikipedia.org/w/api.php?action=help&amp;modules=options">options</a> API as it seemed that setting options for the current user (perhaps <a href="https://en.wikipedia.org/wiki/Steganography">steganography</a> via a user profile picture?) would be a plausible solution. Browsing the list of <a href="https://www.mediawiki.org/wiki/API:Options#Available_Options">user options</a>, one immediately stood out: <code>userjs-arbitraryKeyName</code>. After a bit of experimentation, it proved trivial to set the value of this option. In addition, testing revealed that the maximum size was 65535 characters - more than enough for a useful C2 channel.</p>
-<p>As an attacker, I would be hesitant to use this method as my primary C2 channel. A well-positioned defender could potentially notice the spike in traffic to Wikipedia. Instead, I would use this similar to the way that Red Teams utilize C2 over DNS - a backup channel in case the primary method is blocked.</p>
-<p>As a defender, I would continue with standard methods for identifying unusual spikes in traffic. Play with the POC and see how much data has to be transferred to cause a spike in traffic to Wikipedia. If you&rsquo;re doing HTTPS interception, it&rsquo;s unlikely that standard users are using the Wikipedia API. All that being said, I believe this technique would be incredibly difficult to detect for your average Blue Team. I&rsquo;m a firm believer in focusing security on the endpoint, and demonstrations like this continue to confirm that belief.</p>
-<p>Project link: <a href="https://github.com/dweezy-netsec/wikipedia-c2"><a href="https://github.com/dweezy-netsec/wikipedia-c2">https://github.com/dweezy-netsec/wikipedia-c2</a></a></p>
+      <p>On a recent <a href="https://www.praetorian.com/corporate-security/purple-team-detection-response">Purple Team</a> engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.
+To backup a little, a key part of an offensive campaign (and many say the most critical part) is recon. During this phase, the Red Team or malicious actor tries to obtain as much information about the target as possible. Key items of interest include organizational charts, employee lists, email formats, external address space, and technologies utilized by the organization. During this phase, the attacker wants to limit their interaction with the target as much as possible in order to avoid tipping off defenders. Most attackers avoid active scanning or interaction with the target during this phase.</p>
+<p>So back to my story. I wanted to answer two questions: 1. Could this technique be applied to identify other organizations that are using Splunk Cloud? 2. What other SaaS applications could I enumerate in this way?</p>
+<p>To answer the first question, I pulled a CSV of the Fortune 500 companies and ran a very rudimentary bash loop to curl sites based on the company names.</p>
+<p><code>while read p; do echo $p; curl $p.splunkcloud.com; done &lt; ~/f500.txt &gt; ~/f500_splunkcloud.txt</code></p>
+<p>Surprisingly, this returned 29 results. I then built a better wordlist for the first 150 companies and compared that with what was returned for the top 150 from the basic list. As an example, for “Capital One Financial”, my first list only contained “capitalonefinancial”. In the second list, I also included “capitalone”. This yieled 14 companies in the top 150 utilizing slunkcloud.com whereas the basic search had returned only 9 in the top 150. My basic search of the Fortune 500 yielded 29 companies using splunkcloud.com, though I’m sure that would return more results if I built a better wordlist.</p>
+<p>My next goal was to see if this worked for other SaaS applications. In a few minutes of digging, I identified that Okta, Zoom, Atlassian, Slack, Box, and Zendesk also offer the same opportunities for open source recon (I’m intentionally avoiding the word “vulnerability” as I don’t believe this qualifies). A few of these sites were a bit more difficult to figure out. As an example, entering an invalid Okta url will still land you on a valid sign-in page. Fortunately, most organization upload their logo when making an Okta login page and we can grep for logoText and identify which of these pages are actually valid.</p>
+<p><code>while read p; do echo $p; curl -L $p.okta.com | grep logoText; done &lt; ~/top150.txt &gt; top150_okta.txt</code></p>
+<p>Utilizing my same top 150 list with some adjustments, I foudn that 31 of the top 150 Fortune 500 companies are using Okta. (Some false positives may be in there.)</p>
+<p>For Slack, I simply had to look for the phrase “There’s been a glitch” which was returned on invalid subdomains. My list yielded quite a few false positives so I had to grep based on email addresses to ensure I had the right organization.</p>
+<p><code>while read p; do echo $p; curl -L $p.slack.com | tr -d &lsquo;\n&rsquo; | grep -v &ldquo;There&rsquo;s been a glitch&rdquo; ; done &lt; ~/top150.txt &gt; top150_slack.txt
+cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}'</code></p>
+<p>I’d like to give a special shout-out to the folks at 1password.com. As far as I could tell, valid and invalid login pages presented the exact same content.</p>
+<p>So what should you take away from this? As an attacker, build a list of SaaS applications to check prior to each engagement and add that to your playbook. As a defender, unless the vendor makes changes, I don’t see many options for preventing this type of recon. I’d be happy to receive emails if you have ideas. Make sure to monitor for logins to all your SaaS applications. Utilize a robust IAM solution. You could also consider setting up honey services. Say your a Microsoft Teams organization (some do exist, trust me), you could register for a basic Slack account and monitor for attempted logins. I haven’t done the research, but I’d bet that most failed logins would likely be a part of an advanced campaign as opposed to merely bots.</p>
+<p>If you have experience in this area (either defending against this or using it on your Red Teams), I’d be happy to hear your stories!</p>
+<p>All opinions in this article are my own.</p>
 
     </div>
     <footer>
@@ -311,11 +321,11 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/wikipedia/">wikipedia</a></li>
+          <li><a class="article-terms-link" href="/tags/twitter/">twitter</a></li>
         
-          <li><a class="article-terms-link" href="/tags/c2/">c2</a></li>
+          <li><a class="article-terms-link" href="/tags/sms/">sms</a></li>
         
-          <li><a class="article-terms-link" href="/tags/domainfronting/">domainfronting</a></li>
+          <li><a class="article-terms-link" href="/tags/2fa/">2fa</a></li>
         
           <li><a class="article-terms-link" href="/tags/mfa/">mfa</a></li>
         
@@ -339,7 +349,7 @@
           </h3>
 
           
-          <input type="hidden" name="options[entryId]" value="5f0d717ff7657a18fe022f67b617af54">
+          <input type="hidden" name="options[entryId]" value="15615dd28b9bfe7d4428f4ccdeaf45e2">
           <input type='hidden' name='fields[replyThread]' value=''>
           <input type='hidden' name='fields[replyID]' value=''>
           <input type='hidden' name='fields[replyName]' value=''>
@@ -376,10 +386,8 @@
   
   <div class="pagination">
     
-      <a href="/blog/attackbenchmark/" class="button left"><span>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</span></a>
+      <a href="/blog/wikipediac2/" class="button left"><span>Demonstrating the Future of Command and Control with Wikipedia</span></a>
     
-    
-      <a href="/blog/opensourcesubdomainrecon/" class="button right"><span>Open Source SaaS Reconnaissance Utilizing Subdomains</span></a>
     
   </div>
 

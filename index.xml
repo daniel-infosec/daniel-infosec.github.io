@@ -62,5 +62,14 @@
 In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
     </item>
     
+    <item>
+      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+      <link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
+      <description>On a recent Purple Team engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
+    </item>
+    
   </channel>
 </rss>
