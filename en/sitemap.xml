@@ -196,6 +196,9 @@
                 href="https://catscrdl.io/blog/markdown-syntax/"
                 />
   </url><url>
+    <loc>https://catscrdl.io/blog/regardingsms2fa/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://catscrdl.io/categories/syntax/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -357,28 +360,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://catscrdl.io/blog/emoji-support/"
-                />
-  </url><url>
-    <loc>https://catscrdl.io/contact/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://catscrdl.io/de/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://catscrdl.io/es/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/contact/"
                 />
   </url>
 </urlset>

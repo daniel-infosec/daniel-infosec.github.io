@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+      <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
+    </item>
+    
+    <item>
       <title>Rich Content</title>
       <link>https://catscrdl.io/blog/rich-content/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
