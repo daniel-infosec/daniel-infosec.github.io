@@ -25,8 +25,11 @@
                 href="https://catscrdl.io/about/"
                 />
   </url><url>
+    <loc>https://catscrdl.io/tags/2fa/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://catscrdl.io/blog/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -39,7 +42,7 @@
                 />
   </url><url>
     <loc>https://catscrdl.io/categories/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -92,7 +95,7 @@
                 />
   </url><url>
     <loc>https://catscrdl.io/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -144,79 +147,20 @@
                 href="https://catscrdl.io/"
                 />
   </url><url>
-    <loc>https://catscrdl.io/tags/css/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/tags/css/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/tags/css/"
-                />
-  </url><url>
-    <loc>https://catscrdl.io/tags/html/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/tags/html/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/tags/html/"
-                />
-  </url><url>
     <loc>https://catscrdl.io/categories/infosec/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://catscrdl.io/tags/markdown/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/tags/markdown/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/tags/markdown/"
-                />
-  </url><url>
-    <loc>https://catscrdl.io/blog/markdown-syntax/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/blog/markdown-syntax/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/blog/markdown-syntax/"
-                />
+    <loc>https://catscrdl.io/tags/mfa/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/regardingsms2fa/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://catscrdl.io/categories/syntax/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/categories/syntax/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/categories/syntax/"
-                />
+    <loc>https://catscrdl.io/tags/sms/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/tags/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -266,6 +210,74 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://catscrdl.io/tags/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/twitter/</loc>
+    <lastmod>2020-07-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/css/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/css/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/css/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/html/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/html/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/html/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/tags/markdown/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/markdown/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/tags/markdown/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/blog/markdown-syntax/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/blog/markdown-syntax/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/blog/markdown-syntax/"
+                />
+  </url><url>
+    <loc>https://catscrdl.io/categories/syntax/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/categories/syntax/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/categories/syntax/"
                 />
   </url><url>
     <loc>https://catscrdl.io/tags/themes/</loc>
