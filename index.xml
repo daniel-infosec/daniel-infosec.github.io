@@ -71,5 +71,16 @@ In addition, there was a recent Twitter post from @randomuserid that got me thin
       <description>On a recent Purple Team engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
     </item>
     
+    <item>
+      <title>Yields, Interest Rates, and Equities - March 2021</title>
+      <link>https://catscrdl.io/blog/currentthoughtsonyields/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/currentthoughtsonyields/</guid>
+      <description>This is not financial advice. These are just my musings and thoughts on the current situation in the markets.
+Ever since mid-February, we&amp;rsquo;ve seen the market retract with Qs closing below 300 and SPY also seeing some drops. When we look deeper into the individual stocks that compromise these indexes, I think we&amp;rsquo;ll find a different story. Before we do, we need to take a detour into bonds.
+The relationship between bonds, yields, and interest rates is fairly basic, but having almost no background in finance, it took me a bit to try to understand it.</description>
+    </item>
+    
   </channel>
 </rss>
