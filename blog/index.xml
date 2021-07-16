@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Catscrdl</title>
+    <link>https://catscrdl.io/blog/</link>
+    <description>Recent content in Blog on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Regarding SMS 2FA</title>
+      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+      <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
+    </item>
+    
+    <item>
+      <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
+      <link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/opensourceredteamtooling/</guid>
+      <description>Update 1 - I&amp;rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
+      <description>Blog link: Getting Started with Praetorian&amp;rsquo;s ATT&amp;amp;CK Automation</description>
+    </item>
+    
+    <item>
+      <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
+      <link>https://catscrdl.io/blog/attackbenchmark/</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
+      <description>Blog link: Why Praetorian Benchmarks to MITRE ATT&amp;amp;CK™ and Why You Should Too</description>
+    </item>
+    
+    <item>
+      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
+      <link>https://catscrdl.io/blog/wikipediac2/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
+      <description>This work was inspired by my coworker&amp;rsquo;s (Josh Abraham) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.
+In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
+    </item>
+    
+    <item>
+      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+      <link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
+      <description>On a recent Purple Team engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
+    </item>
+    
+  </channel>
+</rss>

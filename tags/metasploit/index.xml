@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>metasploit on Catscrdl</title>
+    <link>https://catscrdl.io/tags/metasploit/</link>
+    <description>Recent content in metasploit on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/metasploit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
+      <link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/opensourceredteamtooling/</guid>
+      <description>Update 1 - I&amp;rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
+      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
+      <description>Blog link: Getting Started with Praetorian&amp;rsquo;s ATT&amp;amp;CK Automation</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
++++
+title = "Yields, Interest Rates, and Equities - March 2021"
+description = "I believe that we're going to see more destabiliation in yields which will temporarily hurt equities but is long term bullish for the economy and the markets."
+author = "Daniel Wyleczuk-Stern"
+date = "2021-03-08"
+tags = ["bonds", "yields", "interest rates", "fomc"]
+categories = ["trading"]
+[[images]]
+  src = "static/img/2021/03/bonds.jpeg"
+  alt = "Bonds"
++++
+
+This is not financial advice. These are just my musings and thoughts on the current situation in the markets.
+
+Ever since mid-February, we've seen the market retract with Qs closing below 300 and SPY also seeing some drops. When we look deeper into the individual stocks that compromise these indexes, I think we'll find a different story. Before we do, we need to take a detour into bonds.
+
+The relationship between bonds, yields, and interest rates is fairly basic, but having almost no background in finance, it took me a bit to try to understand it. Essentially, bond prices and yields have an inverse relationship. If a bond price falls, it's yield goes up. The simplest way to explain this was from a Youtube video I watched but can't find the link. Imagine a bond cost $1000 and it paid you $5 every month. You would say it had a 6% yield every year. Now imagine that, for some reason, you wanted to sell the bond. But nobody wanted it because they could get 8% interest rate from having cash in their savings account. Well you try and sell your bond for $900. It still pays $5 every month. But now your yield is 6.6%. You'd have to lower the bond price to $750 in order to be equivalent with the interest rate in that person's savings account. So that's how yields and bond prices are related. So when yields are going up, no one wants to buy bonds.
+
+So how does yields affect equities? Well you can roughly convert a stock's price to it's yield by inversing it's PE ratio. Well, apparently, for where the market was at, at about 1.5% yield, bonds became more attractive than stocks.
+
+To quickly summarize, no one wanted bonds so yields spiked enough to where it became more attractive to move from equities to bonds (or at least to not own high PE equities). So what are these high PE equities? Growth stocks and tech. TSLA, SPACs, ARK funds, etc are all heavily focused on growth vs value. Which means that investors pay for future value vs present value. Well the market is saying that future value was overvalued and present value was undervalued. If you noticed over the past few weeks, the Dow is doing fine and dividend stocks and financial stocks have been doing just fine. Compare the IWN (Russell growth) vs the IWO (Russell value). It's pretty clear.
+
+So why does no one want bonds right now? Inflation. Or at least the expectation of inflation. The money supply is at incredibly highs due to QE but the money velocity has not increased because demand is stunted due to the pandemic. The recent jobs report that showed good news and the acceleration of vaccine deployment has market analysts thinking that we're going to see sky-high demand soon without a subsequent uptick in supply which would cause prices to rise, hence, inflation. We're already seeing this with crude futures and oil stocks seeing a pretty consistent increase.
+
+So why exactly does no one want bonds? Well if there's a belief that inflation is coming, you believe that your bonds will be worth less than the money you can get in your savings account, so why buy bonds? You wouldn't. The market believes that inflation will come faster than the Fed is prediciting, which will necessitate a rise in interest rates.
+
+Just like in March 2020 when tech took off despite a global pandemic, the market isn't the economy. While this rotation and correction is scary, I think it's good. The market is pricing in a growing and successful economy. Which will mean an organic growth in tech stocks due to improved free cash flow. This is what you should be looking for as an investor.
