@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Azure Flow Log Analysis - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.85.0" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Azure Flow Log Analysis">
+  <meta property="og:description" content="Azure flow logs don&#39;t have the same instance ID that AWS flow logs do. So how do you figure out which VM the logs cam efrom&gt;">
+  <meta property="description" content="Azure flow logs don&#39;t have the same instance ID that AWS flow logs do. So how do you figure out which VM the logs cam efrom&gt;">
+  <meta property="og:url" content="https://catscrdl.io/blog/azureflowloganalysis/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/network.png">
+      <meta property="og:image:alt" content="Network">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.6ad9eb85bff384c75937a02036b01425a2ca63f19a96535b8ba5b181db62a4b3.css" integrity="sha256-atnrhb/zhMdZN6AgNrAUJaLKY/GallNbi6WxgdtipLM="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Azure%20Flow%20Log%20Analysis&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;title=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;title=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;description=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec and trading</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/azureflowloganalysis/">Azure Flow Log Analysis</a></h2>
+    
+    
+      <p>Azure flow logs don&#39;t have the same instance ID that AWS flow logs do. So how do you figure out which VM the logs cam efrom&gt;</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>7-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Azure%20Flow%20Log%20Analysis&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;title=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;title=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f&amp;description=Azure%20Flow%20Log%20Analysis" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fazureflowloganalysis%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/azureflowloganalysis/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.png');">
+    <img src="https://catscrdl.io/static/img/network.png" alt="Network">
+  </a>
+      <h1 id="intro">Intro</h1>
+<p><em>Disclaimer</em> I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.</p>
+<p>At Snowflake, we&rsquo;re a multi-cloud environment. As part of the threat detection team, it&rsquo;s my job to ensure that we&rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found <a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">at this link.</a> When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">field that ties the flow log to the instance ID</a>, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.</p>
+<h1 id="plotting">Plotting</h1>
+<p>Fortunately, I had SQL to help. To conduct my analysis, I used Snowflake, which is where we (obviously) store our logs. However, any SQL tool should offer the same capabilities below. In order to conduct this analysis, I used a trick taught to me by one of the data scientists at Snowflake. First, for Azure logs, IPs aren&rsquo;t associated with VMs. They&rsquo;re associated with NICs and a NIC is associated with a VM. Now, a lot of organizations use various tools and scripts that collect information about current assets periodically. However, considering Snowflake creates and destroys VMs and NICs so rapidly, this isn&rsquo;t sufficient. We also needed to look at the Azure operation logs in order to establish confidence that we were looking at every NIC. Let&rsquo;s take a look at some code.</p>
+<pre><code>select
+  parse_json(propertiesresponseBody) as response_body,
+  response_body:etag::string as etag,
+  response_body:name::string as nic_name,
+  response_body:location::string as nic_locatin,
+  response_body:properties as nic_properties,
+  response_body:tags as tags,
+  response_body:type::string as nic_type,
+  value:properties.privateIPAddress::string as nic_ip
+from
+  azure_operation_logs_v, lateral flatten(parse_json(properties:responseBody):properties.ipConfigurations)
+where
+  operation_name = 'MICROSOFT.NETWORK/NETWORKINTERFACES/WRITE'
+</code></pre><p>You can review the documentation on the structure here: <a href="https://docs.microsoft.com/en-us/rest/api/virtualnetwork/network-interfaces/create-or-update#networkinterface">Network Interfaces - Create Or Update</a>.</p>
+<p>This gets us information on NICs from our operation logs. We also had have scripts running that collect information on existing NICs. This is useful for looking at longer running VMs.</p>
+<pre><code>with nic_collect_logs as (
+  select
+    id::string as nic_id,
+    etag::string as etag,
+    nic_name::string as nic_name,
+    nic_location::string as nic_location,
+    nic_properties,
+    tags,
+    nic_type::string as nic_type,
+    value:properties.privateIPAddress::string as nic_ip
+    'collect_script' as source
+    min(recorded_at) as earliest,
+    max(recorded_at) as latest
+    
+  from
+    AZURE_COLLECT_NETWORK_INTERFACES_V, lateral flatten(properties:ipConfigurations)
+  group by
+    1,2,3,4,5,6,7,8,9
+)
+select * from nic_collect_logs;
+</code></pre><p>This is slightly different. We wanted to remove duplicate NICs by using group by and also note the first time we saw the NIC and the most recent time we&rsquo;ve seen the NIC. Let&rsquo;s apply the same to the NICs collected by the operation logs.</p>
+<pre><code>with nic_create_op_logs_raw as (
+  select
+    parse_json(propertiesresponseBody) as response_body,
+    response_body:etag::string as etag,
+    response_body:name::string as nic_name,
+    response_body:location::string as nic_location,
+    response_body:properties as nic_properties,
+    response_body:tags as tags,
+    response_body:type::string as nic_type,
+    value:properties.privateIPAddress::string as nic_ip
+    value:properties.entity::string as nic_id,
+    'operation_logs' as source
+  from
+    azure_operation_logs_v, lateral flatten(parse_json(properties:responseBody):properties.ipConfigurations)
+  where
+    operation_name = 'MICROSOFT.NETWORK/NETWORKINTERFACES/WRITE'
+),
+nic_create_op_logs as (
+  select
+    nic_id,
+    etag,
+    nic_name,
+    nic_location,
+    nic_properties,
+    tags,
+    nic_type,
+    nic_ip,
+    source
+    min(event_time) as earliest,
+    max(event_time) as latest from nic_create_op_logs
+  from nic_create_op_logs
+  group by
+    1,2,3,4,5,6,7,8,9
+)
+select * from nic_create_op_logs;
+</code></pre><p>So now we have NICs created by operational logs and NICs identified from our collection scripts. Let&rsquo;s combine them together using union.</p>
+<pre><code>with all_nics as (
+  select * from nic_create_op_logs
+  UNION
+  select * from nic_collect_logs
+)
+select * from all_nics;
+</code></pre><p>Now, the issue comes up where we want to know the window of time that a NIC had a particular IP address. We can do this using the lead and lag functions to get the start and end window times for a NIC&rsquo;s association with an IP address. In this case, we can use true_earliest as the window start. To find the window_end, we&rsquo;ll use lead</p>
+<pre><code>select *,
+  true_earliest as window_start,
+  lead(true_earliest) over (
+    partition by nic_ip
+      order by true_earliest asc
+  ) as window_end
+from all_nics
+;
+</code></pre><h1 id="the-code">The Code</h1>
+<p>Putting all the code together we have</p>
+<pre><code>with nic_collect_logs as (
+  select
+    id::string as nic_id,
+    etag::string as etag,
+    nic_name::string as nic_name,
+    nic_location::string as nic_location,
+    nic_properties,
+    tags,
+    nic_type::string as nic_type,
+    value:properties.privateIPAddress::string as nic_ip
+    'collect_script' as source
+    min(recorded_at) as earliest,
+    max(recorded_at) as latest
+    
+  from
+    AZURE_COLLECT_NETWORK_INTERFACES_V, lateral flatten(properties:ipConfigurations)
+  group by
+    1,2,3,4,5,6,7,8,9
+),
+nic_create_op_logs_raw as (
+  select
+    parse_json(propertiesresponseBody) as response_body,
+    response_body:etag::string as etag,
+    response_body:name::string as nic_name,
+    response_body:location::string as nic_location,
+    response_body:properties as nic_properties,
+    response_body:tags as tags,
+    response_body:type::string as nic_type,
+    value:properties.privateIPAddress::string as nic_ip
+    value:properties.entity::string as nic_id,
+    'operation_logs' as source
+  from
+    azure_operation_logs_v, lateral flatten(parse_json(properties:responseBody):properties.ipConfigurations)
+  where
+    operation_name = 'MICROSOFT.NETWORK/NETWORKINTERFACES/WRITE'
+),
+nic_create_op_logs as (
+  select
+    nic_id,
+    etag,
+    nic_name,
+    nic_location,
+    nic_properties,
+    tags,
+    nic_type,
+    nic_ip,
+    source
+    min(event_time) as earliest,
+    max(event_time) as latest from nic_create_op_logs
+  from nic_create_op_logs
+  group by
+    1,2,3,4,5,6,7,8,9
+),
+with all_nics as (
+  select * from nic_create_op_logs
+  UNION
+  select * from nic_collect_logs
+),
+select *,
+  true_earliest as window_start,
+  lead(true_earliest) over (
+    partition by nic_ip
+      order by true_earliest asc
+  ) as window_end
+from all_nics;
+</code></pre><p>And now we have NICs and the IPs associated with them and the window of time when that IP was associated with that NIC.</p>
+<p>Our next step is to join this on VM data. That&rsquo;s fairly easy.</p>
+<p>For our Azure VMs, we did a similar exercise of joining data from Collect script and Operational logs. We&rsquo;ll call this view <code>AZURE_VMS_V</code>. We&rsquo;ll call our Azure NICs view <code>AZURE_NICS_V</code>.</p>
+<pre><code>select * from AZURE_NICS_V a
+join AZURE_VMS_V b on lower(a.id) = lower(b.properties['networkProfile']['networkInterfaces'][0]['id])
+</code></pre><p>A few notes - I used lower since there were some instances where the ID had varying cases and other instances where it didn&rsquo;t. I&rsquo;m attributing this to inconsistences with the APIs between collection scripts vs operational logs. You may also note that I used 0 instead of lateral flatten for accessing the network interfaces of the VMs. In our environment, we do not have VMs where there are multiple NICs. If you do, you can use lateral flatten again.</p>
+<p>The final step is to join our flow logs on our NICs. In this way we&rsquo;ll have joined Flow Log &lt;&gt; NIC &lt;&gt; VM. Fortunately, most of the hardwork is done.</p>
+<pre><code>select * from AZURE_FLOW_LOGS_V
+left outer join AZURE_NICS_V on src_addr = nic_ip and event_time &gt;= window_start and (event_time &lt;= window_end or window_end is NULL)
+left outer join AZURE_VMS_V on lower(AZURE_NICS_V.id) = lower(AZURE_VMS_V.properties['networkProfile']['networkInterfaces'][0]['id])
+</code></pre><p>For joining the flow logs on the NIC, we want to ensure that the Flow Log event time occurred after the window start for the NIC and before the end time of the NIC. If the NIC still exists, the window_end would be NULL.</p>
+<p>If you seek higher fidelity, you can also look at including tenant ID and subscription ID into your joins.</p>
+<p>The obvious question is &ldquo;how accurate is this?&rdquo;</p>
+<p>Let&rsquo;s check. I&rsquo;ll call our above logic <code>AZURE_FLOW_LOGS_JOIN_VMS_V</code>. We&rsquo;ll look for null VM IDs (where we couldn&rsquo;t join on a VM) and the flow was recorded in the past day. (<code>flow_recorded_at</code> is a column we add during ingestion that records the time the flow was ingested into Snowflake.)</p>
+<pre><code>select count(*) from AZURE_FLOW_LOGS_JOIN_VMS_V
+where vm_id is NULL
+and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
+</code></pre><p>and something similar for not null showed me that 99.75% of flow logs could be matched to their VM.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This was a lot of work for something that AWS offers natively. I hope that as Azure matures their product that they&rsquo;ll also offer similar levels of visibility.</p>
+<p>You may be wondering why I used IPs instead of MAC addresses. When inspecting our logs, a vast number of NICs has IPs but no MAC addresses. I do not have a clear reason from Microsoft why that is at the time of this publication.</p>
+<p>I hope this work helps those working in security and Azure clouds. If you have other ideas or ways to improve the success rate, please let me know!</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/zure/">zure</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection/">detection</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="2827ee04f4dd48ebf0d7995646670673">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/regardingsms2fa/" class="button right"><span>Regarding SMS 2FA</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/azureflowloganalysis/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.png');">
+    <img src="https://catscrdl.io/static/img/network.png" alt="Network">
+  </a>
+        <header>
+          <h2><a href="/blog/azureflowloganalysis/">Azure Flow Log Analysis</a></h2>
+          <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2021/02/2fa.png');">
+    <img src="https://catscrdl.io/static/img/2021/02/2fa.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+          <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/opensourceredteamtooling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/silent-twitter.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/silent-twitter.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/opensourceredteamtooling/">Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</a></h2>
+          <time class="published" datetime="2019-12-24 00:00:00 &#43;0000 UTC">December 24, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/gettingstartedwithautomation/">Getting Started with Praetorian’s ATT&amp;CK™ Automation</a></h2>
+          <time class="published" datetime="2019-05-10 00:00:00 &#43;0000 UTC">May 10, 2019</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/attackbenchmark/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/attack-logo-bold.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/attack-logo-bold.png" alt="Wikipedia">
+  </a>
+        <header>
+          <h2><a href="/blog/attackbenchmark/">Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</a></h2>
+          <time class="published" datetime="2019-05-01 00:00:00 &#43;0000 UTC">May 1, 2019</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Category</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">7</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity and finance.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2021 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.85.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.4a167a7ef806f5df6e596d275d477229324d8e5016b81ceb09f288bb90e4dd8a.js" integrity="sha256-ShZ6fvgG9d9uWW0nXUdyKTJNjlAWuBzrCfKIu5Dk3Yo="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>
