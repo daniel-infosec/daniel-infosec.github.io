@@ -14,7 +14,7 @@
       
       <guid>https://catscrdl.io/blog/azureflowloganalysis/</guid>
       <description>Intro Disclaimer I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.
-At Snowflake, we&amp;rsquo;re a multi-cloud environment. As part of the threat detection team, it&amp;rsquo;s my job to ensure that we&amp;rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found at this link.</description>
+At Snowflake, we&amp;rsquo;re a multi-cloud environment. As part of the threat detection team, it&amp;rsquo;s my job to ensure that we&amp;rsquo;re monitoring our logs for threats and unusual activity. One of my recent tasks was to monitor our Azure flow logs for unusual behavior.</description>
     </item>
     
   </channel>

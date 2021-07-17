@@ -290,7 +290,7 @@
   </a>
       <h1 id="intro">Intro</h1>
 <p><em>Disclaimer</em> I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.</p>
-<p>At Snowflake, we&rsquo;re a multi-cloud environment. As part of the threat detection team, it&rsquo;s my job to ensure that we&rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found <a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">at this link.</a> When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">field that ties the flow log to the instance ID</a>, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.</p>
+<p>At Snowflake, we&rsquo;re a multi-cloud environment. As part of the threat detection team, it&rsquo;s my job to ensure that we&rsquo;re monitoring our logs for threats and unusual activity. One of my recent tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found <a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">at this link.</a> When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">field that ties the flow log to the instance ID</a>, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.</p>
 <h1 id="plotting">Plotting</h1>
 <p>Fortunately, I had SQL to help. To conduct my analysis, I used Snowflake, which is where we (obviously) store our logs. However, any SQL tool should offer the same capabilities below. In order to conduct this analysis, I used a trick taught to me by one of the data scientists at Snowflake. First, for Azure logs, IPs aren&rsquo;t associated with VMs. They&rsquo;re associated with NICs and a NIC is associated with a VM. Now, a lot of organizations use various tools and scripts that collect information about current assets periodically. However, considering Snowflake creates and destroys VMs and NICs so rapidly, this isn&rsquo;t sufficient. We also needed to look at the Azure operation logs in order to establish confidence that we were looking at every NIC. Let&rsquo;s take a look at some code.</p>
 <pre><code>select
@@ -321,7 +321,6 @@ where
     'collect_script' as source
     min(recorded_at) as earliest,
     max(recorded_at) as latest
-    
   from
     AZURE_COLLECT_NETWORK_INTERFACES_V, lateral flatten(properties:ipConfigurations)
   group by
@@ -358,8 +357,8 @@ nic_create_op_logs as (
     nic_ip,
     source
     min(event_time) as earliest,
-    max(event_time) as latest from nic_create_op_logs
-  from nic_create_op_logs
+    max(event_time) as latest
+  from nic_create_op_logs_raw
   group by
     1,2,3,4,5,6,7,8,9
 )
