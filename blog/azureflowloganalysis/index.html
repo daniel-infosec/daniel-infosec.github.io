@@ -290,8 +290,8 @@
   </a>
       <h1 id="intro">Intro</h1>
 <p><em>Disclaimer</em> I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.</p>
-<p>At Snowflake, we&rsquo;re a multi-cloud environment. As part of the threat detection team, it&rsquo;s my job to ensure that we&rsquo;re monitoring our logs for threats and unusual activity. One of my recent tasks was to investigate our Azure flow logs and build detections for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found <a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">at this link.</a> When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">field that ties the flow log to the instance ID</a>, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.</p>
-<h1 id="planning">Planning</h1>
+<p>At Snowflake, we&rsquo;re a multi-cloud environment. As part of the threat detection team, it&rsquo;s my job to ensure that we&rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found <a href="https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview">at this link.</a> When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">field that ties the flow log to the instance ID</a>, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.</p>
+<h1 id="plotting">Plotting</h1>
 <p>Fortunately, I had SQL to help. To conduct my analysis, I used Snowflake, which is where we (obviously) store our logs. However, any SQL tool should offer the same capabilities below. In order to conduct this analysis, I used a trick taught to me by one of the data scientists at Snowflake. First, for Azure logs, IPs aren&rsquo;t associated with VMs. They&rsquo;re associated with NICs and a NIC is associated with a VM. Now, a lot of organizations use various tools and scripts that collect information about current assets periodically. However, considering Snowflake creates and destroys VMs and NICs so rapidly, this isn&rsquo;t sufficient. We also needed to look at the Azure operation logs in order to establish confidence that we were looking at every NIC. Let&rsquo;s take a look at some code.</p>
 <pre><code>select
   parse_json(propertiesresponseBody) as response_body,
@@ -306,8 +306,8 @@ from
   azure_operation_logs_v, lateral flatten(parse_json(properties:responseBody):properties.ipConfigurations)
 where
   operation_name = 'MICROSOFT.NETWORK/NETWORKINTERFACES/WRITE'
-</code></pre><p>The above sql parses events related to the creation of Network Interfaces in our Azure operation logs. You can review the documentation on the structure of the response body here: <a href="https://docs.microsoft.com/en-us/rest/api/virtualnetwork/network-interfaces/create-or-update#networkinterface">Network Interfaces - Create Or Update</a>. This gets us information on NICs from our operation logs.</p>
-<p>We also had have scripts running that collect information on existing NICs. This is useful for looking at longer running VMs.</p>
+</code></pre><p>You can review the documentation on the structure here: <a href="https://docs.microsoft.com/en-us/rest/api/virtualnetwork/network-interfaces/create-or-update#networkinterface">Network Interfaces - Create Or Update</a>.</p>
+<p>This gets us information on NICs from our operation logs. We also had have scripts running that collect information on existing NICs. This is useful for looking at longer running VMs.</p>
 <pre><code>with nic_collect_logs as (
   select
     id::string as nic_id,
@@ -321,6 +321,7 @@ where
     'collect_script' as source
     min(recorded_at) as earliest,
     max(recorded_at) as latest
+    
   from
     AZURE_COLLECT_NETWORK_INTERFACES_V, lateral flatten(properties:ipConfigurations)
   group by
@@ -357,8 +358,8 @@ nic_create_op_logs as (
     nic_ip,
     source
     min(event_time) as earliest,
-    max(event_time) as latest
-  from nic_create_op_logs_raw
+    max(event_time) as latest from nic_create_op_logs
+  from nic_create_op_logs
   group by
     1,2,3,4,5,6,7,8,9
 )
@@ -546,6 +547,8 @@ and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
   
   <div class="pagination">
     
+      <a href="/blog/ashmoosguidetodc/" class="button left"><span>A Shmoo&#39;s Guide to DC</span></a>
+    
     
       <a href="/blog/regardingsms2fa/" class="button right"><span>Regarding SMS 2FA</span></a>
     
@@ -558,6 +561,16 @@ and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
       <header>
         <h1>Recent Posts</h1>
       </header>
+      
+      <article class="mini-post">
+          <a href="/blog/ashmoosguidetodc/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/ShmooCon.jpg');">
+    <img src="https://catscrdl.io/static/img/2022/ShmooCon.jpg" alt="Shmoocon">
+  </a>
+        <header>
+          <h2><a href="/blog/ashmoosguidetodc/">A Shmoo&#39;s Guide to DC</a></h2>
+          <time class="published" datetime="2022-03-26 00:00:00 &#43;0000 UTC">March 26, 2022</time>
+        </header>
+      </article>
       
       <article class="mini-post">
           <a href="/blog/azureflowloganalysis/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
@@ -597,16 +610,6 @@ and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
         </header>
       </article>
       
-      <article class="mini-post">
-          <a href="/blog/attackbenchmark/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/attack-logo-bold.png');">
-    <img src="https://catscrdl.io/static/img/oldblog/attack-logo-bold.png" alt="Wikipedia">
-  </a>
-        <header>
-          <h2><a href="/blog/attackbenchmark/">Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</a></h2>
-          <time class="published" datetime="2019-05-01 00:00:00 &#43;0000 UTC">May 1, 2019</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -620,13 +623,16 @@ and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
 
       <section id="categories">
         <header>
-          <h1><a href="/categories">Category</a></h1>
+          <h1><a href="/categories">Categories</a></h1>
         </header>
         <ul>
           
           
           <li>
               <a href="/categories/infosec/">infosec<span class="count">7</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
           
           </li>
         </ul>
@@ -697,7 +703,7 @@ and flow_recorded_at &gt;= dateadd(hour, -1, current_timestamp())
       </ul>
   
   <p class="copyright">
-    © 2021 Catscrdl
+    © 2022 Catscrdl
       <br>
     Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.85.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
