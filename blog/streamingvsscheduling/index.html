@@ -374,7 +374,7 @@ def title(event):
     else:
       return f&quot;Dest IP ({event.udm('dest_ip')}) matched a known IoC&quot;
 </code></pre><p>In this sample code, we have a library that allows us to pass in an IP and query an API to see if the IP matches a known IoC. What potential costs could we have?</p>
-<p>We&rsquo;re going to have real time analytics costs and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc fucntion up to 3 times. Depending on the volume of our fireall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
+<p>We&rsquo;re going to have real time analytics costs and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc fucntion up to 3 times. Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
 <ol start="2">
 <li>Scheduled query matching AWS logins with Okta usernames with Jamf IPs</li>
 </ol>
