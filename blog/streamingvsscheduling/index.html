@@ -8,8 +8,8 @@
 
 <meta name="generator" content="Hugo 0.85.0" /><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Real Time vs Scheduled Query Detections - A Guide For Detection Engineers">
-  <meta property="og:description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?">
-  <meta property="description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?">
+  <meta property="og:description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why? This blog post is designed to serve as a guide to those designing their detection architecture.">
+  <meta property="description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why? This blog post is designed to serve as a guide to those designing their detection architecture.">
   <meta property="og:url" content="https://catscrdl.io/blog/streamingvsscheduling/">
   <meta property="og:type" content="article">
   
@@ -229,7 +229,7 @@
       <h2><a href="/blog/streamingvsscheduling/">Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</a></h2>
     
     
-      <p>Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?</p>
+      <p>Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why? This blog post is designed to serve as a guide to those designing their detection architecture.</p>
     
   </div>
   <div class="meta">
@@ -290,7 +290,7 @@
   </a>
       <p>Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&rsquo;s clarify what we mean by each.</p>
 <h1 id="definitions">Definitions</h1>
-<p>A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data. Let&rsquo;s take a look at some examples.</p>
+<p>A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data. It&rsquo;s important to note that these are actually more accurately &ldquo;near&rdquo; real time rules. There&rsquo;s delays due to log generation, ingestion, parsing, running the rule logic, and delivering the results. Let&rsquo;s take a look at some examples.</p>
 <pre><code>OKTA_SUPPORT_ACCESS_EVENTS = [
     &quot;user.session.impersonation.grant&quot;,
     &quot;user.session.impersonation.initiate&quot;,
@@ -374,7 +374,7 @@ def title(event):
     else:
       return f&quot;Dest IP ({event.udm('dest_ip')}) matched a known IoC&quot;
 </code></pre><p>In this sample code, we have a library that allows us to pass in an IP and query an API to see if the IP matches a known IoC. What potential costs could we have?</p>
-<p>We&rsquo;re going to have real time analytic and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc function up to 3 times. Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
+<p>We&rsquo;re going to have real time analytic and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc function up to 3 times. (Note that this is a naive implementation to serve as an example.) Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
 <ol start="2">
 <li>Scheduled query matching AWS logins with Okta usernames with Jamf IPs</li>
 </ol>
