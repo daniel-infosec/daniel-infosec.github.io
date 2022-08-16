@@ -312,7 +312,7 @@ def alert_context(event):
         &quot;event&quot;: event.get(&quot;eventType&quot;),
     }
     return context
-</code></pre><p>The above rule is from Panther and can be found at <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py">https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py</a>.</p>
+</code></pre><p>The above rule is from Panther and can be found at <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py">okta account support access</a>.</p>
 <p>The rule is configured to run on Okta logs. For every event, it determines if the event type was in a list of defined Okta support access events. This rule runs as the Okta logs are ingested into Panther and is near-real time: as soon as the logs are shipped to Panther, the rule runs.</p>
 <p>Now, let&rsquo;s take a look at a scheduled query.</p>
 <pre><code>AnalysisType: scheduled_query
@@ -339,7 +339,7 @@ SnowflakeQuery: &gt;
 Schedule:
   RateMinutes: 60
   TimeoutMinutes: 1
-</code></pre><p>The above query can be found here: <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_queries/okta_mfa_password_reset_audit.yml">https://github.com/panther-labs/panther-analysis/blob/master/okta_queries/okta_mfa_password_reset_audit.yml</a> (thought it was modified for this blog post)</p>
+</code></pre><p>The above query can be found here: <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_queries/okta_mfa_password_reset_audit.yml">okta mfa reset</a> (thought it was modified for this blog post)</p>
 <p>This query operates on data that has already been ingested into the SIEM. Every hour, it runs a SQL query over the Okta system logs and looks for events related to MFA. If any match, it will generate an alert.</p>
 <h1 id="types-of-cost">Types of Cost</h1>
 <p>I believe that nearly any rule you write as a streaming rule you can also write as a scheduled query and vice versa. So why would one choose one over the other? It comes down to cost in more ways than one. First, let&rsquo;s identify the types of cost.</p>
