@@ -374,7 +374,7 @@ def title(event):
     else:
       return f&quot;Dest IP ({event.udm('dest_ip')}) matched a known IoC&quot;
 </code></pre><p>In this sample code, we have a library that allows us to pass in an IP and query an API to see if the IP matches a known IoC. What potential costs could we have?</p>
-<p>We&rsquo;re going to have real time analytics costs and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc fucntion up to 3 times. Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
+<p>We&rsquo;re going to have real time analytics costs and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc function up to 3 times. Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
 <ol start="2">
 <li>Scheduled query matching AWS logins with Okta usernames with Jamf IPs</li>
 </ol>
@@ -397,9 +397,9 @@ SnowflakeQuery: &gt;
 Schedule:
   RateMinutes: 60
   TimeoutMinutes: 1
-</code></pre><p>In the above login, we&rsquo;re joining our cloutrail data wiht Okta and then joining that again on Jamf data to see where users are logging in from devices that aren&rsquo;t their laptops. How would we write this if it was a streaming rule? Similarly to the first example, we&rsquo;d have to have an API where we could pass an IP and see if that IP is associated with one of our deviecs in Jamf.</p>
+</code></pre><p>In the above login, we&rsquo;re joining our cloutrail data with Okta, and then joining that again on Jamf data to see where users are logging in from devices that aren&rsquo;t their laptops. How would we write this if it was a streaming rule? Similarly to the first example, we&rsquo;d have to have an API where we could pass an IP and see if that IP is associated with one of our devices in Jamf.</p>
 <p>What are the costs here?</p>
-<p>We&rsquo;re going to have processing costs in our SIEM - if we have a lot of cloudtrail logs, we could be searching a lot of data. Additionally, while not super relevant in this example, depending on the join we could have face costs/performance concerns.</p>
+<p>We&rsquo;re going to have processing costs in our SIEM - if we have a lot of cloudtrail logs, we could be searching a lot of data. Additionally, while not super relevant in this example, depending on the join we could face costs/performance concerns.</p>
 <h1 id="deciding-on-a-style">Deciding on a Style</h1>
 <p>Now that we&rsquo;re familiar with some of the costs, what questions should we ask ourselves when designing a rule?</p>
 <ol>
@@ -411,7 +411,7 @@ Schedule:
 <li>What infrastructure and supporting automation and tooling have we already built? Are you architected around ingesting all your data into your security data lake? Or do you have a robust series of APIs to query 3rd party endpoints? This could drive your decision one way or the other. Though with Snowflake&rsquo;s UDF support, you could call these APIs from your scheduled queries if you wish.</li>
 <li>Do I need to consider state? Let&rsquo;s imagine a scenario where we have an endpoint security tool that we want to alert if it&rsquo;s uninstalled. However, our IT team has a script that is triggering false positives because it temporarily disables the agent when it applies updates. So we want to know what state the system was in when the disable command was run. You could potentially set up some sort of state analysis pipeline, but it can get prohibitively expensive. It&rsquo;s much simpler to use joins or something like <a href="https://docs.snowflake.com/en/sql-reference/constructs/match_recognize.html">match_recognize</a>.</li>
 <li>How much data do I need to look at? Let&rsquo;s envision we&rsquo;re using a scheduled query that&rsquo;s using data source A and B. And we&rsquo;re joining the past hour of A on all of B. If B is a very voluminous data source, we could be looking at a very slow query. In this case, it may be better to run a streaming rule on A and then query B as necessary in the next step of the pipeline.</li>
-<li>How many rules do I have running on this data set and how large is the data set? Let&rsquo;s say we&rsquo;re writing rules on VPC flow log data which has a LOT of data. Let&rsquo;s say we want to write 5 different rules to look for IoCs, unexpected ports, etc (ones that are very simple). If we were to write 5 different scheduled queries, we would be looking at the same (large amount of) data multiple times. This can get expensive. We could write 1 scheduled query but it would be complicated and hard to parse. So in this case, writing streaming rulse would make more sense and we could rely on downstream enrichments.</li>
+<li>How many rules do I have running on this data set and how large is the data set? Let&rsquo;s say we&rsquo;re writing rules on VPC flow log data which has a LOT of data. Let&rsquo;s say we want to write 5 different rules to look for IoCs, unexpected ports, etc (ones that are very simple). If we were to write 5 different scheduled queries, we would be looking at the same (large amount of) data multiple times. This can get expensive. We could write 1 scheduled query but it would be complicated and hard to parse. So in this case, writing streaming rules would make more sense and we could rely on downstream enrichments.</li>
 </ol>
 <h1 id="conclusion">Conclusion</h1>
 <p>Hopefully this information and questions will help you make better decisions when it comes to designing your rules. Are there other things you consider during your design process? Please let me know!</p>
