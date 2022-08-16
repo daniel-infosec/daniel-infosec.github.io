@@ -8,7 +8,7 @@
     <language>en</language>
     <lastBuildDate>Mon, 15 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/categories/infosec/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Scheduled Queries vs Real Time Rules - A Guide For Detection Engineers</title>
+      <title>Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</title>
       <link>https://catscrdl.io/blog/streamingvsscheduling/</link>
       <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
       
