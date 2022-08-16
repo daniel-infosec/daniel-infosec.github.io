@@ -14,7 +14,7 @@
       
       <guid>https://catscrdl.io/blog/streamingvsscheduling/</guid>
       <description>Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&amp;rsquo;s clarify what we mean by each.
-Definitions A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each line of data will get processed against the rules that correspond with that kind of data.</description>
+Definitions A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data.</description>
     </item>
     
   </channel>
