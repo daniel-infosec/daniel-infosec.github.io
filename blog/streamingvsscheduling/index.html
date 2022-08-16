@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Scheduled Queries vs Real Time Rules - A Guide For Detection Engineers - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.85.0" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Scheduled Queries vs Real Time Rules - A Guide For Detection Engineers">
+  <meta property="og:description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?">
+  <meta property="description" content="Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?">
+  <meta property="og:url" content="https://catscrdl.io/blog/streamingvsscheduling/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/2022/analysis.png">
+      <meta property="og:image:alt" content="Analysis">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.6ad9eb85bff384c75937a02036b01425a2ca63f19a96535b8ba5b181db62a4b3.css" integrity="sha256-atnrhb/zhMdZN6AgNrAUJaLKY/GallNbi6WxgdtipLM="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;title=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;title=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;description=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/streamingvsscheduling/">Scheduled Queries vs Real Time Rules - A Guide For Detection Engineers</a></h2>
+    
+    
+      <p>Many SIEM tools nowadays offer both the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why?</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2022-08-15 00:00:00 &#43;0000 UTC">August 15, 2022</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>6-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;title=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;title=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f&amp;description=Scheduled%20Queries%20vs%20Real%20Time%20Rules%20-%20A%20Guide%20For%20Detection%20Engineers" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fstreamingvsscheduling%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/streamingvsscheduling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/analysis.png');">
+    <img src="https://catscrdl.io/static/img/2022/analysis.png" alt="Analysis">
+  </a>
+      <p>Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&rsquo;s clarify what we mean by each.</p>
+<h1 id="definitions">Definitions</h1>
+<p>A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each line of data will get processed against the rules that correspond with that kind of data. Let&rsquo;s take a look at some examples.</p>
+<pre><code>OKTA_SUPPORT_ACCESS_EVENTS = [
+    &quot;user.session.impersonation.grant&quot;,
+    &quot;user.session.impersonation.initiate&quot;,
+]
+
+
+def rule(event):
+    return event.get(&quot;eventType&quot;) in OKTA_SUPPORT_ACCESS_EVENTS
+
+
+def title(event):
+    return f&quot;Okta Support Access Granted by {event.udm('actor_user')}&quot;
+
+
+def alert_context(event):
+    context = {
+        &quot;user&quot;: event.udm(&quot;actor_user&quot;),
+        &quot;ip&quot;: event.udm(&quot;source_ip&quot;),
+        &quot;event&quot;: event.get(&quot;eventType&quot;),
+    }
+    return context
+</code></pre><p>The above rule is from Panther and can be found at <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py">https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py</a>.</p>
+<p>The rule is configured to run on Okta logs. For every event, it determines if the event type was in a list of defined Okta support access events. This rule runs as the Okta logs are ingested into Panther and is near-real time: as soon as the logs are shipped to Panther, the rule runs.</p>
+<p>Now, let&rsquo;s take a look at a scheduled query.</p>
+<pre><code>AnalysisType: scheduled_query
+QueryName: Okta Investigate MFA and Password resets
+Enabled: true
+Description: &gt;
+  Investigate Password and MFA resets for the last 1 hour
+SnowflakeQuery: &gt;
+  SELECT
+    p_event_time,
+    actor:alternateId as actor_user,
+    target[0]:alternateId as target_user,
+    eventType,client:ipAddress as ip_address
+  FROM panther_logs.public.okta_systemlog
+  WHERE eventType IN ('user.mfa.factor.reset_all', 'user.mfa.factor.deactivate', 'user.mfa.factor.suspend', 'user.account.reset_password', 'user.account.update_password','user.mfa.factor.update')
+  and p_occurs_since('1 hour')
+  ORDER by p_event_time DESC
+Schedule:
+  RateMinutes: 60
+  TimeoutMinutes: 1
+</code></pre><p>The above query can be found here: <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_queries/okta_mfa_password_reset_audit.yml">https://github.com/panther-labs/panther-analysis/blob/master/okta_queries/okta_mfa_password_reset_audit.yml</a> (thought it was modified for this blog post)</p>
+<p>This query operates on data that has already been ingested into the SIEM. Every hour, it runs a SQL query over the Okta system logs and looks for events related to MFA. If any match, it will generate an alert.</p>
+<h1 id="types-of-cost">Types of Cost</h1>
+<p>I believe that nearly any rule you write as a streaming rule you can also write as a scheduled query and vice versa. So why would one choose one over the other? It comes down to cost in more ways than one. First, let&rsquo;s identify the types of cost.</p>
+<ol>
+<li>Real Time Analytics - some SIEMs charge for the cost of running real time analytics.</li>
+<li>Batch Processing - some SIEMs will charge for running analytics and may have different charges for real time vs scheduled rules</li>
+<li>Enrichment - nearly every alert nowadays requires enrichment. With a real time rule, this often can be done with lookup tables or calling an external API. With a scheduled query, one can use joins</li>
+<li>Development - time is money friends! If a rule takes longer to develop and test, that&rsquo;s a cost that needs to be accounted for</li>
+</ol>
+<p>Let&rsquo;s take a look at some examples of common detections and see where their costs are.</p>
+<h1 id="example-costs">Example Costs</h1>
+<ol>
+<li>Streaming rule on firewall logs looking for IoC IPs</li>
+</ol>
+<p>Let&rsquo;s look at some example code.</p>
+<pre><code>from ioc_library import lookup_ioc
+
+def rule(event):
+    return lookup_ioc(event.udm(&quot;source_ip&quot;)) or lookup_ioc(event.udm(&quot;dest_ip&quot;))
+
+
+def title(event):
+    if lookup_ioc(event.udm(&quot;source_ip&quot;)):
+      return f&quot;Source IP ({event.udm('source_ip')}) matched a known IOC&quot;
+    else:
+      return f&quot;Dest IP ({event.udm('dest_ip')}) matched a known IOC&quot;
+</code></pre><p>In this sample code, we have a library that allows us to pass in an IP and query an API to see if the IP matches a known IOC. What potential costs could we have?</p>
+<p>We&rsquo;re going to have real time analytics costs and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc fucntion up to 3 times. Depending on the volume of our fireall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
+<ol start="2">
+<li>Scheduled query matching AWS logins with Okta usernames with Jamf IPs</li>
+</ol>
+<pre><code>AnalysisType: scheduled_query
+QueryName: Okta AWS Console Logins from Non-Laptops
+Enabled: true
+Description: &gt;
+  Investigate AWS console logins from Non-Laptops
+SnowflakeQuery: &gt;
+  SELECT *
+  FROM panther_logs.public.cloudtrail ct
+  INNER JOIN panther_logs.public.okta_users okta on okta:email like CONCAT('%', lower(ct:userIdentity.userName), '%')
+  LEFT OUTER JOIN panther_logs.public.jamf_inventory jamf on jamf:externalIP = ct:sourceIPAddress
+  WHERE ct:eventName = 'ConsoleLogin'
+  and p_occurs_since('1 hour')
+  and jamf:externalIP is NULL
+  ORDER by p_event_time DESC
+Schedule:
+  RateMinutes: 60
+  TimeoutMinutes: 1
+</code></pre><p>In the above login, we&rsquo;re joining our cloutrail data wiht Okta and then joining that again on Jamf data to see where users are logging in from devices that aren&rsquo;t their laptops. How would we write this if it was a streaming rule? Similarly to the first example, we&rsquo;d have to have an API where we could pass an IP and see if that IP is associated with one of our deviecs in Jamf.</p>
+<p>What are the costs here?</p>
+<p>We&rsquo;re going to have processing costs in our SIEM - if we have a lot of cloudtrail logs, we could be searching a lot of data. Additionally, while not super relevant in this example, depending on the join we could have face costs/performance concerns.</p>
+<h1 id="deciding-on-a-style">Deciding on a Style</h1>
+<p>Now that we&rsquo;re familiar with some of the costs, what questions should we ask ourselves when designing a rule?</p>
+<ol>
+<li>How quickly do I need to be alerted? A streaming rule will notify your SOC/IR team in near-real time. If the rule doesn&rsquo;t require an immediate response, one could use a scheduled query.</li>
+<li>Do I need enrichment to generate an alert? In our first example, we needed to enrich our data in order to generate an alert. This means we&rsquo;ll need to call an API on every data record. On the other hand, if we only need to call the API after we&rsquo;ve decided to generate an alert, we&rsquo;ll significantly reduce how often we&rsquo;ll need to call the API and avoid potential rate limit concerns.</li>
+<li>What&rsquo;s my team familiar with? If your team is more familiar with real time rules, you should defer to that. It&rsquo;s likely your existing infrastructure and tooling better supports development and testing of those rules. That doesn&rsquo;t mean you should ignore the alternative all together, though!</li>
+<li>How many data points do I need to make a conclusion? In our second example, we needed cloudtrail, okta, and jamf in order to make a determination if the login was malicious. This would be difficult to do with a real time rule as it would likely require the development of specific infrastructure to support these lookups.</li>
+<li>How well does my infrastructure handle failure? Let&rsquo;s say you hit a rate limit and your API lookup fails. What happens? Does your infrastructure rerun the rule at a later date? Or does it drop the record. If you suspect you may hit a rate limit with your rule and your infrastructure fails silently, you should consider re-designing the rule or running it as a scheduled query.</li>
+<li>What does my current infrastructure support? Are you architected around ingesting all your data into your security data lake? Or do you have a robust series of APIs to query 3rd party endpoints? This could drive your decision one way or the other. Though with Snowflake&rsquo;s UDF support, you could call these APIs from your scheduled queries if you wish.</li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<p>Hopefully this information and questions will help you make better decisions when it comes to designing your rules. Are there other things you consider during your design process? Please let me know!</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="e5b1c02bc5fe1a507c3b2809ca369f11">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/ashmoosguidetodc/" class="button right"><span>A Shmoo&#39;s Guide to DC</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/streamingvsscheduling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/analysis.png');">
+    <img src="https://catscrdl.io/static/img/2022/analysis.png" alt="Analysis">
+  </a>
+        <header>
+          <h2><a href="/blog/streamingvsscheduling/">Scheduled Queries vs Real Time Rules - A Guide For Detection Engineers</a></h2>
+          <time class="published" datetime="2022-08-15 00:00:00 &#43;0000 UTC">August 15, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/ashmoosguidetodc/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/ShmooCon.jpg');">
+    <img src="https://catscrdl.io/static/img/2022/ShmooCon.jpg" alt="Shmoocon">
+  </a>
+        <header>
+          <h2><a href="/blog/ashmoosguidetodc/">A Shmoo&#39;s Guide to DC</a></h2>
+          <time class="published" datetime="2022-03-26 00:00:00 &#43;0000 UTC">March 26, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/azureflowloganalysis/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
+    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
+  </a>
+        <header>
+          <h2><a href="/blog/azureflowloganalysis/">Azure Flow Log Analysis</a></h2>
+          <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2021/02/2fa.png');">
+    <img src="https://catscrdl.io/static/img/2021/02/2fa.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+          <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/opensourceredteamtooling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/silent-twitter.png');">
+    <img src="https://catscrdl.io/static/img/oldblog/silent-twitter.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/opensourceredteamtooling/">Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</a></h2>
+          <time class="published" datetime="2019-12-24 00:00:00 &#43;0000 UTC">December 24, 2019</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">8</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2022 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.85.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.4a167a7ef806f5df6e596d275d477229324d8e5016b81ceb09f288bb90e4dd8a.js" integrity="sha256-ShZ6fvgG9d9uWW0nXUdyKTJNjlAWuBzrCfKIu5Dk3Yo="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>
