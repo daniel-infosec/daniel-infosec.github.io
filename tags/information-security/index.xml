@@ -13,10 +13,10 @@
     
     <item>
       <title>How to Write an Actionable Alert</title>
-      <link>https://catscrdl.io/blog/howtowriteagoodalert/</link>
+      <link>https://catscrdl.io/blog/howtowriteanactionablealert/</link>
       <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://catscrdl.io/blog/howtowriteagoodalert/</guid>
+      <guid>https://catscrdl.io/blog/howtowriteanactionablealert/</guid>
       <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
 This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts.</description>
     </item>
