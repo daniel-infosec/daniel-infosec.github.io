@@ -235,7 +235,7 @@
   <div class="meta">
     <time datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>10-Minute Read</p>
+    <p>11-Minute Read</p>
   </div>
 </header>
 
@@ -300,6 +300,8 @@
 <p>I think any article on this topic would be remiss if it didn&rsquo;t start by referencing the <a href="http://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html">Pyramid of Pain</a>. This piece by David Bianco has really pushed forward detection engineering into the state it is today. We, as detection engineers, now strive to move beyond the most basic indicators and towards the top of the pyramid - TTPs.</p>
 <h2 id="funnel-of-fidelity">Funnel of Fidelity</h2>
 <p>Next up is one of my favorite pieces on the <a href="https://posts.specterops.io/introducing-the-funnel-of-fidelity-b1bb59b04036">Funnel of Fidelity</a>. This series of pieces covers of straining data to find the pieces that accurately represent the behavior your looking for. In general, I recommend all of SpecterOps and Jared Atkinson&rsquo;s pieces. They&rsquo;re worth a read.</p>
+<h2 id="detection-development-lifecycle">Detection Development Lifecycle</h2>
+<p>Can never hurt to sprinkle in some personal bias. I think the <a href="https://medium.com/snowflake/detection-development-lifecycle-af166fffb3bc">Detection Lifecycle</a> that we utilize at Snowflake is a pretty good place to start when it comes to learning about building solid detections.</p>
 <h1 id="what-makes-a-good-alert">What Makes a Good Alert</h1>
 <p>So now that we know what makes a good rule, let&rsquo;s dive into what makes a good alert. In my opinion and experience, there are a few qualities that make an alert good.</p>
 <ol>
@@ -325,7 +327,7 @@ Details: Identified user logged in from a new device. IPs were 123.34.12.11.
 Timestamps: 14:33 UTC
 Playbook: Reach out to user and confirm if the login was from them. If not,
   proceed to reset their password.
-</code></pre><p>Let&rsquo;s assume that the rule itself is accurate and the login was from a new device. What&rsquo;s wrong with this alert? Well the first step is to reach out to the user. This step is automatable and does not require a human to take the next step. When you&rsquo;re designing your alert, ask yourself Do we require the intelligence and ingenuity of our human analysts to make a decision or act on this information?&rdquo; If the answer is no, then you should strive to do more to improve the alert.</p>
+</code></pre><p>Let&rsquo;s assume that the rule itself is accurate and the login was from a new device. What&rsquo;s wrong with this alert? Well the first step is to reach out to the user. This step is automatable and does not require a human to take the next step. When you&rsquo;re designing your alert, ask yourself, &ldquo;Do we require the intelligence and ingenuity of our human analysts to make a decision or act on this information?&rdquo; If the answer is no, then you should strive to do more to improve the alert.</p>
 <p>On the subject of automation, I personally believe that any automation that is designed to improve the fidelity or the quality of information of an alert should be done by detection engineers. Incident response automation should focus on response and remediation.</p>
 <p>So what does a good alert look like?</p>
 <pre><code>Title: Phishing Reported by User
@@ -342,7 +344,7 @@ Playbook: Review the attached phishing emails and analysis. To remove the simila
 Attachments: &lt;simulated analysis&gt;
 </code></pre><p>This alert does a few things right: first, it has automated analysis of the phishing email and attached it to the ticket. This reduces the friction an analyst experiences when working a ticket. Second, it&rsquo;s clear what has already been done: the reported email has been removed from the user&rsquo;s inbox. Third, it presents a call to action: the system has identified similar emails and requires human analysis to determine what the next steps should be. Finally, it makes it easy to take the next steps by presenting links that trigger a playbook. When designing your alerts, make sure to consider that you should reduce analysis friction and make it easy to take the next steps.</p>
 <h2 id="automatically-enriched">Automatically Enriched</h2>
-<p>This property is highly related to the one above, and is arguable a subset; however, I believe it&rsquo;s important enough where I&rsquo;ve decided to specifically call it out. This property can be summed up succinctly by answering the following question: Does the human analyst need to go into another system to gather additional information? If the answer is yes, you can improve the alert. There&rsquo;s a term I use with alert analysis that I call &ldquo;friction&rdquo;. Friction is anything that slows down analysis in an unhelpful way. Having to go to another system to look something up, not knowing what playbook to use, a swarm of false positives, etc. All of these events add friction to the alert triage process slowing it down and increasing the possibility of errors.</p>
+<p>This property is highly related to the one above, and is arguably a subset; however, I believe it&rsquo;s important enough where I&rsquo;ve decided to specifically call it out. This property can be summed up succinctly by answering the following question: Does the human analyst need to go into another system to gather additional information? If the answer is yes, you can improve the alert. There&rsquo;s a term I use with alert analysis that I call &ldquo;friction&rdquo;. Friction is anything that slows down analysis in an unhelpful way. Having to go to another system to look something up, not knowing what playbook to use, a swarm of false positives, etc. All of these events add friction to the alert triage process slowing it down and increasing the possibility of errors.</p>
 <p>With that in mind, let&rsquo;s revisit the example above.</p>
 <pre><code>Title: Phishing Reported by User
 User: john.doe@snowflake.com
