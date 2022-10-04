@@ -18,7 +18,7 @@
       
       <guid>https://catscrdl.io/blog/howtowriteagoodalert/</guid>
       <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
-This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</description>
+This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts.</description>
     </item>
     
     <item>
