@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>How to Write an Actionable Alert - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="How to Write an Actionable Alert">
+  <meta property="og:description" content="Writing a powerful detection is great! But if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.">
+  <meta property="description" content="Writing a powerful detection is great! But if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.">
+  <meta property="og:url" content="https://catscrdl.io/blog/howtowriteagoodalert/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/network.jpg">
+      <meta property="og:image:alt" content="Network">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=How%20to%20Write%20an%20Actionable%20Alert&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;title=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;title=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;description=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/howtowriteagoodalert/">How to Write an Actionable Alert</a></h2>
+    
+    
+      <p>Writing a powerful detection is great! But if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>10-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=How%20to%20Write%20an%20Actionable%20Alert&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;title=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;title=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f&amp;description=How%20to%20Write%20an%20Actionable%20Alert" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fhowtowriteagoodalert%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
+    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
+  </a>
+      <h1 id="intro">Intro</h1>
+<p>&ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&rdquo;</p>
+<p>This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</p>
+<h1 id="definitions">Definitions</h1>
+<p>Before we get much further, I&rsquo;d like to clarity how I define a rule as opposed to an alert. In my lexicon, and the one I will use throughout this article, a rule (or query) is the construct by which one searches for a behavior (often malicious) within a data set. This rule can be <a href="https://catscrdl.io/blog/streamingvsscheduling/">real time or streaming</a>. The alert, on the other hand, is the output of that rule. A rule and data will enter a SIEM (or some kind of query processing engine) and the output is an alert or so some sort of notification.</p>
+<p><img src="/static/img/2022/ruleflow.png" alt="Metro Map"></p>
+<h1 id="writing-a-good-rule">Writing a Good Rule</h1>
+<p>There&rsquo;s been a number of great blog posts and articles that talk about how to write a good rule. I&rsquo;ll try to briefly summarize a few of the pieces that inspire me.</p>
+<h2 id="pyramid-of-pain">Pyramid of Pain</h2>
+<p>I think any article on this topic would be remiss if it didn&rsquo;t start by referencing the <a href="http://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html">Pyramid of Pain</a>. This piece by David Bianco has really pushed forward detection engineering into the state it is today. We, as detection engineers, now strive to move beyond the most basic indicators and towards the top of the pyramid - TTPs.</p>
+<h2 id="funnel-of-fidelity">Funnel of Fidelity</h2>
+<p>Next up is one of my favorite pieces on the <a href="https://posts.specterops.io/introducing-the-funnel-of-fidelity-b1bb59b04036">Funnel of Fidelity</a>. This series of pieces covers of straining data to find the pieces that accurately represent the behavior your looking for. In general, I recommend all of SpecterOps and Jared Atkinson&rsquo;s pieces. They&rsquo;re worth a read.</p>
+<h1 id="what-makes-a-good-alert">What Makes a Good Alert</h1>
+<p>So now that we know what makes a good rule, let&rsquo;s dive into what makes a good alert. In my opinion and experience, there are a few qualities that make an alert good.</p>
+<ol>
+<li>
+<p>Immediately human actionable. If you as a detection engineer are going to present an alert, the analyst who&rsquo;s responding to it should have the tools and information they need to immediately make a decision and take an action.</p>
+</li>
+<li>
+<p>Automatically enriched. If the first step an analyst needs to take when triaging an alert is to collect additional data or information, I consider this a failure.</p>
+</li>
+<li>
+<p>Well prioritized. When presented with a slew of alerts to work, the analyst should be able to clearly identify which is the most important to work first and why.</p>
+</li>
+<li>
+<p>Grouped and correlated. If multiple different alerts trigger for a system or user, they should be grouped and correlated so the analyst(s) working the case doesn&rsquo;t miss that multiple related alerts exist.</p>
+</li>
+</ol>
+<p>Let&rsquo;s dive into how to achieve these properties.</p>
+<h2 id="human-actionable">Human Actionable</h2>
+<p>In my opinion, one of the most important properties a good alert should have is that it needs to be &ldquo;human&rdquo; actionable. For this to be true, a human needs to be able to review the content of the alert, know what their next steps should be, and have the tools necessary to take those next steps. A key qualifier in this section is &ldquo;human&rdquo; actionable. A good alert should require a human to make a decision as the next step in the response process. This differs from &ldquo;machine&rdquo; actionable where the next steps could be automated or executed by code. Let&rsquo;s take a look at a bad alert that does not demonstrate this property.</p>
+<pre><code>Title: Login from New Device
+User: jane.doe@snowflake.com
+Details: Identified user logged in from a new device. IPs were 123.34.12.11.
+Timestamps: 14:33 UTC
+Playbook: Reach out to user and confirm if the login was from them. If not, proceed to reset their password.
+</code></pre><p>Let&rsquo;s assume that the rule itself is accurate and the login was from a new device. What&rsquo;s wrong with this alert? Well the first step is to reach out to the user. This step is automatable and does not require a human to take the next step. When you&rsquo;re designing your alert, ask yourself Do we require the intelligence and ingenuity of our human analysts to make a decision or act on this information?&rdquo; If the answer is no, then you should strive to do more to improve the alert.</p>
+<p>On the subject of automation, I personally believe that any automation that is designed to improve the fidelity or the quality of information of an alert should be done by detection engineers. Incident response automation should focus on response and remediation.</p>
+<p>So what does a good alert look like?</p>
+<pre><code>Title: Phishing Reported by User
+User: john.doe@snowflake.com
+Details: The attached email was reported as phishing by the user. The email has been removed from the user's inboxes. Similar emails were found in the following user's inboxes and have been temporarily quarantined.: jane.doe@snowflake.com, bob.human@snowflake.com, lee.user@snowflake.om.
+Information on the attachment and URLs in the email is attached to the ticket.
+Timestamps: 14:33 UTC
+Playbook: Review the attached phishing emails and analysis. To remove the similar emails from the associated user's inboxes, click here &lt;link&gt;. To release from quarantine back into the users' inbox, click here &lt;link&gt;.
+Attachments: &lt;simulated analysis&gt;
+</code></pre><p>This alert does a few things right: first, it has automated analysis of the phishing email and attached it to the ticket. This reduces the friction an analyst experiences when working a ticket. Second, it&rsquo;s clear what has already been done: the reported email has been removed from the user&rsquo;s inbox. Third, it presents a call to action: the system has identified similar emails and requires human analysis to determine what the next steps should be. Finally, it makes it easy to take the next steps by presenting links that trigger a playbook. When designing your alerts, make sure to consider that you should reduce analysis friction and make it easy to take the next steps.</p>
+<h2 id="automatically-enriched">Automatically Enriched</h2>
+<p>This property is highly related to the one above, and is arguable a subset; however, I believe it&rsquo;s important enough where I&rsquo;ve decided to specifically call it out. This property can be summed up succinctly by answering the following question: Does the human analyst need to go into another system to gather additional information? If the answer is yes, you can improve the alert. There&rsquo;s a term I use with alert analysis that I call &ldquo;friction&rdquo;. Friction is anything that slows down analysis in an unhelpful way. Having to go to another system to look something up, not knowing what playbook to use, a swarm of false positives, etc. All of these events add friction to the alert triage process slowing it down and increasing the possibility of errors.</p>
+<p>With that in mind, let&rsquo;s revisit the example above.</p>
+<pre><code>Title: Phishing Reported by User
+User: john.doe@snowflake.com
+Timestamps: 14:33 UTC
+</code></pre><p>When an analyst gets an alert about phishing, it&rsquo;s your job as a detection engineer to understand what questions they&rsquo;ll have and work to answer as many of those in the alert as you can. (The best way to know what questions they&rsquo;ll ask is to go talk to them.) In this case, some common questions when triaging phishing are:</p>
+<ol>
+<li>Did the user click anything or download anything?</li>
+<li>Who else got the phish?</li>
+<li>What do we know about the phishing links/attachments?</li>
+</ol>
+<p>By knowing what questions the analyst will have, we can enrich our alerts (with whatever SIEM/SOAR you&rsquo;re using) to reduce analyst friction.</p>
+<h2 id="well-prioritized">Well Prioritized</h2>
+<p>Doing good work is easy. You just have to do the right things in the right order. With our previous work, we&rsquo;ve helped IR do the right things by providing them the tools they need to execute. The next part we need to help with is alert prioritization. Most SOCs have some sort of SLA when it comes to alerts that varies by severity. A basic example could be</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Critical</th>
+<th>High</th>
+<th>Medium</th>
+<th>Low</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLA</td>
+<td>Pageable</td>
+<td>1 hour</td>
+<td>12 hours</td>
+<td>24 hours</td>
+</tr>
+</tbody>
+</table>
+<p>If you write the most accurate alert for someone running <code>whoami</code> on a laptop and you set it as a critical paging your IR at 3 AM, you&rsquo;re going to have some very unhappy analysts. As a detection engineer, you can&rsquo;t forget that you have a customer and that&rsquo;s the individuals responding to your alerts. It is of utmost importance that you equip them with the information and tools they need to make the correct decisions quickly. And that means helping them prioritize their work.</p>
+<p>When it comes to severity, I&rsquo;d recommend that your team decide on a framework on how it&rsquo;s set. The goal is that if two different engineers write the same rule, they would end up with the same severity. Some guiding questions could be:</p>
+<ol>
+<li>Does this signal mean customer data has been compromised?</li>
+<li>What is our confidence that this alert is always going to be a true positive?</li>
+<li>Does this signal affect the integrity/availability of administrative credentials/permissions?</li>
+</ol>
+<p>Ideally, you want to keep your framework to a limited number of questions. You don&rsquo;t want your detection engineers going through an audit every time severity is being set.</p>
+<h2 id="grouped-and-correlated">Grouped and Correlated</h2>
+<p>One of the last properties that I think is critical for writing good alerts is grouping and correlation. I&rsquo;ll also associate deduplication with this category. Let me start by defining what I mean by these properties:</p>
+<ul>
+<li>Grouping/correlation: the ability to determine that two separate alerts are related</li>
+<li>Deduplication: the ability to determine that two separate alerts are for the same event and to suppress one of them</li>
+</ul>
+<p>Let&rsquo;s start off with deduplication by providing some examples. Let&rsquo;s say we have an alert for the root user in an AWS account having a failed login. In this example, a penetration test is running and attempts to brute force the account 10,000 times. Without deduplication, IR would receive 10,000 separate tickets. However, if we&rsquo;re doing alert deduplication properly, they would receive 1 ticket with information that the alert triggered 10,000 times.</p>
+<p>Depending on your SIEM, it is often the responsibility of the detection engineer to decide how alerts are deduplicated. For instance, <a href="https://docs.panther.com/writing-detections#dedup">Panther offers deduplication as part of it&rsquo;s Python functionality</a>. As a detection engineer, you can solve for deduplication by asking yourself the following questions: what key properties identify a unique instance of this event? What do I want to show IR if the same event fires multiple times? At Snowflake, we often structure our alerts as &ldquo;Actor&rdquo; did &ldquo;Action&rdquo; to &ldquo;Object&rdquo;. Our default deduplication says if the &ldquo;actor&rdquo; and &ldquo;action&rdquo; or &ldquo;actor&rdquo; and &ldquo;object&rdquo; are the same for a particular alert, then deduplicate. To illustrate with an example, let&rsquo;s say we have an alert for an action having permission denied in AWS. We say our &ldquo;actor&rdquo; is the IAM user, the &ldquo;action&rdquo; is the AWS API, and the &ldquo;object&rdquo; is the request parameters. Let&rsquo;s say a particular user triggers the alert on &ldquo;DeleteObject&rdquo; 10,000 times across 10,000 different buckets. Because the user and API action are the same, these would be deduplicated and the 10,000 events would be presented in one ticket. Similarly, if a user did a number of reconnaissance actions (let&rsquo;s say GetObject, GetObjectACL, etc) against a particular bucket, these would also be grouped. That being said, as a detection engineer, you should feel free to be flexible with deduplication and choose the properties that work best for your detection.</p>
+<p>A similar property is alert grouping/correlation. Let&rsquo;s revisit the above example about permission denied for an AWS user. Let&rsquo;s say we also have a detection for multiple failed logins for an AWS user. In this example, both of these alerts trigger about 3 hours apart (with permission denied occurring second) in the middle of changeover for our SOC. Without alert correlation/grouping, the analyst working the second alert may be unaware that there was previously an alert for multiple failed logins. However, if our system is able to group these alerts and show them together, then the analyst has the context they need to make smart response decisions. This capability is also a critical first step to successfully implementing Risk Based Alerting for your SOC.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>I think this piece can best be summarized by remembering that if alerts are not properly triaged, then your detections don&rsquo;t matter. And you, as a detection engineer, have many tools to empower analysts to make the correct decisions.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="877faa9b068754d7b81d810253ff2687">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/azureflowloganalysis/" class="button left"><span>Azure Flow Log Analysis</span></a>
+    
+    
+      <a href="/blog/regardingsms2fa/" class="button right"><span>Regarding SMS 2FA</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/streamingvsscheduling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/analysis.png');">
+    <img src="https://catscrdl.io/static/img/2022/analysis.png" alt="Analysis">
+  </a>
+        <header>
+          <h2><a href="/blog/streamingvsscheduling/">Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</a></h2>
+          <time class="published" datetime="2022-08-15 00:00:00 &#43;0000 UTC">August 15, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/ashmoosguidetodc/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/ShmooCon.jpg');">
+    <img src="https://catscrdl.io/static/img/2022/ShmooCon.jpg" alt="Shmoocon">
+  </a>
+        <header>
+          <h2><a href="/blog/ashmoosguidetodc/">A Shmoo&#39;s Guide to DC</a></h2>
+          <time class="published" datetime="2022-03-26 00:00:00 &#43;0000 UTC">March 26, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/azureflowloganalysis/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
+    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
+  </a>
+        <header>
+          <h2><a href="/blog/azureflowloganalysis/">Azure Flow Log Analysis</a></h2>
+          <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
+    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
+  </a>
+        <header>
+          <h2><a href="/blog/howtowriteagoodalert/">How to Write an Actionable Alert</a></h2>
+          <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/regardingsms2fa/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2021/02/2fa.png');">
+    <img src="https://catscrdl.io/static/img/2021/02/2fa.png" alt="Two Factor Authentication">
+  </a>
+        <header>
+          <h2><a href="/blog/regardingsms2fa/">Regarding SMS 2FA</a></h2>
+          <time class="published" datetime="2020-07-29 00:00:00 &#43;0000 UTC">July 29, 2020</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">9</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2022 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

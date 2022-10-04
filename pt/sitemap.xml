@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://catscrdl.io/pt/</loc>
+    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://catscrdl.io/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://catscrdl.io/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://catscrdl.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://catscrdl.io/zh-tw/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://catscrdl.io/ja/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nl"
+                href="https://catscrdl.io/nl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://catscrdl.io/pt/"
+                />
+  </url>
+  
   <url>
     <loc>https://catscrdl.io/pt/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
@@ -24,7 +80,9 @@
                 hreflang="pt"
                 href="https://catscrdl.io/pt/about/"
                 />
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/pt/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -76,59 +134,9 @@
                 hreflang="pt"
                 href="https://catscrdl.io/pt/categories/"
                 />
-  </url><url>
-    <loc>https://catscrdl.io/pt/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://catscrdl.io/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://catscrdl.io/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://catscrdl.io/zh-tw/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://catscrdl.io/ja/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="nl"
-                href="https://catscrdl.io/nl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="https://catscrdl.io/pt/"
-                />
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/pt/tags/</loc>
     <xhtml:link
                 rel="alternate"
@@ -181,4 +189,5 @@
                 href="https://catscrdl.io/pt/tags/"
                 />
   </url>
+  
 </urlset>

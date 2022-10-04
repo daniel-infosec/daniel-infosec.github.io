@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>information security on Catscrdl</title>
+    <link>https://catscrdl.io/tags/information-security/</link>
+    <description>Recent content in information security on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://catscrdl.io/tags/information-security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to Write an Actionable Alert</title>
+      <link>https://catscrdl.io/blog/howtowriteagoodalert/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/howtowriteagoodalert/</guid>
+      <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
+This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</description>
+    </item>
+    
+  </channel>
+</rss>

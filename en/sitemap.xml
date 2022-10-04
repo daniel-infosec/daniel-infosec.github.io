@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://catscrdl.io/blog/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/categories/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -57,69 +60,29 @@
                 hreflang="en"
                 href="https://catscrdl.io/categories/"
                 />
-  </url><url>
-    <loc>https://catscrdl.io/</loc>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/tags/detection/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="https://catscrdl.io/pt/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://catscrdl.io/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://catscrdl.io/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://catscrdl.io/zh-tw/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://catscrdl.io/ja/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="nl"
-                href="https://catscrdl.io/nl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://catscrdl.io/"
-                />
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/detection-engineering/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/categories/infosec/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/streamingvsscheduling/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/</loc>
     <lastmod>2022-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -172,31 +135,59 @@
                 hreflang="en"
                 href="https://catscrdl.io/tags/"
                 />
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/ashmoosguidetodc/</loc>
     <lastmod>2022-03-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/drink/</loc>
     <lastmod>2022-03-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/food/</loc>
     <lastmod>2022-03-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/categories/food/</loc>
     <lastmod>2022-03-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/shmoocon/</loc>
     <lastmod>2022-03-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/azureflowloganalysis/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/tags/detection/</loc>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/tags/cyber-security/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/blog/howtowriteagoodalert/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/tags/information-security/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/zure/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/about/</loc>
     <lastmod>2021-02-28T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -219,61 +210,155 @@
                 hreflang="en"
                 href="https://catscrdl.io/about/"
                 />
-  </url><url>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://catscrdl.io/pt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://catscrdl.io/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://catscrdl.io/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://catscrdl.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://catscrdl.io/zh-tw/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://catscrdl.io/ja/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nl"
+                href="https://catscrdl.io/nl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://catscrdl.io/"
+                />
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/2fa/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/mfa/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/regardingsms2fa/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/sms/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/twitter/</loc>
     <lastmod>2020-07-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/opensourceredteamtooling/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/attck/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/attack-emulation/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/automation/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/benchmark/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/metasploit/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/mitre/</loc>
     <lastmod>2019-12-24T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/gettingstartedwithautomation/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/attackbenchmark/</loc>
     <lastmod>2019-05-01T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/c2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/wikipediac2/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/domainfronting/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/tags/wikipedia/</loc>
     <lastmod>2019-04-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://catscrdl.io/blog/opensourcesubdomainrecon/</loc>
   </url>
+  
 </urlset>

@@ -5,7 +5,12 @@
     <link>https://catscrdl.io/pt/</link>
     <description>Recent content on Hugo Future Imperfect Slim em português</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pt</language><atom:link href="https://catscrdl.io/pt/index.xml" rel="self" type="application/rss+xml" />
+    <language>pt</language>
+    <lastBuildDate>Thu, 28 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://catscrdl.io/pt/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Sobre</title>
       <link>https://catscrdl.io/pt/about/</link>

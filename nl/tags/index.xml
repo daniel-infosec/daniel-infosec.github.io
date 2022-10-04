@@ -5,6 +5,10 @@
     <link>https://catscrdl.io/nl/tags/</link>
     <description>Recent content in Tags on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>nl</language><atom:link href="https://catscrdl.io/nl/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>nl</language>
+    
+	<atom:link href="https://catscrdl.io/nl/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

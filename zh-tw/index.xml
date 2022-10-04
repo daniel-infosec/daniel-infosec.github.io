@@ -5,6 +5,10 @@
     <link>https://catscrdl.io/zh-tw/</link>
     <description>Recent content on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-TW</language><atom:link href="https://catscrdl.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-TW</language>
+    
+	<atom:link href="https://catscrdl.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

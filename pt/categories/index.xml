@@ -5,6 +5,10 @@
     <link>https://catscrdl.io/pt/categories/</link>
     <description>Recent content in Categories on Hugo Future Imperfect Slim em português</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pt</language><atom:link href="https://catscrdl.io/pt/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>pt</language>
+    
+	<atom:link href="https://catscrdl.io/pt/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

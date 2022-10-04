@@ -6,7 +6,11 @@
     <description>Recent content in domainfronting on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://catscrdl.io/tags/domainfronting/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://catscrdl.io/tags/domainfronting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Demonstrating the Future of Command and Control with Wikipedia</title>
       <link>https://catscrdl.io/blog/wikipediac2/</link>

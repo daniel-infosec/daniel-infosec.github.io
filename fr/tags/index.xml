@@ -5,6 +5,10 @@
     <link>https://catscrdl.io/fr/tags/</link>
     <description>Recent content in Tags on Hugo Future Imperfect Slim en français</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>fr</language><atom:link href="https://catscrdl.io/fr/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>fr</language>
+    
+	<atom:link href="https://catscrdl.io/fr/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>
