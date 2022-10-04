@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>How to Write an Actionable Alert</title>
+      <link>https://catscrdl.io/blog/howtowriteagoodalert/</link>
+      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/howtowriteagoodalert/</guid>
+      <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
+This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</description>
+    </item>
+    
+    <item>
       <title>Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</title>
       <link>https://catscrdl.io/blog/streamingvsscheduling/</link>
       <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
@@ -43,16 +53,6 @@ Metro
       <guid>https://catscrdl.io/blog/azureflowloganalysis/</guid>
       <description>Intro Disclaimer I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.
 At Snowflake, we&amp;rsquo;re a multi-cloud environment. As part of the threat detection team, it&amp;rsquo;s my job to ensure that we&amp;rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found at this link.</description>
-    </item>
-    
-    <item>
-      <title>How to Write an Actionable Alert</title>
-      <link>https://catscrdl.io/blog/howtowriteagoodalert/</link>
-      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/howtowriteagoodalert/</guid>
-      <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
-This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</description>
     </item>
     
     <item>

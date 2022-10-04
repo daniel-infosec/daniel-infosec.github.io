@@ -14,8 +14,8 @@
   <meta property="og:type" content="article">
   
     
-      <meta property="og:image" content="https://catscrdl.io/static/img/network.jpg">
-      <meta property="og:image:alt" content="Network">
+      <meta property="og:image" content="https://catscrdl.io/static/img/writingrules.jpeg">
+      <meta property="og:image:alt" content="Writing Rules">
     
   
   <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
@@ -233,7 +233,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
+    <time datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>10-Minute Read</p>
   </div>
@@ -285,12 +285,12 @@
 
     </div>
     <div class="content">
-      <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
-    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
+      <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/writingrules.jpeg');">
+    <img src="https://catscrdl.io/static/img/writingrules.jpeg" alt="Writing Rules">
   </a>
       <h1 id="intro">Intro</h1>
 <p>&ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&rdquo;</p>
-<p>This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts.</p>
+<p>This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule, but no one (or nothing) acts upon the alert, did you even generate make a noise? In this article, I will strive to express upon to you the importance of not only writing solid detections, but also solid alerts. The target audience of this blog post is security professionals who write custom detections in their SIEM or other similar system.</p>
 <h1 id="definitions">Definitions</h1>
 <p>Before we get much further, I&rsquo;d like to clarity how I define a rule as opposed to an alert. In my lexicon, and the one I will use throughout this article, a rule (or query) is the construct by which one searches for a behavior (often malicious) within a data set. This rule can be <a href="https://catscrdl.io/blog/streamingvsscheduling/">real time or streaming</a>. The alert, on the other hand, is the output of that rule. A rule and data will enter a SIEM (or some kind of query processing engine) and the output is an alert or so some sort of notification.</p>
 <p><img src="/static/img/2022/ruleflow.png" alt="Metro Map"></p>
@@ -469,10 +469,8 @@ Timestamps: 14:33 UTC
   
   <div class="pagination">
     
-      <a href="/blog/azureflowloganalysis/" class="button left"><span>Azure Flow Log Analysis</span></a>
     
-    
-      <a href="/blog/regardingsms2fa/" class="button right"><span>Regarding SMS 2FA</span></a>
+      <a href="/blog/streamingvsscheduling/" class="button right"><span>Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</span></a>
     
   </div>
 
@@ -483,6 +481,16 @@ Timestamps: 14:33 UTC
       <header>
         <h1>Recent Posts</h1>
       </header>
+      
+      <article class="mini-post">
+          <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/writingrules.jpeg');">
+    <img src="https://catscrdl.io/static/img/writingrules.jpeg" alt="Writing Rules">
+  </a>
+        <header>
+          <h2><a href="/blog/howtowriteagoodalert/">How to Write an Actionable Alert</a></h2>
+          <time class="published" datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
+        </header>
+      </article>
       
       <article class="mini-post">
           <a href="/blog/streamingvsscheduling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/analysis.png');">
@@ -510,16 +518,6 @@ Timestamps: 14:33 UTC
   </a>
         <header>
           <h2><a href="/blog/azureflowloganalysis/">Azure Flow Log Analysis</a></h2>
-          <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
-        </header>
-      </article>
-      
-      <article class="mini-post">
-          <a href="/blog/howtowriteagoodalert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/network.jpg');">
-    <img src="https://catscrdl.io/static/img/network.jpg" alt="Network">
-  </a>
-        <header>
-          <h2><a href="/blog/howtowriteagoodalert/">How to Write an Actionable Alert</a></h2>
           <time class="published" datetime="2021-07-16 00:00:00 &#43;0000 UTC">July 16, 2021</time>
         </header>
       </article>
