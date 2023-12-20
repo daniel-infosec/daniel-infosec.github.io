@@ -13,10 +13,10 @@
     
     <item>
       <title>Building Resilient Detection Suppressions</title>
-      <link>https://catscrdl.io/blog/buildingresilienttuning/</link>
+      <link>https://catscrdl.io/blog/buildingresilientsuppressions/</link>
       <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://catscrdl.io/blog/buildingresilienttuning/</guid>
+      <guid>https://catscrdl.io/blog/buildingresilientsuppressions/</guid>
       <description>Intro Raise your hand if you&amp;rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&amp;rsquo;s back in your &amp;ldquo;fix&amp;rdquo; queue with another false positive. I&amp;rsquo;d expect almost everyone who&amp;rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&amp;rsquo;t very good and it&amp;rsquo;s alerting on a lot of benign behavior.</description>
     </item>
     

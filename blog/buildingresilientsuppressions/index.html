@@ -2,18 +2,21 @@
 <html lang="en">
   <head>
   <meta charset="utf-8">
-<title>Getting Started with Praetorian’s ATT&amp;CK™ Automation - Catscrdl</title>
+<title>Building Resilient Detection Suppressions - Catscrdl</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 <meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
-  <meta property="og:title" content="Getting Started with Praetorian’s ATT&amp;CK™ Automation">
-  <meta property="og:description" content="We&#39;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&#39;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module.">
-  <meta property="description" content="We&#39;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&#39;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module.">
-  <meta property="og:url" content="https://catscrdl.io/blog/gettingstartedwithautomation/">
+  <meta property="og:title" content="Building Resilient Detection Suppressions">
+  <meta property="og:description" content="When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.">
+  <meta property="description" content="When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.">
+  <meta property="og:url" content="https://catscrdl.io/blog/buildingresilientsuppressions/">
   <meta property="og:type" content="article">
   
-    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/2023/whackamole.png">
+      <meta property="og:image:alt" content="A Cybersecurity Engineering Playing Whack-a-Mole">
+    
   
   <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
 </head>
@@ -116,37 +119,37 @@
 
   
     
-    <a href="//twitter.com/share?text=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+    <a href="//twitter.com/share?text=Building%20Resilient%20Detection%20Suppressions&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
         <p>Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
         <p>Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;title=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;title=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn reddit">
           <p>Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;title=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;title=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn linkedin">
             <p>LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;description=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;description=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn pinterest">
           <p>Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <p>Email</p>
         </a>
   
@@ -223,16 +226,16 @@
     <header>
   <div class="title">
     
-      <h2><a href="/blog/gettingstartedwithautomation/">Getting Started with Praetorian’s ATT&amp;CK™ Automation</a></h2>
+      <h2><a href="/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></h2>
     
     
-      <p>We&#39;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&#39;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module.</p>
+      <p>When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-05-10 00:00:00 &#43;0000 UTC">May 10, 2019</time>
+    <time datetime="2023-12-20 00:00:00 &#43;0000 UTC">December 20, 2023</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>1-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -244,37 +247,37 @@
 
   
     
-    <a href="//twitter.com/share?text=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+    <a href="//twitter.com/share?text=Building%20Resilient%20Detection%20Suppressions&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
         <p>Twitter</p>
       </a>
   
 
   
-      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
         <p>Facebook</p>
         </a>
   
 
   
-    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;title=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn reddit">
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;title=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn reddit">
           <p>Reddit</p>
         </a>
   
 
   
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;title=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn linkedin">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;title=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn linkedin">
             <p>LinkedIn</p>
           </a>
   
 
   
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f&amp;description=Getting%20Started%20with%20Praetorian%e2%80%99s%20ATT%26CK%e2%84%a2%20Automation" target="_blank" rel="noopener" class="nav share-btn pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f&amp;description=Building%20Resilient%20Detection%20Suppressions" target="_blank" rel="noopener" class="nav share-btn pinterest">
           <p>Pinterest</p>
         </a>
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fgettingstartedwithautomation%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fbuildingresilientsuppressions%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <p>Email</p>
         </a>
   
@@ -282,8 +285,34 @@
 
     </div>
     <div class="content">
-      
-      <p>Blog link: <a href="https://www.praetorian.com/blog/getting-started-with-praetorians-attack-automation/">Getting Started with Praetorian&rsquo;s ATT&amp;CK Automation</a></p>
+      <a href="/blog/buildingresilientsuppressions/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/whackamole.png');">
+    <img src="https://catscrdl.io/static/img/2023/whackamole.png" alt="A Cybersecurity Engineering Playing Whack-a-Mole">
+  </a>
+      <h1 id="intro">Intro</h1>
+<p>Raise your hand if you&rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&rsquo;s back in your &ldquo;fix&rdquo; queue with another false positive. I&rsquo;d expect almost everyone who&rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&rsquo;t very good and it&rsquo;s alerting on a lot of benign behavior. But sometimes, the answer is that the suppression that was implemented was too specific and wasn&rsquo;t properly generalized to capture the benign behavior.</p>
+<p>At Snowflake, when we write our suppressions, we strive to understand the root cause that drove the false positive so that our detections are resilient and don&rsquo;t immediately pop back up in the queue for another tweak. In this article, I&rsquo;ll walk through my thought process on a recent suppression request that came into our queue.</p>
+<h1 id="the-detection">The Detection</h1>
+<p>Like most cloud based companies, we have numerous rules that monitor IAM activity in our cloud environments. One particular rule is focused on monitoring the behavior our deployment automation system in GCP. For some background, our cloud engineering team used to rely solely on IaC like Terraform. However, they quickly realized that TFE wasn&rsquo;t sufficient to instrument all the infrastructure they wanted to control, including Snowflake itself. So some savvy engineers built Avalanche which orchestrates our cloud deployments today. (If this sounds cool to you and you want to work on it, we have an active job posting as of 12/20/2023 <a href="https://careers.snowflake.com/us/en/job/6872907002/Senior-Software-Engineer-Cloud-Platform-Avalanche">here</a>.) As you can imagine, such a system uses a number of highly privileged roles, so we worked with our product security and cloud engineering to orchestrate detections around how these roles (and service accounts in GCP specifically) are used. We built a static list of service accounts and IPs where the accounts are used.</p>
+<h1 id="the-false-positive">The False Positive</h1>
+<p>When we first wrote the rule, we chose to implement an allowlist approach. That is, we stated we expected only certain service accounts to be doing certain, specific actions. When the benign activity occurred, someone had written an Avalanche module that utilized the service account to execute a method we had not previously seen it used before. We were able to verify with the engineers and the pull request that the behavior we were seeing in the logs was, in fact, benign.</p>
+<h1 id="the-suppression">The Suppression</h1>
+<p>Now it came time for us to decide how to alter the detector so that we wouldn&rsquo;t see this type of false positive again.</p>
+<h2 id="approach-1">Approach 1</h2>
+<p>The most obvious approach is to extend our list of allowed methods to include the new method. However, we quickly realized we&rsquo;d run into more benign alerts if someone wrote another module with new capabilities, which certainly happens.</p>
+<h2 id="approach-2">Approach 2</h2>
+<p>The next idea was to see if we could dynamically build an allowlist of methods based on the permissions granted to the service account. We took a look at the grants to the service account and realized that wouldn&rsquo;t be feasible. Considering the service account was used to instrument the environment, it had quite a range of permissions granted to it.</p>
+<h2 id="approach-3">Approach 3</h2>
+<p>We decided to pivot and say: let&rsquo;s assume the service account can do anything. What if we focus our efforts on making sure the service account is being used from the correct compute nodes? (We have separate monitoring on validating the security of those nodes.) Then our assumptions can be:</p>
+<ul>
+<li>These service accounts are instrumented by Avalanche running in these compute systems</li>
+<li>Avalanche is controlled by our CI/CD systems with code living in GitHub</li>
+<li>The compute nodes are secure via monitoring and various other controls</li>
+<li>Our repo is secure via codeowners, protected branches, etc</li>
+</ul>
+<p>Thus, we can state that so long as the service account is being used from the instance, it&rsquo;s being used correctly. To accomplish this, we can look at our asset inventory and build a list of internal IPs associated with our Avalanche cluster at detection run time. Furthermore, we realized that we should update our list of static service accounts to be dynamic. Again, we used our asset inventory to pull a list of service accounts rather than our static list. To ensure our list of service accounts was accurate, we based our filtering on tags applied to the service accounts in Pulumi.</p>
+<p>After implementing these changes, we updated our detector, tested it, and pushed it back to production.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>When building dynamic suppressions, it&rsquo;s important to consider several factors, with the key focus being on ensuring that all elements that can be made dynamic are indeed implemented as such. In our example, we realized that our list of IPs and service accounts should be more dynamic to yield a more resilient detector. In addition, by understanding our threat model and other compensating controls, we were able to remove a condition that was prone to inducing benign false positive behavior. Hopefully this short article will help you the next time you come across a false positive.</p>
 
     </div>
     <footer>
@@ -301,17 +330,11 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/mitre/">mitre</a></li>
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
         
-          <li><a class="article-terms-link" href="/tags/attck/">att&amp;ck</a></li>
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
         
-          <li><a class="article-terms-link" href="/tags/benchmark/">benchmark</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/attack-emulation/">attack emulation</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/metasploit/">metasploit</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/automation/">automation</a></li>
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
         
       
     </ul>
@@ -333,7 +356,7 @@
           </h3>
 
           
-          <input type="hidden" name="options[entryId]" value="ed92633a30d4dfab1053df60a9629537">
+          <input type="hidden" name="options[entryId]" value="ec011444127c93b89b5d7552381428b0">
           <input type='hidden' name='fields[replyThread]' value=''>
           <input type='hidden' name='fields[replyID]' value=''>
           <input type='hidden' name='fields[replyName]' value=''>
@@ -370,10 +393,8 @@
   
   <div class="pagination">
     
-      <a href="/blog/opensourceredteamtooling/" class="button left"><span>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</span></a>
     
-    
-      <a href="/blog/attackbenchmark/" class="button right"><span>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</span></a>
+      <a href="/blog/howtowriteanactionablealert/" class="button right"><span>How to Write an Actionable Alert</span></a>
     
   </div>
 
