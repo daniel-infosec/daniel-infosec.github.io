@@ -4,17 +4,12 @@
   
   <url>
     <loc>https://catscrdl.io/blog/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://catscrdl.io/blog/buildingresilientsuppressions/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/categories/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -69,32 +64,32 @@
   
   <url>
     <loc>https://catscrdl.io/tags/cyber-security/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/tags/detection/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/tags/detection-engineering/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/tags/information-security/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/categories/infosec/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://catscrdl.io/tags/</loc>
-    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -145,6 +140,16 @@
                 hreflang="en"
                 href="https://catscrdl.io/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/blog/thereareonlytworules/</loc>
+    <lastmod>2023-12-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://catscrdl.io/blog/buildingresilientsuppressions/</loc>
+    <lastmod>2023-12-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>

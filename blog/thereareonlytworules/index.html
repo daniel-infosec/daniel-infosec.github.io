@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>There are Only Two Rules - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="There are Only Two Rules">
+  <meta property="og:description" content="One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
+  <meta property="description" content="One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
+  <meta property="og:url" content="https://catscrdl.io/blog/thereareonlytworules/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/2023/onlytworules.jpeg">
+      <meta property="og:image:alt" content="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=There%20are%20Only%20Two%20Rules&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;title=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;title=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;description=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
+    
+    
+      <p>One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2023-12-22 00:00:00 &#43;0000 UTC">December 22, 2023</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>12-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=There%20are%20Only%20Two%20Rules&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;title=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;title=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f&amp;description=There%20are%20Only%20Two%20Rules" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fthereareonlytworules%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/thereareonlytworules/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/onlytworules.jpeg');">
+    <img src="https://catscrdl.io/static/img/2023/onlytworules.jpeg" alt="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
+  </a>
+      <h1 id="intro">Intro</h1>
+<p>In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.</p>
+<h1 id="the-two-rules">The Two Rules</h1>
+<p>Essentially, every detection can be categorized as an &ldquo;allowlist&rdquo; detection or a &ldquo;denylist&rdquo; detection. An allowlist detection is written to state that only a certain set of actions are allowed and to alert on anything that isn&rsquo;t in that list of allowed actions. Conversely, a denylist detection looks for specific actions and alerts if they occur. Said another way, an allowlist detection looks for anything except a specific set of actions occurring and alerting if something not in that set happens while a denylist detections alerts if a specific stated behavior occurs. And all threat detection rules can be cleanly categorized as one or the other.</p>
+<h1 id="defending-the-thesis">Defending the Thesis</h1>
+<p>Let&rsquo;s take a look at some example rules and establish how (in my experience) every rule can be classified into one of these categories.</p>
+<h2 id="port-scanning">Port Scanning</h2>
+<p>Port scanning is an obvious candidate for denylist categorization. Most port scanning alerts look for a specific number of connections matching a specific pattern of behavior with regards to ports in some way (usually number of ports, diversity of ports, a time window, TCP flags, etc are involved in the pattern). One can see that since we&rsquo;re looking for a set of actions that matches a pre-defined list, that meets our definition of a denylist detection.</p>
+<h2 id="iam-role-abuse">IAM Role Abuse</h2>
+<p>Let&rsquo;s say we have a detection that monitors a specific AWS IAM role. It&rsquo;s a critical role with high permissions for a service. So we write a rule that says the role policy must match a predefined set of permissions, the role can only be assumed from a certain IP address, the user agent must match a predefined string, etc. In this case we&rsquo;ve built a list of conditions that are allowed and if any condition does not match, we will alert. This matches our definition of an &ldquo;allowlist&rdquo; detection.</p>
+<h2 id="malware">Malware</h2>
+<p>Detections for malware clearly fall in the denylist category. Whether behavior based, signature based, or other - they look for a specific signal and alert if it occurs.</p>
+<h2 id="other">Other</h2>
+<p>Let&rsquo;s take a quick sampling of <a href="https://www.elastic.co/guide/en/security/current/prebuilt-rules.html">Elastic&rsquo;s prebuilt rules</a> and see if we can categorize them.</p>
+<p><a href="https://www.elastic.co/guide/en/security/current/aws-cloudtrail-log-deleted.html">AWS CloudTrail Log Deleted</a> - Denylist</p>
+<p><a href="https://www.elastic.co/guide/en/security/current/aws-ec2-snapshot-activity.html">AWS EC2 Snapshot Activity</a> - Denylist</p>
+<p><a href="https://www.elastic.co/guide/en/security/current/lsass-process-access-via-windows-api.html#lsass-process-access-via-windows-api">LSASS Process Access via Windows API</a> - Denylist</p>
+<p>Once you understand the distinction, it&rsquo;s pretty easy to categorize a rule.</p>
+<h1 id="attck-vs-d3fend">ATT&amp;CK vs D3FEND</h1>
+<p>One thing I&rsquo;ve noticed as I&rsquo;ve categorized our own internal rule set is that Denylist rules generally match up better with <a href="https://attack.mitre.org/">ATT&amp;CK</a> whereas Allowlist rules are generally categorized by <a href="https://d3fend.mitre.org/">D3FEND</a>. Let&rsquo;s go over our above examples again.</p>
+<h2 id="port-scanning-1">Port Scanning</h2>
+<p>This lines up fairly cleanly with <a href="https://attack.mitre.org/techniques/T1595/001/">Active Scanning: Scanning IP Blocks - T1595.001</a> and <a href="https://attack.mitre.org/techniques/T1046/">Network Service Discovery - T1046</a>.</p>
+<h2 id="iam-role-abuse-1">IAM Role Abuse</h2>
+<p>Let&rsquo;s say we&rsquo;ve build a detection that does the following:</p>
+<ul>
+<li>Monitors the IPs where the role is used</li>
+<li>Monitors user agent string</li>
+<li>Monitors what actions the role performs.</li>
+</ul>
+<p>The first lines up with <a href="https://d3fend.mitre.org/technique/d3f:UserGeolocationLogonPatternAnalysis/">User Geolocation Logon Pattern Analysis</a>.</p>
+<p>The second, it can be argued, lines up with <a href="https://d3fend.mitre.org/technique/d3f:ProtocolMetadataAnomalyDetection/">Protocol Metadata Anomaly Detection</a> as we&rsquo;re monitoring metadata about the network traffic and looking for deviations.</p>
+<p>And the last matches up with <a href="https://d3fend.mitre.org/technique/d3f:ResourceAccessPatternAnalysis/">Resource Access Pattern Analysis</a> as we&rsquo;re understanding what resources (or actions) the role is performing.</p>
+<p>If you were to read a pentest report where a red teamer gained access to a role and abused it, they may categorize that action under <a href="https://attack.mitre.org/techniques/T1552/005/">T1552.005 - Unsecured Credentials: Cloud Instance Metadata API</a> or <a href="https://attack.mitre.org/techniques/T1078/004/">Valid Accounts: Cloud Accounts - T1078.004</a>. But that&rsquo;s not really what our detector is looking for, is it? That&rsquo;s one of the reasons I firmly believe over-categorizing detections with ATT&amp;CK is a fallacy, but that&rsquo;s a monologue for another blog.</p>
+<p>While D3FEND doesn&rsquo;t have quite the popularity of ATT&amp;CK, I still find it especially useful for detection engineers to categorize their rules, and we&rsquo;ve even created our own Snowflake D3FEND techniques internally for further categorization and sub-categorization.</p>
+<h1 id="trends">Trends</h1>
+<p>One trend you may notice as you go through your own internal rule corpus and begin to categorize their actions is that the vast majority of your rules are denylist based or ATT&amp;CK lined. Why do you think that is? I have a few theories. First, if you buy any tool or go to any source of free rules, they&rsquo;re almost all going to be denylist based. So right away, any company is going to have a decent amount of denylist detections by default. As junior engineers come up, they&rsquo;re going to see these types of rules and emulate them in their own authorship. But that doesn&rsquo;t really answer the question of why default to denylist?</p>
+<h2 id="easier-to-write">Easier to Write</h2>
+<p>A denylist detection is inherently going to be easier to write. Denylist detections are based on adversary knowledge as opposed to knowledge about an internal environment. As a detection engineer, there&rsquo;s a lower barrier to entry. You don&rsquo;t have to go talk to other teams. You study the adversary, understand the behavior, and write the rule. You may have to suppress some false positives specific to your environment, but you can generally just author and go.</p>
+<h2 id="more-general">More General</h2>
+<p>The above point leads to these rules being more general and easier to share (one of the reasons that almost every public rule is denylist based). Let&rsquo;s take a look at one of the <a href="https://www.elastic.co/guide/en/security/current/executable-file-with-unusual-extension.html">example Elastic rules</a>:</p>
+<pre><code>file where host.os.type == &quot;windows&quot; and event.action != &quot;deletion&quot; and
+
+ /* MZ header or its common base64 equivalent TVqQ */
+ file.Ext.header_bytes : (&quot;4d5a*&quot;, &quot;54567151*&quot;) and
+
+ (
+   /* common image file extensions */
+   file.extension : (&quot;jpg&quot;, &quot;jpeg&quot;, &quot;emf&quot;, &quot;tiff&quot;, &quot;gif&quot;, &quot;png&quot;, &quot;bmp&quot;, &quot;fpx&quot;, &quot;eps&quot;, &quot;svg&quot;, &quot;inf&quot;) or
+
+   /* common audio and video file extensions */
+   file.extension : (&quot;mp3&quot;, &quot;wav&quot;, &quot;avi&quot;, &quot;mpeg&quot;, &quot;flv&quot;, &quot;wma&quot;, &quot;wmv&quot;, &quot;mov&quot;, &quot;mp4&quot;, &quot;3gp&quot;) or
+
+   /* common document file extensions */
+   file.extension : (&quot;txt&quot;, &quot;pdf&quot;, &quot;doc&quot;, &quot;docx&quot;, &quot;rtf&quot;, &quot;ppt&quot;, &quot;pptx&quot;, &quot;xls&quot;, &quot;xlsx&quot;, &quot;hwp&quot;, &quot;html&quot;)
+  ) and
+  not process.pid == 4 and
+  not process.executable : &quot;?:\\Program Files (x86)\\Trend Micro\\Client Server Security Agent\\Ntrtscan.exe&quot;
+</code></pre><p>We can clearly see it&rsquo;s looking for some header bytes with specific file extensions. We also see some exclusions at the end. It&rsquo;s incredibly easy for a detection engineer to run this in their environment, observe the false positives, and extend the excluded processes at the end.</p>
+<h1 id="strengths-and-weaknesses">Strengths and Weaknesses</h1>
+<p>Now that we&rsquo;ve established these broad categorizations, let&rsquo;s take a look at the strengths and weaknesses of allowlist and denylist detections.</p>
+<h2 id="denylist">Denylist</h2>
+<p>As we&rsquo;ve established earlier, denylist detections are easier to write. The reason is that it requires knowledge of the adversary and their behavior with minimal specific knowledge of your own environment besides what is necessary to tune false positives. As a denylist rule looks for a specific pattern of behavior, it tends to have a much lower ratio of false positives. The corollary to this, however, is that denylist rules also will have a broader range of false negatives. Let&rsquo;s go back to our port scanning detection as an example.</p>
+<pre><code>SELECT source_ip,
+     COUNT(DISTINCT destination_port) AS distinct_ports_accessed,
+     MIN(timestamp) AS scan_start,
+     MAX(timestamp) AS scan_end
+FROM firewall_logs
+WHERE timestamp &gt;= '2023-01-01' -- adjust the date range as needed
+AND timestamp &lt; '2023-02-01'
+GROUP BY source_ip
+HAVING COUNT(DISTINCT destination_port) &gt; 100 -- threshold for number of distinct ports
+ AND MAX(timestamp) - MIN(timestamp) &lt; INTERVAL '1 HOUR' -- within a short time frame, adjust as needed
+ORDER BY distinct_ports_accessed DESC;
+</code></pre><p>Here we have a basic detection (written by ChatGPT) that looks in our firewall logs for more than 100 distinct ports accessed by a source IP address in a 1 hour time frame. If this rule fires, while it may be a benign true positive, it will have alerted to the behavior we wanted it to. Now, one can quickly look at the code and see that there&rsquo;s numerous instances a false negative can occur:</p>
+<ol>
+<li>If the adversary rotates their source IP address</li>
+<li>If the adversary only scans 99 ports</li>
+<li>If the adversary scans slowly so no more than 100 distinct ports are hit within a 1 hour time frame</li>
+</ol>
+<p>Finally, denylist rules are fairly easy to test. There&rsquo;s numerous tools to help you simulate malicious activity such as <a href="https://atomicredteam.io/">atomic red team</a>.</p>
+<h2 id="allowlist">Allowlist</h2>
+<p>The strengths and weaknesses of allowlist and denylist rules essentially flipped. First of all, writing a good allowlist rule requires specialized knowledge of an environment: what actions does this service account do, what machines does this server normally connect to, who are our admins and what&rsquo;s the process for adding them, etc. It requires threat detection engineers to work with system owners to understand the risks to the systems and how they generally behave. Prioritization also becomes more difficult as it requires a holistic understanding of your risks and how effectively you can mitigate them with detections. Additionally, false positives increase while false negatives decrease. Let&rsquo;s work through an example again.</p>
+<pre><code>SELECT eventtime,
+       eventname,
+       sourceipaddress,
+       useridentity,
+       requestparameters
+FROM cloudtrail_logs
+WHERE useridentity.role = 'billing_service_role' -- role involved in the access
+  AND eventtime &gt;= '2023-01-01' -- specific time range of interest
+  AND eventtime &lt; '2023-02-01'
+  AND (
+    NOT sourceipaddress IN ('192.168.1.1', '192.168.1.2') -- allowed EC2 IP addresses
+    OR eventsource != 'rds.amazonaws.com'
+  )
+ORDER BY eventtime DESC;
+</code></pre><p>In the above query, we&rsquo;re looking at fake role called <code>billing_service_role</code> and alerting if it&rsquo;s not coming from a source IP address associated with our internal IP addresses or if it&rsquo;s not performing an action associated with the AWS RDS service. In this theoretical example, we&rsquo;ve based this off of analysis and discussions with the engineering team that manages this role. In this case, we expect very few false negatives. If this role is compromised and used from another IP or if it&rsquo;s compromised on the instance and any kind of enumeration or other activity is performed, we&rsquo;d expect to get an alert. However, if the engineering team scales up to 3 instances without telling us or if they expand the capabilities of this service account, we can expect to quickly be overwhelmed with false negatives.</p>
+<h2 id="table-summary">Table Summary</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>True Positives</th>
+<th>False Positives</th>
+<th>Requires Internal Knowledge?</th>
+<th>Easy to Test?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allowlist</td>
+<td>High</td>
+<td>High</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Denylist</td>
+<td>Low</td>
+<td>Low</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h1 id="when-to-use-which">When to Use Which</h1>
+<p>In order to understand which style of rule to write, I generally use a few guiding questions:</p>
+<p>Is this an internally defined risk or externally defined?</p>
+<ul>
+<li>Externally defined threats often lend themselves to denylist style rules</li>
+</ul>
+<p>How much do we understand the system at risk?</p>
+<ul>
+<li>Allowlist detections require an understanding of the internal system</li>
+</ul>
+<p>How often do we expect the system or threat to change?</p>
+<ul>
+<li>Highly variable systems are not generally good for allowlist rules unless you can dynamically update your allowlist</li>
+</ul>
+<p>Is the detection looking to defend something early or late in the attacker lifecycle? (i.e., how close to the &ldquo;crown jewels&rdquo; is the system we&rsquo;re defending with this detection?)</p>
+<ul>
+<li>Being close to crown jewels means you may want to strive for a rule with very low false negatives i.e. an allowlist rule</li>
+</ul>
+<p>If a false positive occurs, would we be able to easily deduplicate it to avoid flooding our SOC?</p>
+<ul>
+<li>If something is hard to deduplicate, you may want to avoid allowlist which can generate high false positives</li>
+</ul>
+<p>How &ldquo;expensive&rdquo; to our SOC is a false positive? (i.e. does it take a lot of time and resources to investigate false positives?)</p>
+<ul>
+<li>Expensive triage means you probably want to avoid high false positives</li>
+</ul>
+<p>These are just guiding questions and you may find that the answers don&rsquo;t lend to a clean decision. In some cases, we&rsquo;ve built both allowlist and denylist rules for a specific risk.</p>
+<h1 id="build-vs-buy">Build vs Buy</h1>
+<p>I&rsquo;d like to touch on a concept that&rsquo;s dear to my heart and related to this conversation: the decision to build or buy something. As a detection engineer, when we think about building or buying tools, we&rsquo;re really building or buying detections. Let&rsquo;s take <a href="https://www.snowflake.com/powered-by/gem-security/">Gem Security</a>. In addition to other capabilities, they provide a few hundred out of the box detections for cloud providers as well as other solutions. Like most vendors, they&rsquo;re rules are primarily denylist focused. When choosing to go with a vendor like this, what you&rsquo;re really deciding is if it&rsquo;s worth it for your organization to buy these detections or build them yourself. Fundamentally, when you choose to purchase or not purchase solutions like these, you&rsquo;re making a decision on what is the most important thing to invest in. If you have a large corpus of internal risks that need mitigating via detections, it may behoove you to buy detections like these. In general, I&rsquo;ve noticed that as organizations mature, they actually buy detections more than build. The reason for that is that their internal risk identification apparatus has identified numerous areas that need detections. If you&rsquo;re going to hire smart detection engineers, in my opinion, it makes more sense for them to build things unique to your organization as opposed to reinventing the wheel.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>In this piece, I&rsquo;ve stated my definitions for the critical frameworks of allowlist and denylist detections, each with its distinct characteristics and applications. These are not mere theoretical constructs; they are practical tools that help us navigate the complex landscape of cybersecurity threats and defenses. They force us to ask the right questions about our systems, understand our adversaries, and articulate our defensive strategies with clarity and precision.</p>
+<p>The choice between allowlist and denylist is a strategic one, reflecting our understanding of the threat landscape and our systems&rsquo; architecture. It&rsquo;s about making informed choices, leveraging the strengths of both methodologies to build robust and resilient defenses. As you continue on your journey as a detection engineer, I hope you use this framework to make informed and justifiable decisions as you work towards building more secure systems.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="b4819f438515d55c530817107c2118b3">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/buildingresilientsuppressions/" class="button right"><span>Building Resilient Detection Suppressions</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/thereareonlytworules/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/onlytworules.jpeg');">
+    <img src="https://catscrdl.io/static/img/2023/onlytworules.jpeg" alt="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
+  </a>
+        <header>
+          <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
+          <time class="published" datetime="2023-12-22 00:00:00 &#43;0000 UTC">December 22, 2023</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/buildingresilientsuppressions/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/whackamole.png');">
+    <img src="https://catscrdl.io/static/img/2023/whackamole.png" alt="A Cybersecurity Engineering Playing Whack-a-Mole">
+  </a>
+        <header>
+          <h2><a href="/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></h2>
+          <time class="published" datetime="2023-12-20 00:00:00 &#43;0000 UTC">December 20, 2023</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/howtowriteanactionablealert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/writingrules.jpeg');">
+    <img src="https://catscrdl.io/static/img/2022/writingrules.jpeg" alt="Writing Rules">
+  </a>
+        <header>
+          <h2><a href="/blog/howtowriteanactionablealert/">How to Write an Actionable Alert</a></h2>
+          <time class="published" datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/streamingvsscheduling/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/analysis.png');">
+    <img src="https://catscrdl.io/static/img/2022/analysis.png" alt="Analysis">
+  </a>
+        <header>
+          <h2><a href="/blog/streamingvsscheduling/">Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</a></h2>
+          <time class="published" datetime="2022-08-15 00:00:00 &#43;0000 UTC">August 15, 2022</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/ashmoosguidetodc/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/ShmooCon.jpg');">
+    <img src="https://catscrdl.io/static/img/2022/ShmooCon.jpg" alt="Shmoocon">
+  </a>
+        <header>
+          <h2><a href="/blog/ashmoosguidetodc/">A Shmoo&#39;s Guide to DC</a></h2>
+          <time class="published" datetime="2022-03-26 00:00:00 &#43;0000 UTC">March 26, 2022</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">11</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2023 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

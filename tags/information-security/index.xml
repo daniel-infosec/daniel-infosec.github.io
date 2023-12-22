@@ -6,10 +6,19 @@
     <description>Recent content in information security on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 Dec 2023 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/tags/information-security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>There are Only Two Rules</title>
+      <link>https://catscrdl.io/blog/thereareonlytworules/</link>
+      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/thereareonlytworules/</guid>
+      <description>Intro In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&amp;rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.</description>
+    </item>
     
     <item>
       <title>Building Resilient Detection Suppressions</title>
