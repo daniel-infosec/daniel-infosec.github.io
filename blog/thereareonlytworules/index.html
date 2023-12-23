@@ -8,8 +8,8 @@
 
 <meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="There are Only Two Rules">
-  <meta property="og:description" content="One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
-  <meta property="description" content="One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
+  <meta property="og:description" content="One mental model I&#39;ve maintained for a long time is that there are only two types of detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
+  <meta property="description" content="One mental model I&#39;ve maintained for a long time is that there are only two types of detection rules. We&#39;ll cover what those rules are and why this distinction matters.">
   <meta property="og:url" content="https://catscrdl.io/blog/thereareonlytworules/">
   <meta property="og:type" content="article">
   
@@ -229,7 +229,7 @@
       <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
     
     
-      <p>One mental model I&#39;ve maintained for a long time is that there are only two types detection rules. We&#39;ll cover what those rules are and why this distinction matters.</p>
+      <p>One mental model I&#39;ve maintained for a long time is that there are only two types of detection rules. We&#39;ll cover what those rules are and why this distinction matters.</p>
     
   </div>
   <div class="meta">
@@ -300,6 +300,8 @@
 <p>Let&rsquo;s say we have a detection that monitors a specific AWS IAM role. It&rsquo;s a critical role with high permissions for a service. So we write a rule that says the role policy must match a predefined set of permissions, the role can only be assumed from a certain IP address, the user agent must match a predefined string, etc. In this case we&rsquo;ve built a list of conditions that are allowed and if any condition does not match, we will alert. This matches our definition of an &ldquo;allowlist&rdquo; detection.</p>
 <h2 id="malware">Malware</h2>
 <p>Detections for malware clearly fall in the denylist category. Whether behavior based, signature based, or other - they look for a specific signal and alert if it occurs.</p>
+<h2 id="ml-models">ML Models</h2>
+<p>Even ML models can generally be categorized as allowlist or denylist. EDRs such as CrowdStrike rely on learned behavior of what bad looks like (denylist) while other tools that claim to &ldquo;baseline&rdquo; your environment rely on definitions of good or &ldquo;allowlists&rdquo;. While the sources that feed into what&rsquo;s good and bad are a bit more dynamic, the general categorization still applies.</p>
 <h2 id="other">Other</h2>
 <p>Let&rsquo;s take a quick sampling of <a href="https://www.elastic.co/guide/en/security/current/prebuilt-rules.html">Elastic&rsquo;s prebuilt rules</a> and see if we can categorize them.</p>
 <p><a href="https://www.elastic.co/guide/en/security/current/aws-cloudtrail-log-deleted.html">AWS CloudTrail Log Deleted</a> - Denylist</p>
