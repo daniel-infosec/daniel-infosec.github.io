@@ -6,10 +6,19 @@
     <description>Recent content in infosec on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 22 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/categories/infosec/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Detection as Code: A Maturity Framework</title>
+      <link>https://catscrdl.io/blog/detectionascodematurity/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/detectionascodematurity/</guid>
+      <description>Detection as Code: A Maturity Framework Introduction In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&amp;rsquo;ve come to realize that it&amp;rsquo;s not simply a matter of adopting DaC or not.</description>
+    </item>
     
     <item>
       <title>There are Only Two Rules</title>
