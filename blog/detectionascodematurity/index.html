@@ -235,7 +235,7 @@
   <div class="meta">
     <time datetime="2024-07-25 00:00:00 &#43;0000 UTC">July 25, 2024</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>8-Minute Read</p>
+    <p>9-Minute Read</p>
   </div>
 </header>
 
@@ -290,15 +290,16 @@
   </a>
       <h1 id="detection-as-code-a-maturity-framework">Detection as Code: A Maturity Framework</h1>
 <h2 id="introduction">Introduction</h2>
-<p>In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&rsquo;ve come to realize that it&rsquo;s not simply a matter of adopting DaC or not. Like most principles in cybersecurity, DaC can be broken down into multiple functional areas, each with its own levels of maturity. In this blog post, I&rsquo;ll share my insights into these functional areas, the various maturity levels within them, and how to improve your competency in each area.</p>
+<p>In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&rsquo;ve come to realize that it&rsquo;s not simply a matter of whether or not to adopt DaC.</p>
+<p>If we want to adopt DaC, where do we start? And how do we know if we&rsquo;re doing a good job at it? How do I convince leadership that it&rsquo;s an area we should invest in? At Snowflake, we&rsquo;ve been executing on aspects of DaC long before I arrived. However, we quickly learned that writing our detections in an IDE wasn&rsquo;t sufficient to achieve the operational results we wanted. Like most principles in cybersecurity, DaC can be broken down into multiple functional areas, each with its own levels of maturity. I&rsquo;ll share my insights into these functional areas, the various maturity levels within them, and how to improve your competency in each area.</p>
 <h2 id="understanding-detection-as-code">Understanding Detection as Code</h2>
 <p>Detection as Code (DaC) leverages automation and version control to manage, deploy, and maintain detection rules, policies, and configurations. By treating detection rules as code, DaC enables rigorous testing, continuous integration/continuous deployment (CI/CD), and monitoring practices to enhance the reliability and efficiency of threat detection. A key aspect of DaC isn&rsquo;t just writing detections in YAML or Python, but also applying the same development and deployment rigor as software engineers.</p>
 <h2 id="functional-areas-and-maturity-levels">Functional Areas and Maturity Levels</h2>
 <p>DaC can be divided into four functional areas: programming language, testing, integration &amp; automation, and monitoring. Each area has four maturity levels: ad-hoc, structured, automated, and optimized. Let’s explore each area in detail.</p>
 <h2 id="programming-language">Programming Language</h2>
-<p>The choice of language for defining detections significantly impacts capabilities. Languages vary in flexibility and tools for translating ideas into code. For instance, YAML is a basic example, though some may hesitate to call it a true programming language.</p>
+<p>The choice of language for defining detections significantly impacts capabilities. Languages vary in flexibility and tools for translating ideas into code. Many teams start with markup languages, such as YAML. YAML has almost no barrier to entry and is extremely human readable.</p>
 <p><img src="/static/img/2024/dac/yaml.PNG" alt="YAML Rule"></p>
-<p>The <a href="https://github.com/SigmaHQ/sigma">Sigma Project</a> is a well-known DaC project focused on YAML. However, expressing complex logical thoughts with YAML or other markup languages can be challenging.</p>
+<p>The <a href="https://github.com/SigmaHQ/sigma">Sigma Project</a> is a well-known DaC project focused on YAML. However, expressing complex logical thoughts with YAML can be challenging.</p>
 <p>A step up from YAML are query languages such as SQL or SPL. Query languages are specifically designed for analyzing large amounts of systems from databases or other data stores (such as one where you may keep your logs). The SIEM I&rsquo;m most familiar with that is purely based on using SQL is <a href="https://github.com/snowflakedb/SnowAlert">SnowAlert</a> (a now mostly deprecated project).</p>
 <p>General-purpose languages like Python offer the most flexibility in translating detection logic to code. Many modern detection engineering teams are moving towards Python or Go for interfacing with their data due to their flexible structures and rich libraries.</p>
 <p>An optimized team uses the best tool for the job, seamlessly integrating markup, query, and functional languages.</p>
@@ -307,10 +308,10 @@
 <li>Ad-hoc: Markup language</li>
 <li>Structured: Query language</li>
 <li>Automated: General-purpose language</li>
-<li>Optimized: All of the above/best tool for the job</li>
+<li>Optimized: Any combination the above/best tool for the job</li>
 </ul>
 <h2 id="testing">Testing</h2>
-<p>Testing DaC is critical and often neglected. Here, I break down five important areas of testing: unit testing, linting, performance testing, integration testing, and end-to-end testing.</p>
+<p>Testing your detections is a critical and sadly often neglected area. I&rsquo;ve broken down testing into five different areas (unit testing, linting, performance testing, integration testing, and end-to-end), which can seem even more daunting. You may say to yourself &ldquo;that&rsquo;s such a huge task, why even bother?&rdquo; It&rsquo;s important to realize that significant improvements can be realized with just a modicum of testing.</p>
 <h3 id="unit-testing">Unit Testing</h3>
 <p>Unit testing is focused on ensuring your detection logic is correct that works by passing input to your detection logic and ensuring the output matches as expected.</p>
 <p><img src="/static/img/2024/dac/unit_testing_1.png" alt="Unit Testing 1"></p>
@@ -370,26 +371,28 @@
 <li>Ad-hoc: No or minimal testing</li>
 <li>Structured: Some testing in all areas or strong testing in some areas but missing in others</li>
 <li>Automated: Some testing in all areas with strong capabilities in a few categories. A sandbox/dev environment exists and is used</li>
-<li>Optimized: Testing for all components with code coverage measurements. Tests required for new detections</li>
+<li>Optimized: Appropriate testing for all components with code coverage measurements. Tests required for new detections, with appropriate mechanisms in place (ie. robust criteria and automated expiration) for break-glass scenarios</li>
 </ul>
 <h2 id="automation-and-integration">Automation and Integration</h2>
-<p>Developing appropriate automation and integrations is critical to improving analyst response time and decrease error likelihood. Anytime your SOC analyst has to context switch, go into another system for information, or look something up, it increases time to respond and adds unnecessary friction. I break down integrations into three general categories: suppress an alert, generate an alert, or enrich an alert.</p>
+<p>Developing appropriate automation and integrations is critical to improving analyst response time and decrease error likelihood. Anytime your SOC analyst has to context switch, go into another system for information, or look something up, it increases time to respond and adds unnecessary friction. I firmly believe that as detection engineers, our job is to give as much information to the SOC so they can do what they do best: analysis and response. Integrations empower your analyst and therefore should be a top priority for any robust detection team.</p>
 <h3 id="suppression">Suppression</h3>
-<p>One of the most common detections is &ldquo;impossible travel&rdquo;. When an analytics gets this alert, the first step in their playbook is usually to reach out to the user to confirm that it was in fact them logging into a system. We can use automation to suppress this alert, though.</p>
+<p>One of the most common detections is &ldquo;impossible travel&rdquo;. When an analyst gets this alert, the first step in their playbook is usually to reach out to the user to confirm that it was in fact them logging into a system. We can use automation to suppress this alert, though.</p>
 <p><img src="/static/img/2024/dac/was_this_you.png" alt="Was This You?"></p>
 <p>If the user clicks &ldquo;I recognize this activity&rdquo; then the alert is closed without further (or any) action needed from the analyst.</p>
 <h3 id="enrichment">Enrichment</h3>
 <p>Sometimes the data you need doesn&rsquo;t exist in your logs because maybe it&rsquo;s too expensive or too infeasible to ingest for whatever reason. In this case, you&rsquo;ll want integrations that allow you to query real-time data in order to enrich an alert. Looking at the example <a href="https://hackingthe.cloud/aws/exploitation/local_ec2_priv_esc_through_user_data/">where one can escalate privileges through EC2 user data</a>, we can see that we can detect this activity through watching CloudTrail for the &ldquo;ModifyInstanceAttribute&rdquo; event. However, the actual user data is removed because its very common for secrets to be in this data.</p>
 <p><img src="/static/img/2024/dac/enrichment.png" alt="ModifyInstanceAttribute"></p>
-<p>So an analysts first step would be to run a command to pull this data.</p>
+<p>So an analyst&rsquo;s first step would be to run a command to pull this data.</p>
 <p><img src="/static/img/2024/dac/enrichment_2.png" alt="Manual Command"></p>
 <p>However, ran than rely on an analyst to have all the necessary permissions and access, the better solution is to fold these capabilities into your detection platform and automatically run this command when the alert fires and appropriately enrich your alert. Thus, you have a more secure and faster system that allows your responders to do their analysis in a timely and efficient way.</p>
+<h3 id="generation">Generation</h3>
+<p>This may be the most common integration that detection engineers will support in their environment. Let&rsquo;s say you use a Cloud Detection and Response tool. While a basic implementation may involve directly sending alerts to your case management system, a mature DaC team will ingest those alerts into their SIEM just like any other data. From there, alerts can be normalized, suppressed, and enriched as appropriate.</p>
 <h2 id="monitoring">Monitoring</h2>
 <p>As our systems grow in complexity, it becomes increasingly important to monitor their inputs, activity, and outputs. Identifying and resolving failures or errors in your system as quickly as possible is the goal. I generally break down monitoring into 3 parts: inputs, executions, and outputs. Are you getting good data? Are you monitoring the performance or run time failures in your system? Are you generating useful alerts?</p>
 <h3 id="inputs">Inputs</h3>
 <p>Data quality can be (and has been many times from other writers) its own blog post. For the purpose of detection engineering, I focus on five areas of data quality:</p>
 <ul>
-<li>Format or ensuring your data is well structured and parseable (please stop using syslog)</li>
+<li>Format or ensuring your data is well structured and parsable (please stop using syslog)</li>
 <li>Volume or monitoring for spikes or drops in data volume</li>
 <li>Completeness or ensuring you&rsquo;re collecting data from all systems or accounts</li>
 <li>Timing or ensuring that data is reaching your detection engine soon after the event occurs</li>
@@ -411,7 +414,7 @@
 <li>Optimized: Automated suppressions, data/performance contracts, automatic recovery capabilities</li>
 </ul>
 <h1 id="conclusion">Conclusion</h1>
-<p>Detection as Code (DaC) represents a significant advancement in cybersecurity, bringing software engineering principles into threat detection processes. By breaking down DaC into functional areas—programming language, testing, integration &amp; automation, and monitoring—we can assess our current maturity and pinpoint areas for improvement.</p>
+<p>Detection as Code (DaC) represents a significant advancement in cybersecurity, bringing software engineering principles into threat detection processes. By breaking DaC down into functional areas—programming language, testing, integration &amp; automation, and monitoring, we can assess our current maturity and pinpoint areas for improvement.</p>
 <p>Each functional area offers a pathway from basic, ad-hoc practices to optimized, comprehensive systems that enhance efficiency, reliability, and response times. Implementing DaC requires a commitment to continuous improvement, leveraging the best tools and practices available.</p>
 <p>As cybersecurity threats continue to evolve, adopting DaC can provide a robust framework for staying ahead. By treating detection rules as code, integrating rigorous testing, and ensuring seamless automation and monitoring, we can significantly enhance our security posture.</p>
 <p>Whether your team is just starting out with DaC or looking to optimize an existing system, focusing on these key areas will help you build a more resilient and responsive security operation. The journey to maturity in DaC is incremental, but the benefits—reduced response times, fewer errors, and more effective threat detection—are well worth the investment.</p>
