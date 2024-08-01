@@ -298,7 +298,8 @@
 <p>DaC can be divided into four functional areas: programming language, testing, integration &amp; automation, and monitoring. Each area has four maturity levels: ad-hoc, structured, automated, and optimized. Let’s explore each area in detail.</p>
 <h2 id="programming-language">Programming Language</h2>
 <p>The choice of language for defining detections significantly impacts capabilities. Languages vary in flexibility and tools for translating ideas into code. Many teams start with markup languages, such as YAML. YAML has almost no barrier to entry and is extremely human readable.</p>
-<p><img src="/static/img/2024/dac/yaml.PNG" alt="YAML Rule"></p>
+<p><img src="/static/img/2024/dac/yaml.PNG" alt="YAML Rule">
+Image Source: <a href="https://github.com/SigmaHQ/sigma/blob/master/rules/cloud/aws/cloudtrail/aws_cloudtrail_disable_logging.yml">https://github.com/SigmaHQ/sigma/blob/master/rules/cloud/aws/cloudtrail/aws_cloudtrail_disable_logging.yml</a></p>
 <p>The <a href="https://github.com/SigmaHQ/sigma">Sigma Project</a> is a well-known DaC project focused on YAML. However, expressing complex logical thoughts with YAML can be challenging.</p>
 <p>A step up from YAML are query languages such as SQL or SPL. Query languages are specifically designed for analyzing large amounts of systems from databases or other data stores (such as one where you may keep your logs). The SIEM I&rsquo;m most familiar with that is purely based on using SQL is <a href="https://github.com/snowflakedb/SnowAlert">SnowAlert</a> (a now mostly deprecated project).</p>
 <p>General-purpose languages like Python offer the most flexibility in translating detection logic to code. Many modern detection engineering teams are moving towards Python or Go for interfacing with their data due to their flexible structures and rich libraries.</p>
@@ -327,7 +328,8 @@
 <p>Integration testing ensures that disparate systems which interface together properly interface as expected. This is most common when you have other parts of your detection platform such as SOAR.</p>
 <h3 id="end-to-end-testing">End-to-End Testing</h3>
 <p>End-to-end testing occurs when you full test your system from data generation all the way to case management and potentially closure.</p>
-<p><img src="/static/img/2024/dac/end_to_end.png" alt="End-to-End"></p>
+<p><img src="/static/img/2024/dac/end_to_end.png" alt="End-to-End">
+Image Source: <a href="https://github.com/WithSecureLabs/leonidas">https://github.com/WithSecureLabs/leonidas</a></p>
 <h3 id="testing-priority-and-difficulty">Testing Priority and Difficulty</h3>
 <p>Not all testing methodologies are created equal. Some tests are hard to get setup or maybe aren&rsquo;t a super high priority. For your organization, you should decide on the areas you&rsquo;re seeing the most operational failures and work to setup testing for those areas. Note that the below difficulty may vary depending on your tech stack and organizational structure.</p>
 <table>
@@ -377,7 +379,8 @@
 <p>Developing appropriate automation and integrations is critical to improving analyst response time and decrease error likelihood. Anytime your SOC analyst has to context switch, go into another system for information, or look something up, it increases time to respond and adds unnecessary friction. I firmly believe that as detection engineers, our job is to give as much information to the SOC so they can do what they do best: analysis and response. Integrations empower your analyst and therefore should be a top priority for any robust detection team.</p>
 <h3 id="suppression">Suppression</h3>
 <p>One of the most common detections is &ldquo;impossible travel&rdquo;. When an analyst gets this alert, the first step in their playbook is usually to reach out to the user to confirm that it was in fact them logging into a system. We can use automation to suppress this alert, though.</p>
-<p><img src="/static/img/2024/dac/was_this_you.png" alt="Was This You?"></p>
+<p><img src="/static/img/2024/dac/was_this_you.png" alt="Was This You?">
+Image Source: <a href="https://www.tines.com/blog/chatbots-for-security-and-it-teams-part-3-creating-a-slack-chatbot/">https://www.tines.com/blog/chatbots-for-security-and-it-teams-part-3-creating-a-slack-chatbot/</a></p>
 <p>If the user clicks &ldquo;I recognize this activity&rdquo; then the alert is closed without further (or any) action needed from the analyst.</p>
 <h3 id="enrichment">Enrichment</h3>
 <p>Sometimes the data you need doesn&rsquo;t exist in your logs because maybe it&rsquo;s too expensive or too infeasible to ingest for whatever reason. In this case, you&rsquo;ll want integrations that allow you to query real-time data in order to enrich an alert. Looking at the example <a href="https://hackingthe.cloud/aws/exploitation/local_ec2_priv_esc_through_user_data/">where one can escalate privileges through EC2 user data</a>, we can see that we can detect this activity through watching CloudTrail for the &ldquo;ModifyInstanceAttribute&rdquo; event. However, the actual user data is removed because its very common for secrets to be in this data.</p>
