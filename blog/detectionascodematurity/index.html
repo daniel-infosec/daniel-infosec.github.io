@@ -235,7 +235,7 @@
   <div class="meta">
     <time datetime="2024-07-25 00:00:00 &#43;0000 UTC">July 25, 2024</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>9-Minute Read</p>
+    <p>11-Minute Read</p>
   </div>
 </header>
 
@@ -295,7 +295,7 @@
 <h2 id="understanding-detection-as-code">Understanding Detection as Code</h2>
 <p>Detection as Code (DaC) leverages automation and version control to manage, deploy, and maintain detection rules, policies, and configurations. By treating detection rules as code, DaC enables rigorous testing, continuous integration/continuous deployment (CI/CD), and monitoring practices to enhance the reliability and efficiency of threat detection. A key aspect of DaC isn&rsquo;t just writing detections in YAML or Python, but also applying the same development and deployment rigor as software engineers.</p>
 <h2 id="functional-areas-and-maturity-levels">Functional Areas and Maturity Levels</h2>
-<p>DaC can be divided into four functional areas: programming language, testing, integration &amp; automation, and monitoring. Each area has four maturity levels: ad-hoc, structured, automated, and optimized. Let’s explore each area in detail.</p>
+<p>DaC can be divided into four functional areas: programming language, testing, integration &amp; automation, and monitoring. Each area has four maturity levels: Ad hoc, structured, automated, and optimized. Let’s explore each area in detail.</p>
 <h2 id="programming-language">Programming Language</h2>
 <p>The choice of language for defining detections significantly impacts capabilities. Languages vary in flexibility and tools for translating ideas into code. Many teams start with markup languages, such as YAML. YAML has almost no barrier to entry and is extremely human readable.</p>
 <p><img src="/static/img/2024/dac/yaml.PNG" alt="YAML Rule"></p>
@@ -306,7 +306,7 @@
 <p>An optimized team uses the best tool for the job, seamlessly integrating markup, query, and functional languages.</p>
 <h3 id="maturity-levels">Maturity Levels</h3>
 <ul>
-<li>Ad-hoc: Markup language</li>
+<li>Ad hoc: Markup language</li>
 <li>Structured: Query language</li>
 <li>Automated: General-purpose language</li>
 <li>Optimized: Any combination the above/best tool for the job</li>
@@ -371,7 +371,7 @@
 </table>
 <h3 id="maturity-levels-1">Maturity Levels</h3>
 <ul>
-<li>Ad-hoc: No or minimal testing</li>
+<li>Ad hoc: No or minimal testing</li>
 <li>Structured: Some testing in all areas or strong testing in some areas but missing in others</li>
 <li>Automated: Some testing in all areas with strong capabilities in a few categories. A sandbox/dev environment exists and is used</li>
 <li>Optimized: Appropriate testing for all components with code coverage measurements. Tests required for new detections, with appropriate mechanisms in place (ie. robust criteria and automated expiration) for break-glass scenarios</li>
@@ -391,6 +391,13 @@
 <p>However, ran than rely on an analyst to have all the necessary permissions and access, the better solution is to fold these capabilities into your detection platform and automatically run this command when the alert fires and appropriately enrich your alert. Thus, you have a more secure and faster system that allows your responders to do their analysis in a timely and efficient way.</p>
 <h3 id="generation">Generation</h3>
 <p>This may be the most common integration that detection engineers will support in their environment. Let&rsquo;s say you use a Cloud Detection and Response tool. While a basic implementation may involve directly sending alerts to your case management system, a mature DaC team will ingest those alerts into their SIEM just like any other data. From there, alerts can be normalized, suppressed, and enriched as appropriate.</p>
+<h3 id="maturity-levels-2">Maturity Levels</h3>
+<ul>
+<li>Ad hoc: No or minimal integrations</li>
+<li>Structured: Some integrations setup, but setting up new integrations is high effort. Missing tooling and standards</li>
+<li>Automated: Process and tooling exists for developing new integrations, can automation suppression or enrichment for key detections</li>
+<li>Optimized: Integrations for suppression and enrichment. Can easily incorporate 3rd party alerts. Strong standards and tooling for deployment of new integrations</li>
+</ul>
 <h2 id="monitoring">Monitoring</h2>
 <p>As our systems grow in complexity, it becomes increasingly important to monitor their inputs, activity, and outputs. Identifying and resolving failures or errors in your system as quickly as possible is the goal. I generally break down monitoring into 3 parts: inputs, executions, and outputs. Are you getting good data? Are you monitoring the performance or run time failures in your system? Are you generating useful alerts?</p>
 <h3 id="inputs">Inputs</h3>
@@ -410,16 +417,60 @@
 <p>This has large overlap with business continuity and disaster recovery and will make your compliance team happy. When a rule fails, does your system identify this and re-run it automatically? Do you get alerted when it repeatedly happens so you can take action? Or do things silently fail? If you wrote all these great detections but something is silently failing, then you&rsquo;re not executing an effective detection engineering system.</p>
 <h3 id="outputs">Outputs</h3>
 <p>This is the area of monitoring that most security operations are familiar with and start off with: labeling your alerts as true or false positive and working to improve the false positives. As you mature, you can grow in this area with <a href="https://www.rapid7.com/blog/post/2021/02/12/talkin-smac-alert-labeling-and-why-it-matters/">improved labeling</a> or proactively suppress alerts that start spiking and overwhelming your triage team. As an example, at Snowflake, we&rsquo;ll quarantine a particular detector and create a ticket for our detection engineers if it has too many false positive closure statuses within a particular time window.</p>
-<h3 id="maturity-levels-2">Maturity Levels</h3>
+<h3 id="maturity-levels-3">Maturity Levels</h3>
 <ul>
-<li>Ad-hoc: Find out about missing data during forensics, get told about detection issues from the SOC</li>
+<li>Ad hoc: Find out about missing data during forensics, get told about detection issues from the SOC</li>
 <li>Structured: Collecting output metrics, basic dashboards and visualizations</li>
 <li>Automated: Notified about failures, established SLAs and SLOs</li>
 <li>Optimized: Automated suppressions, data/performance contracts, automatic recovery capabilities</li>
 </ul>
+<h1 id="maturity-matrix">Maturity Matrix</h1>
+<table>
+<thead>
+<tr>
+<th><strong>Language</strong></th>
+<th><strong>Testing</strong></th>
+<th><strong>Integration</strong></th>
+<th><strong>Monitoring</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ad Hoc</td>
+<td>Markup language</td>
+<td>No or minimal testing</td>
+<td>No or minimal integrations</td>
+<td>Find out about missing data during forensics, get told about detection issues from the SOC</td>
+</tr>
+<tr>
+<td>Structured</td>
+<td>Query language</td>
+<td>Some testing in all areas or strong testing in some areas but missing in others</td>
+<td>Some integrations setup, but setting up new integrations is high effort. Missing tooling and standards</td>
+<td>Collecting output metrics, basic dashboards and visualizations</td>
+</tr>
+<tr>
+<td>Automated</td>
+<td>General-purpose language</td>
+<td>Some testing in all areas with strong capabilities in a few categories. A sandbox/dev environment exists and is used</td>
+<td>Process and tooling exists for developing new integrations, can automation suppression or enrichment for key detections</td>
+<td>Notified about failures, established SLAs and SLOs</td>
+</tr>
+<tr>
+<td>Optimized</td>
+<td>Any combination the above/best tool for the job</td>
+<td>Appropriate testing for all components with code coverage measurements. Tests required for new detections, with appropriate mechanisms in place (ie. robust criteria and automated expiration) for break-glass scenarios</td>
+<td>Integrations for suppression and enrichment. Can easily incorporate 3rd party alerts. Strong standards and tooling for deployment of new integrations</td>
+<td>Automated suppressions, data/performance contracts, automatic recovery capabilities</td>
+</tr>
+</tbody>
+</table>
+<h1 id="setting-goals">Setting Goals</h1>
+<p>You may read through this blog post and wonder how you&rsquo;ll ever reach optimized in all categories. It&rsquo;s my belief that this shouldn&rsquo;t be the goal for all teams. Security is ultimately a function of risk management, and you shouldn&rsquo;t overinvest for how much risk you mitigate. Similar, with adopting devops principles your detections, you may end up over-engineering when resources could have been better invested in other areas. As an example, if you&rsquo;re a smaller shop where your only detection engineer also runs vulnerability management and incident response, then shooting for optimized across the board may not be realistic. In that case, it may be more important that you have strong integrations and automation to scale your engineer. Meanwhile, a shop that has a ton of legacy components may want to invest in monitoring to ensure all areas are working as expected. Reason through your particular situation and where your pain points to decide where on the matrix you want to end up before setting unreachable goals.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Detection as Code (DaC) represents a significant advancement in cybersecurity, bringing software engineering principles into threat detection processes. By breaking DaC down into functional areas—programming language, testing, integration &amp; automation, and monitoring, we can assess our current maturity and pinpoint areas for improvement.</p>
-<p>Each functional area offers a pathway from basic, ad-hoc practices to optimized, comprehensive systems that enhance efficiency, reliability, and response times. Implementing DaC requires a commitment to continuous improvement, leveraging the best tools and practices available.</p>
+<p>Each functional area offers a pathway from basic, ad hoc practices to optimized, comprehensive systems that enhance efficiency, reliability, and response times. Implementing DaC requires a commitment to continuous improvement, leveraging the best tools and practices available.</p>
 <p>As cybersecurity threats continue to evolve, adopting DaC can provide a robust framework for staying ahead. By treating detection rules as code, integrating rigorous testing, and ensuring seamless automation and monitoring, we can significantly enhance our security posture.</p>
 <p>Whether your team is just starting out with DaC or looking to optimize an existing system, focusing on these key areas will help you build a more resilient and responsive security operation. The journey to maturity in DaC is incremental, but the benefits—reduced response times, fewer errors, and more effective threat detection—are well worth the investment.</p>
 <p>(Note, this is a blog post version of a talk I gave a while ago with some additional updates. You can find the original slides <a href="https://docs.google.com/presentation/d/1Yv8J1FBAHdeMs6e5X5wihQMjhSoIR98kvGtrynyj4NY/edit#slide=id.g11ff4044692_0_683">here</a>.)</p>
