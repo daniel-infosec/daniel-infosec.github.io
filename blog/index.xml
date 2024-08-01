@@ -129,16 +129,6 @@ In addition, there was a recent Twitter post from @randomuserid that got me thin
     </item>
     
     <item>
-      <title></title>
-      <link>https://catscrdl.io/blog/fourtypesofsecuritymonitoring/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/fourtypesofsecuritymonitoring/</guid>
-      <description>Excellent suggestion. I&amp;rsquo;ll integrate information about the different response actions for each pillar. Here&amp;rsquo;s an updated version incorporating these distinctions:
-+++ title = &amp;ldquo;The Four Pillars of Security Monitoring: A Comprehensive Guide&amp;rdquo; description = &amp;ldquo;Why do the distinctions between threat detection, posture management, compliance monitoring, and vulnerability monitoring matter? Discover how understanding these four key types of security monitoring can transform your cybersecurity strategy and fortify your defenses against evolving threats.</description>
-    </item>
-    
-    <item>
       <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
       <link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
