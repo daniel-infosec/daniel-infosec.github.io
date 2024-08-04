@@ -290,6 +290,12 @@
   </a>
       <h1 id="the-pillars-of-security-monitoring-a-comprehensive-guide">The Pillars of Security Monitoring: A Comprehensive Guide</h1>
 <p>As you may know by now if you&rsquo;ve read a few of my blog articles, I&rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&rsquo;re part of a larger &ldquo;security monitoring&rdquo; capability which consists of related but distinct pillars. We&rsquo;ll explore these interrelated pillars of security monitoring: threat detection, posture management, compliance monitoring, abuse detection, insider threat, and vulnerability management. Understanding these differences isn&rsquo;t just academic – it&rsquo;s essential for crafting an effective, nuanced security strategy. Importantly, it will lead into an often opinionated discussion on SOC vs SOC-less models.</p>
+<h1 id="an-ounce-of-prevention">An Ounce of Prevention</h1>
+<p>Before we really dive into security monitoring, I wanted to get on a soap box briefly and discuss the need for monitoring at all. A security team should always strive to prevent or make impossible the realization of a risk. Monitoring should be a second choice based on:</p>
+<ul>
+<li>Financial or technical cost to implement prevention</li>
+<li>Timeline to implement prevention</li>
+</ul>
 <h1 id="sides-of-the-same-die">Sides of the Same Die</h1>
 <p>Before we break down the differences between these pillars, I feel like I have some responsibility to convince you that they&rsquo;re all part of the same discipline. To that end, let&rsquo;s start with define what I mean when I say &ldquo;security monitoring&rdquo;. Starting with good old Wikipedia, we have a definition for computer security as <a href="https://en.wikipedia.org/wiki/Computer_security">&ldquo;the protection of computer systems and networks from threats that may result in unauthorized information disclosure, theft of (or damage to) hardware, software, or data, as well as from the disruption or misdirection of the services they provide&rdquo;</a>. Monitoring, per the dictionary, is <a href="https://dictionary.cambridge.org/us/dictionary/english/monitoring">&ldquo;to watch and check a situation carefully for a period of time in order to discover something about it&rdquo;</a>. It thus follows, then, that security monitoring is the act of protecting computer systems by checking on them in order to reduce systemic risk by identifying to and responding to situations that could result in a loss before the loss (or at least a catastrophic loss) were to occur. Let&rsquo;s thus then see how each of these areas can be interpreted as a version of security monitoring.</p>
 <ul>
@@ -302,10 +308,16 @@
 </ul>
 <h1 id="drivers-and-sources-of-monitoring-requirements">Drivers and Sources of Monitoring Requirements</h1>
 <p>Now that we&rsquo;ve aligned that these 6 operations are all sub-categories of security monitoring, we&rsquo;ll dive into the differences starting with where requirements for these pillars originate from.</p>
+<h2 id="similarities">Similarities</h2>
+<p>There&rsquo;s a few sources of monitoring requirements that are common for almost all pillars:</p>
+<ul>
+<li>Threat Intelligence: The backbone of any mature security team, a solid threat intelligence program will help with both identifying as well as prioritizing areas of risk.</li>
+<li>Threat Modeling: A systematic approach to identifying potential security risks. It uncovers gaps in our monitoring strategy across all pillars, helping anticipate vulnerabilities and enhance monitoring in critical areas.</li>
+<li>Red Teaming: A solid red team will uncover new areas of risk and security monitoring programs can help with mitigating risk via monitoring if prevention is infeasible or on a longer timeline.</li>
+</ul>
 <h2 id="threat-detection">Threat Detection</h2>
 <p>Threat detection is driven by a mix of internal strategies and external intel. More often than not, we&rsquo;ve identified some indicator that can be used to determine unauthorized access. Internally, one way that can be accomplished is by analyzing system behavior to determine, for example, an application allowlist. Other sources of indicators can include:</p>
 <ul>
-<li>Threat Intelligence Reports: We&rsquo;re subscribed to various feeds from cybersecurity firms, government agencies, and industry-specific sharing centers.</li>
 <li>Internal Incident History: We learn from our own past incidents.</li>
 <li>Security Research: Sometimes our own team or contractors uncover new threats.</li>
 <li>Emerging Trends: We keep an eye on dark web forums and hacker communities.</li>
@@ -334,13 +346,11 @@
 <ul>
 <li>Industry Best Practice: Understand common abuse scenarios like resource hijacking, DoS, hosting inappropriate or malicious content, etc.</li>
 <li>Customer Reports: While not ideal, if a customer reports active abuse, we should work quickly to both prevent and monitor for it.</li>
-<li>Internal Risk Assessment and Threat Modeling: During threat models, ensure to account for how public services could be abused.</li>
 </ul>
 <p>An undesired, but extremely common, scenario for hosting providers is receiving takedown notices from companies saying that someone is abusing their service to illegal host copyrighted or otherwise protected content.</p>
 <h2 id="insider-threat">Insider Threat</h2>
 <p>Insider threat monitoring is driven by organizational risk management and specific incidents or trends:</p>
 <ul>
-<li>Organizational Risk Assessments: We identify critical assets and potential insider risks.</li>
 <li>Historical Incidents: Past insider threats inform our strategies.</li>
 <li>Industry Trends: We learn from insider threats in similar organizations.</li>
 <li>Regulatory Requirements: Some industries have specific requirements for monitoring insider activities.</li>
@@ -398,7 +408,8 @@
 <li>Remediation and Prevention: Remove any abusive elements, like malicious scripts or unauthorized access points. Then, work on fortifying your systems to prevent similar incidents in the future. This might involve tightening up acceptable use policies or enhancing your monitoring systems.</li>
 <li>Legal and Compliance Coordination: Collaborate with your legal and compliance teams to ensure your response is in line with regulatory requirements. In severe cases, legal action against the perpetrators might be necessary.</li>
 </ol>
-<p>False positives for abuse detection can have a similar impact to the team threat detection false positives where sigificant churn and wasted time can occur. False negatives can range in impact from increased spend (say an attacker figu)</p>
+<p>Abuse response requires a strong combination of security operations, engineering, customer support, and legal in order to successfully execute all of the above steps. Strong playbooks and contracts are needed between these teams prior to rolling out features that have potential for abuse.</p>
+<p>False positives for abuse detection can have a similar impact to the team threat detection false positives where significant churn and wasted time can occur. False negatives can range in impact from increased spend to significant reputational damage or legal action.</p>
 <h2 id="insider-threat-1">Insider Threat</h2>
 <p>Insider threats involve detecting and preventing malicious activities from within your own organization – employees, contractors, or anyone with internal access. Responding to insider threats is a delicate process, as it involves balancing security needs with employee privacy:</p>
 <ol>
@@ -419,69 +430,63 @@
 <li>Monitoring: Continuously watch for any attempts to exploit the vulnerability. This ongoing vigilance helps ensure that your defenses remain effective.</li>
 </ol>
 <p>Vulnerability management often involves collaboration between security teams and system administrators, with timelines varying based on the severity of the vulnerability. Critical vulnerabilities like Log4j may require an all-hands-on-deck response, while less severe issues can be addressed during routine maintenance windows.</p>
-<h2 id="additional-key-differences">Additional Key Differences</h2>
-<h3 id="tooling-and-technology">Tooling and Technology</h3>
+<h1 id="additional-key-differences">Additional Key Differences</h1>
+<h2 id="tooling-and-technology">Tooling and Technology</h2>
 <p>Each pillar has its own tech stack:</p>
 <ul>
 <li>Threat Detection: Usually involves SIEM systems, EDR/XDR tools, network traffic analyzers.</li>
 <li>Posture Management: Cloud security posture management (CSPM) tools, configuration management databases.</li>
 <li>Compliance Monitoring: GRC platforms, policy management tools.</li>
+<li>Abuse Monitoring: Application logs, WAF, third party reporting systems.</li>
 <li>Vulnerability Management: Vulnerability scanners, patch management systems.</li>
 <li>Insider Threat: User and Entity Behavior Analytics (UEBA) tools, data loss prevention (DLP) solutions.</li>
 </ul>
-<h3 id="skill-sets-and-expertise">Skill Sets and Expertise</h3>
+<h2 id="skill-sets-and-expertise">Skill Sets and Expertise</h2>
 <p>The people involved in each type of monitoring often have different backgrounds:</p>
 <ul>
 <li>Threat Detection: Incident response specialists, SOC analysts.</li>
 <li>Posture Management: Cloud security experts, system administrators.</li>
 <li>Compliance Monitoring: Compliance officers, auditors, legal experts.</li>
+<li>Abuse Monitoring: Product security, product operations, legal.</li>
 <li>Vulnerability Management: Security researchers, system administrators.</li>
 <li>Insider Threat: Behavioral analysts, HR professionals, forensic investigators.</li>
 </ul>
-<h3 id="frequency-and-timing">Frequency and Timing</h3>
-<p>The rhythm of monitoring activities varies:</p>
-<ul>
-<li>Threat Detection: It&rsquo;s a 24/7 operation.</li>
-<li>Posture Management: Regular scans, often daily or weekly.</li>
-<li>Compliance Monitoring: Periodic audits and ongoing checks.</li>
-<li>Vulnerability Management: Regular scans and ad-hoc checks for critical vulnerabilities.</li>
-<li>Insider Threat: Ongoing behavioral analysis with periodic reviews. May be triggered by high-risk events (off-boarding).</li>
-</ul>
-<h3 id="metrics-and-kpis">Metrics and KPIs</h3>
-<p>We measure success differently across the pillars:</p>
+<h2 id="metrics-and-kpis">Metrics and KPIs</h2>
+<p>We measure success differently across the pillars (note that the intricacies of metrics is outside the scope of this post):</p>
 <ul>
 <li>Threat Detection: We&rsquo;re looking at mean time to detect (MTTD) and mean time to respond (MTTR).</li>
 <li>Posture Management: Percentage of systems compliant with security baselines.</li>
 <li>Compliance Monitoring: Audit pass rates, number of policy violations.</li>
+<li>Abuse Monitoring: Financial loss incurred, customer reports.</li>
 <li>Vulnerability Management: How quickly we remediate vulnerabilities, patch coverage.</li>
 <li>Insider Threat: Number of insider incidents detected, time to detect insider threats.</li>
 </ul>
-<h3 id="integration-with-business-processes">Integration with Business Processes</h3>
-<p>Each pillar fits into the broader business in its own way:</p>
-<ul>
-<li>Threat Detection: Closely tied to incident response and business continuity planning.</li>
-<li>Posture Management: Integrated with change management and system deployment processes.</li>
-<li>Compliance Monitoring: Aligned with regulatory reporting and audit processes.</li>
-<li>Vulnerability Management: Integrated with IT operations and software development lifecycles.</li>
-<li>Insider Threat: Closely tied to HR processes, employee onboarding/off-boarding, and access management.</li>
-</ul>
-<h2 id="to-soc-or-not-to-soc---that-is-the-question">To SOC or Not To SOC - That is the Question</h2>
-<p>Deciding whether to establish a Security Operations Center (SOC) is a significant decision that can shape your organization&rsquo;s entire approach to cybersecurity. While the idea of having a dedicated team working around the clock to monitor and respond to threats is appealing, the decision should be based on a nuanced understanding of your organization’s unique characteristics and needs. Here&rsquo;s what I&rsquo;d recommend considering as you ponder your organizational structure:</p>
-<h3 id="historical-team-capabilities">Historical Team Capabilities</h3>
+<h1 id="to-soc-or-not-to-soc---that-is-the-question">To SOC or Not To SOC - That is the Question</h1>
+<p>Deciding whether to establish a Security Operations Center (SOC) is a significant decision that can shape your organization&rsquo;s entire approach to cybersecurity. While the idea of having a dedicated team working around the clock to monitor and respond to threats is appealing, the decision should be based on a nuanced understanding of your organization’s unique characteristics and needs. Before that, though, let&rsquo;s dive into what I mean and what others can mean by &ldquo;SOCLess&rdquo;.</p>
+<h2 id="socless">SOCLess</h2>
+<p>In my opinion, a SOC (as opposed to a SOCLess) team differs in two key aspects:</p>
+<ol>
+<li>Centralized alert notifications</li>
+<li>The presence of L1 analysts for alert triage</li>
+</ol>
+<p>Most SOCLess blog posts or references I&rsquo;ve seen refer to the elimination of L1 analysts and replacing it with high fidelity automation, correlation rules, improved prevention, etc. However, SOCs in most companies also serve as a central routing function for security notifications including auditing to ensure security notifications are properly actioned. Before you set out on a journey or eliminating a SOC and direct routing security notifications to individuals or teams, ensure that those teams are actually setup to directly receive those notifications.</p>
+<h2 id="historical-team-capabilities">Historical Team Capabilities</h2>
 <p>Begin by assessing your current team’s capabilities. Have they historically been able to handle security incidents efficiently? Do they possess the technical skills required to monitor, detect, and respond to threats in real-time? Do you already have a SOC and are deciding to reorg? Are you a new company building your first &ldquo;Blue Team&rdquo;? An organization with a mature and capable security team might find that building out a SOC could amplify their strengths, enabling more robust and effective threat response. Meanwhile, a company with a greenfield security structure may decide to start SOC-less and build an organization around that model.</p>
-<h3 id="organizational-dynamics">Organizational Dynamics</h3>
+<h2 id="organizational-dynamics">Organizational Dynamics</h2>
 <p>Consider how a SOC fits into your organizational structure. Do you have the support from executive leadership and the necessary budget to implement and sustain a SOC? It’s also important to evaluate how a SOC would integrate with existing teams. Will it create silos, or can it facilitate better communication and coordination across departments? Do other teams want to take on the work, and do they have the necessary funding?</p>
-<h3 id="automation-sophistication">Automation Sophistication</h3>
+<h2 id="automation-sophistication">Automation Sophistication</h2>
 <p>Evaluate the level of automation in your current security processes. A highly automated environment can reduce the need for a large, traditional SOC by enabling more efficient threat detection and response. Automation tools can handle routine monitoring and alerting, allowing your security team to focus on more complex tasks.</p>
-<h3 id="culture-of-ownership">Culture of Ownership</h3>
+<h2 id="culture-of-ownership">Culture of Ownership</h2>
 <p>Your organization&rsquo;s culture plays a crucial role in deciding whether a SOC is the right choice. A strong culture of ownership, where teams are empowered and responsible for their security posture, can reduce reliance on a centralized SOC. In such environments, a distributed security model with embedded security champions might be more effective.</p>
-<h3 id="the-decision">The Decision</h3>
+<h2 id="the-decision">The Decision</h2>
 <p>Ultimately, the decision to establish a SOC should be guided by a strategic evaluation of these factors. For some organizations, a SOC provides the necessary focus and resources to stay ahead of threats. For others, leveraging automation and fostering a culture of security ownership might be a better path. The key is to align your security operations with your organization&rsquo;s strengths and needs.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>By recognizing these distinct yet interconnected pillars and their unique characteristics, we can develop more targeted and effective security strategies. Each pillar requires its own set of tools, expertise, and response protocols. Whether you choose to implement a 24/7 SOC team for threat detection or distribute responsibilities across teams, understanding your organizational dynamics and capabilities is key.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>By recognizing these distinct yet interconnected pillars and their unique characteristics, we can develop more targeted and effective security strategies. Each pillar requires its own set of tools, expertise, and response protocols. Whether you choose to implement a 24/7 SOC team for security monitoring or distribute responsibilities across teams, understanding your organizational dynamics and capabilities is key.</p>
 <p>In practice, these pillars work together synergistically. A threat detection alert might trigger a broader vulnerability scan, while a compliance violation could lead to updates in security posture management. By understanding and implementing all pillars of security monitoring, and carefully considering your approach to SOC, we can build a more resilient and adaptive security posture.</p>
 <p>As cyber threats continue to evolve in complexity and scale, maintaining a clear understanding of these distinct yet interconnected monitoring types becomes increasingly crucial. It&rsquo;s not just about having multiple layers of security – it&rsquo;s about having the right layers, working in harmony to provide comprehensive protection.</p>
 <p>In the end, while all security monitoring aims to prevent unauthorized access, the path to achieving this goal is multifaceted. By recognizing and leveraging the unique strengths and response patterns of each pillar, and making informed decisions about your SOC strategy, we can build a more robust, efficient, and effective security strategy. In the ever-changing world of cybersecurity, this nuanced approach isn&rsquo;t just beneficial – it&rsquo;s essential for staying ahead of evolving threats and protecting our critical assets.</p>
+<h1 id="other-worthwhile-readings">Other Worthwhile Readings</h1>
+<p><a href="https://crowdalert.com/tips-for-socless-oncall/">Tips for SOCLess Oncall</a></p>
 
     </div>
     <footer>
