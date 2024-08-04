@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>The Pillars of Security Monitoring: A Comprehensive Guide - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="The Pillars of Security Monitoring: A Comprehensive Guide">
+  <meta property="og:description" content="Why do the distinctions between threat detection, posture management, compliance monitoring, insider threat, and vulnerability monitoring matter? Discover how understanding these key types of security monitoring can transform your cybersecurity strategy and fortify your defenses against evolving threats.">
+  <meta property="description" content="Why do the distinctions between threat detection, posture management, compliance monitoring, insider threat, and vulnerability monitoring matter? Discover how understanding these key types of security monitoring can transform your cybersecurity strategy and fortify your defenses against evolving threats.">
+  <meta property="og:url" content="https://catscrdl.io/blog/typesofsecuritymonitoring/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/2024/monitoring/pillars.webp">
+      <meta property="og:image:alt" content="Security Monitoring Pilalrs">
+    
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;title=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;title=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;description=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/typesofsecuritymonitoring/">The Pillars of Security Monitoring: A Comprehensive Guide</a></h2>
+    
+    
+      <p>Why do the distinctions between threat detection, posture management, compliance monitoring, insider threat, and vulnerability monitoring matter? Discover how understanding these key types of security monitoring can transform your cybersecurity strategy and fortify your defenses against evolving threats.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2024-08-03 00:00:00 &#43;0000 UTC">August 3, 2024</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>17-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;title=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;title=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f&amp;description=The%20Pillars%20of%20Security%20Monitoring%3a%20A%20Comprehensive%20Guide" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2ftypesofsecuritymonitoring%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/typesofsecuritymonitoring/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2024/monitoring/pillars.webp');">
+    <img src="https://catscrdl.io/static/img/2024/monitoring/pillars.webp" alt="Security Monitoring Pilalrs">
+  </a>
+      <h1 id="the-pillars-of-security-monitoring-a-comprehensive-guide">The Pillars of Security Monitoring: A Comprehensive Guide</h1>
+<p>As you may know by now if you&rsquo;ve read a few of my blog articles, I&rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&rsquo;re part of a larger &ldquo;security monitoring&rdquo; capability which consists of related but distinct pillars. We&rsquo;ll explore these interrelated pillars of security monitoring: threat detection, posture management, compliance monitoring, abuse detection, insider threat, and vulnerability management. Understanding these differences isn&rsquo;t just academic – it&rsquo;s essential for crafting an effective, nuanced security strategy. Importantly, it will lead into an often opinionated discussion on SOC vs SOC-less models.</p>
+<h1 id="same-same-but-different">Same-Same but Different</h1>
+<p>Before we break down the differences between these pillars, I feel like I have some responsibility to convince you that they&rsquo;re all part of the same discipline. To that end, let&rsquo;s start with define what I mean when I say &ldquo;security monitoring&rdquo;. Starting with good old Wikipedia, we have a definition for computer security as <a href="https://en.wikipedia.org/wiki/Computer_security">&ldquo;the protection of computer systems and networks from threats that may result in unauthorized information disclosure, theft of (or damage to) hardware, software, or data, as well as from the disruption or misdirection of the services they provide&rdquo;</a>. Monitoring, per the dictionary, is <a href="https://dictionary.cambridge.org/us/dictionary/english/monitoring">&ldquo;to watch and check a situation carefully for a period of time in order to discover something about it&rdquo;</a>. It thus follows, then, that security monitoring is the act of protecting computer systems by checking on them in order to reduce systemic risk by identifying to and responding to situations that could result in a loss before the loss (or at least a catastrophic loss) were to occur. Let&rsquo;s thus then see how each of these areas can be interpreted as a version of security monitoring.</p>
+<ul>
+<li>Threat Detection, as I strictly define it for the purpose of this article, is the act of looking for unauthorized access or activity on a computer system.</li>
+<li>Posture Management is the process of identifying when controls that were applied to a system to make it secure have, for some reason or another, been weakened or removed. Here, our security team is looking for events or identifying configurations that would take a system from a secure state to one that is not. A common example is when an S3 bucket is made public.</li>
+<li>Compliance Monitoring has its roots in the requirements of governments or other governing bodies. Compliance Monitoring looks for events that violate those requirements. Often there&rsquo;s an overlap with posture management (e.g. the governing body may say that you should monitoring for weakening of security controls). But there can be monitoring unique to compliance such as stating that all production access should be logged and audited.</li>
+<li>Abuse Detection can vastly overlap with Threat Detection. Abuse is defined as using a system as designed but for purposes that are intended to cause harm. As an example, Threat Detection may look for unauthorized access to an AWS EC2 instance. Whereas Abuse Detection may look to an EC2 instance being used to DDoS a third party.</li>
+<li>Insider Threat has a strong overlap with Threat Detection. What can differ, as we&rsquo;ll cover in more detail earlier, is where requirements come from and how response needs to be handled. Generally, the initial access to a computer system is authroized, but the user has or develops malicious intents. Some teams will often group Insider Threat as a sub-function of Threat Detection, and I do believe that is a reasonable approach for most organizations.</li>
+<li>Vulnerability Management is not often grouped with security monitoring by most professionals. However, if we consider what Vulnerability Monitoring consists of, we can see that it matches the definition. With vulnerability monitoring, we&rsquo;re inspecting our systems for weakness (risks) and taking action (patching) before the risk is realized (vulnerability exploited).</li>
+</ul>
+<h1 id="drivers-and-sources-of-monitoring-requirements">Drivers and Sources of Monitoring Requirements</h1>
+<p>Now that we&rsquo;ve aligned that these 6 operations are all sub-categories of security monitoring, we&rsquo;ll dive into the differences starting with where requirements for these pillars originate from.</p>
+<h2 id="threat-detection">Threat Detection</h2>
+<p>Threat detection is driven by a mix of internal strategies and external intel. More often than not, we&rsquo;ve identified some indicator that can be used to determine unauthorized access. Internally, one way that can be accomplished is by analyzing system behavior to determine, for example, an application allowlist. Other sources of indicators can include:</p>
+<ul>
+<li>Threat Intelligence Reports: We&rsquo;re subscribed to various feeds from cybersecurity firms, government agencies, and industry-specific sharing centers.</li>
+<li>Internal Incident History: We learn from our own past incidents.</li>
+<li>Security Research: Sometimes our own team or contractors uncover new threats.</li>
+<li>Emerging Trends: We keep an eye on dark web forums and hacker communities.</li>
+</ul>
+<p>For example, if we get a threat intel report about a new malware targeting our industry, a threat detection team will work to develop and implement new detection rules pronto.</p>
+<h2 id="posture-management">Posture Management</h2>
+<p>Posture management is all about best practices, security frameworks, and risk assessments. We&rsquo;re looking at:</p>
+<ul>
+<li>Security Benchmarks: Organizations like CIS provide guidelines for secure configurations.</li>
+<li>Cloud Provider Guidelines: The big cloud providers offer their own security best practices.</li>
+<li>Internal Security Policies: We develop our own standards based on our unique needs.</li>
+<li>Industry Standards: Frameworks like NIST or ISO 27001 inform our requirements.</li>
+</ul>
+<p>So if CIS puts out a new benchmark for AWS configurations, we&rsquo;re likely going to update our monitoring accordingly.</p>
+<h2 id="compliance-monitoring">Compliance Monitoring</h2>
+<p>Compliance monitoring is driven by legal and regulatory requirements. We&rsquo;re talking about:</p>
+<ul>
+<li>Regulatory Bodies: Government agencies or industry regulators setting standards.</li>
+<li>Legal Requirements: Laws like GDPR, CCPA, or HIPAA.</li>
+<li>Industry Standards: Things like PCI DSS for the payment card industry.</li>
+<li>Contractual Obligations: Sometimes our business agreements require certain standards.</li>
+</ul>
+<p>For instance, a healthcare provider might need to monitor HIPAA compliance for data access and user authentication. Some government orgs require logging and auditing of all production access.</p>
+<h2 id="abuse-detection">Abuse Detection</h2>
+<p>Requirements will be based on the capabilities of our service as well as our terms of acceptable use policies.</p>
+<ul>
+<li>Industry Best Practice: Understand common abuse scenarios like resource hijacking, DoS, hosting inappropriate or malicious content, etc.</li>
+<li>Customer Reports: While not ideal, if a customer reports active abuse, we should work quickly to both prevent and monitor for it.</li>
+<li>Internal Risk Assessment and Threat Modeling: During threat models, ensure to account for how public services could be abused.</li>
+</ul>
+<p>An undesired, but extremely common, scenario for hosting providers is receiving takedown notices from companies saying that someone is abusing their service to illegal host copyrighted or otherwise protected content.</p>
+<h2 id="insider-threat">Insider Threat</h2>
+<p>Insider threat monitoring is driven by organizational risk management and specific incidents or trends:</p>
+<ul>
+<li>Organizational Risk Assessments: We identify critical assets and potential insider risks.</li>
+<li>Historical Incidents: Past insider threats inform our strategies.</li>
+<li>Industry Trends: We learn from insider threats in similar organizations.</li>
+<li>Regulatory Requirements: Some industries have specific requirements for monitoring insider activities.</li>
+</ul>
+<p>For example, a financial institution might need to keep a closer eye on employees with access to sensitive financial data. But we&rsquo;ve got to be careful here – there&rsquo;s a fine line between monitoring and creating bias traps. We need to work closely with HR and legal to avoid issues.</p>
+<h2 id="vulnerability-management">Vulnerability Management</h2>
+<p>Vulnerability management is often reactive to new discoveries and proactive based on regular assessments:</p>
+<ul>
+<li>Vulnerability Databases: We&rsquo;re constantly checking the National Vulnerability Database and CVE list.</li>
+<li>Vendor Security Advisories: We keep an eye on what software and hardware vendors are saying.</li>
+<li>Automated Vulnerability Scanners: We run regular scans of our environment.</li>
+<li>Penetration Testing Results: Findings from our pen tests inform our monitoring.</li>
+<li>Bug Bounty Programs: We learn from what ethical hackers report.</li>
+</ul>
+<p>The Log4j vulnerability is a perfect example of how a new discovery can drive urgent monitoring and patching efforts across the board.</p>
+<h1 id="differences-in-response-strategy-and-ownership">Differences in Response Strategy and Ownership</h1>
+<p>As we move into discussions on the different response strategies, there&rsquo;s a few themes I want to focus on. The first is how important false positives and negatives are. Some types of security monitoring are more tolerant of FP and FN whereas for others, there&rsquo;s more wiggle room.</p>
+<h2 id="threat-detection-1">Threat Detection</h2>
+<p>Threat detection is often seen as the frontline of defense against cyber threats. It focuses on identifying potential security breaches or malicious activities in real-time. Imagine your threat detection tools flagging unusual network traffic from a corporate laptop, indicating the presence of a Remote Access Trojan (RAT). What happens next? The response to a threat detection alert typically resembles a high-stakes fire drill:</p>
+<ol>
+<li>Triage: Quickly assess how severe the threat could be. Is this a false alarm, or do we have a real issue on our hands?</li>
+<li>Investigation: Dive deeper to figure out the nature and scope of the threat. What system is affected? How did the intruder get in? What is their objective?</li>
+<li>Containment: Isolate affected systems to prevent the threat from spreading. This might mean taking a server offline or blocking specific network traffic.</li>
+<li>Eradication: Remove the threat from the environment. This could involve deleting malicious files, disabling compromised accounts, or even rebuilding entire systems.</li>
+<li>Recovery: Get everything back to normal operations. Restore systems from backups, apply security patches, and confirm that the threat is truly gone.</li>
+</ol>
+<p>This process usually involves a dedicated incident response team working around the clock until the threat is neutralized. The goal for incident response is to operate 24/7 with a low mean time to respond (MTTR).</p>
+<p>The tolerance for false positives and negatives in threat detection is extremely low. False positives can overwhelm the team and lead to alert fatigue, while false negatives can result in catastrophic damage to the company. It’s crucial to strike the right balance and continuously refine detection algorithms to maintain effectiveness.</p>
+<h2 id="posture-management-1">Posture Management</h2>
+<p>Posture management shifts the focus from reactive firefighting to proactive defense. It’s all about maintaining the optimal security configuration across your systems and networks. For instance, tools constantly scan your AWS environment, raising alarms if someone accidentally makes a security group too permissive. Here&rsquo;s how the response typically unfolds:</p>
+<ol>
+<li>Notification: Alerts are sent directly to the responsible team (like the cloud infrastructure folks for AWS misconfigurations).</li>
+<li>Assessment: The team evaluates the alert to determine its validity and decide if immediate action is needed. Is this a minor misconfiguration, or does it expose critical data?</li>
+<li>Remediation: Apply the necessary fixes to bring the system back into compliance with security policies. This might involve adjusting firewall rules, updating access permissions, or enforcing encryption standards.</li>
+<li>Verification: Conduct a follow-up scan to ensure the issue has been resolved and no new vulnerabilities have been introduced.</li>
+</ol>
+<p>Posture management is often more of a 9-to-5 operation, unless a critical risk is identified that requires urgent attention. Here, the tolerance for false positives can generally be a bit higher since validation is usually quick and often automated. However, false negatives can be disastrous, especially if they involve exposing sensitive data or critical infrastructure to potential attacks.</p>
+<h2 id="compliance-monitoring-1">Compliance Monitoring</h2>
+<p>Compliance monitoring ensures that your organization adheres to industry standards, government regulations, and internal policies. Let&rsquo;s say an employee installs unauthorized software on their work computer. Here’s how the response might play out:</p>
+<ol>
+<li>Documentation: Log the violation for the inevitable audit. Detailed records are crucial for demonstrating compliance efforts.</li>
+<li>Notification: Inform the employee&rsquo;s manager about the policy violation. This step helps reinforce the importance of following established procedures.</li>
+<li>Education: Provide the employee with a refresher on company policies and the importance of compliance. This could involve additional training sessions or workshops.</li>
+<li>Remediation: Remove the unauthorized software or get it approved through proper channels. Ensure that systems are brought back into compliance with relevant policies.</li>
+<li>Review: Analyze the incident to determine if updates are needed in your policies or monitoring processes to prevent future violations.</li>
+</ol>
+<p>This process often involves collaboration between HR, compliance officers, and management, focusing more on policy enforcement and education rather than technical firefighting.</p>
+<p>False positives and negatives can be tricky to balance here. False positives may require additional work with the compliance team to document and understand, while false negatives could lead to regulatory penalties or loss of certifications, impacting the company&rsquo;s ability to operate. It’s crucial to maintain accurate and comprehensive monitoring to minimize these risks.</p>
+<h2 id="abuse-detection-1">Abuse Detection</h2>
+<p>Responding to abuse detection is a bit different from the other pillars because it often involves external parties and requires a fast response to prevent further harm. Here&rsquo;s how you might handle it:</p>
+<ol>
+<li>Immediate Assessment: As soon as an abuse case is identified, assess the situation to understand the scope and impact. This could mean figuring out if a DoS attack is underway or if someone&rsquo;s using your resources to mine cryptocurrency.</li>
+<li>Containment and Mitigation: Quickly isolate the problem to prevent it from affecting more users or resources. This might involve temporarily suspending the offending account or cutting off network access to the abused resource.</li>
+<li>Notification and Communication: Inform affected parties, whether they are customers, partners, or internal stakeholders, about what’s happening. Transparency is key to maintaining trust, especially if third parties are involved.</li>
+<li>Remediation and Prevention: Remove any abusive elements, like malicious scripts or unauthorized access points. Then, work on fortifying your systems to prevent similar incidents in the future. This might involve tightening up acceptable use policies or enhancing your monitoring systems.</li>
+<li>Legal and Compliance Coordination: Collaborate with your legal and compliance teams to ensure your response is in line with regulatory requirements. In severe cases, legal action against the perpetrators might be necessary.</li>
+</ol>
+<p>False positives for abuse detection can have a similar impact to the team threat detection false positives where sigificant churn and wasted time can occur. False negatives can range in impact from increased spend (say an attacker figu)</p>
+<h2 id="insider-threat-1">Insider Threat</h2>
+<p>Insider threats involve detecting and preventing malicious activities from within your own organization – employees, contractors, or anyone with internal access. Responding to insider threats is a delicate process, as it involves balancing security needs with employee privacy:</p>
+<ol>
+<li>Discreet Investigation: Gather evidence without tipping off the suspect. This might involve monitoring communication channels, reviewing access logs, or analyzing recent activities.</li>
+<li>Risk Assessment: Determine the potential impact of the insider’s actions. Are they stealing sensitive data? Are they trying to sabotage operations?</li>
+<li>Legal Consultation: Ensure compliance with labor laws and company policies. Involving legal advisors early on helps avoid potential legal pitfalls.</li>
+<li>Intervention: Depending on the severity, this could range from a conversation with the employee to involving law enforcement. Handle the situation with care to avoid unnecessary escalation.</li>
+<li>Mitigation: Implement measures to prevent similar incidents in the future. This could involve updating access controls, improving employee training, or enhancing monitoring capabilities.</li>
+</ol>
+<p>This process typically requires close collaboration between HR, legal, and security teams, often with oversight from senior management due to its sensitive nature. It’s essential to maintain a careful balance between security measures and employee trust.</p>
+<h2 id="vulnerability-management-1">Vulnerability Management</h2>
+<p>Vulnerability management is about staying ahead of potential threats by continuously scanning for and assessing security weaknesses. Think back to the Log4j vulnerability from late 2021 – a prime example of why proactive vulnerability management matters. Here&rsquo;s how the response typically goes:</p>
+<ol>
+<li>Assessment: Identify which systems are affected by the vulnerability and evaluate the potential impact. Prioritize based on the severity and exploitability of the vulnerability.</li>
+<li>Prioritization: Rank vulnerabilities according to their risk level. Focus on addressing the most critical vulnerabilities first to reduce potential attack surfaces.</li>
+<li>Patching: Apply the necessary updates or patches to affected systems. This step is crucial for mitigating the risk posed by the vulnerability.</li>
+<li>Verification: Confirm that patches have been successfully applied and that systems are no longer vulnerable to known exploits.</li>
+<li>Monitoring: Continuously watch for any attempts to exploit the vulnerability. This ongoing vigilance helps ensure that your defenses remain effective.</li>
+</ol>
+<p>Vulnerability management often involves collaboration between security teams and system administrators, with timelines varying based on the severity of the vulnerability. Critical vulnerabilities like Log4j may require an all-hands-on-deck response, while less severe issues can be addressed during routine maintenance windows.</p>
+<h2 id="additional-key-differences">Additional Key Differences</h2>
+<h3 id="tooling-and-technology">Tooling and Technology</h3>
+<p>Each pillar has its own tech stack:</p>
+<ul>
+<li>Threat Detection: Usually involves SIEM systems, EDR/XDR tools, network traffic analyzers.</li>
+<li>Posture Management: Cloud security posture management (CSPM) tools, configuration management databases.</li>
+<li>Compliance Monitoring: GRC platforms, policy management tools.</li>
+<li>Vulnerability Management: Vulnerability scanners, patch management systems.</li>
+<li>Insider Threat: User and Entity Behavior Analytics (UEBA) tools, data loss prevention (DLP) solutions.</li>
+</ul>
+<h3 id="skill-sets-and-expertise">Skill Sets and Expertise</h3>
+<p>The people involved in each type of monitoring often have different backgrounds:</p>
+<ul>
+<li>Threat Detection: Incident response specialists, SOC analysts.</li>
+<li>Posture Management: Cloud security experts, system administrators.</li>
+<li>Compliance Monitoring: Compliance officers, auditors, legal experts.</li>
+<li>Vulnerability Management: Security researchers, system administrators.</li>
+<li>Insider Threat: Behavioral analysts, HR professionals, forensic investigators.</li>
+</ul>
+<h3 id="frequency-and-timing">Frequency and Timing</h3>
+<p>The rhythm of monitoring activities varies:</p>
+<ul>
+<li>Threat Detection: It&rsquo;s a 24/7 operation.</li>
+<li>Posture Management: Regular scans, often daily or weekly.</li>
+<li>Compliance Monitoring: Periodic audits and ongoing checks.</li>
+<li>Vulnerability Management: Regular scans and ad-hoc checks for critical vulnerabilities.</li>
+<li>Insider Threat: Ongoing behavioral analysis with periodic reviews.</li>
+</ul>
+<h3 id="metrics-and-kpis">Metrics and KPIs</h3>
+<p>We measure success differently across the pillars:</p>
+<ul>
+<li>Threat Detection: We&rsquo;re looking at mean time to detect (MTTD) and mean time to respond (MTTR).</li>
+<li>Posture Management: Percentage of systems compliant with security baselines.</li>
+<li>Compliance Monitoring: Audit pass rates, number of policy violations.</li>
+<li>Vulnerability Management: How quickly we remediate vulnerabilities, patch coverage.</li>
+<li>Insider Threat: Number of insider incidents detected, time to detect insider threats.</li>
+</ul>
+<h3 id="integration-with-business-processes">Integration with Business Processes</h3>
+<p>Each pillar fits into the broader business in its own way:</p>
+<ul>
+<li>Threat Detection: Closely tied to incident response and business continuity planning.</li>
+<li>Posture Management: Integrated with change management and system deployment processes.</li>
+<li>Compliance Monitoring: Aligned with regulatory reporting and audit processes.</li>
+<li>Vulnerability Management: Integrated with IT operations and software development lifecycles.</li>
+<li>Insider Threat: Closely tied to HR processes, employee onboarding/offboarding, and access management.</li>
+</ul>
+<h2 id="to-soc-or-not-to-soc---that-is-the-question">To SOC or Not To SOC - That is the Question</h2>
+<p>Deciding whether to establish a Security Operations Center (SOC) is a significant decision that can shape your organization&rsquo;s entire approach to cybersecurity. While the idea of having a dedicated team working around the clock to monitor and respond to threats is appealing, the decision should be based on a nuanced understanding of your organization’s unique characteristics and needs. Here&rsquo;s what I&rsquo;d recommend considering as you ponder your organizational structure:</p>
+<h3 id="historical-team-capabilities">Historical Team Capabilities</h3>
+<p>Begin by assessing your current team’s capabilities. Have they historically been able to handle security incidents efficiently? Do they possess the technical skills required to monitor, detect, and respond to threats in real-time? Do you already have a SOC and are deciding to reorg? Are you a new company building your first &ldquo;Blue Team&rdquo;? An organization with a mature and capable security team might find that building out a SOC could amplify their strengths, enabling more robust and effective threat response. Meanwhile, a company with a greenfield security structure may decide to start SOC-less and build an organization around that model.</p>
+<h3 id="organizational-dynamics">Organizational Dynamics</h3>
+<p>Consider how a SOC fits into your organizational structure. Do you have the support from executive leadership and the necessary budget to implement and sustain a SOC? It’s also important to evaluate how a SOC would integrate with existing teams. Will it create silos, or can it facilitate better communication and coordination across departments? Do other teams want to take on the work, and do they have the necessary funding?</p>
+<h3 id="automation-sophistication">Automation Sophistication</h3>
+<p>Evaluate the level of automation in your current security processes. A highly automated environment can reduce the need for a large, traditional SOC by enabling more efficient threat detection and response. Automation tools can handle routine monitoring and alerting, allowing your security team to focus on more complex tasks.</p>
+<h3 id="culture-of-ownership">Culture of Ownership</h3>
+<p>Your organization&rsquo;s culture plays a crucial role in deciding whether a SOC is the right choice. A strong culture of ownership, where teams are empowered and responsible for their security posture, can reduce reliance on a centralized SOC. In such environments, a distributed security model with embedded security champions might be more effective.</p>
+<h3 id="the-decision">The Decision</h3>
+<p>Ultimately, the decision to establish a SOC should be guided by a strategic evaluation of these factors. For some organizations, a SOC provides the necessary focus and resources to stay ahead of threats. For others, leveraging automation and fostering a culture of security ownership might be a better path. The key is to align your security operations with your organization&rsquo;s strengths and needs.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>By recognizing these distinct yet interconnected pillars and their unique characteristics, we can develop more targeted and effective security strategies. Each pillar requires its own set of tools, expertise, and response protocols. Whether you choose to implement a 24/7 SOC team for threat detection or distribute responsibilities across teams, understanding your organizational dynamics and capabilities is key.</p>
+<p>In practice, these pillars work together synergistically. A threat detection alert might trigger a broader vulnerability scan, while a compliance violation could lead to updates in security posture management. By understanding and implementing all pillars of security monitoring, and carefully considering your approach to SOC, we can build a more resilient and adaptive security posture.</p>
+<p>As cyber threats continue to evolve in complexity and scale, maintaining a clear understanding of these distinct yet interconnected monitoring types becomes increasingly crucial. It&rsquo;s not just about having multiple layers of security – it&rsquo;s about having the right layers, working in harmony to provide comprehensive protection.</p>
+<p>In the end, while all security monitoring aims to prevent unauthorized access, the path to achieving this goal is multifaceted. By recognizing and leveraging the unique strengths and response patterns of each pillar, and making informed decisions about your SOC strategy, we can build a more robust, efficient, and effective security strategy. In the ever-changing world of cybersecurity, this nuanced approach isn&rsquo;t just beneficial – it&rsquo;s essential for staying ahead of evolving threats and protecting our critical assets.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/security-monitoring/">security monitoring</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/threat-detection/">threat detection</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="3b80827de48f0a7fcd0d0818cc3dacc9">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/detectionascodematurity/" class="button right"><span>Detection as Code: A Maturity Framework</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/typesofsecuritymonitoring/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2024/monitoring/pillars.webp');">
+    <img src="https://catscrdl.io/static/img/2024/monitoring/pillars.webp" alt="Security Monitoring Pilalrs">
+  </a>
+        <header>
+          <h2><a href="/blog/typesofsecuritymonitoring/">The Pillars of Security Monitoring: A Comprehensive Guide</a></h2>
+          <time class="published" datetime="2024-08-03 00:00:00 &#43;0000 UTC">August 3, 2024</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/detectionascodematurity/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2024/dac/dac_maturity.webp');">
+    <img src="https://catscrdl.io/static/img/2024/dac/dac_maturity.webp" alt="Detection as Code Maturity Improvement">
+  </a>
+        <header>
+          <h2><a href="/blog/detectionascodematurity/">Detection as Code: A Maturity Framework</a></h2>
+          <time class="published" datetime="2024-07-25 00:00:00 &#43;0000 UTC">July 25, 2024</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/thereareonlytworules/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/onlytworules.png');">
+    <img src="https://catscrdl.io/static/img/2023/onlytworules.png" alt="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
+  </a>
+        <header>
+          <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
+          <time class="published" datetime="2023-12-22 00:00:00 &#43;0000 UTC">December 22, 2023</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/buildingresilientsuppressions/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/whackamole.png');">
+    <img src="https://catscrdl.io/static/img/2023/whackamole.png" alt="A Cybersecurity Engineering Playing Whack-a-Mole">
+  </a>
+        <header>
+          <h2><a href="/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></h2>
+          <time class="published" datetime="2023-12-20 00:00:00 &#43;0000 UTC">December 20, 2023</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/howtowriteanactionablealert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/writingrules.jpeg');">
+    <img src="https://catscrdl.io/static/img/2022/writingrules.jpeg" alt="Writing Rules">
+  </a>
+        <header>
+          <h2><a href="/blog/howtowriteanactionablealert/">How to Write an Actionable Alert</a></h2>
+          <time class="published" datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">13</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2024 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

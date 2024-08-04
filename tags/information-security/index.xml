@@ -6,10 +6,19 @@
     <description>Recent content in information security on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Aug 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/tags/information-security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The Pillars of Security Monitoring: A Comprehensive Guide</title>
+      <link>https://catscrdl.io/blog/typesofsecuritymonitoring/</link>
+      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/typesofsecuritymonitoring/</guid>
+      <description>The Pillars of Security Monitoring: A Comprehensive Guide As you may know by now if you&amp;rsquo;ve read a few of my blog articles, I&amp;rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&amp;rsquo;re part of a larger &amp;ldquo;security monitoring&amp;rdquo; capability which consists of related but distinct pillars.</description>
+    </item>
     
     <item>
       <title>Detection as Code: A Maturity Framework</title>
