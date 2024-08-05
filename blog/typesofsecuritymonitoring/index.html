@@ -464,11 +464,28 @@
 <h1 id="to-soc-or-not-to-soc---that-is-the-question">To SOC or Not To SOC - That is the Question</h1>
 <p>Deciding whether to establish a Security Operations Center (SOC) is a significant decision that can shape your organization&rsquo;s entire approach to cybersecurity. While the idea of having a dedicated team working around the clock to monitor and respond to threats is appealing, the decision should be based on a nuanced understanding of your organization’s unique characteristics and needs. Before that, though, let&rsquo;s dive into what I mean and what others can mean by &ldquo;SOCLess&rdquo;.</p>
 <h2 id="socless">SOCLess</h2>
-<p>In my opinion, a SOC (as opposed to a SOCLess) differs in two key aspects:</p>
-<ol>
-<li>Centralized alert notifications and handling</li>
-<li>The presence of L1 analysts for initial alert triage</li>
-</ol>
+<p>In my opinion, a SOC vs SOCLess architecture differs in the following key aspects:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SOC</th>
+<th>SOCLess</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alert Routing</td>
+<td>All security notifications are initially routed to the SOC</td>
+<td>Direct routing of alerts and notifications to the teams that own actioning them</td>
+</tr>
+<tr>
+<td>Initial Triage</td>
+<td>L1 analysts handle the majority of triage and initial response</td>
+<td>Automation handles most of the initial triage and many of the response operations</td>
+</tr>
+</tbody>
+</table>
 <p>Most SOCLess blog posts or references I&rsquo;ve seen refer to the elimination of L1 analysts and replacing it with high fidelity automation, correlation rules, improved prevention, etc. However, SOCs in most companies also serve as a central routing function for security notifications including auditing to ensure alerts are properly actioned. Before you set out on a journey of eliminating a SOC and direct routing security notifications to individuals or teams, ensure that those people are actually setup to directly receive and action those signals.</p>
 <h2 id="historical-team-capabilities">Historical Team Capabilities</h2>
 <p>Begin by assessing your current team’s capabilities. Have they historically been able to handle security incidents efficiently? Do they possess the technical skills required to monitor, detect, and respond to threats in real-time? Do you already have a SOC and are deciding to reorg? Are you a new company building your first &ldquo;Blue Team&rdquo;? An organization with a mature and capable security team might find that building out a SOC could amplify their strengths, enabling more robust and effective threat response. Meanwhile, a company with a greenfield security structure may decide to start SOC-less and build an organization around that model.</p>
