@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model">
+  <meta property="og:description" content="Before you can detect a container escape, you need to understand what&#39;s being escaped. This post covers the Linux isolation primitives that containers rely on, why they break, and how eBPF-based security tools observe those breakdowns at the kernel level.">
+  <meta property="description" content="Before you can detect a container escape, you need to understand what&#39;s being escaped. This post covers the Linux isolation primitives that containers rely on, why they break, and how eBPF-based security tools observe those breakdowns at the kernel level.">
+  <meta property="og:url" content="https://catscrdl.io/blog/containerescapetelemetry/isolation/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+    
+    
+      <p>Before you can detect a container escape, you need to understand what&#39;s being escaped. This post covers the Linux isolation primitives that containers rely on, why they break, and how eBPF-based security tools observe those breakdowns at the kernel level.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>13-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%201%3a%20Isolation%20Primitives%20and%20the%20eBPF%20Observability%20Model" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fisolation%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>This is Part 1 of the container escape telemetry series. The <a href="../containerescapetelemetry/intro">series overview</a> has the project goals, key findings, and reading guide. If you&rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to <a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a>.</p>
+<p>This post is the primer. It covers what containers actually are at the kernel level, what &ldquo;escape&rdquo; means in concrete terms, and how eBPF-based tools get telemetry out of the kernel. That last part matters more than you might think, because the mechanism that delivers telemetry to your security tool has its own failure modes, and an attacker who understands those failure modes can exploit them.</p>
+<h1 id="what-containers-actually-are">What Containers Actually Are</h1>
+<p>Containers are not virtual machines. There&rsquo;s no hardware emulation, no separate kernel. A containerized process is still just a Linux process. It shares the host kernel and is isolated using a combination of kernel features layered on top. As Luca Vallini <a href="https://www.lucavall.in/blog/containers-are-not-a-security-boundary">puts it well</a>, containers were never intended to be a security boundary &ndash; they&rsquo;re a packaging and resource management abstraction. The isolation mechanisms they rely on &ndash; <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a>, <a href="https://man7.org/linux/man-pages/man7/cgroups.7.html">cgroups</a>, and <a href="https://www.man7.org/linux/man-pages/man7/capabilities.7.html">capabilities</a> &ndash; were designed for resource partitioning, not for containing adversarial code.</p>
+<p>That distinction matters for this entire series because every escape technique we&rsquo;ll look at exploits the gap between &ldquo;isolation for convenience&rdquo; and &ldquo;isolation for security.&rdquo;</p>
+<h2 id="namespaces">Namespaces</h2>
+<p>Namespaces are the kernel&rsquo;s <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">isolation primitive</a>. Each namespace type gives a process its own view of a specific system resource. Linux currently supports eight namespace types:</p>
+<ul>
+<li><strong>Mount</strong> &ndash; what filesystems you can see</li>
+<li><strong>PID</strong> &ndash; what process IDs you can see</li>
+<li><strong>Network</strong> &ndash; what network interfaces and routing tables you can see</li>
+<li><strong>UTS</strong> &ndash; what hostname you think you have</li>
+<li><strong>IPC</strong> &ndash; what shared memory and message queues you can access</li>
+<li><strong>User</strong> &ndash; what uid/gid you think you are</li>
+<li><strong>Cgroup</strong> &ndash; what cgroup hierarchy you can see</li>
+<li><strong>Time</strong> &ndash; what the system clock reads</li>
+</ul>
+<p>When you <code>docker run</code> a container, Docker calls <code>clone()</code> with a combination of namespace flags, and the new process gets its own isolated view of each resource.</p>
+<p>Three syscalls dominate escape telemetry: <a href="https://man7.org/linux/man-pages/man2/clone.2.html"><code>clone()</code></a> (create a new process with new namespaces), <a href="https://man7.org/linux/man-pages/man2/unshare.2.html"><code>unshare()</code></a> (move the current process into new namespaces), and <a href="https://man7.org/linux/man-pages/man2/setns.2.html"><code>setns()</code></a> (join an existing namespace). These show up constantly because escaping a container almost always involves either creating new namespaces with elevated privileges or joining the host&rsquo;s namespaces directly.</p>
+<p>Here&rsquo;s what that looks like concretely. When you see <code>setns()</code> called four times in rapid succession from a container-namespaced process targeting PID 1&rsquo;s namespace file descriptors, that&rsquo;s <code>nsenter</code> doing exactly what it&rsquo;s designed to do, and it&rsquo;s almost certainly an escape. The four calls correspond to joining the host&rsquo;s mount, UTS, IPC, and PID namespaces in sequence. Every eBPF-based security tool can observe these calls. The difference between tools is <em>how much context</em> they attach to each observation &ndash; do you get just the syscall name, or do you also get the namespace type flags, the source and target namespace inodes, the calling process&rsquo;s credential set, and its full ancestry chain? That context is what separates a useful detection signal from noise.</p>
+<h2 id="cgroups">Cgroups</h2>
+<p>Cgroups (control groups) handle resource limits and accounting: how much CPU, memory, I/O, and other resources a process can consume. They&rsquo;re organized as a filesystem hierarchy, which is both elegant and the source of one of the oldest container escapes.</p>
+<p>The cgroup v1 <a href="https://docs.kernel.org/admin-guide/cgroup-v1/cgroups.html"><code>release_agent</code> mechanism</a> allows you to specify a program that the <em>host kernel</em> executes when the last process in a cgroup exits. Felix Wilhelm <a href="https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/">demonstrated in 2019</a> that if you can mount the cgroup filesystem from inside a privileged container, write to <code>release_agent</code>, and trigger it, you&rsquo;ve achieved arbitrary code execution on the host. The telemetry signature is a very specific sequence: <code>mount(&quot;cgroup&quot;)</code>, then <code>mkdir</code> (create child cgroup), then <code>write(notify_on_release)</code>, then <code>write(release_agent)</code>, then <code>write(cgroup.procs)</code>. Each step is a separate syscall, and missing any one of them in your telemetry means you either can&rsquo;t detect the escape or you&rsquo;ll generate false positives on the individual operations that are benign in isolation.</p>
+<p><a href="https://docs.kernel.org/admin-guide/cgroup-v2.html">Cgroup v2</a>, which merged the separate v1 hierarchies into a unified tree, removed the <code>release_agent</code> mechanism entirely. But cgroup v1 is still the default on many production systems, and Docker&rsquo;s <code>--privileged</code> flag grants the <code>CAP_SYS_ADMIN</code> capability needed to mount it. Palo Alto&rsquo;s Unit 42 <a href="https://unit42.paloaltonetworks.com/cve-2022-0492-cgroups/">documented CVE-2022-0492</a>, a variant that allowed even unprivileged containers to exploit the same mechanism under certain kernel configurations. This is why we still care about this attack in 2026.</p>
+<h2 id="capabilities">Capabilities</h2>
+<p><a href="https://www.man7.org/linux/man-pages/man7/capabilities.7.html">Linux capabilities</a> break the traditional root/non-root binary into granular permissions. There are currently over 40 distinct capabilities, but <code>CAP_SYS_ADMIN</code> is the big one for container escapes. It&rsquo;s required for mounting filesystems, manipulating namespaces, loading kernel modules, using <code>ptrace</code>, and a long list of other privileged operations. The kernel man page itself <a href="https://lwn.net/Articles/486306/">warns developers</a> that <code>CAP_SYS_ADMIN</code> can &ldquo;plausibly be called the new root&rdquo; because of its scope.</p>
+<p>A properly configured container <a href="https://docs.docker.com/engine/security/seccomp/">drops most capabilities</a>, but &ldquo;privileged&rdquo; containers (the <code>--privileged</code> flag in Docker) get all of them. And even without <code>--privileged</code>, teams frequently over-grant capabilities like <code>CAP_SYS_PTRACE</code>, <code>CAP_NET_RAW</code>, or <code>CAP_SYS_ADMIN</code> individually because their application needs one specific operation and the capability system bundles too many operations together.</p>
+<p>The telemetry around capability checks turns out to be one of the more useful signals for distinguishing exploit activity from normal container behavior. Tetragon&rsquo;s <code>cap_capable</code> kprobe fires every time the kernel evaluates a capability check, with the specific capability name decoded. Tracee&rsquo;s <code>commit_creds</code> event fires when a process&rsquo;s credential structure changes, which is what happens when a kernel exploit overwrites the cred struct to grant itself root. These are different abstraction levels for observing the same underlying phenomenon: something in a container is doing things that require privileges it may or may not legitimately have.</p>
+<h2 id="what-escape-means-in-telemetry-terms">What &ldquo;Escape&rdquo; Means in Telemetry Terms</h2>
+<p>With this framing, a container escape is any action that crosses an isolation boundary: joining the host&rsquo;s namespaces, mounting the host&rsquo;s filesystems, writing to cgroup control files that the host kernel acts on, or exploiting kernel vulnerabilities to corrupt memory and modify credentials. Every escape technique in this research maps to one or more of these boundary violations, and the telemetry each tool generates is fundamentally about observing those violations at the kernel level.</p>
+<p>The question isn&rsquo;t whether an escape happened. It&rsquo;s what kernel-level evidence the escape left behind and whether your tooling captured it.</p>
+<p>But there&rsquo;s a prerequisite to that question that most discussions skip: how does the telemetry get from the kernel to your security tool in the first place? And what happens when that mechanism fails?</p>
+<h1 id="how-ebpf-security-tools-see-the-kernel">How eBPF Security Tools See the Kernel</h1>
+<p>All three tools in this research (Tetragon, Falco, and Tracee) use eBPF to observe kernel activity. eBPF lets you attach small programs to kernel functions, tracepoints, and LSM hooks. When the kernel executes the hooked function, your eBPF program runs, collects whatever data you&rsquo;ve asked for, and writes it to a buffer that a userspace program reads.</p>
+<p>That buffer is the critical infrastructure. Everything your security tool knows about what&rsquo;s happening on the system flows through it. And it has a fundamental constraint: it&rsquo;s finite.</p>
+<h2 id="the-ring-buffer">The Ring Buffer</h2>
+<p>There are two buffer types in use. The older mechanism is the <strong>perf buffer</strong> (<code>BPF_MAP_TYPE_PERF_EVENT_ARRAY</code>), which creates one ring buffer per CPU. The newer mechanism is the <strong><a href="https://nakryiko.com/posts/bpf-ringbuf/">BPF ring buffer</a></strong> (<code>BPF_MAP_TYPE_RINGBUF</code>, introduced in kernel 5.8 by Andrii Nakryiko), which creates a single shared buffer across all CPUs.</p>
+<p>The per-CPU model has a fragmentation problem that Nakryiko <a href="https://docs.kernel.org/bpf/ringbuf.html">identified as a key motivation</a> for the new design. If CPU 0 is handling a burst of syscalls from an escaping container while CPUs 1-3 are idle, CPU 0&rsquo;s buffer can overflow while the other buffers sit empty. The shared ring buffer model solves this by letting any CPU write to the same buffer, so idle capacity on one CPU absorbs bursts from another.</p>
+<p>In the tools we tested:</p>
+<ul>
+<li><strong>Tetragon</strong> uses the BPF ring buffer (shared, 64 MB in our config)</li>
+<li><strong>Falco</strong> (modern_ebpf driver) uses the BPF ring buffer, one per 2 CPUs by default</li>
+<li><strong>Tracee</strong> uses perf buffers (per-CPU, 4 MB per CPU by default)</li>
+</ul>
+<p>This distinction matters under load, and we&rsquo;ll see exactly how much it matters when we get to the syscall flood stress test results later in the series.</p>
+<p><img src="images/ring-buffer.svg" alt="How eBPF events flow from kernel hooks through ring buffers to userspace"></p>
+<h2 id="what-happens-when-the-buffer-is-full">What Happens When the Buffer Is Full</h2>
+<p>Both buffer types default to a <strong>drop-newest</strong> policy in the security tool context. When the buffer is full, new events are silently discarded rather than blocking the kernel. (Perf buffers can technically be configured to overwrite old data, but none of the three tools in this research use that mode &ndash; losing the most recent event is preferable to silently discarding old events that may already be referenced downstream.) The kernel can&rsquo;t block or sleep waiting for userspace to drain the buffer because eBPF programs run in a non-sleepable context.</p>
+<p>This means there&rsquo;s a race condition at the heart of every eBPF security tool: the kernel is writing events into the buffer, and a userspace program is reading them out. If the kernel produces events faster than userspace consumes them, events are lost. The security tool never sees them. There&rsquo;s no retry, no backpressure, no &ldquo;please hold.&rdquo; The events are simply gone.</p>
+<p>Each tool handles this differently:</p>
+<p><strong>Tetragon</strong> increments a BPF-side counter when <code>bpf_ringbuf_output()</code> fails and exposes it via Prometheus metrics (<code>tetragon_ringbuf_perf_event_lost_total</code>). It also logs a periodic summary: <code>received=N lost=N errors=N</code>. In our testing across 15 scenarios, Tetragon reported <code>lost=0</code>.</p>
+<p><strong>Falco</strong> has per-category drop counters. When drops exceed a threshold, it emits an internal alert: &ldquo;Falco internal: syscall event drop. N system calls dropped in last second.&rdquo; Critically, Falco tracks drops <em>per syscall category</em> (e.g., <code>n_drops_buffer_clone_fork_exit</code>, <code>n_drops_buffer_open_enter/exit</code>), which tells you whether the drops are in security-critical categories or just file I/O noise.</p>
+<p><strong>Tracee</strong> logs <code>&quot;Lost %d events&quot;</code> at warn level when its perf buffer consumer detects missed events. With the <code>METRICS=1</code> build flag, it exposes per-event-type submit attempt and failure counts. Tracee also has a separate control-plane buffer for essential process tracking events, added specifically to prevent high-frequency traced events from drowning process lifecycle data.</p>
+<h2 id="why-this-matters-for-detection">Why This Matters for Detection</h2>
+<p>Under normal conditions, none of this matters. In our testing, all three tools reported zero event loss running the 14 sequential scenarios S01-S14 (excluding the S15 stress test, which deliberately induces buffer pressure). The buffer sizes are configured for the common case, and the common case doesn&rsquo;t produce enough events to fill them.</p>
+<p>But the common case isn&rsquo;t what keeps detection engineers up at night. The adversarial case is.</p>
+<p>A container process can generate millions of cheap syscalls per second. <code>getpid()</code> in a tight loop runs at over 8 million calls per second on commodity hardware. <code>openat(&quot;/dev/null&quot;)</code> runs at over 100,000 per second including the overhead of actual file descriptor operations. If any of those syscalls match a hook in your security tool&rsquo;s eBPF program, each one generates an event that enters the buffer.</p>
+<p>An attacker who understands this can deliberately flood syscalls to fill the ring buffer, causing the security tool to drop subsequent events &ndash; including the events from the actual escape happening concurrently in a different container. This maps to MITRE ATT&amp;CK <a href="https://attack.mitre.org/techniques/T1562/001/">T1562.001</a> (Impair Defenses: Disable or Modify Tools) and <a href="https://attack.mitre.org/techniques/T1562/006/">T1562.006</a> (Impair Defenses: Indicator Blocking).</p>
+<p>The defenses against this vary by architecture:</p>
+<p><strong>In-kernel filtering</strong> is the structural mitigation. If an event doesn&rsquo;t match your policy, it never enters the buffer. Tetragon&rsquo;s TracingPolicy model is the strongest example of this: if you haven&rsquo;t written a policy that matches <code>openat</code> on <code>/dev/null</code>, the flood generates exactly zero events. The buffer never sees it.</p>
+<p><strong>Buffer prioritization</strong> is the middle ground. Falco&rsquo;s modern_ebpf driver drops events by category under pressure, prioritizing process lifecycle events (execve, clone/fork) over file operations (open, close). An attacker can drown out file access telemetry, but the tool still sees new processes being spawned &ndash; including the one running <code>nsenter</code>.</p>
+<p><strong>Broad hook coverage without prioritization</strong> is the vulnerability. If your tool hooks <code>security_file_open</code> on all file opens and doesn&rsquo;t prioritize which events survive buffer pressure, a sustained <code>openat</code> flood can push security-critical events out of the buffer. The tool faithfully records millions of <code>/dev/null</code> opens while the concurrent namespace escape disappears into the gap.</p>
+<p>We tested this directly with a dedicated stress-test scenario (S15 in the series), and the results were striking. But the specifics belong in the per-tool analysis. The point for this post is: the buffer mechanism that delivers kernel telemetry to your security tool is not a passive conduit. It&rsquo;s an attack surface. Understanding how it works, and how it fails, is a prerequisite for trusting what your tools tell you.</p>
+<h1 id="what-comes-next">What Comes Next</h1>
+<p>With this foundation, the rest of the series digs into what actually happened when we ran 15 escape scenarios against Tetragon, Falco, and Tracee. <a href="../containerescapetelemetry/methodology">Part 2</a> covers the lab setup, tool architectures, and the full detection coverage matrix. <a href="../containerescapetelemetry/deepdives">Part 3</a> is the per-scenario deep dive: what each tool captured (or missed), why, and what the telemetry actually looks like. <a href="../containerescapetelemetry/production">Part 4</a> covers volume, signal-to-noise, and deployment recommendations. <a href="../containerescapetelemetry/tuning">Part 5</a> covers the practical tuning work: what ships by default, what you have to build yourself, and what breaks along the way. <a href="../containerescapetelemetry/teampcp">Part 6</a> maps the lab findings against TeamPCP, a real threat actor using these exact techniques in the wild right now.</p>
+<p>If you&rsquo;re a detection engineer working in the container security space, you&rsquo;ll get the most value from reading the whole series. But each post is designed to stand on its own. If you already know this material cold, skip to the part that interests you.</p>
+<h1 id="references-and-further-reading">References and Further Reading</h1>
+<h2 id="kernel-documentation">Kernel Documentation</h2>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man7/namespaces.7.html"><code>namespaces(7)</code> man page</a> &ndash; the authoritative reference for Linux namespace types, semantics, and <code>/proc/pid/ns/</code> interface</li>
+<li><a href="https://man7.org/linux/man-pages/man2/clone.2.html"><code>clone(2)</code></a>, <a href="https://man7.org/linux/man-pages/man2/unshare.2.html"><code>unshare(2)</code></a>, <a href="https://man7.org/linux/man-pages/man2/setns.2.html"><code>setns(2)</code></a> &ndash; the three namespace syscalls that dominate escape telemetry</li>
+<li><a href="https://man7.org/linux/man-pages/man7/cgroups.7.html"><code>cgroups(7)</code> man page</a> &ndash; covers both v1 and v2 cgroup hierarchies</li>
+<li><a href="https://docs.kernel.org/admin-guide/cgroup-v1/cgroups.html">Control Group v1 kernel docs</a> &ndash; <code>release_agent</code> and <code>notify_on_release</code> mechanism</li>
+<li><a href="https://docs.kernel.org/admin-guide/cgroup-v2.html">Control Group v2 kernel docs</a> &ndash; the unified hierarchy that removed <code>release_agent</code></li>
+<li><a href="https://www.man7.org/linux/man-pages/man7/capabilities.7.html"><code>capabilities(7)</code> man page</a> &ndash; the full list of Linux capabilities and what each permits</li>
+<li><a href="https://lwn.net/Articles/486306/">CAP_SYS_ADMIN: the new root</a> (LWN.net, 2012) &ndash; Jake Edge&rsquo;s article on the scope creep of <code>CAP_SYS_ADMIN</code></li>
+</ul>
+<h2 id="container-escape-research">Container Escape Research</h2>
+<ul>
+<li><a href="https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/">Understanding Docker container escapes</a> (Trail of Bits, 2019) &ndash; covers Felix Wilhelm&rsquo;s cgroup release_agent PoC</li>
+<li><a href="https://blog.ajxchapman.com/posts/2020/11/19/privileged-container-escape.html">Privileged Container Escape - Control Groups release_agent</a> (Alex Chapman, 2020) &ndash; detailed walkthrough of the release_agent technique</li>
+<li><a href="https://unit42.paloaltonetworks.com/cve-2022-0492-cgroups/">CVE-2022-0492: New Linux Kernel cgroups Vulnerability</a> (Palo Alto Unit 42, 2022) &ndash; the unprivileged cgroup escape variant</li>
+<li><a href="https://www.lucavall.in/blog/containers-are-not-a-security-boundary">Containers Are Not a Security Boundary</a> (Luca Vallini) &ndash; a clear explanation of why container isolation was never designed for adversarial workloads</li>
+<li><a href="https://unit42.paloaltonetworks.com/making-containers-more-isolated-an-overview-of-sandboxed-container-technologies/">Making Containers More Isolated: An Overview of Sandboxed Container Technologies</a> (Palo Alto Unit 42) &ndash; gVisor, Kata Containers, and Firecracker as alternatives when containers aren&rsquo;t enough</li>
+</ul>
+<h2 id="ebpf-and-ring-buffers">eBPF and Ring Buffers</h2>
+<ul>
+<li><a href="https://nakryiko.com/posts/bpf-ringbuf/">Andrii Nakryiko, &ldquo;BPF ring buffer&rdquo;</a> &ndash; the canonical design document for <code>BPF_MAP_TYPE_RINGBUF</code></li>
+<li><a href="https://docs.kernel.org/bpf/ringbuf.html">BPF ring buffer kernel docs</a> &ndash; the official kernel documentation for the ring buffer API</li>
+<li>Brendan Gregg, <em>BPF Performance Tools</em> (Addison-Wesley, 2019) &ndash; the reference on buffer sizing and performance characteristics</li>
+<li><a href="https://falco.org/docs/concepts/event-sources/kernel/dropped-events/">Falco: Understanding Dropped Events</a> &ndash; Falco&rsquo;s documentation on buffer pressure behavior and per-category drop counters</li>
+<li>Rex Guo &amp; Junyuan Zeng, <a href="https://i.blackhat.com/USA21/Wednesday-Handouts/us-21-Phantom-Attack-Evading-System-Call-Monitoring.pdf">&ldquo;Phantom Attack: Evading System Call Monitoring&rdquo;</a> (DEF CON 29, 2021) &ndash; a related but distinct evasion technique (TOCTTOU on syscall arguments)</li>
+</ul>
+<h2 id="docker-security">Docker Security</h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/security/seccomp/">Docker seccomp security profiles</a> &ndash; default seccomp profile and capability dropping behavior</li>
+<li><a href="https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities">Docker runtime privilege and Linux capabilities</a> &ndash; what <code>--privileged</code> actually grants</li>
+</ul>
+<h1 id="llm-disclosure">LLM Disclosure</h1>
+<p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/container-security/">container security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/ebpf/">eBPF</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/runtime-security/">runtime security</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="5846a86d0772dbf3b194f248035a055d">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/containerescapetelemetry/methodology/" class="button right"><span>Container Escape Telemetry, Part 2: Methodology and Tool Architecture</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

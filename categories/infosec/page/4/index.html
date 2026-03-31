@@ -227,26 +227,28 @@
   <header>
   <div class="title">
     
-      <h2><a href="/blog/gettingstartedwithautomation/">Getting Started with Praetorian’s ATT&amp;CK™ Automation</a></h2>
+      <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
     
     
-      <p>We&#39;ve had a couple of people reach out about how to get started with our automation. This is part one of a multipart series where we&#39;ll cover how to get started with our automation. In this post, I show how to get the automation installed, a payload up and running, and executing a basic module.</p>
+      <p>One mental model I&#39;ve maintained for a long time is that there are only two types of detection rules. We&#39;ll cover what those rules are and why this distinction matters.</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-05-10 00:00:00 &#43;0000 UTC">May 10, 2019</time>
+    <time datetime="2023-12-22 00:00:00 &#43;0000 UTC">December 22, 2023</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>1-Minute Read</p>
+    <p>12-Minute Read</p>
   </div>
 </header>
 
   <div class="content">
+    <a href="/blog/thereareonlytworules/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/onlytworules.png');">
+    <img src="https://catscrdl.io/static/img/2023/onlytworules.png" alt="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
+  </a>
     
-    
-    <p>Blog link: <a href="https://www.praetorian.com/blog/getting-started-with-praetorians-attack-automation/">Getting Started with Praetorian&rsquo;s ATT&CK Automation</a></p>
+    <p>In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&rsquo;ll explain how I use one mental model to clearly&hellip;</p>
   </div>
   <footer>
-    <a href="/blog/gettingstartedwithautomation/" class="button big">Read More</a>
+    <a href="/blog/thereareonlytworules/" class="button big">Read More</a>
     <div class="stats">
   
     <ul class="categories">
@@ -261,17 +263,11 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/mitre/">mitre</a></li>
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
         
-          <li><a class="article-terms-link" href="/tags/attck/">att&amp;ck</a></li>
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
         
-          <li><a class="article-terms-link" href="/tags/benchmark/">benchmark</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/attack-emulation/">attack emulation</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/metasploit/">metasploit</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/automation/">automation</a></li>
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
         
       
     </ul>
@@ -286,28 +282,28 @@
   <header>
   <div class="title">
     
-      <h2><a href="/blog/attackbenchmark/">Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</a></h2>
+      <h2><a href="/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></h2>
     
     
-      <p>I wrote a blog post on Praetorian&#39;s website explaining why we chose to benchmark detection and response to MITRE ATT&amp;CK™.</p>
+      <p>When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-05-01 00:00:00 &#43;0000 UTC">May 1, 2019</time>
+    <time datetime="2023-12-20 00:00:00 &#43;0000 UTC">December 20, 2023</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>1-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
   <div class="content">
-    <a href="/blog/attackbenchmark/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/attack-logo-bold.png');">
-    <img src="https://catscrdl.io/static/img/oldblog/attack-logo-bold.png" alt="Wikipedia">
+    <a href="/blog/buildingresilientsuppressions/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/whackamole.png');">
+    <img src="https://catscrdl.io/static/img/2023/whackamole.png" alt="A Cybersecurity Engineering Playing Whack-a-Mole">
   </a>
     
-    <p>Blog link: <a href="https://www.praetorian.com/blog/why-praetorian-benchmarks-to-mitre-attack/">Why Praetorian Benchmarks to MITRE ATT&CK™ and Why You Should Too</a></p>
+    <p>Raise your hand if you&rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&rsquo;s back in your &ldquo;fix&rdquo; queue with another false positive. I&rsquo;d expect almost everyone who&rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&rsquo;t very good and it&rsquo;s alerting on a lot of benign behavior. But sometimes, the answer is that&hellip;</p>
   </div>
   <footer>
-    <a href="/blog/attackbenchmark/" class="button big">Read More</a>
+    <a href="/blog/buildingresilientsuppressions/" class="button big">Read More</a>
     <div class="stats">
   
     <ul class="categories">
@@ -322,13 +318,11 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/mitre/">mitre</a></li>
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
         
-          <li><a class="article-terms-link" href="/tags/attck/">att&amp;ck</a></li>
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
         
-          <li><a class="article-terms-link" href="/tags/benchmark/">benchmark</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/attack-emulation/">attack emulation</a></li>
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
         
       
     </ul>
@@ -343,28 +337,28 @@
   <header>
   <div class="title">
     
-      <h2><a href="/blog/wikipediac2/">Demonstrating the Future of Command and Control with Wikipedia</a></h2>
+      <h2><a href="/blog/howtowriteanactionablealert/">How to Write an Actionable Alert</a></h2>
     
     
-      <p>This tool demonstrates what I believe will be the future of Command and Control (C2) for Red Teams and potentially Advanced Persistent Threats (APTs). With Domain Fronting slowly being killed by major CDNs and security teams getting better at looking for unusual sites (I still love that detection for new sites encrypted with LetsEncrypt certificates), Red Teams will look for alternate ways to hide their traffic. What better way than to utilize features of common sites that users are visiting anyways?</p>
+      <p>Writing a powerful detection is great, but if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.</p>
     
   </div>
   <div class="meta">
-    <time datetime="2019-04-14 00:00:00 &#43;0000 UTC">April 14, 2019</time>
+    <time datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>2-Minute Read</p>
+    <p>11-Minute Read</p>
   </div>
 </header>
 
   <div class="content">
-    <a href="/blog/wikipediac2/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/oldblog/wikipedia.png');">
-    <img src="https://catscrdl.io/static/img/oldblog/wikipedia.png" alt="Wikipedia">
+    <a href="/blog/howtowriteanactionablealert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/writingrules.jpeg');">
+    <img src="https://catscrdl.io/static/img/2022/writingrules.jpeg" alt="Writing Rules">
   </a>
     
-    <p>This work was inspired by my coworker&rsquo;s (<a href="https://twitter.com/Jabra">Josh Abraham</a>) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.</p>
+    <p>&ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&rdquo;</p>
   </div>
   <footer>
-    <a href="/blog/wikipediac2/" class="button big">Read More</a>
+    <a href="/blog/howtowriteanactionablealert/" class="button big">Read More</a>
     <div class="stats">
   
     <ul class="categories">
@@ -379,13 +373,11 @@
     <ul class="tags">
       
         
-          <li><a class="article-terms-link" href="/tags/wikipedia/">wikipedia</a></li>
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
         
-          <li><a class="article-terms-link" href="/tags/c2/">c2</a></li>
+          <li><a class="article-terms-link" href="/tags/information-security/">information security</a></li>
         
-          <li><a class="article-terms-link" href="/tags/domainfronting/">domainfronting</a></li>
-        
-          <li><a class="article-terms-link" href="/tags/mfa/">mfa</a></li>
+          <li><a class="article-terms-link" href="/tags/cyber-security/">cyber security</a></li>
         
       
     </ul>
@@ -414,52 +406,42 @@
       </header>
       
       <article class="mini-post">
-          <a href="/blog/typesofsecuritymonitoring/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2024/monitoring/pillars.webp');">
-    <img src="https://catscrdl.io/static/img/2024/monitoring/pillars.webp" alt="Security Monitoring Pilalrs">
-  </a>
+          
         <header>
-          <h2><a href="/blog/typesofsecuritymonitoring/">The Pillars of Security Monitoring: A Comprehensive Guide</a></h2>
-          <time class="published" datetime="2024-08-03 00:00:00 &#43;0000 UTC">August 3, 2024</time>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
         </header>
       </article>
       
       <article class="mini-post">
-          <a href="/blog/detectionascodematurity/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2024/dac/dac_maturity.webp');">
-    <img src="https://catscrdl.io/static/img/2024/dac/dac_maturity.webp" alt="Detection as Code Maturity Improvement">
-  </a>
+          
         <header>
-          <h2><a href="/blog/detectionascodematurity/">Detection as Code: A Maturity Framework</a></h2>
-          <time class="published" datetime="2024-07-25 00:00:00 &#43;0000 UTC">July 25, 2024</time>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
         </header>
       </article>
       
       <article class="mini-post">
-          <a href="/blog/thereareonlytworules/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/onlytworules.png');">
-    <img src="https://catscrdl.io/static/img/2023/onlytworules.png" alt="A cyber security professional offering a choice between a red pill and a blue pill in a style reminiscent of the Matrix. The scene captures a futuristic and mysterious atmosphere.">
-  </a>
+          
         <header>
-          <h2><a href="/blog/thereareonlytworules/">There are Only Two Rules</a></h2>
-          <time class="published" datetime="2023-12-22 00:00:00 &#43;0000 UTC">December 22, 2023</time>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
         </header>
       </article>
       
       <article class="mini-post">
-          <a href="/blog/buildingresilientsuppressions/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2023/whackamole.png');">
-    <img src="https://catscrdl.io/static/img/2023/whackamole.png" alt="A Cybersecurity Engineering Playing Whack-a-Mole">
-  </a>
+          
         <header>
-          <h2><a href="/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></h2>
-          <time class="published" datetime="2023-12-20 00:00:00 &#43;0000 UTC">December 20, 2023</time>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
         </header>
       </article>
       
       <article class="mini-post">
-          <a href="/blog/howtowriteanactionablealert/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2022/writingrules.jpeg');">
-    <img src="https://catscrdl.io/static/img/2022/writingrules.jpeg" alt="Writing Rules">
-  </a>
+          
         <header>
-          <h2><a href="/blog/howtowriteanactionablealert/">How to Write an Actionable Alert</a></h2>
-          <time class="published" datetime="2022-10-03 00:00:00 &#43;0000 UTC">October 3, 2022</time>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
         </header>
       </article>
       
@@ -482,7 +464,7 @@
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">13</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -558,7 +540,7 @@
       </ul>
   
   <p class="copyright">
-    © 2024 Catscrdl
+    © 2026 Catscrdl
       <br>
     Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
   </p>

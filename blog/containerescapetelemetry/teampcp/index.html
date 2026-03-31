@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted">
+  <meta property="og:description" content="A real threat actor is doing exactly what our lab scenarios simulate. Mapping TeamPCP&#39;s container escape kill chain against Tetragon, Falco, and Tracee telemetry to answer: would these tools have caught it?">
+  <meta property="description" content="A real threat actor is doing exactly what our lab scenarios simulate. Mapping TeamPCP&#39;s container escape kill chain against Tetragon, Falco, and Tracee telemetry to answer: would these tools have caught it?">
+  <meta property="og:url" content="https://catscrdl.io/blog/containerescapetelemetry/teampcp/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/containerescapetelemetry/teampcp/">Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</a></h2>
+    
+    
+      <p>A real threat actor is doing exactly what our lab scenarios simulate. Mapping TeamPCP&#39;s container escape kill chain against Tetragon, Falco, and Tracee telemetry to answer: would these tools have caught it?</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>12-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%206%3a%20TeamPCP%20and%20What%20the%20Lab%20Predicted" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fteampcp%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>This is Part 6 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). Parts <a href="../containerescapetelemetry/isolation">1</a>-<a href="../containerescapetelemetry/tuning">5</a> covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.</p>
+<p>TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored LiteLLM&rsquo;s PyPI package. As of late March 2026, incident response teams across the industry are still assessing the blast radius. But the container escape techniques TeamPCP uses aren&rsquo;t novel &ndash; they&rsquo;re the same patterns our 15 lab scenarios were designed to detect. That&rsquo;s either a validation of the research or a coincidence. Having spent weeks staring at this telemetry, I don&rsquo;t think it&rsquo;s a coincidence.</p>
+<h1 id="who-is-teampcp">Who Is TeamPCP</h1>
+<p>TeamPCP (also tracked as DeadCatx3, PCPcat, ShellForce, and CanisterWorm) emerged in December 2025 as a cloud-native threat actor targeting Docker APIs, Kubernetes clusters, Redis servers, and CI/CD pipelines. Elastic Security Labs published the <a href="https://www.elastic.co/security-labs/canisterworm-cloud-threat">initial CanisterWorm analysis</a> in January 2026. Trivy and Checkmarx tracked the supply chain component through their own incident reports (<a href="https://github.com/aquasecurity/trivy-action/security/advisories/GHSA-m5q5-v7c8-2m28">Trivy GHSA</a>, <a href="https://checkmarx.com/blog/teampcp-supply-chain-attack-march-2026/">Checkmarx advisory</a>). Their operation has two distinct phases that are worth separating because they test different parts of a detection stack.</p>
+<p><strong>Phase 1: CanisterWorm (December 2025 &ndash; ongoing).</strong> A worm that scans for exposed Docker APIs on port 2375, creates privileged containers with the host root filesystem mounted, and propagates via stolen SSH keys. On Kubernetes, it deploys privileged DaemonSets to every node. There&rsquo;s a geopolitical dimension &ndash; Iranian systems get wiped, everyone else gets backdoored &ndash; but from a detection engineering perspective, the container escape techniques are identical regardless of the payload.</p>
+<p><strong>Phase 2: Supply chain campaign (March 2026).</strong> TeamPCP compromised Aqua Security&rsquo;s Trivy vulnerability scanner via a misconfigured <code>pull_request_target</code> GitHub Actions workflow, stole CI/CD secrets, and used those credentials to cascade into Checkmarx KICS and LiteLLM. The LiteLLM compromise is particularly relevant: malicious PyPI packages (versions 1.82.7 and 1.82.8) deployed a three-stage payload that harvested credentials, attempted Kubernetes lateral movement via privileged pod deployment, and installed persistent systemd backdoors. LiteLLM has broad adoption across cloud environments.</p>
+<p>The supply chain initial access is outside the scope of runtime container security tools &ndash; you need CI/CD pipeline integrity controls, package signature verification, and GitHub Actions security hardening for that. But once TeamPCP&rsquo;s payload executes inside a container, every subsequent step is observable at the kernel level. That&rsquo;s where our lab data becomes directly applicable.</p>
+<h1 id="the-kill-chain-mapped-to-lab-telemetry">The Kill Chain, Mapped to Lab Telemetry</h1>
+<p>I&rsquo;m going to walk through TeamPCP&rsquo;s documented techniques and map each one to the specific scenario, tool, and telemetry signal from our research. The question at each step: would our tuned Tetragon, Falco, and Tracee configurations have detected this?</p>
+<h2 id="step-1-docker-api-scan-and-privileged-container-creation">Step 1: Docker API Scan and Privileged Container Creation</h2>
+<p><strong>TeamPCP technique:</strong> Scan the local subnet for exposed Docker APIs on port 2375. When found, create a privileged Alpine container via the API with the host root filesystem mounted at <code>/mnt/host</code>.</p>
+<p><strong>Lab mapping:</strong> This is <strong>S04</strong> (Docker socket mount). Our scenario mounts <code>docker.sock</code> into a container and uses the Docker API to spawn a new container with the host&rsquo;s root filesystem. The vector is different (mounted socket vs. exposed API), but the kernel-level behavior is identical: a process inside a container connects to the Docker daemon and creates a privileged child container.</p>
+<p><strong>What each tool would see:</strong></p>
+<ul>
+<li><strong>Tetragon:</strong> <code>security_socket_connect</code> to the Docker socket, then full process lifecycle telemetry for the new privileged container including all 41 capabilities in the effective set. The namespace metadata would show the new container&rsquo;s namespace inodes, and the <code>is_host: false</code> boolean confirms the request originated from a container, not the host. Our S04 data showed exactly this chain.</li>
+<li><strong>Tracee:</strong> <code>security_socket_connect</code> x5 during the Docker API interaction (our S04 captured this), then <code>sched_process_exec</code> for every process in the new container. The <code>commit_creds</code> event would show the full capability expansion.</li>
+<li><strong>Falco:</strong> This is where it gets interesting. Our S04 testing showed Falco&rsquo;s &ldquo;Docker Socket Access from Container&rdquo; rule only fired on runc init, not the actual in-container abuse. The <code>fd.name</code> path resolution issue through mount namespaces means Falco would likely miss the socket connection from inside the container. The privileged container creation itself would trigger &ldquo;Launch Privileged Container&rdquo; from the default ruleset. So Falco catches the consequence (privileged container appeared) but potentially misses the cause (which container requested it via the API).</li>
+</ul>
+<p><strong>Detection verdict:</strong> Tetragon and Tracee catch the full chain. Falco catches the privileged container creation but may miss the socket-level attribution.</p>
+<h2 id="step-2-host-filesystem-access-via-chroot">Step 2: Host Filesystem Access via chroot</h2>
+<p><strong>TeamPCP technique:</strong> Inside the privileged container, run <code>chroot /mnt/host</code> to pivot into the host&rsquo;s root filesystem. From there, install backdoors, harvest credentials, and establish persistence.</p>
+<p><strong>Lab mapping:</strong> This combines <strong>S05</strong> (host /proc access) and <strong>S13</strong> (privileged post-exploitation). The <code>chroot</code> call itself would be visible to all three tools, but the critical signals are what happens after &ndash; the file accesses on host paths.</p>
+<p><strong>What each tool would see:</strong></p>
+<ul>
+<li><strong>Tetragon:</strong> <code>security_file_open</code> events on every sensitive host file accessed through the chroot. The 04-sensitive-file-access TracingPolicy covers <code>/etc/shadow</code>, <code>/proc/1/root/*</code>, and credential paths. In our S05 test, Tetragon captured <code>file_open on /proc/1/root/*, core_pattern</code> with full namespace context.</li>
+<li><strong>Tracee:</strong> <code>security_file_open</code> with path-filtered events on the same sensitive paths. Our S05 data showed 49 <code>security_file_open</code> events from the container accessing host files.</li>
+<li><strong>Falco:</strong> &ldquo;Sensitive Host File Read&rdquo; would fire on reads to <code>/etc/shadow</code>, <code>/proc/1/root/*</code>, etc. Our S05 data showed 3 alerts with container metadata.</li>
+</ul>
+<p><strong>Detection verdict:</strong> All three tools catch this. The signals are loud and well-covered by default and custom rules alike.</p>
+<h2 id="step-3-ssh-key-harvesting-and-procenviron-reads">Step 3: SSH Key Harvesting and /proc/*/environ Reads</h2>
+<p><strong>TeamPCP technique:</strong> The CanisterWorm parses SSH authentication logs to derive user/IP pairs and harvests local SSH private keys. The LiteLLM payload scans <code>/proc/*/environ</code> across all processes, extracting cloud tokens, API keys, and credentials from environment variables.</p>
+<p><strong>Lab mapping:</strong> This is exactly <strong>S14</strong> (excessive capabilities). Our S14 scenario reads <code>/proc/1/environ</code> with <code>CAP_SYS_PTRACE</code> and <code>--pid=host</code> &ndash; the same technique TeamPCP&rsquo;s LiteLLM payload uses to harvest secrets from process environment variables.</p>
+<p><strong>What each tool would see:</strong></p>
+<ul>
+<li><strong>Tetragon:</strong> <code>security_file_open</code> on <code>/proc/1/environ</code> via the capability-abuse TracingPolicy (07-capability-abuse.yaml). Our S14 data showed these events with full capability sets proving the container had <code>CAP_SYS_PTRACE</code>.</li>
+<li><strong>Tracee:</strong> <code>security_file_open</code> on <code>/proc/1/environ</code> and <code>/proc/1/maps</code>. Our S14 data captured both paths.</li>
+<li><strong>Falco:</strong> &ldquo;Host Process Environ Read from Container&rdquo; (3 alerts in our S14 run) and &ldquo;Host Process Maps Read from Container&rdquo; (3 alerts). These are the custom rules I wrote &ndash; Falco&rsquo;s defaults don&rsquo;t cover this.</li>
+</ul>
+<p><strong>Detection verdict:</strong> All three catch it <em>after tuning</em>. This is the critical point: none of these tools detected <code>/proc/1/environ</code> reads out of the box. Every detection required custom policy additions. TeamPCP&rsquo;s most valuable credential harvesting technique is invisible to default configurations of all three tools.</p>
+<h2 id="step-4-kubernetes-daemonset-deployment">Step 4: Kubernetes DaemonSet Deployment</h2>
+<p><strong>TeamPCP technique:</strong> On Kubernetes, deploy a privileged DaemonSet named <code>host-provisioner-iran</code> in the <code>kube-system</code> namespace. Each node runs an Alpine container named <code>kamikaze</code> with the host root filesystem mounted at <code>/mnt/host</code>.</p>
+<p><strong>Lab mapping:</strong> This is <strong>S13</strong> (privileged post-exploitation) scaled to every node in the cluster. The per-node container behavior is identical to what we tested. The Kubernetes control plane activity (DaemonSet creation in <code>kube-system</code>) is outside the scope of runtime eBPF tools &ndash; you need Kubernetes audit logs for that.</p>
+<p><strong>What each tool would see on each node:</strong></p>
+<ul>
+<li><strong>Tetragon:</strong> 122 mount events (our S13 count) from the privileged container&rsquo;s filesystem operations, <code>sys_keyctl</code> events if the payload enumerates keyrings, <code>security_file_open</code> on <code>/dev/kmsg</code> and other sensitive paths. The namespace metadata on every event confirms container origin.</li>
+<li><strong>Tracee:</strong> 7 mount events with full arguments, <code>commit_creds</code> x18, process lifecycle for every payload binary. Our S13 Tracee data captured all of these.</li>
+<li><strong>Falco:</strong> Keyctl Invocation (504 alerts in our S13 run), Kernel Log Buffer Read, Mount Syscall alerts. Plus the default &ldquo;Launch Privileged Container&rdquo; rule would fire on each node.</li>
+</ul>
+<p><strong>Detection verdict:</strong> All three tools catch the per-node container behavior. But no eBPF-based runtime tool sees the DaemonSet creation itself. That&rsquo;s a Kubernetes audit log signal (<code>create DaemonSet in kube-system from non-system service account</code>). This is the gap Elastic&rsquo;s analysis of TeamPCP also identified: effective cloud-native detection requires combining runtime and control-plane data sources.</p>
+<h2 id="step-5-persistence-via-systemd">Step 5: Persistence via systemd</h2>
+<p><strong>TeamPCP technique:</strong> The LiteLLM payload installs a persistent systemd backdoor on the host that polls for additional binaries. CanisterWorm installs itself as a systemd service on non-Iranian nodes.</p>
+<p><strong>Lab mapping:</strong> This goes beyond our scenarios. We tested host filesystem access (S05, S13) but not explicit systemd service installation. The file writes to <code>/etc/systemd/system/</code> would be visible to any tool monitoring sensitive host file writes, but we didn&rsquo;t have a specific policy for systemd unit file creation.</p>
+<p><strong>What each tool would see:</strong></p>
+<ul>
+<li><strong>Tetragon:</strong> Would capture <code>security_file_open</code> on systemd paths if the path filter includes <code>/etc/systemd/</code>. Our current 04-sensitive-file-access policy doesn&rsquo;t cover this path. This is a gap.</li>
+<li><strong>Tracee:</strong> Same &ndash; <code>security_file_open</code> would fire if the path filter includes systemd directories. Our current filter list doesn&rsquo;t.</li>
+<li><strong>Falco:</strong> &ldquo;Write below etc&rdquo; is a default Falco rule that would fire on writes to <code>/etc/systemd/system/</code>. This is one case where Falco&rsquo;s broader default ruleset provides coverage that the more targeted Tetragon and Tracee configurations miss.</li>
+</ul>
+<p><strong>Detection verdict:</strong> Falco catches this by default. Tetragon and Tracee would miss it without adding <code>/etc/systemd/*</code> to their path filters. Adding it is trivial, but the gap exists in our current configuration.</p>
+<h2 id="step-6-c2-via-internet-computer-protocol">Step 6: C2 via Internet Computer Protocol</h2>
+<p><strong>TeamPCP technique:</strong> CanisterWorm uses an Internet Computer Protocol (ICP) canister for command-and-control. There&rsquo;s no registrar to contact, no hosting provider to subpoena, no single point of failure. The C2 remains operational as long as the ICP blockchain exists.</p>
+<p><strong>Lab mapping:</strong> No direct scenario mapping. Our network monitoring (Tetragon&rsquo;s 05-network-activity policy with <code>tcp_connect</code>/<code>tcp_close</code>) would capture outbound connections from the container, but distinguishing ICP canister traffic from legitimate HTTPS requires network-level analysis beyond what runtime eBPF tools provide.</p>
+<p><strong>Detection verdict:</strong> Runtime tools see the connection. They don&rsquo;t understand the protocol. Network detection (TLS fingerprinting, JA3/JA4 hashes, destination reputation) is the right layer for this signal.</p>
+<h1 id="the-scorecard">The Scorecard</h1>
+<table>
+<thead>
+<tr>
+<th>TeamPCP Technique</th>
+<th>S-Mapping</th>
+<th>Tetragon</th>
+<th>Falco</th>
+<th>Tracee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker API scan + privileged container</td>
+<td>S04, S13</td>
+<td>Full chain</td>
+<td>Partial (misses socket attribution)</td>
+<td>Full chain</td>
+</tr>
+<tr>
+<td>Host filesystem via chroot /mnt/host</td>
+<td>S05, S13</td>
+<td>Detected</td>
+<td>Detected</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>/proc/*/environ credential harvest</td>
+<td>S14</td>
+<td>Detected (custom policy)</td>
+<td>Detected (custom rule)</td>
+<td>Detected (custom policy)</td>
+</tr>
+<tr>
+<td>SSH key harvesting from host</td>
+<td>S05</td>
+<td>Detected</td>
+<td>Detected</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>K8s DaemonSet in kube-system</td>
+<td>&ndash;</td>
+<td>Not visible (K8s audit log)</td>
+<td>Not visible (K8s audit log)</td>
+<td>Not visible (K8s audit log)</td>
+</tr>
+<tr>
+<td>systemd persistence on host</td>
+<td>&ndash;</td>
+<td>Gap (path filter needed)</td>
+<td>Detected (default rule)</td>
+<td>Gap (path filter needed)</td>
+</tr>
+<tr>
+<td>ICP canister C2</td>
+<td>&ndash;</td>
+<td>Connection visible, protocol opaque</td>
+<td>Connection visible, protocol opaque</td>
+<td>Connection visible, protocol opaque</td>
+</tr>
+</tbody>
+</table>
+<p>Out of TeamPCP&rsquo;s seven documented techniques, a tuned three-tool stack catches five at the runtime level. The Kubernetes control plane activity and the C2 protocol identification require different detection layers.</p>
+<h1 id="what-this-validates">What This Validates</h1>
+<h2 id="s13s14-were-the-right-scenarios-to-add">S13/S14 Were the Right Scenarios to Add</h2>
+<p>These two scenarios were added in response to peer review feedback: &ldquo;I would have loved if one of your scenarios was taking a privileged container that isn&rsquo;t a straight breakout.&rdquo; TeamPCP&rsquo;s entire CanisterWorm operation is exactly this &ndash; privileged containers abusing their capabilities without namespace escape. The <code>mount /dev/sda1</code>, <code>chroot /mnt/host</code>, and <code>/proc/*/environ</code> harvesting patterns we tested in S13/S14 are the same patterns TeamPCP uses in production. The fact that no tool detected <code>/proc/1/environ</code> reads by default, and all three required custom policies, is directly validated by TeamPCP making this their primary credential harvesting technique.</p>
+<h2 id="default-configurations-are-insufficient-for-real-threats">Default Configurations Are Insufficient for Real Threats</h2>
+<p>TeamPCP&rsquo;s techniques are not exotic. Docker API scanning, privileged container creation, host filesystem mounting, and environment variable harvesting are well-documented patterns. Yet Falco&rsquo;s default ruleset only covers four of the five runtime-detectable techniques &ndash; &ldquo;Launch Privileged Container&rdquo; catches the container creation, &ldquo;Sensitive Host File Read&rdquo; catches host filesystem access and SSH key harvesting, &ldquo;Write below etc&rdquo; catches systemd persistence, and &ldquo;Docker Socket Access from Container&rdquo; partially catches the API abuse (runc init only, not the source container&rsquo;s socket connect). The <code>/proc/*/environ</code> harvesting &ndash; TeamPCP&rsquo;s primary credential theft technique &ndash; requires a custom rule. Tetragon ships with zero detection policies. Tracee&rsquo;s defaults would miss the <code>/proc/*/environ</code> reads entirely.</p>
+<p>The Falco rule gap finding from <a href="../containerescapetelemetry/production">Part 4</a> &ndash; configuration, not engine &ndash; takes on new urgency when the configuration gap aligns with what a real threat actor is doing right now.</p>
+<h1 id="what-would-have-caught-teampcp-fastest">What Would Have Caught TeamPCP Fastest</h1>
+<p>If I were building a detection stack specifically for TeamPCP&rsquo;s documented TTPs, the minimum set would be:</p>
+<ol>
+<li><strong>Falco with &ldquo;Launch Privileged Container&rdquo; rule</strong> (default) &ndash; catches the privileged container creation on every node, fastest alert</li>
+<li><strong>Tetragon or Tracee with <code>/proc/*/environ</code> path filter</strong> &ndash; catches the credential harvesting that makes lateral movement possible</li>
+<li><strong>Kubernetes audit log monitoring</strong> for DaemonSet/Pod creation in <code>kube-system</code> by non-system identities</li>
+<li><strong>Network monitoring</strong> for outbound connections to ICP canister endpoints (destination reputation)</li>
+</ol>
+<p>The first two are the runtime layer that our research covers. The third and fourth require different tooling. But the runtime signals alone &ndash; privileged container launch plus <code>/proc/*/environ</code> access from within that container &ndash; would have generated alerts within seconds of CanisterWorm executing on a node. Whether those alerts get investigated before the attacker establishes persistence is an operational question, not a detection one.</p>
+<h1 id="why-runtime-telemetry-still-matters">Why Runtime Telemetry Still Matters</h1>
+<p>TeamPCP&rsquo;s supply chain campaign compromised security scanners, AI proxies, and CI/CD pipelines. But the runtime telemetry layer &ndash; what the kernel sees happening inside containers &ndash; operates below all of that. An attacker can poison your dependencies and backdoor your toolchain. But when their payload runs <code>mount /dev/sda1</code> or reads <code>/proc/1/environ</code>, the kernel knows, and a properly tuned eBPF tool will see it. The gap between &ldquo;properly tuned&rdquo; and &ldquo;default configuration&rdquo; is where TeamPCP lives.</p>
+<h1 id="the-series">The Series</h1>
+<p>This is the final post. The full series:</p>
+<ul>
+<li><a href="../containerescapetelemetry/intro">Series Overview</a> &ndash; project goals, key findings, and reading guide</li>
+<li><a href="../containerescapetelemetry/isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a></li>
+<li><a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a></li>
+<li><a href="../containerescapetelemetry/deepdives">Part 3: What Each Tool Actually Captured</a></li>
+<li><a href="../containerescapetelemetry/production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></li>
+<li><a href="../containerescapetelemetry/tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a></li>
+</ul>
+<p>The full scenario scripts, Tetragon policies, Falco rules, and automation harness are available in the <a href="https://github.com/catscrdl/container-escape-telemetry">research repository</a>.</p>
+<h1 id="llm-disclosure">LLM Disclosure</h1>
+<p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/container-security/">container security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/ebpf/">eBPF</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/runtime-security/">runtime security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/threat-intelligence/">threat intelligence</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/teampcp/">TeamPCP</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="c54b95e4f41bb3b0a823a712de40310a">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/containerescapetelemetry/tuning/" class="button left"><span>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</span></a>
+    
+    
+      <a href="/blog/containerescapetelemetry/intro/" class="button right"><span>Container Escape Telemetry: Series Overview</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

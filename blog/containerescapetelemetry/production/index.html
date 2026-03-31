@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool">
+  <meta property="og:description" content="How much telemetry do Tetragon, Falco, and Tracee actually generate? Per-scenario volume breakdowns, signal-to-noise analysis, production rate estimates, the Falco rule gap, S15 stress test results, and recommendations by threat model.">
+  <meta property="description" content="How much telemetry do Tetragon, Falco, and Tracee actually generate? Per-scenario volume breakdowns, signal-to-noise analysis, production rate estimates, the Falco rule gap, S15 stress test results, and recommendations by threat model.">
+  <meta property="og:url" content="https://catscrdl.io/blog/containerescapetelemetry/production/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+    
+    
+      <p>How much telemetry do Tetragon, Falco, and Tracee actually generate? Per-scenario volume breakdowns, signal-to-noise analysis, production rate estimates, the Falco rule gap, S15 stress test results, and recommendations by threat model.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>20-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%204%3a%20Volume%2c%20Signal-to-Noise%2c%20and%20Choosing%20a%20Tool" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fproduction%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>This is Part 4 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab and detection coverage matrix. <a href="../containerescapetelemetry/deepdives">Part 3</a> walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?</p>
+<h1 id="the-volume-question">The Volume Question</h1>
+<p>Parts 2 and 3 focused on what each tool sees. But there&rsquo;s an equally important dimension: how <em>much</em> does each tool generate, and what&rsquo;s the signal-to-noise ratio of that output? If you&rsquo;re going to deploy any of these tools in production, the telemetry volume has direct implications for storage, bandwidth, and whether an analyst can actually find the escape signal in the noise.</p>
+<p><img src="images/event-volume.svg" alt="Total telemetry volume across 15 scenarios: Tetragon 1.2 GB, Falco 36 MB, Tracee 20 MB"></p>
+<h2 id="aggregate-numbers">Aggregate Numbers</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Tetragon</th>
+<th>Falco</th>
+<th>Tracee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total events</td>
+<td>86,275</td>
+<td>10,892</td>
+<td>15,169</td>
+</tr>
+<tr>
+<td>Total data size</td>
+<td>1.2 GB</td>
+<td>36 MB</td>
+<td>~20 MB</td>
+</tr>
+<tr>
+<td>Avg bytes per event</td>
+<td>~14,600</td>
+<td>~3,500</td>
+<td>~1,400</td>
+</tr>
+<tr>
+<td>Events inside scenario windows</td>
+<td>~64,000</td>
+<td>~9,700</td>
+<td>~15,100</td>
+</tr>
+<tr>
+<td>Events outside scenario windows</td>
+<td>~22,300</td>
+<td>~1,200</td>
+<td>~60</td>
+</tr>
+</tbody>
+</table>
+<p>A naive reading says Tetragon is wildly wasteful at 1.2 GB to monitor 15 short-lived scenarios versus Falco&rsquo;s 36 MB and Tracee&rsquo;s ~20 MB. But when you decompose the data size gaps, they factor into two independent architectural decisions: event count and event size. Tetragon generates ~6x more events than Tracee <em>and</em> each event is ~10x larger. Those two multipliers compound into the ~60x difference, and they reflect fundamentally different design philosophies rather than inefficiency. Falco&rsquo;s per-event size (~3,500 bytes) reflects the twelve custom rules and <code>rule_matching=all</code>, which produce richer output fields and multiple rule firings per event.</p>
+<p>The out-of-scenario event count is particularly revealing. Tracee captured only ~60 events outside the scenario windows because its eBPF programs are scoped tightly to container-namespaced processes. Tetragon generated ~22,300, because its baseline policies (particularly <code>cap_capable</code> and <code>wake_up_new_task</code>) plus the capability-abuse kprobes continuously observe kernel-wide behavior. That ambient stream is valuable for baselining but expensive in volume.</p>
+<p><strong>A note on Tracee&rsquo;s numbers:</strong> These reflect a properly scoped <code>security_file_open</code> policy with path prefix filters matching the same sensitive paths as Tetragon&rsquo;s TracingPolicies. Without path filtering, Tracee generates ~3.76M events across all scenarios (dominated by S15&rsquo;s openat flood producing 1.94M <code>security_file_open</code> events) and suffers ~10.1M dropped events, including the S15 nsenter escape. That&rsquo;s a 248x event volume increase from a single policy misconfiguration. The S15 section later in this post covers what happens in detail.</p>
+<h2 id="why-tetragon-events-are-10x-larger">Why Tetragon Events Are ~10x Larger</h2>
+<p>A single Tetragon <code>process_kprobe</code> event averages 14,614 bytes. That&rsquo;s not bloat &ndash; it&rsquo;s the cost of forensic self-sufficiency. Every Tetragon event can be analyzed in complete isolation without correlating against external context. That ~15 KB buys you:</p>
+<ul>
+<li>All 10 Linux namespace inodes with host/container booleans (~400 bytes)</li>
+<li>Full <code>permitted</code> and <code>effective</code> capability arrays listing every capability by name (~800 bytes for a privileged container)</li>
+<li>The complete 8-field credential struct (uid/gid/euid/egid/suid/sgid/fsuid/fsgid)</li>
+<li>Parent process ancestry with binary paths and arguments</li>
+<li>Function-specific kprobe arguments (file paths on <code>do_splice</code>, namespace type flags on <code>setns</code>, filesystem type on <code>mount</code>)</li>
+</ul>
+<p>A Falco event averages 3,881 bytes (higher than defaults due to the twelve custom rules and <code>rule_matching=all</code>): container name, image, container ID, user name, process name, full command line, and rule-specific output fields. Useful for alerting, but no raw namespace inodes and no deep capability context.</p>
+<p>A Tracee event averages 1,403 bytes with a compact structure: two namespace inodes (mount + pid), container metadata, and a typed args array.</p>
+<p>The architectural implication: Tetragon optimizes for forensic self-sufficiency per event, Falco optimizes for alert relevance with minimal overhead, and Tracee optimizes for behavioral breadth with compact events. None of these is the wrong answer. They&rsquo;re different answers to different questions.</p>
+<h2 id="per-scenario-volume">Per-Scenario Volume</h2>
+<p>This is where it gets interesting, because the volume story shifts depending on the escape type.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Tetragon</th>
+<th>Falco</th>
+<th>Tracee</th>
+<th>Most Verbose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S06 Baseline</td>
+<td>1,127</td>
+<td>76</td>
+<td>29</td>
+<td>Tetragon (39x)</td>
+</tr>
+<tr>
+<td>S01 cgroup release_agent</td>
+<td>1,235</td>
+<td>102</td>
+<td>59</td>
+<td>Tetragon (21x)</td>
+</tr>
+<tr>
+<td>S02 CVE-2022-0492</td>
+<td>1,263</td>
+<td>143</td>
+<td>166</td>
+<td>Tetragon (8x)</td>
+</tr>
+<tr>
+<td>S03 nsenter</td>
+<td>571</td>
+<td>114</td>
+<td>90</td>
+<td>Tetragon (6x)</td>
+</tr>
+<tr>
+<td>S04 Docker socket</td>
+<td>1,895</td>
+<td>213</td>
+<td>176</td>
+<td>Tetragon (11x)</td>
+</tr>
+<tr>
+<td>S05 Host /proc</td>
+<td>547</td>
+<td>96</td>
+<td>54</td>
+<td>Tetragon (10x)</td>
+</tr>
+<tr>
+<td>S07 Leaky Vessels</td>
+<td>1,746</td>
+<td>68</td>
+<td>8</td>
+<td>Tetragon (218x)</td>
+</tr>
+<tr>
+<td>S08 DirtyPipe</td>
+<td>3,521</td>
+<td>128</td>
+<td>1,422</td>
+<td>Tetragon (2x)</td>
+</tr>
+<tr>
+<td>S09 fsconfig</td>
+<td>5,711</td>
+<td>81</td>
+<td>2,305</td>
+<td>Tetragon (2x)</td>
+</tr>
+<tr>
+<td>S10 Netfilter</td>
+<td>5,585</td>
+<td>83</td>
+<td>2,305</td>
+<td>Tetragon (2x)</td>
+</tr>
+<tr>
+<td>S11 maskedPaths</td>
+<td>890</td>
+<td>110</td>
+<td>65</td>
+<td>Tetragon (14x)</td>
+</tr>
+<tr>
+<td>S12 runc overwrite</td>
+<td>1,233</td>
+<td>53</td>
+<td>32</td>
+<td>Tetragon (39x)</td>
+</tr>
+<tr>
+<td>S13 <code>--privileged</code> post-exploit</td>
+<td>9,986</td>
+<td>5,623</td>
+<td>7,437</td>
+<td>Tetragon (1.3x)</td>
+</tr>
+<tr>
+<td>S14 Excessive capabilities</td>
+<td>1,045</td>
+<td>611</td>
+<td>920</td>
+<td>Tetragon (1.1x)</td>
+</tr>
+<tr>
+<td>S15 Syscall flood</td>
+<td>15,637</td>
+<td>623</td>
+<td>41</td>
+<td>Tetragon (381x)</td>
+</tr>
+</tbody>
+</table>
+<p>Tetragon dominates every scenario. That&rsquo;s a direct consequence of its always-on kprobe policies. The S06 baseline &ndash; a clean unprivileged container doing nothing suspicious &ndash; still generated 1,127 Tetragon events versus 29 from Tracee. That 39x ratio on a clean container is the clearest measure of Tetragon&rsquo;s observability philosophy: observe everything, filter later.</p>
+<p>S07 (Leaky Vessels) shows this even more starkly: 1,746 Tetragon events versus 8 from Tracee (218x), driven by the capability-abuse policy&rsquo;s <code>sys_mount</code> kprobe firing during container creation. Every <code>mount()</code> syscall during runc init becomes a Tetragon event, even though it&rsquo;s completely benign.</p>
+<p>The CVE exploit scenarios (S08-S10) show the tightest spread. Tracee&rsquo;s behavioral hooks (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) fire heavily during active exploitation, plus the path-filtered <code>security_file_open</code> still generates meaningful volume from the exploit binaries&rsquo; filesystem operations. These scenarios are where all three tools are actually busy doing useful work, rather than recording ambient kernel activity.</p>
+<p>The capability abuse scenarios (S13, S14) are the noisiest for all tools. S13&rsquo;s <code>apt-get install keyutils</code> subprocess tree generated thousands of process lifecycle events across every tool. The difference between tools narrows to nearly 1:1 when the actual workload is complex. Tetragon&rsquo;s 9,986 versus Tracee&rsquo;s 7,437 for S13 is only a 1.3x ratio, compared to the 39x ratio on baseline.</p>
+<p>S15 (syscall flood) is the most instructive comparison. With filtering, Tracee generated just 41 events &ndash; the fewest of any tool &ndash; because the <code>openat</code> flood on <code>/dev/null</code> matched no path filter. Without filtering, Tracee would have generated 1,940,289 events and lost 10.1M more. That&rsquo;s a 47,000x difference from a single policy change, and the strongest evidence that policy tuning isn&rsquo;t optional.</p>
+<h2 id="signal-to-noise">Signal-to-Noise</h2>
+<p>The operational question: what percentage of each tool&rsquo;s output is actually escape-relevant?</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Tetragon</th>
+<th>Falco</th>
+<th>Tracee</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dominant noise source</td>
+<td>cap_capable + sys_mount kprobes (~50%)</td>
+<td>Process lifecycle + runc init (~40%)</td>
+<td>Process lifecycle from subprocess trees (~60%)</td>
+</tr>
+<tr>
+<td>Signal density (escape events/MB)</td>
+<td>~5</td>
+<td>~3</td>
+<td>~80</td>
+</tr>
+</tbody>
+</table>
+<p>Tracee&rsquo;s signal density is the highest at roughly 80 escape-relevant events per megabyte versus Tetragon&rsquo;s ~5 and Falco&rsquo;s ~3. With path-filtered <code>security_file_open</code>, Tracee&rsquo;s output is almost entirely behaviorally relevant events: process exec/exit, namespace transitions, credential changes, and security-sensitive file access. The noise that remains is mostly process lifecycle events from container subprocess trees (apt-get, dpkg, etc.), which is unavoidable for any tool that tracks process creation.</p>
+<p><strong>Critical caveat:</strong> This signal density advantage depends on proper policy tuning. Without path filters on <code>security_file_open</code>, Tracee&rsquo;s signal density collapses &ndash; the unfiltered configuration generated 248x more events, with <code>security_file_open</code> noise accounting for ~98% of total volume. Under adversarial conditions (S15 syscall flood), the unfiltered configuration caused 10.1M dropped events including the escape itself. See the S15 section below.</p>
+<p>Tetragon&rsquo;s low signal density is a deliberate design choice. The <code>cap_capable</code> events that dominate its output serve two purposes: they provide a baseline behavior profile that makes anomaly detection possible (the 13x spike during DirtyPipe), and they capture capability check failures indicating privilege boundary enforcement. The new <code>sys_mount</code> kprobe from the capability-abuse policy also contributes significant volume during container lifecycle events. Disabling or rate-limiting <code>cap_capable</code> in the baseline policy would cut total volume substantially while preserving all escape-specific detection hooks. That&rsquo;s the single highest-impact tuning change for a Tetragon production deployment.</p>
+<p>Falco&rsquo;s signal density dropped compared to its pre-custom-rules configuration because the twelve new rules and <code>rule_matching=all</code> increased total volume while many of the new detections fire on runc initialization noise. Adding <code>not proc.name in (runc, ...)</code> exclusions and dropping the debug lifecycle rules would improve the ratio significantly.</p>
+<h2 id="production-rate-estimates">Production Rate Estimates</h2>
+<p>If you extrapolate the observed rates to a production cluster with moderate container churn:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Estimated Production Rate</th>
+<th>With Tuning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tetragon</td>
+<td>60-120 MB/hour/node</td>
+<td>10-25 MB/hour (disable baseline cap_capable, rate-limit sys_mount)</td>
+</tr>
+<tr>
+<td>Falco</td>
+<td>3-8 MB/hour/node</td>
+<td>&lt;2 MB/hour (runc exclusions + drop Debug rules)</td>
+</tr>
+<tr>
+<td>Tracee</td>
+<td>5-20 MB/hour/node</td>
+<td>2-8 MB/hour (path-filter security_file_open)</td>
+</tr>
+</tbody>
+</table>
+<p>These are rough estimates from 15 short-lived scenarios, not sustained production measurements. But they give you the right order of magnitude for capacity planning. The volume data makes the architectural tradeoffs concrete and measurable. Tetragon gives you forensically complete events at the cost of storage. Falco gives you rule-driven alerting at moderate overhead. Tracee gives you the best signal-to-noise ratio with compact events, but this depends on proper policy tuning &ndash; without path filtering on <code>security_file_open</code>, volume explodes to 2.6 GB with catastrophic event loss under adversarial conditions.</p>
+<h1 id="the-falco-rule-gap-was-configuration-not-engine">The Falco Rule Gap Was Configuration, Not Engine</h1>
+<p>This might be the most actionable finding from the entire project. Falco&rsquo;s default ruleset detected only 5 of 13 scoreable scenarios (S01-S14, excluding S06 baseline and S15 stress test). But the gaps were entirely configuration-driven, not engine limitations. Every syscall that Tetragon and Tracee used for detection &ndash; <code>splice</code>, <code>fsopen</code>, <code>symlink</code>, <code>setns</code> &ndash; is supported by Falco&rsquo;s event model. The difference is that Tetragon and Tracee ship with CVE-specific hooks and behavioral signatures, while Falco relies on rules that must be authored.</p>
+<p>I wrote twelve custom rules and rule changes, enabled <code>rule_matching=all</code> (so overlapping rules fire on the same event instead of just the first match), and took Falco from 5/13 to 11/13. Scoring note: S04 counts as detected (5/13 baseline) because Falco&rsquo;s default &ldquo;Docker Socket Access from Container&rdquo; rule fired on runc init, even though my custom rule targeting the in-container socket abuse didn&rsquo;t work. S12&rsquo;s custom rule was not validated because the kernel blocked the write before Falco could observe it &ndash; the score counts S12 as missed. S07 is missed by all tools.</p>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add openat2 + open_read/open_write to Docker socket rule</td>
+<td>S04</td>
+<td>Bug fix</td>
+<td>Still missed; fd.name path resolution issue</td>
+</tr>
+<tr>
+<td>New rule: evt.type = splice from container</td>
+<td>S08</td>
+<td>New rule</td>
+<td>Detected (2 CRITICAL alerts)</td>
+</tr>
+<tr>
+<td>New rule: evt.type in (fsconfig, fsopen, fsmount)</td>
+<td>S09</td>
+<td>New rule</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>New rule: AF_NETLINK/SOCK_RAW socket from container</td>
+<td>S10</td>
+<td>New rule</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>New rule: symlink/symlinkat targeting /proc or /sys</td>
+<td>S11</td>
+<td>New rule</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>New rule: open_write on /proc/self/exe</td>
+<td>S12</td>
+<td>New rule</td>
+<td>Not validated (write blocked before Falco observed)</td>
+</tr>
+<tr>
+<td>New rule: Keyctl Invocation from Container</td>
+<td>S13</td>
+<td>New rule</td>
+<td>Detected (504 alerts)</td>
+</tr>
+<tr>
+<td>New rule: Kernel Module Load from Container</td>
+<td>S13</td>
+<td>New rule</td>
+<td>Did not fire (modprobe fails before init_module)</td>
+</tr>
+<tr>
+<td>New rule: BPF Syscall from Container</td>
+<td>S13</td>
+<td>New rule</td>
+<td>Did not fire (S13 reads /proc/kallsyms, not bpf())</td>
+</tr>
+<tr>
+<td>New rule: Kernel Log Buffer Read from Container</td>
+<td>S13</td>
+<td>New rule</td>
+<td>Detected (1 alert for /dev/kmsg)</td>
+</tr>
+<tr>
+<td>New rule: Host Process Environ Read from Container</td>
+<td>S14</td>
+<td>New rule</td>
+<td>Detected (3 alerts for /proc/1/environ)</td>
+</tr>
+<tr>
+<td>New rule: Host Process Maps Read from Container</td>
+<td>S14</td>
+<td>New rule</td>
+<td>Detected (3 alerts for /proc/1/maps)</td>
+</tr>
+</tbody>
+</table>
+<p>A critical lesson from validation: runc itself calls <code>fsopen</code>, <code>fsconfig</code>, <code>symlink</code>, and creates netlink sockets during normal container initialization. All new rules need the exclusion <code>not proc.name in (runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;)</code>. Without this, each container start generates approximately 18 false positive events. If you&rsquo;ve read my post on <a href="https://catscrdl.io/blog/buildingresilientsuppressions/">building resilient suppressions</a>, you know this is exactly the kind of suppression that needs to be well-documented and regularly validated.</p>
+<p>The runc noise problem exists in every tool, not just Falco. Tetragon&rsquo;s <code>cap_capable</code> kprobe and <code>sys_mount</code> kprobe generate roughly half its total volume from routine capability checks and container lifecycle mounts. Tracee&rsquo;s <code>security_file_open</code> accounts for the majority of events when unfiltered, mostly from package managers and compilers. Detection rules that look precise in a lab become noisy the moment they encounter real container lifecycle activity. The gap between &ldquo;rule works&rdquo; and &ldquo;rule is production-ready&rdquo; is where most operational effort goes.</p>
+<p>One YAML syntax pitfall worth noting: Falco&rsquo;s folded scalar (<code>&gt;</code>) syntax for multi-line <code>condition</code> and <code>output</code> fields is fragile. Two of the custom rules initially crashed the entire Falco rules engine because the <code>output: &gt;</code> line ran onto the same line as the end of the <code>condition: &gt;</code> block. Falco rejected the entire custom-rules.yaml and crash-looped 27 times before I caught the error in the container logs. The fix was a single newline. Silent-until-fatal configuration errors are a real operational risk when hand-authoring Falco rules.</p>
+<p>For teams already running Falco, these twelve rule changes close most of the gap without changing infrastructure. That&rsquo;s a meaningful finding.</p>
+<h1 id="s15-syscall-flood-stress-test">S15: Syscall Flood Stress Test</h1>
+<p>Everything up to this point assumes the tools are operating under normal conditions. S15 answers a different question: what happens when an attacker deliberately floods syscalls to overwhelm eBPF ring buffers? This is a realistic evasion technique. Any unprivileged container can call <code>openat(&quot;/dev/null&quot;)</code> in a tight loop at 100,000+ operations per second. If that&rsquo;s sufficient to cause a detection tool to miss a concurrent escape, it&rsquo;s a practical blind spot, not a theoretical one.</p>
+<h2 id="the-test-design">The Test Design</h2>
+<p>Seven phases in two groups:</p>
+<p><strong>Phases 1-3 (unhooked):</strong> <code>getpid()</code> at 1K, 100K, and 1M calls (~8.2M syscalls/sec). None of the three tools hook getpid, so these test whether unhooked syscall floods affect tool stability at all.</p>
+<p><strong>Phases 4-5, 7 (hooked):</strong> <code>openat(/dev/null)</code> at 100K, 1M, and 10M calls (~101K syscalls/sec). All three tools hook openat in some form, generating real ring buffer pressure from events that enter the pipeline.</p>
+<p><strong>Phase 6 (the critical test):</strong> 1M <code>openat()</code> flood running concurrently with an <code>nsenter -t 1 -m -u -i -p</code> escape attempt. The question: can the tool see the escape during the flood?</p>
+<h2 id="results">Results</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>S15 Events</th>
+<th>Events Dropped</th>
+<th>Drop Rate</th>
+<th>nsenter Captured?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tetragon</strong></td>
+<td>15,637</td>
+<td><strong>0</strong></td>
+<td>0%</td>
+<td><strong>Yes</strong> (full chain)</td>
+</tr>
+<tr>
+<td><strong>Falco</strong></td>
+<td>623</td>
+<td>895,813</td>
+<td>~68% at peak</td>
+<td><strong>Yes</strong> (4 nsenter alerts)</td>
+</tr>
+<tr>
+<td><strong>Tracee (filtered)</strong></td>
+<td>41</td>
+<td><strong>0</strong></td>
+<td>0%</td>
+<td><strong>Yes</strong> (exec + 4x setns)</td>
+</tr>
+<tr>
+<td><strong>Tracee (unfiltered)</strong></td>
+<td>1,940,289</td>
+<td>10,127,573</td>
+<td>~84%</td>
+<td><strong>No</strong> (escape events lost)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tetragon lost zero events.</strong> Its in-kernel filtering means events that don&rsquo;t match a TracingPolicy never enter the ring buffer. The openat floods generated only process lifecycle events (exec/exit), not per-syscall events, because no TracingPolicy matched openat on <code>/dev/null</code>. The nsenter escape was captured with full forensic detail: process_exec for the nsenter command, process_kprobe events for the namespace operations, and the complete process tree.</p>
+<p><strong>Falco dropped ~896K events but preserved all security-critical detections.</strong> Its buffer management prioritizes process lifecycle events (execve, clone/fork) over file operation events (open, close). During peak flood, 68% of events were dropped, but <code>execve_exit</code> and <code>clone_fork_exit</code> drops were <strong>zero</strong>. The nsenter escape fired 4 &ldquo;Nsenter Execution in Container&rdquo; alerts. This is a good engineering tradeoff: you lose visibility into <em>which files</em> were accessed during a flood, but you don&rsquo;t miss the attacker spawning nsenter.</p>
+<p><strong>Tracee&rsquo;s result depends entirely on policy configuration.</strong> With <code>security_file_open</code> scoped to sensitive path prefixes, Tracee captured the nsenter escape with zero dropped events: 41 events total including <code>sched_process_exec</code>, 4 <code>setns</code> calls, and 4 <code>switch_task_ns</code> events. The openat flood on <code>/dev/null</code> matched no path filter and generated zero events, so the perf buffer never filled.</p>
+<p>Without path filtering, the outcome was catastrophic: 10.1M events lost (84% loss rate), and the nsenter escape was among the losses. Only 2 events from the escape container survived. The unfiltered <code>security_file_open</code> hook captured 1.94M openat events from the flood, overwhelming the perf buffer and drowning escape-critical events from a different container.</p>
+<h2 id="configuration-vs-architecture">Configuration vs Architecture</h2>
+<p>We ran S15 twice with Tracee: once with <code>security_file_open</code> unfiltered, and once with path prefix filters scoping it to the same sensitive paths that Tetragon monitors. The difference was dramatic: from 10.1M dropped events and a missed escape to zero drops and full capture.</p>
+<p><strong>The configuration argument (in Tracee&rsquo;s favor):</strong> With proper path filtering, Tracee matched Tetragon&rsquo;s S15 outcome &ndash; zero drops, escape captured. The unfiltered policy was a testing oversight, not a Tracee limitation. Any tool will struggle if you hook every file open on a system doing 500K+ openat/sec. The fix is trivial: add path filters.</p>
+<p><strong>The architectural argument (still relevant):</strong> Even with a perfectly tuned policy, Tracee&rsquo;s perf buffer is shared across all event types with no prioritization. An attacker who knows which events Tracee hooks can target any of them. Our filtered policy still enables 30 event types. Removing <code>security_file_open</code> closes the openat vector, but an attacker could flood <code>clone</code>, <code>pipe</code>, <code>dup2</code>, <code>symlink</code>, or any other hooked syscall. The attack surface for buffer flooding is proportional to the number of hooked events, and Tracee&rsquo;s value proposition is broad hook coverage. Tetragon&rsquo;s in-kernel filtering and Falco&rsquo;s per-category buffer prioritization are structural defenses that work regardless of which syscall the attacker floods. Tracee lacks an equivalent mechanism.</p>
+<p><strong>What we validated:</strong> Path-filtering <code>security_file_open</code> reduced Tracee&rsquo;s total events from 3.76M to 15,169 across all 15 scenarios &ndash; a 99.6% reduction &ndash; with zero lost events and no detection regressions. Every escape the unfiltered policy detected, the filtered policy also detected. This is the single highest-impact tuning change for a Tracee deployment.</p>
+<p>The practical takeaway: if you deploy Tracee, audit your policy for unfiltered high-frequency hooks. <code>security_file_open</code> without path filters is the most obvious one, but any event that fires on routine container operations at high rates is a potential flooding target. And if your threat model includes deliberate evasion by sophisticated attackers, Tracee&rsquo;s shared perf buffer without event-type prioritization is a structural limitation that policy tuning can reduce but not eliminate.</p>
+<h1 id="recommendations">Recommendations</h1>
+<p>No detection engineering team is going to deploy all three of these tools. Most teams will pick one, maybe two. The right choice depends on your threat model, your SIEM and log pipeline, and your budget. Here&rsquo;s how I&rsquo;d think about it.</p>
+<h2 id="start-with-the-environment-not-the-tool">Start With the Environment, Not the Tool</h2>
+<p>Before picking a tool, the more important question is: what are you actually running in these containers, and where?</p>
+<p><strong>Trusted first-party code in isolated containers.</strong> If your containers are running your own code, well-isolated from production databases and sensitive infrastructure, a lighter-touch approach works. Falco with its default rules plus a few CVE-specific additions gives you solid coverage for misconfiguration-based escapes and common attack patterns without a heavy telemetry footprint. The primary threat is misconfiguration and lateral movement, not adversarial code execution.</p>
+<p><strong>Untrusted or third-party code with network access to production.</strong> An attacker who escapes a container that can reach your production database is in a fundamentally different position than one who escapes into an isolated build worker. In these environments, Tetragon&rsquo;s enforcement capability (killing exploit processes in-kernel before they complete) and forensic depth become much more valuable. Same for Tracee&rsquo;s behavioral detection &ndash; untrusted code is where you&rsquo;re most likely to encounter novel exploit techniques that don&rsquo;t match known CVE patterns.</p>
+<p><strong>Multi-tenant shared infrastructure.</strong> The highest-risk case. You probably want Tetragon&rsquo;s enforcement capability combined with either Falco or Tracee for complementary detection coverage. You need to both prevent escapes and have multiple detection layers in case one tool&rsquo;s blind spots align with an attacker&rsquo;s technique.</p>
+<h2 id="tool-specific-guidance">Tool-Specific Guidance</h2>
+<p><strong>If you need enforcement and forensic depth, choose Tetragon.</strong> Its kprobe-level argument capture gives you the richest per-event context: file paths on <code>do_splice</code>, namespace type flags on <code>setns</code>, full credential sets on every event. It has in-kernel SIGKILL enforcement for killing exploit processes mid-syscall. The tradeoff is that you need to invest in TracingPolicy authoring, and the telemetry volume (60-120 MB/hour/node untuned) requires a log pipeline that can handle it. If your SIEM is already sized for high-volume security telemetry, Tetragon is the strongest single-tool choice.</p>
+<p><strong>If you need fast time-to-value and broad coverage, choose Falco.</strong> 400+ community rules, MITRE ATT&amp;CK mapping, and broad integrations (Kubernetes admission webhooks, SIEM forwarding, PagerDuty) make Falco the easiest to deploy and start getting value from immediately. Telemetry volume is low (3-8 MB/hour/node untuned, &lt;2 MB/hour tuned &ndash; the lightest when tuned), which matters if your log budget is constrained. You will need to supplement its default rules with CVE-specific additions like the ones documented here, but the barrier to writing Falco rules is low.</p>
+<p><strong>If you need behavioral detection resilient to exploit variations, choose Tracee.</strong> <code>magic_write</code> and <code>commit_creds</code> operate at a fundamentally different abstraction level than syscall-matching. They detect exploit <em>consequences</em> &ndash; unauthorized page cache modifications, credential struct transitions &ndash; rather than specific syscall sequences. That&rsquo;s the kind of telemetry you want when the next CVE doesn&rsquo;t look like any of the ones you&rsquo;ve written rules for. With proper policy tuning (path-filtered <code>security_file_open</code>), volume drops to 2-8 MB/hour/node &ndash; comparable to Falco&rsquo;s tuned output. However, the S15 stress test results are worth weighing: without policy tuning, Tracee&rsquo;s broad hook coverage makes it vulnerable to adversarial syscall flooding. Tetragon&rsquo;s in-kernel filtering provides the strongest structural guarantees against deliberate evasion.</p>
+<h2 id="minimum-viable-detection-set">Minimum Viable Detection Set</h2>
+<p>Whichever tool you pick, monitor these from container-namespaced processes:</p>
+<ul>
+<li><code>setns()</code> and <code>unshare()</code> with namespace flags</li>
+<li><code>mount()</code> with filesystem type &ldquo;cgroup&rdquo;</li>
+<li>File writes to <code>release_agent</code>/<code>notify_on_release</code>/<code>cgroup.procs</code></li>
+<li>File opens on <code>/proc/1/root/*</code>, <code>/proc/self/exe</code> (write), and <code>docker.sock</code></li>
+<li><code>splice()</code></li>
+<li><code>fsopen()</code>/<code>fsconfig()</code></li>
+<li><code>symlink()</code> targeting /proc paths</li>
+</ul>
+<p>For capability abuse detection, add:</p>
+<ul>
+<li><code>mount()</code> of block devices or <code>proc</code>/<code>tmpfs</code> from containers</li>
+<li>File opens on <code>/proc/1/environ</code> and <code>/proc/1/maps</code></li>
+<li>Raw socket creation (<code>AF_PACKET</code>)</li>
+<li><code>init_module</code>/<code>finit_module</code></li>
+<li><code>keyctl</code> invocations</li>
+</ul>
+<p>This covers all five successful escapes, five of six CVE patterns (S07 Leaky Vessels remains undetectable by observation-based tools), and both capability abuse scenarios from this research.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>The core takeaway from this research is that no single eBPF-based container security tool provides complete escape detection, and the <em>reasons</em> for each tool&rsquo;s blind spots are architecturally instructive. Tetragon&rsquo;s precision requires manual policy authoring per CVE pattern. Tracee&rsquo;s behavioral layer catches exploit consequences that syscall-matching tools miss. Falco&rsquo;s gaps are configuration-driven and fixable, which is actually the most operationally useful finding.</p>
+<p>Think about it the same way we think about allowlist vs denylist detection in any other domain. Tetragon and Falco&rsquo;s per-CVE rules are denylist detections &ndash; they look for specific known-bad patterns. Tracee&rsquo;s <code>magic_write</code> and <code>commit_creds</code> are closer to allowlist thinking because they detect when something violates expected behavior (writes should go through normal permissions, credentials shouldn&rsquo;t change unexpectedly). Whichever tool you pick, understanding both approaches will make your detections stronger.</p>
+<p>Across all 15 scenarios and tens of thousands of events, every tool left gaps that another tool covered. The capability abuse scenarios (S13, S14) reinforced this: tools optimized for detecting namespace boundary violations have weaker coverage for in-namespace capability abuse, which is arguably the more common real-world threat. The S15 stress test added a third dimension: policy tuning isn&rsquo;t optional. An unfiltered Tracee policy turned a zero-drop tool into one that lost 10.1M events and missed the escape entirely. The same tool, with path-filtered <code>security_file_open</code>, captured the escape cleanly. Configuration is the first line of defense against adversarial flooding.</p>
+<p>You&rsquo;re not going to deploy all three. But knowing what your chosen tool misses, why, and what configuration changes can close those gaps &ndash; that&rsquo;s what lets you compensate with other controls.</p>
+<h1 id="future-research">Future Research</h1>
+<p><strong>Performance impact.</strong> Running eBPF-based security tools in production has a cost: CPU overhead, memory consumption, and latency on hooked syscalls. Tetragon&rsquo;s 8 TracingPolicies with 31 kernel function hooks will have a different performance profile than Falco&rsquo;s broader syscall driver or Tracee&rsquo;s 330+ tracepoints. S15 provides some data points on ring buffer behavior under load, but I didn&rsquo;t measure CPU overhead, memory consumption, or syscall latency. If you&rsquo;re evaluating these tools for deployment, performance benchmarking under your actual workload is a separate and necessary exercise.</p>
+<p><strong>Enforcement and prevention.</strong> Some of these tools can do more than observe. Tetragon can kill processes mid-syscall, and commercial platforms built on Tracee and Falco offer policy enforcement. This research focused entirely on what telemetry each tool generates, not on whether it can stop an escape in progress.</p>
+<p><strong>Commercial and paid tools.</strong> This research only covers open-source tools. There&rsquo;s an entire ecosystem of commercial container security platforms (Aqua, Sysdig Secure, Prisma Cloud, among others) that build on these open-source engines or use proprietary collection methods. I didn&rsquo;t test them and can&rsquo;t speak to them.</p>
+<p><strong>False positive rates in production.</strong> The 15 scenarios ran in isolated VMs with controlled workloads. The runc init false positives are a taste of what production looks like, but real environments generate far more noise. Whether a detection signal that works cleanly in a test lab holds up under production noise can only be answered by running it in your environment.</p>
+<h1 id="further-reading">Further Reading</h1>
+<ul>
+<li><a href="https://tetragon.io/docs/concepts/tracing-policy/">Tetragon TracingPolicy Reference</a></li>
+<li><a href="https://falco.org/docs/rules/">Falco Rules Documentation</a></li>
+<li><a href="https://aquasecurity.github.io/tracee/latest/">Tracee Events and Behavioral Signatures</a></li>
+<li><a href="https://snyk.io/blog/cve-2024-21626-runc-process-cwd-container-breakout/">CVE-2024-21626 (Leaky Vessels) Technical Analysis</a></li>
+<li><a href="https://dirtypipe.cm4all.com/">CVE-2022-0847 (DirtyPipe) Writeup</a></li>
+<li><a href="https://catscrdl.io/blog/buildingresilientsuppressions/">Building Resilient Detection Suppressions</a></li>
+</ul>
+<h1 id="llm-disclosure">LLM Disclosure</h1>
+<p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
+<p><a href="../containerescapetelemetry/tuning">Part 5</a> covers the practical tuning side: what each tool ships with by default, what you have to build yourself, every configuration pitfall we hit, and specific tuning recommendations per tool. <a href="../containerescapetelemetry/teampcp">Part 6</a> pressure-tests these findings against TeamPCP, a real threat actor whose kill chain maps directly to our lab scenarios.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/container-security/">container security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/ebpf/">eBPF</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/runtime-security/">runtime security</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="b539ebfe5ff2b63fa3d3d581324f7b12">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/containerescapetelemetry/deepdives/" class="button left"><span>Container Escape Telemetry, Part 3: What Each Tool Actually Captured</span></a>
+    
+    
+      <a href="/blog/containerescapetelemetry/tuning/" class="button right"><span>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

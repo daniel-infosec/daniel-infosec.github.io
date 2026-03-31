@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TeamPCP on Catscrdl</title>
+    <link>https://catscrdl.io/tags/teampcp/</link>
+    <description>Recent content in TeamPCP on Catscrdl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://catscrdl.io/tags/teampcp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</title>
+      <link>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</guid>
+      <description>This is Part 6 of the container escape telemetry series (overview). Parts 1-5 covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.
+TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored LiteLLM&amp;rsquo;s PyPI package. As of late March 2026, incident response teams across the industry are still assessing the blast radius.</description>
+    </item>
+    
+  </channel>
+</rss>

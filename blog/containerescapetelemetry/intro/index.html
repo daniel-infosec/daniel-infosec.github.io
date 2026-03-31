@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Container Escape Telemetry: Series Overview - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Container Escape Telemetry: Series Overview">
+  <meta property="og:description" content="I ran 15 container escape scenarios against Tetragon, Falco, and Tracee to answer a question most detection engineers can&#39;t: what kernel-level telemetry does each tool actually produce when a container escape happens? This is the series overview and key findings.">
+  <meta property="description" content="I ran 15 container escape scenarios against Tetragon, Falco, and Tracee to answer a question most detection engineers can&#39;t: what kernel-level telemetry does each tool actually produce when a container escape happens? This is the series overview and key findings.">
+  <meta property="og:url" content="https://catscrdl.io/blog/containerescapetelemetry/intro/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%3a%20Series%20Overview&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;title=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;title=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;description=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/containerescapetelemetry/intro/">Container Escape Telemetry: Series Overview</a></h2>
+    
+    
+      <p>I ran 15 container escape scenarios against Tetragon, Falco, and Tracee to answer a question most detection engineers can&#39;t: what kernel-level telemetry does each tool actually produce when a container escape happens? This is the series overview and key findings.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>8-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%3a%20Series%20Overview&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;title=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;title=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f&amp;description=Container%20Escape%20Telemetry%3a%20Series%20Overview" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2fintro%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>As a detection engineer, container escapes have always fascinated me. Detections focused on control bypasses can be both extremely difficult to make and extremely valuable when they fire. The challenge is that most discussions about container runtime security focus on <em>whether</em> a tool detected an escape &ndash; a binary yes/no that doesn&rsquo;t tell you much about the underlying telemetry that makes detection possible in the first place.</p>
+<p>There&rsquo;s also a marketing problem. I&rsquo;ve seen vendors demonstrate container escape detection against one or two scenarios &ndash; usually cgroup release_agent or nsenter &ndash; and present that as comprehensive coverage. It isn&rsquo;t. A tool that detects cgroup escapes but misses DirtyPipe, or catches namespace transitions but is blind to capability abuse, provides a false sense of security. You can&rsquo;t evaluate coverage without testing breadth.</p>
+<p>I wanted to understand something more fundamental: what kernel-level telemetry do container escapes actually generate? What syscall patterns, namespace transitions, credential changes, and behavioral signals does each escape technique produce, and how do different eBPF-based tools capture (or fail to capture) those signals?</p>
+<p>To answer that, I built 15 container escape and stress-test scenarios across five distinct attack classes, pointed three eBPF-based detection tools at them from isolated VMs, and analyzed tens of thousands of raw events. This series is the result.</p>
+<p><img src="images/tool-comparison.svg" alt="Tool architecture comparison: how Tetragon, Falco, and Tracee hook into the kernel and process events"></p>
+<h1 id="the-three-tools">The Three Tools</h1>
+<p><strong>Tetragon</strong> (Cilium/Isovalent) defines custom eBPF kprobes via TracingPolicy YAML. Filtering happens in the kernel &ndash; events that don&rsquo;t match a policy never reach userspace. Every event carries 10 namespace inodes, full capability sets, complete credential structs, and process ancestry. You write precision hooks for exactly the kernel functions you care about. The tradeoff: it ships with zero escape-detection policies. You&rsquo;re writing everything from scratch.</p>
+<p><strong>Falco</strong> (Sysdig/CNCF Graduated) ships with 400+ community rules and captures syscalls broadly via its eBPF driver, evaluating rule conditions in userspace. It has the broadest ecosystem: MITRE ATT&amp;CK mappings, Kubernetes admission webhooks, PagerDuty integration. The tradeoff: its default rules only detected 5 of 13 scoreable scenarios (S01-S14, excluding the S06 baseline and S15 stress test). The gaps were all configuration, not engine limitations.</p>
+<p><strong>Tracee</strong> (Aqua Security) attaches to 330+ syscall tracepoints and runs a behavioral signature engine on top. Its standout feature: events like <code>magic_write</code> (fires on page cache corruption regardless of the syscall that caused it) and <code>commit_creds</code> (captures kernel credential struct transitions). These detect exploit <em>consequences</em> rather than specific syscall patterns, making them resilient to exploit variations. The tradeoff: without proper policy tuning, Tracee&rsquo;s broad hook coverage makes it vulnerable to adversarial syscall flooding.</p>
+<h1 id="the-scenarios">The Scenarios</h1>
+<p>Most container escape research tests one or two techniques against one tool and calls it a day. I wanted broader coverage because the interesting findings come from cross-tool comparison &ndash; seeing how three different architectures respond to the same kernel event. But breadth without variety just gives you fifteen versions of the same data point. So the scenarios were designed to cover fundamentally different attack classes, each testing a different aspect of how these tools observe the kernel.</p>
+<p><strong>Misconfiguration escapes (S01-S05)</strong> are the bread and butter: cgroup release_agent, CVE-2022-0492 fallback, nsenter, Docker socket mount, host /proc access. These work on any kernel because they exploit configuration mistakes, not vulnerabilities. They&rsquo;re also the most common real-world escape vector &ndash; most container breakouts in the wild are someone running <code>--privileged</code> or mounting <code>docker.sock</code>, not dropping a kernel zero-day. If a tool can&rsquo;t detect these, it&rsquo;s not ready for production.</p>
+<p><strong>A baseline control (S06)</strong> runs an unprivileged container doing nothing suspicious. This gives us the noise floor &ndash; how much telemetry does each tool generate when nothing is happening? Without this, you can&rsquo;t evaluate signal-to-noise ratios. Tetragon generated 1,127 events from a clean container. Tracee generated 29. That 39x ratio on <em>nothing</em> tells you a lot about each tool&rsquo;s observability philosophy.</p>
+<p><strong>CVE-based patterns (S07-S12)</strong> test whether the tools can detect specific kernel exploits: Leaky Vessels, DirtyPipe (a real exploit on our kernel &ndash; splice actually corrupts the page cache), fsconfig heap overflow, Netfilter OOB write, maskedPaths symlink race, and runc /proc/self/exe overwrite. These matter because CVEs are what drive most detection rule authoring. The question isn&rsquo;t just &ldquo;can the tool see the syscalls&rdquo; but &ldquo;does the tool ship with rules for this CVE, or do you have to write them yourself?&rdquo;</p>
+<p><strong>Capability abuse scenarios (S13-S14)</strong> came from peer review feedback: &ldquo;I would have loved if one of your scenarios was taking a privileged container that isn&rsquo;t a straight breakout.&rdquo; Fair point. S01-S12 all focus on crossing namespace boundaries. But the more common real-world threat is a <code>--privileged</code> container abusing its capabilities without ever escaping &ndash; mounting host block devices, reading <code>/proc/1/environ</code> for secrets, enumerating kernel keyrings. These techniques map directly to what TeamPCP does in production. Tools optimized for detecting namespace violations have weaker coverage here, and that gap matters.</p>
+<p><strong>A stress test (S15)</strong> answers a question the detection scenarios don&rsquo;t: what happens when an attacker floods millions of syscalls per second to overwhelm eBPF ring buffers while simultaneously running an escape? Any unprivileged container can do this &ndash; <code>openat(&quot;/dev/null&quot;)</code> in a tight loop at 100K+ ops/sec is trivial. If that&rsquo;s enough to make a tool miss a concurrent <code>nsenter</code>, it&rsquo;s a practical blind spot.</p>
+<p>Each scenario ran on each tool&rsquo;s dedicated VM (3 GB RAM, 2 vCPUs, Ubuntu 22.04, kernel 5.15.0-91-generic). One tool per VM, no eBPF hook contention. A PowerShell/bash harness automated the full workflow: provision, upload, install, execute with timestamped markers, download results.</p>
+<h1 id="key-findings">Key Findings</h1>
+<p><strong>No single tool provides complete detection.</strong> Every tool left gaps that another tool covered. Tetragon scored 12/13, Tracee 11/13 (12/13 with an additional event enabled), Falco 11/13 (up from 5/13 after custom rules). The one scenario all three missed &ndash; Leaky Vessels (S07) &ndash; is fundamentally undetectable by observation-based tools because the vulnerability is the <em>absence</em> of a syscall (a <code>close()</code> that should have happened but didn&rsquo;t).</p>
+<p><strong>The tools disagree about what matters, and the disagreements are instructive.</strong> Tetragon hooks the exact CVE syscall (precise but CVE-specific). Tracee hooks the exploit consequence (behavioral but broader). Falco hooks what community rules define (accessible but incomplete). For DirtyPipe, Tetragon captured <code>do_splice</code> with file paths. Tracee captured 961 <code>magic_write</code> events &ndash; page cache corruption regardless of mechanism. The next kernel CVE that corrupts the page cache will trigger <code>magic_write</code> even if it uses a completely different syscall chain.</p>
+<p><strong>Configuration is the first line of defense, not architecture.</strong> An unfiltered Tracee policy generated 3.76M events and lost 10.1M more under adversarial syscall flooding (S15), missing the escape entirely. The same tool with path-filtered <code>security_file_open</code> captured the escape with zero drops &ndash; 41 events total during S15 alone, and 15,169 total across all 15 scenarios (a 99.6% reduction from the unfiltered 3.76M). Tetragon&rsquo;s in-kernel filtering and Falco&rsquo;s buffer prioritization provide structural resilience, but Tracee&rsquo;s result proves that proper tuning can close the gap.</p>
+<p><strong>Default configurations are insufficient for real threats.</strong> TeamPCP, a threat actor active right now, uses Docker API scanning, privileged container creation, and <code>/proc/*/environ</code> harvesting &ndash; techniques that map directly to our S04, S13, and S14 scenarios. None of the three tools detected <code>/proc/1/environ</code> reads out of the box. All three could after tuning. The gap between &ldquo;installed&rdquo; and &ldquo;detecting real attacks&rdquo; is where most operational effort goes.</p>
+<p><strong>Falco&rsquo;s gaps are the most actionable finding.</strong> Every syscall Tetragon and Tracee use for detection is supported by Falco&rsquo;s event model. Twelve custom rules took Falco from 5/13 to 11/13. If you&rsquo;re already running Falco, those rules close most of the gap without changing infrastructure.</p>
+<p><strong>Telemetry volume varies by 60x across tools.</strong> Tetragon generated 1.2 GB across 15 scenarios (forensically self-sufficient events averaging ~15 KB each). Tracee generated ~20 MB (compact events, ~1.4 KB each). Falco sat in between at 36 MB. They&rsquo;re not interchangeable &ndash; they answer different questions at different costs.</p>
+<h1 id="the-series">The Series</h1>
+<ul>
+<li><a href="../containerescapetelemetry/isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a> &ndash; what containers are at the kernel level, how eBPF tools get telemetry out of the kernel, and why the delivery mechanism is itself an attack surface</li>
+<li><a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a> &ndash; the lab, the 15 scenarios, tool architectures, and the full detection coverage matrix</li>
+<li><a href="../containerescapetelemetry/deepdives">Part 3: What Each Tool Actually Captured</a> &ndash; per-scenario telemetry breakdowns and six patterns every deployment should monitor</li>
+<li><a href="../containerescapetelemetry/production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a> &ndash; aggregate numbers, production rate estimates, the Falco rule gap, S15 stress test, and recommendations by threat model</li>
+<li><a href="../containerescapetelemetry/tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a> &ndash; what ships by default, what you have to build, and every configuration pitfall we hit</li>
+<li><a href="../containerescapetelemetry/teampcp">Part 6: TeamPCP and What the Lab Predicted</a> &ndash; mapping a real threat actor&rsquo;s kill chain against our lab telemetry</li>
+</ul>
+<p>If you&rsquo;re a detection engineer working in container security, start with Part 1 for the full context or jump to Part 3 for the per-scenario data. If you&rsquo;re evaluating which tool to deploy, Part 4 has the recommendations. If you just installed one of these tools and want to know what to do next, Part 5 is for you.</p>
+<p>The full scenario scripts, Tetragon policies, Falco rules, Tracee policy, and automation harness are available in the <a href="https://github.com/catscrdl/container-escape-telemetry">research repository</a>.</p>
+<h1 id="llm-disclosure">LLM Disclosure</h1>
+<p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/container-security/">container security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/ebpf/">eBPF</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/runtime-security/">runtime security</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="4d8a23e52f32e308fca2c936291394d6">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/containerescapetelemetry/teampcp/" class="button left"><span>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</span></a>
+    
+    
+      <a href="/blog/typesofsecuritymonitoring/" class="button right"><span>The Pillars of Security Monitoring: A Comprehensive Guide</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection">
+  <meta property="og:description" content="What Tetragon, Falco, and Tracee ship with out of the box, what you have to build yourself, and every configuration pitfall we hit along the way. The practical tuning guide for container runtime security tools.">
+  <meta property="description" content="What Tetragon, Falco, and Tracee ship with out of the box, what you have to build yourself, and every configuration pitfall we hit along the way. The practical tuning guide for container runtime security tools.">
+  <meta property="og:url" content="https://catscrdl.io/blog/containerescapetelemetry/tuning/">
+  <meta property="og:type" content="article">
+  
+    <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
+  
+  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+    
+    
+      <p>What Tetragon, Falco, and Tracee ship with out of the box, what you have to build yourself, and every configuration pitfall we hit along the way. The practical tuning guide for container runtime security tools.</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>17-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;title=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f&amp;description=Container%20Escape%20Telemetry%2c%20Part%205%3a%20Tuning%20eBPF%20Tools%20From%20Defaults%20to%20Detection" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fcontainerescapetelemetry%2ftuning%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      
+      <p>This is Part 5 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab and tools. <a href="../containerescapetelemetry/deepdives">Part 3</a> was the per-scenario data. <a href="../containerescapetelemetry/production">Part 4</a> covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.</p>
+<p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
+<h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
+<h2 id="tetragon-powerful-engine-empty-hangar">Tetragon: Powerful Engine, Empty Hangar</h2>
+<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful &ndash; you can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match &ndash; but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
+<p>I wrote 8 TracingPolicy files covering 31 kernel function hooks for this research:</p>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th>What It Hooks</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00-baseline-collection</td>
+<td>cap_capable, wake_up_new_task, security_bprm_check, cgroup_mkdir/rmdir/attach, setuid/setgid/setresuid, dup3</td>
+<td>Ambient kernel behavior baseline. The cap_capable hook alone generated 55.8% of total Tetragon volume.</td>
+</tr>
+<tr>
+<td>01-namespace-changes</td>
+<td>sys_unshare, sys_setns, sys_clone3, security_task_alloc</td>
+<td>Core escape detection. Any setns from container to host namespace is near-certain escape.</td>
+</tr>
+<tr>
+<td>02-cgroup-manipulation</td>
+<td>sys_mount, security_file_open (release_agent, notify_on_release, cgroup.procs)</td>
+<td>S01/S02 cgroup escapes. The mount + write(release_agent) chain is the canonical pattern.</td>
+</tr>
+<tr>
+<td>03-privilege-escalation</td>
+<td>security_bprm_check, cap_capable, sys_ptrace</td>
+<td>Binary execution context and privilege checks during exploitation.</td>
+</tr>
+<tr>
+<td>04-sensitive-file-access</td>
+<td>security_file_open (/proc/1/root/*, /etc/shadow, docker.sock, core_pattern), security_socket_connect</td>
+<td>S04/S05 sensitive path monitoring. Namespace annotations make host-vs-container filtering trivial.</td>
+</tr>
+<tr>
+<td>05-network-activity</td>
+<td>tcp_connect, tcp_close</td>
+<td>Network connection tracking. Lower priority for escape detection but useful for lateral movement.</td>
+</tr>
+<tr>
+<td>06-cve-specific</td>
+<td>do_splice, sys_splice, sys_fsopen, sys_fsconfig, sys_setsockopt, sys_symlinkat, sys_symlink, security_file_open (/proc/self/exe)</td>
+<td>CVE-specific hooks: DirtyPipe (S08), fsconfig (S09), Netfilter (S10), maskedPaths (S11), runc overwrite (S12).</td>
+</tr>
+<tr>
+<td>07-capability-abuse</td>
+<td>sys_mount, sys_finit_module, sys_init_module, sys_bpf, sys_keyctl, security_file_open (/dev/kmsg)</td>
+<td>S13/S14 in-namespace capability abuse. These are the operations a <code>--privileged</code> container can do without ever calling setns.</td>
+</tr>
+</tbody>
+</table>
+<p>Writing these took multiple iterations. The YAML is straightforward once you understand the schema, but choosing <em>which</em> kernel functions to hook and <em>which</em> arguments to filter on requires understanding both the exploit chain and the kernel internals. You&rsquo;re effectively writing eBPF programs through a YAML abstraction layer. That&rsquo;s powerful, but the authoring cost is real.</p>
+<h2 id="falco-broad-coverage-with-gaps">Falco: Broad Coverage With Gaps</h2>
+<p>Falco ships with 400+ community-maintained rules, MITRE ATT&amp;CK mappings, and broad container runtime integration. Out of the box, it detected 5 of 13 scoreable scenarios (S01-S14, excluding S06 baseline and S15 stress test):</p>
+<p><strong>Default rules that fired</strong> (4 rules across 5 detected scenarios; a 5th rule &ndash; &ldquo;Drop and execute new binary&rdquo; &ndash; caught gcc compilation during S08 but not the splice exploit itself, so it doesn&rsquo;t count as detecting DirtyPipe):</p>
+<ul>
+<li>&ldquo;Container Escape via release_agent&rdquo; &ndash; S01, S02</li>
+<li>&ldquo;Namespace Change from Container&rdquo; &ndash; S02, S03</li>
+<li>&ldquo;Docker Socket Access from Container&rdquo; &ndash; S04 (partial: runc init only, not in-container abuse)</li>
+<li>&ldquo;Sensitive Host File Read&rdquo; &ndash; S05</li>
+<li>&ldquo;Drop and execute new binary&rdquo; &ndash; S08 (fired on gcc, not splice &ndash; does not count as detecting DirtyPipe)</li>
+</ul>
+<p><strong>Default rules that didn&rsquo;t exist:</strong></p>
+<ul>
+<li>No splice rule (S08 DirtyPipe)</li>
+<li>No fsconfig/fsopen rule (S09)</li>
+<li>No netfilter/netlink socket rule (S10)</li>
+<li>No symlink-to-proc rule (S11)</li>
+<li>No /proc/self/exe write rule (S12)</li>
+<li>No keyctl, kernel module, BPF, /dev/kmsg, or /proc/*/environ rules (S13, S14)</li>
+</ul>
+<p>The engine supports every one of these syscalls. The gap is rule coverage, not capability. Closing it required 12 custom rules and rule changes, which I covered in detail in <a href="../containerescapetelemetry/production">Part 4</a>.</p>
+<h2 id="tracee-behavioral-depth-configuration-required">Tracee: Behavioral Depth, Configuration Required</h2>
+<p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature &ndash; they detect exploit *consequences* rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
+<p>The policy file I built enables 30 event types:</p>
+<p><strong>Process lifecycle:</strong> <code>sched_process_exec</code>, <code>sched_process_exit</code>, <code>clone</code>, <code>clone3</code></p>
+<p><strong>Namespace operations:</strong> <code>unshare</code>, <code>setns</code>, <code>switch_task_ns</code></p>
+<p><strong>File operations:</strong> <code>security_file_open</code> (with path prefix filters), <code>openat</code> (filtered to <code>/proc/self/exe</code>), <code>symlink</code>, <code>symlinkat</code></p>
+<p><strong>Credential changes:</strong> <code>setuid</code>, <code>setgid</code>, <code>setresuid</code>, <code>setresgid</code>, <code>capset</code>, <code>commit_creds</code></p>
+<p><strong>Network:</strong> <code>security_socket_connect</code>, <code>setsockopt</code></p>
+<p><strong>Cgroup:</strong> <code>cgroup_mkdir</code>, <code>cgroup_rmdir</code>, <code>mount</code></p>
+<p><strong>CVE-specific:</strong> <code>splice</code>, <code>pipe</code>, <code>pipe2</code>, <code>dup</code>, <code>dup2</code>, <code>dup3</code>, <code>ptrace</code></p>
+<p><strong>Behavioral:</strong> <code>magic_write</code></p>
+<p>The migration from CLI flags to policy YAML was necessary because <code>--events</code> doesn&rsquo;t support inline argument filters. You can&rsquo;t do <code>--events openat.args.pathname=/proc/self/exe</code> on the command line; you need a policy YAML file with a <code>filters</code> block under the event entry.</p>
+<h1 id="what-we-had-to-enable-or-customize">What We Had to Enable or Customize</h1>
+<h2 id="tetragon-flags-that-change-everything">Tetragon Flags That Change Everything</h2>
+<pre><code>--enable-process-ns
+--enable-process-cred
+--enable-ancestors base,kprobe,tracepoint
+--rb-size-total 67108864
+--process-cache-size 65536
+</code></pre><p>Each of these is off by default. Here&rsquo;s what you lose without them:</p>
+<p><strong><code>--enable-process-ns</code></strong>: Without this, you lose all 10 namespace inodes on every event. That means you can&rsquo;t distinguish a container process from a host process in your telemetry. You can&rsquo;t filter <code>setns</code> events to only those originating from containers. You can&rsquo;t prove that a <code>security_file_open</code> on <code>/proc/1/environ</code> came from a container namespace. This flag is effectively mandatory for container security use cases. I don&rsquo;t understand why it&rsquo;s off by default.</p>
+<p><strong><code>--enable-process-cred</code></strong>: Without this, no uid/gid/euid/egid/suid/sgid/fsuid/fsgid on any event. No capability sets. You can see that <code>cap_capable</code> fired but not which capability was being checked or what the process&rsquo;s effective set was.</p>
+<p><strong><code>--enable-ancestors</code></strong>: Without this, you get the immediate process only. No parent, no grandparent, no process tree. When an exploit spawns a chain of processes, you need the ancestry to trace it back to the entry point.</p>
+<p><strong><code>--rb-size-total 67108864</code></strong> (64 MB): The default ring buffer size is much smaller. During the S15 stress test, the 64 MB buffer handled all 15 scenarios with zero drops. If you&rsquo;re monitoring production workloads with high container churn, you may need to increase this further. The tradeoff is memory: this is pinned kernel memory that can&rsquo;t be swapped.</p>
+<p><strong><code>--process-cache-size 65536</code></strong>: The process cache maps PIDs to process metadata. The default is smaller. If you see &ldquo;process not found in cache&rdquo; warnings in Tetragon logs, increase this. Each cache miss means an event ships without full process context.</p>
+<h2 id="falco-rule_matchingall">Falco: rule_matching=all</h2>
+<p>This is the single most important Falco configuration change for detection engineering, and discovering it was one of the more frustrating debugging sessions in this project.</p>
+<p>By default, Falco uses <code>rule_matching=first</code>: when multiple rules match the same event, only the first matching rule fires. I discovered this when the &ldquo;Keyctl Invocation from Container&rdquo; rule never fired on S13 despite keyctl clearly executing 504 times. The reason: &ldquo;Drop and execute new binary&rdquo; matched the same <code>execve_exit</code> event first (keyctl was freshly installed by <code>apt-get</code>), and Falco stopped evaluating.</p>
+<p>Setting <code>rule_matching=all</code> makes all matching rules fire on the same event. This is essential if you have overlapping rules at different priority levels. A process that triggers both &ldquo;Drop and execute new binary&rdquo; (WARNING) and &ldquo;Keyctl Invocation from Container&rdquo; (WARNING) should fire both, because they represent different threat signals from the same event.</p>
+<h2 id="tracee-the-data-vs-args-trap">Tracee: The data. vs args. Trap</h2>
+<p>Tracee&rsquo;s policy YAML supports argument filtering under each event&rsquo;s <code>filters</code> block. The syntax looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
+  <span style="color:#66d9ef">filters</span>:
+    - data.pathname=/etc/shadow*
+</code></pre></div><p>The <code>data.</code> prefix is required. An earlier version of Tracee used <code>args.</code> as the prefix. Here&rsquo;s what makes this dangerous: <code>args.pathname=/etc/shadow*</code> passes YAML validation, the policy loads without error, Tracee starts normally, and the filter is <strong>silently ignored at runtime</strong>. Every <code>security_file_open</code> event passes through as if unfiltered.</p>
+<p>I discovered this when Tracee generated 3.76M events instead of the expected ~15K. The policy file looked correct. Tracee reported no errors. The only symptom was a 248x event volume explosion. If I hadn&rsquo;t been comparing against expected numbers, this misconfiguration would have been invisible.</p>
+<p>The <code>--events</code> CLI flag and policy YAML <code>rules</code> block share keyword names but use different filter syntaxes. If you&rsquo;re migrating from CLI to policy YAML (which you should, because CLI flags don&rsquo;t support argument-level filtering), verify your filters are actually working by checking event counts, not just that the container starts.</p>
+<h1 id="configuration-pitfalls">Configuration Pitfalls</h1>
+<p>These are the bugs that cost hours. Every one was silent until it caused a visible failure.</p>
+<h2 id="falco-folded-scalar-yaml-bombs">Falco: Folded Scalar YAML Bombs</h2>
+<p>Falco rules use YAML folded scalars (<code>&gt;</code>) for multi-line <code>condition</code> and <code>output</code> fields. The syntax is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">condition</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    container and evt.type = splice</span>
+<span style="color:#66d9ef">output</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    splice() from container (user=%user.name)</span>
+</code></pre></div><p>If the <code>output: &gt;</code> line ends up on the same line as the last line of the condition block &ndash; which can happen easily during copy-paste editing &ndash; Falco doesn&rsquo;t report a parse error. Instead, it rejects the <strong>entire</strong> custom-rules.yaml file with a <code>LOAD_ERR</code> that appears only in the container log. All custom rules silently fail to load. The default rules still work, so Falco appears healthy.</p>
+<p>I hit this twice in the same file. The first time, I noticed because the splice rule wasn&rsquo;t firing on S08. The second time, Falco crash-looped 27 times before I checked <code>docker logs falco</code> and found the error. The fix was a single newline both times.</p>
+<p><strong>Recommendation:</strong> After any custom rule change, check <code>docker logs falco 2&gt;&amp;1 | grep LOAD_ERR</code> before running scenarios.</p>
+<h2 id="falco-evtdir-deprecation">Falco: evt.dir Deprecation</h2>
+<p>Falco 0.43 deprecated <code>evt.dir = &lt;</code> (the &ldquo;entry&rdquo; direction filter). The field still exists but always evaluates to true. Six of the default rules used <code>evt.dir = &lt;</code> as part of their conditions. After the deprecation, those rules match both entry and exit events, effectively doubling their firing rate and creating false positives.</p>
+<p>There&rsquo;s no warning at rule load time. The only way to discover this is by noticing unexpected event volumes or by reading the changelog. If you&rsquo;re running Falco 0.43+ with rules that use <code>evt.dir</code>, audit them.</p>
+<h2 id="falco-event-file-accumulation">Falco: Event File Accumulation</h2>
+<p>The harness uses <code>touch</code> to create the Falco output file before starting the container. If Falco appends to an existing file (the default behavior with <code>file_output</code>), events from previous runs contaminate your analysis. Between runs, you need to truncate with <code>: &gt; falco-events.json</code>, not just <code>touch</code>.</p>
+<p>This is a lab-specific issue, but the same principle applies in production if you&rsquo;re rotating Falco output files. Stale events in the current file will confuse any analysis pipeline that assumes the file only contains events from the current session.</p>
+<h2 id="tracee---events-doesnt-support-argument-filters">Tracee: &ndash;events Doesn&rsquo;t Support Argument Filters</h2>
+<p>You can&rsquo;t do:</p>
+<pre><code>--events openat.args.pathname=/proc/self/exe
+</code></pre><p>Tracee will silently ignore the filter part and enable <code>openat</code> with no filtering. To get argument-level filtering, you need a policy YAML file. The documentation mentions this, but the error mode is silent acceptance rather than a parse error, so it&rsquo;s easy to miss.</p>
+<h2 id="tetragon-policy-file-timing">Tetragon: Policy File Timing</h2>
+<p>Tetragon loads TracingPolicy YAML files from a directory mounted into the container. The policies must be on disk <em>before</em> the container starts. If you SCP policy files to the VM and start Tetragon in the same script, there&rsquo;s a race condition: the SCP might not complete before <code>docker run</code> reads the policy directory.</p>
+<p>I hit this with <code>07-capability-abuse.yaml</code>. The file was created after the Tetragon container was already running. Tetragon loaded 7 of 8 policies, and the capability abuse hooks were silently missing from the entire S13/S14 run. The only way I caught it was comparing the <code>docker logs tetragon | grep &quot;Added TracingPolicy&quot;</code> count against the number of YAML files on disk.</p>
+<p><strong>Recommendation:</strong> After starting Tetragon, verify the loaded policy count matches the file count:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">policy_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>find /path/to/policies -name <span style="color:#e6db74">&#39;*.yaml&#39;</span> | wc -l<span style="color:#66d9ef">)</span>
+loaded_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker logs tetragon 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -c <span style="color:#e6db74">&#34;Added TracingPolicy with success&#34;</span><span style="color:#66d9ef">)</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$loaded_count<span style="color:#e6db74">&#34;</span> -lt <span style="color:#e6db74">&#34;</span>$policy_count<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    echo <span style="color:#e6db74">&#34;WARNING: </span>$loaded_count<span style="color:#e6db74">/</span>$policy_count<span style="color:#e6db74"> policies loaded&#34;</span>
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><h2 id="the---restartalways--skip-guard-bug">The &ndash;restart=always + Skip Guard Bug</h2>
+<p>This one cost two full re-runs. All three install functions originally had a guard:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> docker ps --format <span style="color:#e6db74">&#39;{{.Names}}&#39;</span> | grep -q <span style="color:#e6db74">&#34;^toolname</span>$<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+    echo <span style="color:#e6db74">&#34;Tool is already running -- skipping reinstall.&#34;</span>
+    <span style="color:#66d9ef">return</span>
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><p>Combined with <code>--restart=always</code> on the container, here&rsquo;s what happened after a VM reboot: Docker auto-restarted the old container with the old configuration. The install function saw the container running and returned early. The new configuration (updated policies, new filters, different flags) was never applied. The scenario ran against the old config.</p>
+<p>The symptom was subtle: event counts and timestamps matched a previous run exactly. Not &ldquo;similar&rdquo; &ndash; identical. The container log&rsquo;s start timestamp was from three hours ago, not from the current run. If I hadn&rsquo;t been comparing timestamps, I&rsquo;d have analyzed stale data and drawn wrong conclusions.</p>
+<p>The fix was removing the skip guard entirely and always recreating:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always recreate -- the container may have been auto-restarted after</span>
+<span style="color:#75715e"># reboot (--restart=always) with a stale config.</span>
+docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
+</code></pre></div><p>This applies to any containerized tool with <code>--restart=always</code> where you expect configuration changes to take effect on restart. The container restart and the configuration update are separate operations, and the skip guard conflates &ldquo;container is running&rdquo; with &ldquo;container is running <em>with the right config</em>.&rdquo;</p>
+<h1 id="false-positives-and-noise-sources">False Positives and Noise Sources</h1>
+<p>Every tool generates noise. Understanding the noise sources is how you tune effectively.</p>
+<h2 id="runc-init-18-false-positives-per-container-start">runc Init: 18 False Positives Per Container Start</h2>
+<p>runc, the OCI runtime that Docker uses to create containers, calls <code>fsopen</code>, <code>fsconfig</code>, <code>symlink</code>, and creates netlink sockets during normal container initialization. These are exactly the syscalls that CVE-specific rules target. Without exclusions, every <code>docker run</code> generates ~18 false positive events across the CVE rules.</p>
+<p>The required Falco exclusion:</p>
+<pre><code>not proc.name in (runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;)
+</code></pre><p>This needs to be on every CVE-specific rule. The four runc process names correspond to different stages of the container creation process &ndash; parent, child, and init. Missing any one of them leaks false positives.</p>
+<p>Tetragon and Tracee have the same problem but handle it differently. Tetragon&rsquo;s namespace metadata lets you filter in post-processing: runc init processes have <code>is_host: true</code> because they&rsquo;re running in the host&rsquo;s namespaces before the container&rsquo;s namespaces are created. Tracee&rsquo;s container scope (<code>scope: container</code> in the policy) filters out most runc init activity, but some events from <code>runc:[2:INIT]</code> still appear because it executes after the container&rsquo;s namespaces are created but before the container&rsquo;s entrypoint runs.</p>
+<h2 id="tetragon-cap_capable-558-of-all-volume">Tetragon cap_capable: 55.8% of All Volume</h2>
+<p>The <code>cap_capable</code> kprobe in the baseline policy fires on every kernel capability check. A single <code>ls</code> command triggers multiple capability checks. An <code>apt-get install</code> triggers thousands. Across all 15 scenarios, <code>cap_capable</code> accounted for 55.8% of total Tetragon event volume.</p>
+<p>The events are genuinely useful &ndash; the 13x spike during DirtyPipe (1,360 vs 103 baseline) is a real anomaly signal. But for production, you have options:</p>
+<ol>
+<li><strong>Remove from baseline policy entirely.</strong> You lose the ambient capability monitoring but cut volume in half. The CVE-specific and capability-abuse policies still catch the important signals.</li>
+<li><strong>Add <code>matchNamespaces</code> to scope it to containers only.</strong> Host-side capability checks (the majority) are filtered in-kernel.</li>
+<li><strong>Rate-limit via a downstream pipeline.</strong> Keep all events but sample or aggregate before storage.</li>
+</ol>
+<h2 id="tracee-security_file_open-the-biggest-knob">Tracee security_file_open: The Biggest Knob</h2>
+<p>Without path filters, <code>security_file_open</code> is the single biggest source of Tracee event volume. During S13, <code>apt-get install keyutils</code> alone generated 12,000+ <code>security_file_open</code> events from the package manager reading every file in the dpkg database. Across all 15 scenarios, unfiltered <code>security_file_open</code> accounted for ~98% of total events.</p>
+<p>Path-prefix filtering reduced total events from 3.76M to 15,169 &ndash; a 99.6% reduction &ndash; with zero detection regressions. The filters I used match the same sensitive paths as Tetragon&rsquo;s TracingPolicies:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
+  <span style="color:#66d9ef">filters</span>:
+    - data.pathname=/etc/shadow*
+    - data.pathname=/proc/<span style="color:#ae81ff">1</span>/*
+    - data.pathname=/proc/self/*
+    - data.pathname=/var/run/docker.sock*
+    - data.pathname=/proc/sys/kernel/core_pattern*
+    - data.pathname=/dev/kmsg*
+    - data.pathname=/dev/sda*
+    - data.pathname=/etc/passwd*
+    <span style="color:#75715e"># ... (full list in the install-tools.sh source)</span>
+</code></pre></div><p>This is not optional for production. Without these filters, Tracee is vulnerable to adversarial openat flooding (S15 demonstrated 10.1M dropped events and a missed escape). With them, Tracee handled the same flood with zero drops.</p>
+<h2 id="falco-drop-and-execute-new-binary">Falco &ldquo;Drop and execute new binary&rdquo;</h2>
+<p>This rule fires on any binary that was written to disk and then executed. It&rsquo;s high-confidence for supply chain attacks (attacker drops a binary and runs it). It&rsquo;s noisy in containers that install packages at runtime: <code>apt-get install keyutils</code> followed by <code>keyctl</code> triggers it, and so does every other freshly-installed package.</p>
+<p>In production, this rule is valuable but needs context-dependent tuning. If your containers never install packages at runtime (immutable images), leave it at CRITICAL. If they do, either suppress it for known package managers or downgrade to INFORMATIONAL for containers with known install-at-runtime patterns.</p>
+<h1 id="tuning-recommendations">Tuning Recommendations</h1>
+<h2 id="tetragon">Tetragon</h2>
+<ol>
+<li><strong>Rate-limit or scope <code>cap_capable</code>.</strong> This is the single highest-impact change. Either add <code>matchNamespaces</code> to restrict to container processes, or remove it from the baseline policy and rely on the CVE-specific and capability-abuse policies for escape detection. Cuts volume by roughly half.</li>
+<li><strong>Tune <code>--rb-size-total</code> based on workload.</strong> 64 MB (67108864 bytes) handled all 15 scenarios including S15&rsquo;s syscall flood with zero drops. For production workloads with higher container churn, consider 128 MB or higher. Monitor <code>received</code> and <code>lost</code> counters in Tetragon&rsquo;s container log.</li>
+<li><strong>Use <code>matchNamespaces</code> in TracingPolicy.</strong> This filters events in-kernel to only processes in specific namespaces, reducing volume without losing detection capability for container-targeted policies.</li>
+<li><strong>Always verify policy load count.</strong> After starting Tetragon, check that the number of &ldquo;Added TracingPolicy with success&rdquo; log lines matches the number of YAML files. Silent policy load failures are the most common source of coverage gaps.</li>
+</ol>
+<h2 id="falco">Falco</h2>
+<ol>
+<li><strong>Set <code>rule_matching=all</code>.</strong> Without this, overlapping rules suppress each other and you&rsquo;ll have invisible detection gaps. The volume increase is modest.</li>
+<li><strong>Add runc exclusions to every custom rule.</strong> Use the full four-process-name exclusion (<code>runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;</code>). Missing any one leaks false positives.</li>
+<li><strong>Drop Debug-priority lifecycle rules in production.</strong> The &ldquo;Container Process Started&rdquo;, &ldquo;Container Process Exited&rdquo;, and &ldquo;Container Process Forked&rdquo; rules I used for research generate significant volume. In production, keep them only if you&rsquo;re feeding a behavioral analytics pipeline.</li>
+<li><strong>Validate custom rules after every change.</strong> Check <code>docker logs falco 2&gt;&amp;1 | grep LOAD_ERR</code> immediately after starting. Folded scalar YAML errors are silent until they crash the entire custom rules file.</li>
+<li><strong>Audit rules using <code>evt.dir</code>.</strong> If you&rsquo;re on Falco 0.43+, <code>evt.dir = &lt;</code> always evaluates true. Remove or replace any rules that depend on directional filtering.</li>
+</ol>
+<h2 id="tracee">Tracee</h2>
+<ol>
+<li><strong>Use policy YAML files, not <code>--events</code> CLI.</strong> CLI flags don&rsquo;t support argument-level filtering. Policy YAML is the only way to get path-prefix filters on <code>security_file_open</code> and pathname filters on <code>openat</code>.</li>
+<li><strong>Filter <code>security_file_open</code> by path prefix.</strong> This is the single most important tuning change. Without it, you&rsquo;re vulnerable to adversarial flooding, you&rsquo;ll generate 248x more events, and you&rsquo;ll lose escape-critical events under load. The path list should match whatever sensitive paths your Tetragon policies or Falco rules target.</li>
+<li><strong>Use <code>data.</code> prefix, never <code>args.</code></strong> in policy YAML filters. <code>args.</code> is silently ignored. There is no error, no warning, and no indication that your filter isn&rsquo;t working. Verify by checking event counts after deployment.</li>
+<li><strong>Scope to container workloads.</strong> The <code>scope: container</code> directive in the policy file limits Tracee&rsquo;s observation to container-namespaced processes. Without it, host-side activity generates events that are irrelevant for container escape detection.</li>
+<li><strong>Add <code>openat</code> with pathname filter for /proc/self/exe.</strong> This captures CVE-2019-5736 write attempts that <code>security_file_open</code> misses because the VFS rejects the open with ETXTBSY before the LSM hook fires. It&rsquo;s a single event addition but closes a real detection gap.</li>
+</ol>
+<h1 id="the-detection-authoring-cost">The Detection Authoring Cost</h1>
+<p>Across all three tools, closing the gap between &ldquo;installed&rdquo; and &ldquo;maximum detection coverage&rdquo; required:</p>
+<ul>
+<li><strong>Tetragon:</strong> 8 TracingPolicy files with 31 kernel function hooks. Multiple iterations debugging YAML schemas and argument types. Total authoring effort was the highest of any tool because you&rsquo;re specifying kernel function signatures.</li>
+<li><strong>Falco:</strong> 12 custom rules and rule changes. Lower per-rule effort than Tetragon (you&rsquo;re writing conditions against event fields, not kernel function signatures), but the YAML syntax pitfalls and the <code>rule_matching</code> discovery added debugging time.</li>
+<li><strong>Tracee:</strong> 1 policy YAML file with 30 event types and argument filters. The lowest authoring effort because Tracee&rsquo;s behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>) provide escape detection without per-CVE rule authoring. The main effort was discovering the <code>data.</code> vs <code>args.</code> prefix issue and the path-filtering requirement.</li>
+</ul>
+<p>Tetragon and Tracee can reach 12/13 with custom work. Falco reaches 11/13 &ndash; the S12 runc overwrite is blocked before Falco can observe the write, and S04&rsquo;s socket attribution remains a partial detection. All three have the engine capability to detect the underlying syscalls. The difference is how much authoring each requires to get there. If your team has kernel expertise and wants maximum control, Tetragon&rsquo;s TracingPolicy system rewards that investment. If you want fast iteration on rule conditions without kernel internals knowledge, Falco&rsquo;s rule syntax is more accessible. If you want the broadest behavioral coverage with the least custom authoring, Tracee&rsquo;s signature engine plus a well-tuned policy file gets you there with the least effort.</p>
+<p>The gap between &ldquo;tool supports this syscall&rdquo; and &ldquo;tool detects this attack&rdquo; is entirely configuration. That&rsquo;s simultaneously the most frustrating and most empowering finding from this research. Frustrating because every tool requires non-trivial tuning. Empowering because it means the tools you already have are more capable than their default configurations suggest.</p>
+<p><a href="../containerescapetelemetry/teampcp">Part 6</a> takes these tuning lessons and tests them against reality: TeamPCP, a threat actor active right now, uses the exact container escape techniques our lab scenarios simulate. The gap between default configurations and real-world threat coverage is where TeamPCP lives.</p>
+<h1 id="llm-disclosure">LLM Disclosure</h1>
+<p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/infosec/">infosec</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/container-security/">container security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/detection-engineering/">detection engineering</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/ebpf/">eBPF</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/runtime-security/">runtime security</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/tuning/">tuning</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="bc9a31170cae1044d25d4e99045c7e83">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/containerescapetelemetry/production/" class="button left"><span>Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</span></a>
+    
+    
+      <a href="/blog/containerescapetelemetry/teampcp/" class="button right"><span>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
+          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>
