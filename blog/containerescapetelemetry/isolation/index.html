@@ -328,7 +328,7 @@
 <li><strong>Tracee</strong> uses perf buffers (per-CPU, 4 MB per CPU by default)</li>
 </ul>
 <p>This distinction matters under load, and we&rsquo;ll see exactly how much it matters when we get to the syscall flood stress test results later in the series.</p>
-<p><img src="images/ring-buffer.svg" alt="How eBPF events flow from kernel hooks through ring buffers to userspace"></p>
+<p><img src="../images/ring-buffer.svg" alt="How eBPF events flow from kernel hooks through ring buffers to userspace"></p>
 <h2 id="what-happens-when-the-buffer-is-full">What Happens When the Buffer Is Full</h2>
 <p>Both buffer types default to a <strong>drop-newest</strong> policy in the security tool context. When the buffer is full, new events are silently discarded rather than blocking the kernel. (Perf buffers can technically be configured to overwrite old data, but none of the three tools in this research use that mode &ndash; losing the most recent event is preferable to silently discarding old events that may already be referenced downstream.) The kernel can&rsquo;t block or sleep waiting for userspace to drain the buffer because eBPF programs run in a non-sleepable context.</p>
 <p>This means there&rsquo;s a race condition at the heart of every eBPF security tool: the kernel is writing events into the buffer, and a userspace program is reading them out. If the kernel produces events faster than userspace consumes them, events are lost. The security tool never sees them. There&rsquo;s no retry, no backpressure, no &ldquo;please hold.&rdquo; The events are simply gone.</p>

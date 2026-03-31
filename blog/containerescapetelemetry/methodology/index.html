@@ -299,7 +299,7 @@
 <li><strong>CVE-2022-0185</strong> (S09) and <strong>CVE-2021-22555</strong> (S10) are already patched on this kernel, so those run in PATTERN mode &ndash; the syscall sequence fires but the kernel rejects the exploit. That&rsquo;s fine for telemetry analysis. The tool still sees every syscall; it just doesn&rsquo;t result in privilege escalation.</li>
 </ul>
 <p>A newer 6.x kernel would sacrifice the real DirtyPipe exploit. I strived for true emulation in this project &ndash; pattern-only scenarios are useful, but watching splice actually corrupt the page cache and overwrite <code>/etc/passwd</code> produces telemetry you can&rsquo;t get any other way.</p>
-<p><img src="images/lab-architecture.svg" alt="Lab architecture: three isolated VMs, one tool each, driven by a PowerShell harness"></p>
+<p><img src="../images/lab-architecture.svg" alt="Lab architecture: three isolated VMs, one tool each, driven by a PowerShell harness"></p>
 <h1 id="the-15-scenarios">The 15 Scenarios</h1>
 <p>The scenarios break into five categories. Each scenario is a self-contained shell script that creates its own container, runs the technique, checks for success, and cleans up. Result states: <code>ESCAPED</code> (technique worked), <code>PATTERN</code> (syscall sequence fired on a patched kernel), <code>BLOCKED</code> (kernel or runtime prevented the technique), <code>ABUSED</code> (dangerous capabilities exercised without crossing a namespace boundary), or <code>TELEMETRY_TEST</code> (stress test measuring tool reliability).</p>
 <h2 id="misconfiguration-based-escapes-s01-s05">Misconfiguration-Based Escapes (S01-S05)</h2>

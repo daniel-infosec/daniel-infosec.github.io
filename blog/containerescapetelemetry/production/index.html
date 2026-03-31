@@ -286,7 +286,7 @@
       <p>This is Part 4 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab and detection coverage matrix. <a href="../containerescapetelemetry/deepdives">Part 3</a> walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?</p>
 <h1 id="the-volume-question">The Volume Question</h1>
 <p>Parts 2 and 3 focused on what each tool sees. But there&rsquo;s an equally important dimension: how <em>much</em> does each tool generate, and what&rsquo;s the signal-to-noise ratio of that output? If you&rsquo;re going to deploy any of these tools in production, the telemetry volume has direct implications for storage, bandwidth, and whether an analyst can actually find the escape signal in the noise.</p>
-<p><img src="images/event-volume.svg" alt="Total telemetry volume across 15 scenarios: Tetragon 1.2 GB, Falco 36 MB, Tracee 20 MB"></p>
+<p><img src="../images/event-volume.svg" alt="Total telemetry volume across 15 scenarios: Tetragon 1.2 GB, Falco 36 MB, Tracee 20 MB"></p>
 <h2 id="aggregate-numbers">Aggregate Numbers</h2>
 <table>
 <thead>
