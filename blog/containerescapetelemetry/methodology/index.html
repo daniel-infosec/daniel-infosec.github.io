@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>16-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 2 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered the isolation primitives and eBPF observability model. This post covers the lab architecture, the three tools under test, the 15 escape scenarios, and the detection coverage matrix. If you want to skip straight to what the telemetry actually looks like, jump to <a href="../containerescapetelemetry/deepdives">Part 3: Per-Scenario Deep Dives</a>.</p>
+      <p>This is Part 2 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered the isolation primitives and eBPF observability model. This post covers the lab architecture, the three tools under test, the 15 escape scenarios, and the detection coverage matrix. If you want to skip straight to what the telemetry actually looks like, jump to <a href="../deepdives">Part 3: Per-Scenario Deep Dives</a>.</p>
 <h1 id="the-lab">The Lab</h1>
 <p>Each tool ran on its own dedicated Hyper-V VM: 3 GB RAM, 2 vCPUs, Ubuntu 22.04 on kernel 5.15.0-91-generic. One tool per VM. This was non-negotiable. eBPF programs from different tools will contend for the same kernel hooks, and if you&rsquo;re trying to measure event ordering and timing, that contention corrupts your data. You can&rsquo;t draw conclusions about &ldquo;tool A generated event X before tool B generated event Y&rdquo; if both tools are fighting over the same kprobe attachment points on the same kernel.</p>
 <p>You might notice this entire setup runs on Windows with PowerShell and Hyper-V rather than a more typical Linux-native approach. The reason is mundane: my gaming PC has 48 GB of RAM, and computers are way too expensive these days to justify a dedicated lab machine. So Vagrant + Hyper-V it is.</p>
@@ -466,7 +466,7 @@
 </tr>
 </tbody>
 </table>
-<p>S15 answers the question from <a href="../containerescapetelemetry/isolation">Part 1</a>: can an attacker actually blind a security tool by flooding syscalls? Seven phases in two groups. Phases 1-3 flood <code>getpid()</code> at 1K, 100K, and 1M calls (unhooked &ndash; no tool generates events). Phases 4-5 and 7 flood <code>openat(/dev/null)</code> at 100K, 1M, and 10M calls (hooked &ndash; generates real ring buffer pressure). Phase 6 is the critical test: 1M openat flood running concurrently with an <code>nsenter -t 1 -m -u -i -p</code> escape. Can the tool see the escape during the flood?</p>
+<p>S15 answers the question from <a href="../isolation">Part 1</a>: can an attacker actually blind a security tool by flooding syscalls? Seven phases in two groups. Phases 1-3 flood <code>getpid()</code> at 1K, 100K, and 1M calls (unhooked &ndash; no tool generates events). Phases 4-5 and 7 flood <code>openat(/dev/null)</code> at 100K, 1M, and 10M calls (hooked &ndash; generates real ring buffer pressure). Phase 6 is the critical test: 1M openat flood running concurrently with an <code>nsenter -t 1 -m -u -i -p</code> escape. Can the tool see the escape during the flood?</p>
 <p>The results were the most operationally significant finding in the research. I&rsquo;ll cover them in detail in Part 4.</p>
 <h1 id="the-three-tools">The Three Tools</h1>
 <p>Before diving into what each tool captured, it&rsquo;s worth understanding why they produce such different telemetry from the same kernel events. The differences aren&rsquo;t random. They flow directly from how each tool is architected.</p>
@@ -690,8 +690,8 @@
 </ul>
 <p>The S06 baseline is important context for everything that follows. It shows what &ldquo;normal&rdquo; telemetry looks like from an unprivileged container where <code>mount</code> and <code>unshare</code> are both denied. Tetragon generated 1,127 events from its policy hooks with zero escape-specific signals. This is the noise floor against which everything else should be compared. If your detection can&rsquo;t distinguish escape activity from that baseline, it&rsquo;s not a useful detection.</p>
 <h1 id="what-comes-next">What Comes Next</h1>
-<p>With the lab, tools, and coverage matrix established, <a href="../containerescapetelemetry/deepdives">Part 3</a> digs into the per-scenario telemetry: what each tool actually captured, what the events look like, and what patterns emerge when you compare the raw data across tools. That&rsquo;s where the qualitative differences behind the checkmarks become concrete.</p>
-<p>If you&rsquo;re more interested in operational questions &ndash; how much data do these tools generate, what does the signal-to-noise look like, and which tool should you actually deploy &ndash; skip to <a href="../containerescapetelemetry/production">Part 4</a>.</p>
+<p>With the lab, tools, and coverage matrix established, <a href="../deepdives">Part 3</a> digs into the per-scenario telemetry: what each tool actually captured, what the events look like, and what patterns emerge when you compare the raw data across tools. That&rsquo;s where the qualitative differences behind the checkmarks become concrete.</p>
+<p>If you&rsquo;re more interested in operational questions &ndash; how much data do these tools generate, what does the signal-to-noise look like, and which tool should you actually deploy &ndash; skip to <a href="../production">Part 4</a>.</p>
 <p>The full scenario scripts, Tetragon policies, Falco rules, and automation harness are available in the <a href="https://github.com/catscrdl/container-escape-telemetry">research repository</a>.</p>
 <h1 id="references">References</h1>
 <h2 id="cves-and-vulnerability-research">CVEs and Vulnerability Research</h2>
@@ -819,7 +819,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -827,7 +827,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -835,7 +835,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -843,7 +843,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -851,7 +851,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

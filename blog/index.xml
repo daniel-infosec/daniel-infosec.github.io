@@ -6,7 +6,7 @@
     <description>Recent content in Blog on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/isolation/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/isolation/</guid>
       <description>This is Part 1 of the container escape telemetry series. The series overview has the project goals, key findings, and reading guide. If you&amp;rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to Part 2: Methodology and Tool Architecture.
@@ -24,7 +24,7 @@ This post is the primer. It covers what containers actually are at the kernel le
     <item>
       <title>Container Escape Telemetry, Part 2: Methodology and Tool Architecture</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/methodology/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/methodology/</guid>
       <description>This is Part 2 of the container escape telemetry series (overview). Part 1 covered the isolation primitives and eBPF observability model. This post covers the lab architecture, the three tools under test, the 15 escape scenarios, and the detection coverage matrix. If you want to skip straight to what the telemetry actually looks like, jump to Part 3: Per-Scenario Deep Dives.
@@ -34,7 +34,7 @@ The Lab Each tool ran on its own dedicated Hyper-V VM: 3 GB RAM, 2 vCPUs, Ubuntu
     <item>
       <title>Container Escape Telemetry, Part 3: What Each Tool Actually Captured</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</guid>
       <description>This is Part 3 of the container escape telemetry series (overview). Part 1 covered isolation primitives and the eBPF observability model. Part 2 covered the lab, the tools, and the detection coverage matrix. This post is the meat: per-scenario telemetry breakdowns showing what each tool actually captured, where the qualitative differences behind the checkmarks become concrete.
@@ -44,7 +44,7 @@ Not every scenario gets a deep dive. Some produced straightforward results that 
     <item>
       <title>Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/production/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/production/</guid>
       <description>This is Part 4 of the container escape telemetry series (overview). Part 1 covered isolation primitives and the eBPF observability model. Part 2 covered the lab and detection coverage matrix. Part 3 walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?
@@ -54,7 +54,7 @@ The Volume Question Parts 2 and 3 focused on what each tool sees.</description>
     <item>
       <title>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/tuning/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/tuning/</guid>
       <description>This is Part 5 of the container escape telemetry series (overview). Part 1 covered isolation primitives. Part 2 covered the lab and tools. Part 3 was the per-scenario data. Part 4 covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.
@@ -64,7 +64,7 @@ The gap between &amp;ldquo;tool installed&amp;rdquo; and &amp;ldquo;tool detecti
     <item>
       <title>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</guid>
       <description>This is Part 6 of the container escape telemetry series (overview). Parts 1-5 covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.
@@ -74,7 +74,7 @@ TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored Lit
     <item>
       <title>Container Escape Telemetry: Series Overview</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/intro/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/intro/</guid>
       <description>As a detection engineer, container escapes have always fascinated me. Detections focused on control bypasses can be both extremely difficult to make and extremely valuable when they fire. The challenge is that most discussions about container runtime security focus on whether a tool detected an escape &amp;ndash; a binary yes/no that doesn&amp;rsquo;t tell you much about the underlying telemetry that makes detection possible in the first place.

@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>20-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 4 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab and detection coverage matrix. <a href="../containerescapetelemetry/deepdives">Part 3</a> walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?</p>
+      <p>This is Part 4 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../methodology">Part 2</a> covered the lab and detection coverage matrix. <a href="../deepdives">Part 3</a> walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?</p>
 <h1 id="the-volume-question">The Volume Question</h1>
 <p>Parts 2 and 3 focused on what each tool sees. But there&rsquo;s an equally important dimension: how <em>much</em> does each tool generate, and what&rsquo;s the signal-to-noise ratio of that output? If you&rsquo;re going to deploy any of these tools in production, the telemetry volume has direct implications for storage, bandwidth, and whether an analyst can actually find the escape signal in the noise.</p>
 <p><img src="../images/event-volume.svg" alt="Total telemetry volume across 15 scenarios: Tetragon 1.2 GB, Falco 36 MB, Tracee 20 MB"></p>
@@ -731,7 +731,7 @@
 </ul>
 <h1 id="llm-disclosure">LLM Disclosure</h1>
 <p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
-<p><a href="../containerescapetelemetry/tuning">Part 5</a> covers the practical tuning side: what each tool ships with by default, what you have to build yourself, every configuration pitfall we hit, and specific tuning recommendations per tool. <a href="../containerescapetelemetry/teampcp">Part 6</a> pressure-tests these findings against TeamPCP, a real threat actor whose kill chain maps directly to our lab scenarios.</p>
+<p><a href="../tuning">Part 5</a> covers the practical tuning side: what each tool ships with by default, what you have to build yourself, every configuration pitfall we hit, and specific tuning recommendations per tool. <a href="../teampcp">Part 6</a> pressure-tests these findings against TeamPCP, a real threat actor whose kill chain maps directly to our lab scenarios.</p>
 
     </div>
     <footer>
@@ -833,7 +833,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -841,7 +841,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -849,7 +849,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -857,7 +857,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -865,7 +865,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

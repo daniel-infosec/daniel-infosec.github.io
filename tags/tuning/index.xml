@@ -6,7 +6,7 @@
     <description>Recent content in tuning on Catscrdl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://catscrdl.io/tags/tuning/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</title>
       <link>https://catscrdl.io/blog/containerescapetelemetry/tuning/</link>
-      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
       
       <guid>https://catscrdl.io/blog/containerescapetelemetry/tuning/</guid>
       <description>This is Part 5 of the container escape telemetry series (overview). Part 1 covered isolation primitives. Part 2 covered the lab and tools. Part 3 was the per-scenario data. Part 4 covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.

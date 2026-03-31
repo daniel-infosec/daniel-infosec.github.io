@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>13-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 1 of the container escape telemetry series. The <a href="../containerescapetelemetry/intro">series overview</a> has the project goals, key findings, and reading guide. If you&rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to <a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a>.</p>
+      <p>This is Part 1 of the container escape telemetry series. The <a href="../intro">series overview</a> has the project goals, key findings, and reading guide. If you&rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to <a href="../methodology">Part 2: Methodology and Tool Architecture</a>.</p>
 <p>This post is the primer. It covers what containers actually are at the kernel level, what &ldquo;escape&rdquo; means in concrete terms, and how eBPF-based tools get telemetry out of the kernel. That last part matters more than you might think, because the mechanism that delivers telemetry to your security tool has its own failure modes, and an attacker who understands those failure modes can exploit them.</p>
 <h1 id="what-containers-actually-are">What Containers Actually Are</h1>
 <p>Containers are not virtual machines. There&rsquo;s no hardware emulation, no separate kernel. A containerized process is still just a Linux process. It shares the host kernel and is isolated using a combination of kernel features layered on top. As Luca Vallini <a href="https://www.lucavall.in/blog/containers-are-not-a-security-boundary">puts it well</a>, containers were never intended to be a security boundary &ndash; they&rsquo;re a packaging and resource management abstraction. The isolation mechanisms they rely on &ndash; <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a>, <a href="https://man7.org/linux/man-pages/man7/cgroups.7.html">cgroups</a>, and <a href="https://www.man7.org/linux/man-pages/man7/capabilities.7.html">capabilities</a> &ndash; were designed for resource partitioning, not for containing adversarial code.</p>
@@ -347,7 +347,7 @@
 <p><strong>Broad hook coverage without prioritization</strong> is the vulnerability. If your tool hooks <code>security_file_open</code> on all file opens and doesn&rsquo;t prioritize which events survive buffer pressure, a sustained <code>openat</code> flood can push security-critical events out of the buffer. The tool faithfully records millions of <code>/dev/null</code> opens while the concurrent namespace escape disappears into the gap.</p>
 <p>We tested this directly with a dedicated stress-test scenario (S15 in the series), and the results were striking. But the specifics belong in the per-tool analysis. The point for this post is: the buffer mechanism that delivers kernel telemetry to your security tool is not a passive conduit. It&rsquo;s an attack surface. Understanding how it works, and how it fails, is a prerequisite for trusting what your tools tell you.</p>
 <h1 id="what-comes-next">What Comes Next</h1>
-<p>With this foundation, the rest of the series digs into what actually happened when we ran 15 escape scenarios against Tetragon, Falco, and Tracee. <a href="../containerescapetelemetry/methodology">Part 2</a> covers the lab setup, tool architectures, and the full detection coverage matrix. <a href="../containerescapetelemetry/deepdives">Part 3</a> is the per-scenario deep dive: what each tool captured (or missed), why, and what the telemetry actually looks like. <a href="../containerescapetelemetry/production">Part 4</a> covers volume, signal-to-noise, and deployment recommendations. <a href="../containerescapetelemetry/tuning">Part 5</a> covers the practical tuning work: what ships by default, what you have to build yourself, and what breaks along the way. <a href="../containerescapetelemetry/teampcp">Part 6</a> maps the lab findings against TeamPCP, a real threat actor using these exact techniques in the wild right now.</p>
+<p>With this foundation, the rest of the series digs into what actually happened when we ran 15 escape scenarios against Tetragon, Falco, and Tracee. <a href="../methodology">Part 2</a> covers the lab setup, tool architectures, and the full detection coverage matrix. <a href="../deepdives">Part 3</a> is the per-scenario deep dive: what each tool captured (or missed), why, and what the telemetry actually looks like. <a href="../production">Part 4</a> covers volume, signal-to-noise, and deployment recommendations. <a href="../tuning">Part 5</a> covers the practical tuning work: what ships by default, what you have to build yourself, and what breaks along the way. <a href="../teampcp">Part 6</a> maps the lab findings against TeamPCP, a real threat actor using these exact techniques in the wild right now.</p>
 <p>If you&rsquo;re a detection engineer working in the container security space, you&rsquo;ll get the most value from reading the whole series. But each post is designed to stand on its own. If you already know this material cold, skip to the part that interests you.</p>
 <h1 id="references-and-further-reading">References and Further Reading</h1>
 <h2 id="kernel-documentation">Kernel Documentation</h2>
@@ -482,7 +482,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -490,7 +490,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -498,7 +498,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -506,7 +506,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -514,7 +514,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>8-Minute Read</p>
   </div>
@@ -309,12 +309,12 @@
 <p><strong>Telemetry volume varies by 60x across tools.</strong> Tetragon generated 1.2 GB across 15 scenarios (forensically self-sufficient events averaging ~15 KB each). Tracee generated ~20 MB (compact events, ~1.4 KB each). Falco sat in between at 36 MB. They&rsquo;re not interchangeable &ndash; they answer different questions at different costs.</p>
 <h1 id="the-series">The Series</h1>
 <ul>
-<li><a href="../containerescapetelemetry/isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a> &ndash; what containers are at the kernel level, how eBPF tools get telemetry out of the kernel, and why the delivery mechanism is itself an attack surface</li>
-<li><a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a> &ndash; the lab, the 15 scenarios, tool architectures, and the full detection coverage matrix</li>
-<li><a href="../containerescapetelemetry/deepdives">Part 3: What Each Tool Actually Captured</a> &ndash; per-scenario telemetry breakdowns and six patterns every deployment should monitor</li>
-<li><a href="../containerescapetelemetry/production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a> &ndash; aggregate numbers, production rate estimates, the Falco rule gap, S15 stress test, and recommendations by threat model</li>
-<li><a href="../containerescapetelemetry/tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a> &ndash; what ships by default, what you have to build, and every configuration pitfall we hit</li>
-<li><a href="../containerescapetelemetry/teampcp">Part 6: TeamPCP and What the Lab Predicted</a> &ndash; mapping a real threat actor&rsquo;s kill chain against our lab telemetry</li>
+<li><a href="../isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a> &ndash; what containers are at the kernel level, how eBPF tools get telemetry out of the kernel, and why the delivery mechanism is itself an attack surface</li>
+<li><a href="../methodology">Part 2: Methodology and Tool Architecture</a> &ndash; the lab, the 15 scenarios, tool architectures, and the full detection coverage matrix</li>
+<li><a href="../deepdives">Part 3: What Each Tool Actually Captured</a> &ndash; per-scenario telemetry breakdowns and six patterns every deployment should monitor</li>
+<li><a href="../production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a> &ndash; aggregate numbers, production rate estimates, the Falco rule gap, S15 stress test, and recommendations by threat model</li>
+<li><a href="../tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a> &ndash; what ships by default, what you have to build, and every configuration pitfall we hit</li>
+<li><a href="../teampcp">Part 6: TeamPCP and What the Lab Predicted</a> &ndash; mapping a real threat actor&rsquo;s kill chain against our lab telemetry</li>
 </ul>
 <p>If you&rsquo;re a detection engineer working in container security, start with Part 1 for the full context or jump to Part 3 for the per-scenario data. If you&rsquo;re evaluating which tool to deploy, Part 4 has the recommendations. If you just installed one of these tools and want to know what to do next, Part 5 is for you.</p>
 <p>The full scenario scripts, Tetragon policies, Falco rules, Tracee policy, and automation harness are available in the <a href="https://github.com/catscrdl/container-escape-telemetry">research repository</a>.</p>
@@ -421,7 +421,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -429,7 +429,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -437,7 +437,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -445,7 +445,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -453,7 +453,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

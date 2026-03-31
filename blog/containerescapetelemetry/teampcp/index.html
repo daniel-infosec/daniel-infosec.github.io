@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>12-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 6 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). Parts <a href="../containerescapetelemetry/isolation">1</a>-<a href="../containerescapetelemetry/tuning">5</a> covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.</p>
+      <p>This is Part 6 of the container escape telemetry series (<a href="../intro">overview</a>). Parts <a href="../isolation">1</a>-<a href="../tuning">5</a> covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.</p>
 <p>TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored LiteLLM&rsquo;s PyPI package. As of late March 2026, incident response teams across the industry are still assessing the blast radius. But the container escape techniques TeamPCP uses aren&rsquo;t novel &ndash; they&rsquo;re the same patterns our 15 lab scenarios were designed to detect. That&rsquo;s either a validation of the research or a coincidence. Having spent weeks staring at this telemetry, I don&rsquo;t think it&rsquo;s a coincidence.</p>
 <h1 id="who-is-teampcp">Who Is TeamPCP</h1>
 <p>TeamPCP (also tracked as DeadCatx3, PCPcat, ShellForce, and CanisterWorm) emerged in December 2025 as a cloud-native threat actor targeting Docker APIs, Kubernetes clusters, Redis servers, and CI/CD pipelines. Elastic Security Labs published the <a href="https://www.elastic.co/security-labs/canisterworm-cloud-threat">initial CanisterWorm analysis</a> in January 2026. Trivy and Checkmarx tracked the supply chain component through their own incident reports (<a href="https://github.com/aquasecurity/trivy-action/security/advisories/GHSA-m5q5-v7c8-2m28">Trivy GHSA</a>, <a href="https://checkmarx.com/blog/teampcp-supply-chain-attack-march-2026/">Checkmarx advisory</a>). Their operation has two distinct phases that are worth separating because they test different parts of a detection stack.</p>
@@ -415,7 +415,7 @@
 <p>These two scenarios were added in response to peer review feedback: &ldquo;I would have loved if one of your scenarios was taking a privileged container that isn&rsquo;t a straight breakout.&rdquo; TeamPCP&rsquo;s entire CanisterWorm operation is exactly this &ndash; privileged containers abusing their capabilities without namespace escape. The <code>mount /dev/sda1</code>, <code>chroot /mnt/host</code>, and <code>/proc/*/environ</code> harvesting patterns we tested in S13/S14 are the same patterns TeamPCP uses in production. The fact that no tool detected <code>/proc/1/environ</code> reads by default, and all three required custom policies, is directly validated by TeamPCP making this their primary credential harvesting technique.</p>
 <h2 id="default-configurations-are-insufficient-for-real-threats">Default Configurations Are Insufficient for Real Threats</h2>
 <p>TeamPCP&rsquo;s techniques are not exotic. Docker API scanning, privileged container creation, host filesystem mounting, and environment variable harvesting are well-documented patterns. Yet Falco&rsquo;s default ruleset only covers four of the five runtime-detectable techniques &ndash; &ldquo;Launch Privileged Container&rdquo; catches the container creation, &ldquo;Sensitive Host File Read&rdquo; catches host filesystem access and SSH key harvesting, &ldquo;Write below etc&rdquo; catches systemd persistence, and &ldquo;Docker Socket Access from Container&rdquo; partially catches the API abuse (runc init only, not the source container&rsquo;s socket connect). The <code>/proc/*/environ</code> harvesting &ndash; TeamPCP&rsquo;s primary credential theft technique &ndash; requires a custom rule. Tetragon ships with zero detection policies. Tracee&rsquo;s defaults would miss the <code>/proc/*/environ</code> reads entirely.</p>
-<p>The Falco rule gap finding from <a href="../containerescapetelemetry/production">Part 4</a> &ndash; configuration, not engine &ndash; takes on new urgency when the configuration gap aligns with what a real threat actor is doing right now.</p>
+<p>The Falco rule gap finding from <a href="../production">Part 4</a> &ndash; configuration, not engine &ndash; takes on new urgency when the configuration gap aligns with what a real threat actor is doing right now.</p>
 <h1 id="what-would-have-caught-teampcp-fastest">What Would Have Caught TeamPCP Fastest</h1>
 <p>If I were building a detection stack specifically for TeamPCP&rsquo;s documented TTPs, the minimum set would be:</p>
 <ol>
@@ -430,12 +430,12 @@
 <h1 id="the-series">The Series</h1>
 <p>This is the final post. The full series:</p>
 <ul>
-<li><a href="../containerescapetelemetry/intro">Series Overview</a> &ndash; project goals, key findings, and reading guide</li>
-<li><a href="../containerescapetelemetry/isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a></li>
-<li><a href="../containerescapetelemetry/methodology">Part 2: Methodology and Tool Architecture</a></li>
-<li><a href="../containerescapetelemetry/deepdives">Part 3: What Each Tool Actually Captured</a></li>
-<li><a href="../containerescapetelemetry/production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></li>
-<li><a href="../containerescapetelemetry/tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a></li>
+<li><a href="../intro">Series Overview</a> &ndash; project goals, key findings, and reading guide</li>
+<li><a href="../isolation">Part 1: Isolation Primitives and the eBPF Observability Model</a></li>
+<li><a href="../methodology">Part 2: Methodology and Tool Architecture</a></li>
+<li><a href="../deepdives">Part 3: What Each Tool Actually Captured</a></li>
+<li><a href="../production">Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></li>
+<li><a href="../tuning">Part 5: Tuning eBPF Tools From Defaults to Detection</a></li>
 </ul>
 <p>The full scenario scripts, Tetragon policies, Falco rules, and automation harness are available in the <a href="https://github.com/catscrdl/container-escape-telemetry">research repository</a>.</p>
 <h1 id="llm-disclosure">LLM Disclosure</h1>
@@ -545,7 +545,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -553,7 +553,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -561,7 +561,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -569,7 +569,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -577,7 +577,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

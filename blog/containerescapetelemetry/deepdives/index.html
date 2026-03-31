@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>15-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 3 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab, the tools, and the detection coverage matrix. This post is the meat: per-scenario telemetry breakdowns showing what each tool actually captured, where the qualitative differences behind the checkmarks become concrete.</p>
+      <p>This is Part 3 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered isolation primitives and the eBPF observability model. <a href="../methodology">Part 2</a> covered the lab, the tools, and the detection coverage matrix. This post is the meat: per-scenario telemetry breakdowns showing what each tool actually captured, where the qualitative differences behind the checkmarks become concrete.</p>
 <p>Not every scenario gets a deep dive. Some produced straightforward results that the coverage matrix already summarizes. I&rsquo;m focusing on the scenarios where the cross-tool comparison reveals something interesting about how these tools work, where they disagree, and what the disagreements mean for detection engineering.</p>
 <h1 id="s03-nsenter----the-cleanest-comparison">S03: nsenter &ndash; The Cleanest Comparison</h1>
 <p>The nsenter escape joins host PID 1&rsquo;s namespaces via <code>setns()</code>. It&rsquo;s the simplest escape to understand, and it produced the cleanest cross-tool comparison. The container runs <code>nsenter -t 1 -m -u -i -p -- hostname</code>, which opens four namespace file descriptors under <code>/proc/1/ns/</code> and calls <code>setns()</code> on each one.</p>
@@ -352,8 +352,8 @@
 <h2 id="6-capability-abuse-without-namespace-escape">6. Capability Abuse Without Namespace Escape</h2>
 <p>Present in S13, S14. This pattern is distinct from the five above because the attacker never crosses a namespace boundary. The signals: <code>mount()</code> of host block devices or sensitive filesystem types from a container, <code>security_file_open</code> on <code>/proc/1/environ</code> or <code>/proc/1/maps</code>, raw socket creation via <code>AF_PACKET</code>, <code>init_module</code>/<code>finit_module</code>, <code>keyctl</code> invocations (kernel keyrings are not namespace-isolated), and <code>bpf()</code> syscalls. These are harder to detect because the container is &ldquo;supposed to&rdquo; have these capabilities. Detection requires context: a container mounting <code>/dev/sda1</code> or reading <code>/proc/1/environ</code> is almost certainly malicious, regardless of whether it has the capability to do so.</p>
 <h1 id="what-comes-next">What Comes Next</h1>
-<p>The per-scenario data tells you what&rsquo;s possible. <a href="../containerescapetelemetry/production">Part 4</a> answers the operational questions: how much data do these tools actually generate, what&rsquo;s the signal-to-noise ratio, and which tool should you deploy? It also covers the Falco rule gap (configuration, not engine) and the S15 stress test results that showed configuration can be the difference between capturing an escape and missing it entirely.</p>
-<p>If you want to skip the operational analysis and go straight to practical tuning guidance, <a href="../containerescapetelemetry/tuning">Part 5</a> covers what ships by default, what you have to build yourself, and every configuration pitfall we hit along the way. <a href="../containerescapetelemetry/teampcp">Part 6</a> maps these lab findings against TeamPCP, a real threat actor whose kill chain uses the exact techniques our scenarios simulate.</p>
+<p>The per-scenario data tells you what&rsquo;s possible. <a href="../production">Part 4</a> answers the operational questions: how much data do these tools actually generate, what&rsquo;s the signal-to-noise ratio, and which tool should you deploy? It also covers the Falco rule gap (configuration, not engine) and the S15 stress test results that showed configuration can be the difference between capturing an escape and missing it entirely.</p>
+<p>If you want to skip the operational analysis and go straight to practical tuning guidance, <a href="../tuning">Part 5</a> covers what ships by default, what you have to build yourself, and every configuration pitfall we hit along the way. <a href="../teampcp">Part 6</a> maps these lab findings against TeamPCP, a real threat actor whose kill chain uses the exact techniques our scenarios simulate.</p>
 
     </div>
     <footer>
@@ -455,7 +455,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -463,7 +463,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -471,7 +471,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -479,7 +479,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -487,7 +487,7 @@
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       

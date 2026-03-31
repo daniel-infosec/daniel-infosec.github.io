@@ -230,7 +230,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+    <time datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>17-Minute Read</p>
   </div>
@@ -283,7 +283,7 @@
     </div>
     <div class="content">
       
-      <p>This is Part 5 of the container escape telemetry series (<a href="../containerescapetelemetry/intro">overview</a>). <a href="../containerescapetelemetry/isolation">Part 1</a> covered isolation primitives. <a href="../containerescapetelemetry/methodology">Part 2</a> covered the lab and tools. <a href="../containerescapetelemetry/deepdives">Part 3</a> was the per-scenario data. <a href="../containerescapetelemetry/production">Part 4</a> covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.</p>
+      <p>This is Part 5 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered isolation primitives. <a href="../methodology">Part 2</a> covered the lab and tools. <a href="../deepdives">Part 3</a> was the per-scenario data. <a href="../production">Part 4</a> covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.</p>
 <p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
 <h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
 <h2 id="tetragon-powerful-engine-empty-hangar">Tetragon: Powerful Engine, Empty Hangar</h2>
@@ -360,7 +360,7 @@
 <li>No /proc/self/exe write rule (S12)</li>
 <li>No keyctl, kernel module, BPF, /dev/kmsg, or /proc/*/environ rules (S13, S14)</li>
 </ul>
-<p>The engine supports every one of these syscalls. The gap is rule coverage, not capability. Closing it required 12 custom rules and rule changes, which I covered in detail in <a href="../containerescapetelemetry/production">Part 4</a>.</p>
+<p>The engine supports every one of these syscalls. The gap is rule coverage, not capability. Closing it required 12 custom rules and rule changes, which I covered in detail in <a href="../production">Part 4</a>.</p>
 <h2 id="tracee-behavioral-depth-configuration-required">Tracee: Behavioral Depth, Configuration Required</h2>
 <p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature &ndash; they detect exploit *consequences* rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
 <p>The policy file I built enables 30 event types:</p>
@@ -508,7 +508,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 </ul>
 <p>Tetragon and Tracee can reach 12/13 with custom work. Falco reaches 11/13 &ndash; the S12 runc overwrite is blocked before Falco can observe the write, and S04&rsquo;s socket attribution remains a partial detection. All three have the engine capability to detect the underlying syscalls. The difference is how much authoring each requires to get there. If your team has kernel expertise and wants maximum control, Tetragon&rsquo;s TracingPolicy system rewards that investment. If you want fast iteration on rule conditions without kernel internals knowledge, Falco&rsquo;s rule syntax is more accessible. If you want the broadest behavioral coverage with the least custom authoring, Tracee&rsquo;s signature engine plus a well-tuned policy file gets you there with the least effort.</p>
 <p>The gap between &ldquo;tool supports this syscall&rdquo; and &ldquo;tool detects this attack&rdquo; is entirely configuration. That&rsquo;s simultaneously the most frustrating and most empowering finding from this research. Frustrating because every tool requires non-trivial tuning. Empowering because it means the tools you already have are more capable than their default configurations suggest.</p>
-<p><a href="../containerescapetelemetry/teampcp">Part 6</a> takes these tuning lessons and tests them against reality: TeamPCP, a threat actor active right now, uses the exact container escape techniques our lab scenarios simulate. The gap between default configurations and real-world threat coverage is where TeamPCP lives.</p>
+<p><a href="../teampcp">Part 6</a> takes these tuning lessons and tests them against reality: TeamPCP, a threat actor active right now, uses the exact container escape techniques our lab scenarios simulate. The gap between default configurations and real-world threat coverage is where TeamPCP lives.</p>
 <h1 id="llm-disclosure">LLM Disclosure</h1>
 <p>Claude (Anthropic) was used throughout this project to assist with lab setup and automation, telemetry analysis and correlation, and authoring this blog series.</p>
 
@@ -614,7 +614,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -622,7 +622,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -630,7 +630,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/deepdives/">Container Escape Telemetry, Part 3: What Each Tool Actually Captured</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -638,7 +638,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/production/">Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
@@ -646,7 +646,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-28 00:00:00 &#43;0000 UTC">March 28, 2026</time>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
         </header>
       </article>
       
