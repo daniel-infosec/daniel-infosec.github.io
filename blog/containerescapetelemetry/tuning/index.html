@@ -287,7 +287,7 @@
 <p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
 <h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
 <h2 id="tetragon-powerful-engine-empty-hangar">Tetragon: Powerful Engine, Empty Hangar</h2>
-<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful &ndash; you can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match &ndash; but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
+<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
 <p>I wrote 8 TracingPolicy files covering 31 kernel function hooks for this research:</p>
 <table>
 <thead>
@@ -343,13 +343,13 @@
 <p>Writing these took multiple iterations. The YAML is straightforward once you understand the schema, but choosing <em>which</em> kernel functions to hook and <em>which</em> arguments to filter on requires understanding both the exploit chain and the kernel internals. You&rsquo;re effectively writing eBPF programs through a YAML abstraction layer. That&rsquo;s powerful, but the authoring cost is real.</p>
 <h2 id="falco-broad-coverage-with-gaps">Falco: Broad Coverage With Gaps</h2>
 <p>Falco ships with 400+ community-maintained rules, MITRE ATT&amp;CK mappings, and broad container runtime integration. Out of the box, it detected 5 of 13 scoreable scenarios (S01-S14, excluding S06 baseline and S15 stress test):</p>
-<p><strong>Default rules that fired</strong> (4 rules across 5 detected scenarios; a 5th rule &ndash; &ldquo;Drop and execute new binary&rdquo; &ndash; caught gcc compilation during S08 but not the splice exploit itself, so it doesn&rsquo;t count as detecting DirtyPipe):</p>
+<p><strong>Default rules that fired</strong> (4 rules across 5 detected scenarios; a 5th rule, &ldquo;Drop and execute new binary&rdquo;, caught gcc compilation during S08 but not the splice exploit itself, so it doesn&rsquo;t count as detecting DirtyPipe):</p>
 <ul>
 <li>&ldquo;Container Escape via release_agent&rdquo; &ndash; S01, S02</li>
 <li>&ldquo;Namespace Change from Container&rdquo; &ndash; S02, S03</li>
 <li>&ldquo;Docker Socket Access from Container&rdquo; &ndash; S04 (partial: runc init only, not in-container abuse)</li>
 <li>&ldquo;Sensitive Host File Read&rdquo; &ndash; S05</li>
-<li>&ldquo;Drop and execute new binary&rdquo; &ndash; S08 (fired on gcc, not splice &ndash; does not count as detecting DirtyPipe)</li>
+<li>&ldquo;Drop and execute new binary&rdquo; &ndash; S08 (fired on gcc, not splice, so it does not count as detecting DirtyPipe)</li>
 </ul>
 <p><strong>Default rules that didn&rsquo;t exist:</strong></p>
 <ul>
@@ -362,7 +362,7 @@
 </ul>
 <p>The engine supports every one of these syscalls. The gap is rule coverage, not capability. Closing it required 12 custom rules and rule changes, which I covered in detail in <a href="../production">Part 4</a>.</p>
 <h2 id="tracee-behavioral-depth-configuration-required">Tracee: Behavioral Depth, Configuration Required</h2>
-<p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature &ndash; they detect exploit *consequences* rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
+<p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature. They detect exploit *consequences* rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
 <p>The policy file I built enables 30 event types:</p>
 <p><strong>Process lifecycle:</strong> <code>sched_process_exec</code>, <code>sched_process_exit</code>, <code>clone</code>, <code>clone3</code></p>
 <p><strong>Namespace operations:</strong> <code>unshare</code>, <code>setns</code>, <code>switch_task_ns</code></p>
@@ -406,7 +406,7 @@
 </span><span style="color:#e6db74">    container and evt.type = splice</span>
 <span style="color:#66d9ef">output</span>: <span style="color:#e6db74">&gt;
 </span><span style="color:#e6db74">    splice() from container (user=%user.name)</span>
-</code></pre></div><p>If the <code>output: &gt;</code> line ends up on the same line as the last line of the condition block &ndash; which can happen easily during copy-paste editing &ndash; Falco doesn&rsquo;t report a parse error. Instead, it rejects the <strong>entire</strong> custom-rules.yaml file with a <code>LOAD_ERR</code> that appears only in the container log. All custom rules silently fail to load. The default rules still work, so Falco appears healthy.</p>
+</code></pre></div><p>If the <code>output: &gt;</code> line ends up on the same line as the last line of the condition block, which can happen easily during copy-paste editing, Falco doesn&rsquo;t report a parse error. Instead, it rejects the <strong>entire</strong> custom-rules.yaml file with a <code>LOAD_ERR</code> that appears only in the container log. All custom rules silently fail to load. The default rules still work, so Falco appears healthy.</p>
 <p>I hit this twice in the same file. The first time, I noticed because the splice rule wasn&rsquo;t firing on S08. The second time, Falco crash-looped 27 times before I checked <code>docker logs falco</code> and found the error. The fix was a single newline both times.</p>
 <p><strong>Recommendation:</strong> After any custom rule change, check <code>docker logs falco 2&gt;&amp;1 | grep LOAD_ERR</code> before running scenarios.</p>
 <h2 id="falco-evtdir-deprecation">Falco: evt.dir Deprecation</h2>
@@ -435,7 +435,7 @@ loaded_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</
     <span style="color:#66d9ef">return</span>
 <span style="color:#66d9ef">fi</span>
 </code></pre></div><p>Combined with <code>--restart=always</code> on the container, here&rsquo;s what happened after a VM reboot: Docker auto-restarted the old container with the old configuration. The install function saw the container running and returned early. The new configuration (updated policies, new filters, different flags) was never applied. The scenario ran against the old config.</p>
-<p>The symptom was subtle: event counts and timestamps matched a previous run exactly. Not &ldquo;similar&rdquo; &ndash; identical. The container log&rsquo;s start timestamp was from three hours ago, not from the current run. If I hadn&rsquo;t been comparing timestamps, I&rsquo;d have analyzed stale data and drawn wrong conclusions.</p>
+<p>The symptom was subtle: event counts and timestamps matched a previous run exactly. Not &ldquo;similar&rdquo;, identical. The container log&rsquo;s start timestamp was from three hours ago, not from the current run. If I hadn&rsquo;t been comparing timestamps, I&rsquo;d have analyzed stale data and drawn wrong conclusions.</p>
 <p>The fix was removing the skip guard entirely and always recreating:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always recreate -- the container may have been auto-restarted after</span>
 <span style="color:#75715e"># reboot (--restart=always) with a stale config.</span>
@@ -447,11 +447,11 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 <p>runc, the OCI runtime that Docker uses to create containers, calls <code>fsopen</code>, <code>fsconfig</code>, <code>symlink</code>, and creates netlink sockets during normal container initialization. These are exactly the syscalls that CVE-specific rules target. Without exclusions, every <code>docker run</code> generates ~18 false positive events across the CVE rules.</p>
 <p>The required Falco exclusion:</p>
 <pre><code>not proc.name in (runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;)
-</code></pre><p>This needs to be on every CVE-specific rule. The four runc process names correspond to different stages of the container creation process &ndash; parent, child, and init. Missing any one of them leaks false positives.</p>
+</code></pre><p>This needs to be on every CVE-specific rule. The four runc process names correspond to different stages of the container creation process: parent, child, and init. Missing any one of them leaks false positives.</p>
 <p>Tetragon and Tracee have the same problem but handle it differently. Tetragon&rsquo;s namespace metadata lets you filter in post-processing: runc init processes have <code>is_host: true</code> because they&rsquo;re running in the host&rsquo;s namespaces before the container&rsquo;s namespaces are created. Tracee&rsquo;s container scope (<code>scope: container</code> in the policy) filters out most runc init activity, but some events from <code>runc:[2:INIT]</code> still appear because it executes after the container&rsquo;s namespaces are created but before the container&rsquo;s entrypoint runs.</p>
 <h2 id="tetragon-cap_capable-558-of-all-volume">Tetragon cap_capable: 55.8% of All Volume</h2>
 <p>The <code>cap_capable</code> kprobe in the baseline policy fires on every kernel capability check. A single <code>ls</code> command triggers multiple capability checks. An <code>apt-get install</code> triggers thousands. Across all 15 scenarios, <code>cap_capable</code> accounted for 55.8% of total Tetragon event volume.</p>
-<p>The events are genuinely useful &ndash; the 13x spike during DirtyPipe (1,360 vs 103 baseline) is a real anomaly signal. But for production, you have options:</p>
+<p>The events are genuinely useful, and the 13x spike during DirtyPipe (1,360 vs 103 baseline) is a real anomaly signal. But for production, you have options:</p>
 <ol>
 <li><strong>Remove from baseline policy entirely.</strong> You lose the ambient capability monitoring but cut volume in half. The CVE-specific and capability-abuse policies still catch the important signals.</li>
 <li><strong>Add <code>matchNamespaces</code> to scope it to containers only.</strong> Host-side capability checks (the majority) are filtered in-kernel.</li>
@@ -459,7 +459,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 </ol>
 <h2 id="tracee-security_file_open-the-biggest-knob">Tracee security_file_open: The Biggest Knob</h2>
 <p>Without path filters, <code>security_file_open</code> is the single biggest source of Tracee event volume. During S13, <code>apt-get install keyutils</code> alone generated 12,000+ <code>security_file_open</code> events from the package manager reading every file in the dpkg database. Across all 15 scenarios, unfiltered <code>security_file_open</code> accounted for ~98% of total events.</p>
-<p>Path-prefix filtering reduced total events from 3.76M to 15,169 &ndash; a 99.6% reduction &ndash; with zero detection regressions. The filters I used match the same sensitive paths as Tetragon&rsquo;s TracingPolicies:</p>
+<p>Path-prefix filtering reduced total events from 3.76M to 15,169, a 99.6% reduction, with zero detection regressions. The filters I used match the same sensitive paths as Tetragon&rsquo;s TracingPolicies:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
   <span style="color:#66d9ef">filters</span>:
     - data.pathname=/etc/shadow*
@@ -506,7 +506,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 <li><strong>Falco:</strong> 12 custom rules and rule changes. Lower per-rule effort than Tetragon (you&rsquo;re writing conditions against event fields, not kernel function signatures), but the YAML syntax pitfalls and the <code>rule_matching</code> discovery added debugging time.</li>
 <li><strong>Tracee:</strong> 1 policy YAML file with 30 event types and argument filters. The lowest authoring effort because Tracee&rsquo;s behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>) provide escape detection without per-CVE rule authoring. The main effort was discovering the <code>data.</code> vs <code>args.</code> prefix issue and the path-filtering requirement.</li>
 </ul>
-<p>Tetragon and Tracee can reach 12/13 with custom work. Falco reaches 11/13 &ndash; the S12 runc overwrite is blocked before Falco can observe the write, and S04&rsquo;s socket attribution remains a partial detection. All three have the engine capability to detect the underlying syscalls. The difference is how much authoring each requires to get there. If your team has kernel expertise and wants maximum control, Tetragon&rsquo;s TracingPolicy system rewards that investment. If you want fast iteration on rule conditions without kernel internals knowledge, Falco&rsquo;s rule syntax is more accessible. If you want the broadest behavioral coverage with the least custom authoring, Tracee&rsquo;s signature engine plus a well-tuned policy file gets you there with the least effort.</p>
+<p>Tetragon and Tracee can reach 12/13 with custom work. Falco reaches 11/13: the S12 runc overwrite is blocked before Falco can observe the write, and S04&rsquo;s socket attribution remains a partial detection. All three have the engine capability to detect the underlying syscalls. The difference is how much authoring each requires to get there. If your team has kernel expertise and wants maximum control, Tetragon&rsquo;s TracingPolicy system rewards that investment. If you want fast iteration on rule conditions without kernel internals knowledge, Falco&rsquo;s rule syntax is more accessible. If you want the broadest behavioral coverage with the least custom authoring, Tracee&rsquo;s signature engine plus a well-tuned policy file gets you there with the least effort.</p>
 <p>The gap between &ldquo;tool supports this syscall&rdquo; and &ldquo;tool detects this attack&rdquo; is entirely configuration. That&rsquo;s simultaneously the most frustrating and most empowering finding from this research. Frustrating because every tool requires non-trivial tuning. Empowering because it means the tools you already have are more capable than their default configurations suggest.</p>
 <p><a href="../teampcp">Part 6</a> takes these tuning lessons and tests them against reality: TeamPCP, a threat actor active right now, uses the exact container escape techniques our lab scenarios simulate. The gap between default configurations and real-world threat coverage is where TeamPCP lives.</p>
 <h1 id="llm-disclosure">LLM Disclosure</h1>
