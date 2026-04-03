@@ -415,7 +415,7 @@
 <h2 id="falco-event-file-accumulation">Falco: Event File Accumulation</h2>
 <p>The harness uses <code>touch</code> to create the Falco output file before starting the container. If Falco appends to an existing file (the default behavior with <code>file_output</code>), events from previous runs contaminate your analysis. Between runs, you need to truncate with <code>: &gt; falco-events.json</code>, not just <code>touch</code>.</p>
 <p>This is a lab-specific issue, but the same principle applies in production if you&rsquo;re rotating Falco output files. Stale events in the current file will confuse any analysis pipeline that assumes the file only contains events from the current session.</p>
-<h2 id="tracee---events-doesnt-support-argument-filters">Tracee: &ndash;events Doesn&rsquo;t Support Argument Filters</h2>
+<h2 id="tracee---events-doesnt-support-argument-filters">Tracee: <code>--events</code> Doesn&rsquo;t Support Argument Filters</h2>
 <p>You can&rsquo;t do:</p>
 <pre><code>--events openat.args.pathname=/proc/self/exe
 </code></pre><p>Tracee will silently ignore the filter part and enable <code>openat</code> with no filtering. To get argument-level filtering, you need a policy YAML file. The documentation mentions this, but the error mode is silent acceptance rather than a parse error, so it&rsquo;s easy to miss.</p>
@@ -428,7 +428,7 @@ loaded_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$loaded_count<span style="color:#e6db74">&#34;</span> -lt <span style="color:#e6db74">&#34;</span>$policy_count<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo <span style="color:#e6db74">&#34;WARNING: </span>$loaded_count<span style="color:#e6db74">/</span>$policy_count<span style="color:#e6db74"> policies loaded&#34;</span>
 <span style="color:#66d9ef">fi</span>
-</code></pre></div><h2 id="the---restartalways--skip-guard-bug">The &ndash;restart=always + Skip Guard Bug</h2>
+</code></pre></div><h2 id="the---restartalways--skip-guard-bug">The <code>--restart=always</code> + Skip Guard Bug</h2>
 <p>This one cost two full re-runs. All three install functions originally had a guard:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> docker ps --format <span style="color:#e6db74">&#39;{{.Names}}&#39;</span> | grep -q <span style="color:#e6db74">&#34;^toolname</span>$<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
     echo <span style="color:#e6db74">&#34;Tool is already running -- skipping reinstall.&#34;</span>
@@ -474,7 +474,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 </code></pre></div><p>This is not optional for production. Without these filters, Tracee is vulnerable to adversarial openat flooding (S15 demonstrated 10.1M dropped events and a missed escape). With them, Tracee handled the same flood with zero drops.</p>
 <h2 id="falco-drop-and-execute-new-binary">Falco &ldquo;Drop and execute new binary&rdquo;</h2>
 <p>This rule fires on any binary that was written to disk and then executed. It&rsquo;s high-confidence for supply chain attacks (attacker drops a binary and runs it). It&rsquo;s noisy in containers that install packages at runtime: <code>apt-get install keyutils</code> followed by <code>keyctl</code> triggers it, and so does every other freshly-installed package.</p>
-<p>In production, this rule is valuable but needs context-dependent tuning. If your containers never install packages at runtime (immutable images), leave it at CRITICAL. If they do, either suppress it for known package managers or downgrade to INFORMATIONAL for containers with known install-at-runtime patterns.</p>
+<p>In production, this rule is valuable but needs context-dependent tuning. If your containers never install packages at runtime (immutable images: which you should be doing), leave it at CRITICAL. If they do, either suppress it for known package managers or downgrade to INFORMATIONAL for containers with known install-at-runtime patterns.</p>
 <h1 id="tuning-recommendations">Tuning Recommendations</h1>
 <h2 id="tetragon">Tetragon</h2>
 <ol>
