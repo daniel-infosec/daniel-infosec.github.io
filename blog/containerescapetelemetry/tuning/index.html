@@ -287,7 +287,7 @@
 <p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
 <h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
 <h2 id="tetragon-powerful-engine-no-seats">Tetragon: Powerful Engine, No Seats</h2>
-<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
+<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch. (Or your LLM is.)</p>
 <p>I wrote 8 TracingPolicy files covering 31 kernel function hooks for this research:</p>
 <table>
 <thead>
@@ -390,7 +390,7 @@
 <p>This is the single most important Falco configuration change for detection engineering, and discovering it was one of the more frustrating debugging sessions in this project.</p>
 <p>By default, Falco uses <code>rule_matching=first</code>: when multiple rules match the same event, only the first matching rule fires. I discovered this when the &ldquo;Keyctl Invocation from Container&rdquo; rule never fired on S13 despite keyctl clearly executing 504 times. The reason: &ldquo;Drop and execute new binary&rdquo; matched the same <code>execve_exit</code> event first (keyctl was freshly installed by <code>apt-get</code>), and Falco stopped evaluating.</p>
 <p>Setting <code>rule_matching=all</code> makes all matching rules fire on the same event. This is essential if you have overlapping rules at different priority levels. A process that triggers both &ldquo;Drop and execute new binary&rdquo; (WARNING) and &ldquo;Keyctl Invocation from Container&rdquo; (WARNING) should fire both, because they represent different threat signals from the same event.</p>
-<h2 id="tracee-the-data-vs-args-trap">Tracee: The data. vs args. Trap</h2>
+<h2 id="tracee-the-data-vs-args-trap">Tracee: The <code>data.</code> vs <code>args.</code> Trap</h2>
 <p>Tracee&rsquo;s policy YAML supports argument filtering under each event&rsquo;s <code>filters</code> block. The syntax looks like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
   <span style="color:#66d9ef">filters</span>:
