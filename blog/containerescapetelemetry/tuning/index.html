@@ -286,7 +286,7 @@
       <p>This is Part 5 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered isolation primitives. <a href="../methodology">Part 2</a> covered the lab and tools. <a href="../deepdives">Part 3</a> was the per-scenario data. <a href="../production">Part 4</a> covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.</p>
 <p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
 <h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
-<h2 id="tetragon-powerful-engine-empty-hangar">Tetragon: Powerful Engine, Empty Hangar</h2>
+<h2 id="tetragon-powerful-engine-no-seats">Tetragon: Powerful Engine, No Seats</h2>
 <p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
 <p>I wrote 8 TracingPolicy files covering 31 kernel function hooks for this research:</p>
 <table>
