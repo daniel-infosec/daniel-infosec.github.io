@@ -1,206 +1,164 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>infosec on Catscrdl</title>
-    <link>https://catscrdl.io/categories/infosec/</link>
-    <description>Recent content in infosec on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/categories/infosec/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/isolation/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/isolation/</guid>
-      <description>This is Part 1 of the container escape telemetry series. The series overview has the project goals, key findings, and reading guide. If you&amp;rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to Part 2: Methodology and Tool Architecture.
-This post is the primer. It covers what containers actually are at the kernel level, what &amp;ldquo;escape&amp;rdquo; means in concrete terms, and how eBPF-based tools get telemetry out of the kernel.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry, Part 2: Methodology and Tool Architecture</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/methodology/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/methodology/</guid>
-      <description>This is Part 2 of the container escape telemetry series (overview). Part 1 covered the isolation primitives and eBPF observability model. This post covers the lab architecture, the three tools under test, the 15 escape scenarios, and the detection coverage matrix. If you want to skip straight to what the telemetry actually looks like, jump to Part 3: Per-Scenario Deep Dives.
-The Lab Each tool ran on its own dedicated Hyper-V VM: 3 GB RAM, 2 vCPUs, Ubuntu 22.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry, Part 3: What Each Tool Actually Captured</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</guid>
-      <description>This is Part 3 of the container escape telemetry series (overview). Part 1 covered isolation primitives and the eBPF observability model. Part 2 covered the lab, the tools, and the detection coverage matrix. This post is the meat: per-scenario telemetry breakdowns showing what each tool actually captured, where the qualitative differences behind the checkmarks become concrete.
-Not every scenario gets a deep dive. Some produced straightforward results that the coverage matrix already summarizes.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/production/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/production/</guid>
-      <description>This is Part 4 of the container escape telemetry series (overview). Part 1 covered isolation primitives and the eBPF observability model. Part 2 covered the lab and detection coverage matrix. Part 3 walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?
-The Volume Question Parts 2 and 3 focused on what each tool sees.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/tuning/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/tuning/</guid>
-      <description>This is Part 5 of the container escape telemetry series (overview). Part 1 covered isolation primitives. Part 2 covered the lab and tools. Part 3 was the per-scenario data. Part 4 covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.
-The gap between &amp;ldquo;tool installed&amp;rdquo; and &amp;ldquo;tool detecting container escapes&amp;rdquo; is larger than any of these projects&amp;rsquo; documentation suggests.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</guid>
-      <description>This is Part 6 of the container escape telemetry series (overview). Parts 1-5 covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.
-TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored LiteLLM&amp;rsquo;s PyPI package. As of late March 2026, incident response teams across the industry are still assessing the blast radius.</description>
-    </item>
-    
-    <item>
-      <title>Container Escape Telemetry: Series Overview</title>
-      <link>https://catscrdl.io/blog/containerescapetelemetry/intro/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/containerescapetelemetry/intro/</guid>
-      <description>As a detection engineer, container escapes have always fascinated me. Detections focused on control bypasses can be both extremely difficult to make and extremely valuable when they fire. The challenge is that most discussions about container runtime security focus on whether a tool detected an escape &amp;ndash; a binary yes/no that doesn&amp;rsquo;t tell you much about the underlying telemetry that makes detection possible in the first place.
-There&amp;rsquo;s also a marketing problem.</description>
-    </item>
-    
-    <item>
-      <title>The Pillars of Security Monitoring: A Comprehensive Guide</title>
-      <link>https://catscrdl.io/blog/typesofsecuritymonitoring/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/typesofsecuritymonitoring/</guid>
-      <description>The Pillars of Security Monitoring: A Comprehensive Guide As you may know by now if you&amp;rsquo;ve read a few of my blog articles, I&amp;rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&amp;rsquo;re part of a larger &amp;ldquo;security monitoring&amp;rdquo; capability which consists of related but distinct pillars.</description>
-    </item>
-    
-    <item>
-      <title>Detection as Code: A Maturity Framework</title>
-      <link>https://catscrdl.io/blog/detectionascodematurity/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/detectionascodematurity/</guid>
-      <description>Detection as Code: A Maturity Framework Introduction In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&amp;rsquo;ve come to realize that it&amp;rsquo;s not simply a matter of whether or not to adopt DaC.</description>
-    </item>
-    
-    <item>
-      <title>There are Only Two Rules</title>
-      <link>https://catscrdl.io/blog/thereareonlytworules/</link>
-      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/thereareonlytworules/</guid>
-      <description>Intro In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&amp;rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.</description>
-    </item>
-    
-    <item>
-      <title>Building Resilient Detection Suppressions</title>
-      <link>https://catscrdl.io/blog/buildingresilientsuppressions/</link>
-      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/buildingresilientsuppressions/</guid>
-      <description>Intro Raise your hand if you&amp;rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&amp;rsquo;s back in your &amp;ldquo;fix&amp;rdquo; queue with another false positive. I&amp;rsquo;d expect almost everyone who&amp;rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&amp;rsquo;t very good and it&amp;rsquo;s alerting on a lot of benign behavior.</description>
-    </item>
-    
-    <item>
-      <title>How to Write an Actionable Alert</title>
-      <link>https://catscrdl.io/blog/howtowriteanactionablealert/</link>
-      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/howtowriteanactionablealert/</guid>
-      <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
-This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts.</description>
-    </item>
-    
-    <item>
-      <title>Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</title>
-      <link>https://catscrdl.io/blog/streamingvsscheduling/</link>
-      <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/streamingvsscheduling/</guid>
-      <description>Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&amp;rsquo;s clarify what we mean by each.
-Definitions A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data.</description>
-    </item>
-    
-    <item>
-      <title>Azure Flow Log Analysis</title>
-      <link>https://catscrdl.io/blog/azureflowloganalysis/</link>
-      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/azureflowloganalysis/</guid>
-      <description>Intro Disclaimer I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.
-At Snowflake, we&amp;rsquo;re a multi-cloud environment. As part of the threat detection team, it&amp;rsquo;s my job to ensure that we&amp;rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found at this link.</description>
-    </item>
-    
-    <item>
-      <title>Regarding SMS 2FA</title>
-      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
-      <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
-    </item>
-    
-    <item>
-      <title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
-      <link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/opensourceredteamtooling/</guid>
-      <description>Update 1 - I&amp;rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
-      <link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
-      <description>Blog link: Getting Started with Praetorian&amp;rsquo;s ATT&amp;amp;CK Automation</description>
-    </item>
-    
-    <item>
-      <title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
-      <link>https://catscrdl.io/blog/attackbenchmark/</link>
-      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/attackbenchmark/</guid>
-      <description>Blog link: Why Praetorian Benchmarks to MITRE ATT&amp;amp;CK™ and Why You Should Too</description>
-    </item>
-    
-    <item>
-      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
-      <link>https://catscrdl.io/blog/wikipediac2/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
-      <description>This work was inspired by my coworker&amp;rsquo;s (Josh Abraham) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.
-In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
-    </item>
-    
-    <item>
-      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
-      <link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
-      <description>On a recent Purple Team engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Infosec on Catscrdl</title>
+		<link>https://catscrdl.io/categories/infosec/</link>
+		<description>Recent content in Infosec on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/categories/infosec/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Stop Making Your Detection Engineers Triage Alerts</title>
+				<link>https://catscrdl.io/blog/whotriagesthealerts/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/whotriagesthealerts/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;There was a question I saw the other day asking if detection engineers (DE), the folks who author alerts, should also be primarily responsible for their triage. There was large support for having the detection authors also play a large role in initial triage, often as part of the oncall. I largely disagree with this stance and am going to use some time Friday to quickly argue why you&amp;rsquo;re likely compensating for technology and process failures if you do that.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/isolation/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/isolation/</guid>
+				<description>&lt;p&gt;This is Part 1 of the container escape telemetry series. The &lt;a href=&#34;../intro&#34;&gt;series overview&lt;/a&gt; has the project goals, key findings, and reading guide. If you&amp;rsquo;re already comfortable with namespaces, cgroups, capabilities, and how eBPF ring buffers work, skip ahead to &lt;a href=&#34;../methodology&#34;&gt;Part 2: Methodology and Tool Architecture&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;This post is the primer. It covers what containers actually are at the kernel level, what &amp;ldquo;escape&amp;rdquo; means in concrete terms, and how eBPF-based tools get telemetry out of the kernel. That last part matters more than you might think, because the mechanism that delivers telemetry to your security tool has its own failure modes, and an attacker who understands those failure modes can exploit them.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 2: Methodology and Tool Architecture</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/methodology/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/methodology/</guid>
+				<description>&lt;p&gt;This is Part 2 of the container escape telemetry series (&lt;a href=&#34;../intro&#34;&gt;overview&lt;/a&gt;). &lt;a href=&#34;../isolation&#34;&gt;Part 1&lt;/a&gt; covered the isolation primitives and eBPF observability model. This post covers the lab architecture, the three tools under test, the 15 escape scenarios, and the detection coverage matrix. If you want to skip straight to what the telemetry actually looks like, jump to &lt;a href=&#34;../deepdives&#34;&gt;Part 3: Per-Scenario Deep Dives&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h1 id=&#34;the-lab&#34;&gt;The Lab&lt;/h1&gt;&#xA;&lt;p&gt;Each tool ran on its own dedicated Hyper-V VM: 3 GB RAM, 2 vCPUs, Ubuntu 22.04 on kernel 5.15.0-91-generic. One tool per VM. This was non-negotiable. eBPF programs from different tools will contend for the same kernel hooks, and if you&amp;rsquo;re trying to measure event ordering and timing, that contention corrupts your data. You can&amp;rsquo;t draw conclusions about &amp;ldquo;tool A generated event X before tool B generated event Y&amp;rdquo; if both tools are fighting over the same kprobe attachment points on the same kernel.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 3: What Each Tool Actually Captured</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/deepdives/</guid>
+				<description>&lt;p&gt;This is Part 3 of the container escape telemetry series (&lt;a href=&#34;../intro&#34;&gt;overview&lt;/a&gt;). &lt;a href=&#34;../isolation&#34;&gt;Part 1&lt;/a&gt; covered isolation primitives and the eBPF observability model. &lt;a href=&#34;../methodology&#34;&gt;Part 2&lt;/a&gt; covered the lab, the tools, and the detection coverage matrix. This post is the meat: per-scenario telemetry breakdowns showing what each tool actually captured, where the qualitative differences behind the checkmarks become concrete.&lt;/p&gt;&#xA;&lt;p&gt;Not every scenario gets a deep dive. Some produced straightforward results that the coverage matrix already summarizes. I&amp;rsquo;m focusing on the scenarios where the cross-tool comparison reveals something interesting about how these tools work, where they disagree, and what the disagreements mean for detection engineering.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/production/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/production/</guid>
+				<description>&lt;p&gt;This is Part 4 of the container escape telemetry series (&lt;a href=&#34;../intro&#34;&gt;overview&lt;/a&gt;). &lt;a href=&#34;../isolation&#34;&gt;Part 1&lt;/a&gt; covered isolation primitives and the eBPF observability model. &lt;a href=&#34;../methodology&#34;&gt;Part 2&lt;/a&gt; covered the lab and detection coverage matrix. &lt;a href=&#34;../deepdives&#34;&gt;Part 3&lt;/a&gt; walked through per-scenario telemetry. This post is about the operational questions: how much data do these tools produce, what percentage of it matters, and which tool should you actually deploy?&lt;/p&gt;&#xA;&lt;h1 id=&#34;the-volume-question&#34;&gt;The Volume Question&lt;/h1&gt;&#xA;&lt;p&gt;Parts 2 and 3 focused on what each tool sees. But there&amp;rsquo;s an equally important dimension: how &lt;em&gt;much&lt;/em&gt; does each tool generate, and what&amp;rsquo;s the signal-to-noise ratio of that output? If you&amp;rsquo;re going to deploy any of these tools in production, the telemetry volume has direct implications for storage, bandwidth, and whether an analyst can actually find the escape signal in the noise.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/tuning/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/tuning/</guid>
+				<description>&lt;p&gt;This is Part 5 of the container escape telemetry series (&lt;a href=&#34;../intro&#34;&gt;overview&lt;/a&gt;). &lt;a href=&#34;../isolation&#34;&gt;Part 1&lt;/a&gt; covered isolation primitives. &lt;a href=&#34;../methodology&#34;&gt;Part 2&lt;/a&gt; covered the lab and tools. &lt;a href=&#34;../deepdives&#34;&gt;Part 3&lt;/a&gt; was the per-scenario data. &lt;a href=&#34;../production&#34;&gt;Part 4&lt;/a&gt; covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.&lt;/p&gt;&#xA;&lt;p&gt;The gap between &amp;ldquo;tool installed&amp;rdquo; and &amp;ldquo;tool detecting container escapes&amp;rdquo; is larger than any of these projects&amp;rsquo; documentation suggests. Here&amp;rsquo;s what that gap actually looks like and how to close it.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/teampcp/</guid>
+				<description>&lt;p&gt;This is Part 6 of the container escape telemetry series (&lt;a href=&#34;../intro&#34;&gt;overview&lt;/a&gt;). Parts &lt;a href=&#34;../isolation&#34;&gt;1&lt;/a&gt;-&lt;a href=&#34;../tuning&#34;&gt;5&lt;/a&gt; covered isolation primitives, methodology, per-scenario telemetry, production considerations, and tuning. This post takes the lab findings and pressure-tests them against a real threat actor operating in the wild right now.&lt;/p&gt;&#xA;&lt;p&gt;TeamPCP compromised Trivy on March 19, 2026. Five days later they backdoored LiteLLM&amp;rsquo;s PyPI package. As of late March 2026, incident response teams across the industry are still assessing the blast radius. But the container escape techniques TeamPCP uses aren&amp;rsquo;t novel. They&amp;rsquo;re the same patterns our 15 lab scenarios were designed to detect. That&amp;rsquo;s either a validation of the research or a coincidence. Having spent weeks staring at this telemetry, I don&amp;rsquo;t think it&amp;rsquo;s a coincidence.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Container Escape Telemetry: Series Overview</title>
+				<link>https://catscrdl.io/blog/containerescapetelemetry/intro/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/containerescapetelemetry/intro/</guid>
+				<description>&lt;p&gt;As a detection engineer, container escapes have always fascinated me. Detections focused on control bypasses can be both extremely difficult to make and extremely valuable when they fire. The challenge is that most discussions about container runtime security focus on &lt;em&gt;whether&lt;/em&gt; a tool detected an escape &amp;ndash; a binary yes/no that doesn&amp;rsquo;t tell you much about the underlying telemetry that makes detection possible in the first place.&lt;/p&gt;&#xA;&lt;p&gt;There&amp;rsquo;s also a marketing problem. I&amp;rsquo;ve seen vendors demonstrate container escape detection against one or two scenarios &amp;ndash; usually cgroup release_agent or nsenter &amp;ndash; and present that as comprehensive coverage. It isn&amp;rsquo;t. A tool that detects cgroup escapes but misses DirtyPipe, or catches namespace transitions but is blind to capability abuse, provides a false sense of security. You can&amp;rsquo;t evaluate coverage without testing breadth.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>The Pillars of Security Monitoring: A Comprehensive Guide</title>
+				<link>https://catscrdl.io/blog/typesofsecuritymonitoring/</link>
+				<pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/typesofsecuritymonitoring/</guid>
+				<description>&lt;h1 id=&#34;the-pillars-of-security-monitoring-a-comprehensive-guide&#34;&gt;The Pillars of Security Monitoring: A Comprehensive Guide&lt;/h1&gt;&#xA;&lt;p&gt;As you may know by now if you&amp;rsquo;ve read a few of my blog articles, I&amp;rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&amp;rsquo;re part of a larger &amp;ldquo;security monitoring&amp;rdquo; capability which consists of related but distinct pillars. We&amp;rsquo;ll explore these interrelated pillars of security monitoring: threat detection, posture management, compliance monitoring, abuse detection, insider threat, and vulnerability management. Understanding these differences isn&amp;rsquo;t just academic – it&amp;rsquo;s essential for crafting an effective, nuanced security strategy. Importantly, it will lead into an often opinionated discussion on SOC vs SOC-less models.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Detection as Code: A Maturity Framework</title>
+				<link>https://catscrdl.io/blog/detectionascodematurity/</link>
+				<pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/detectionascodematurity/</guid>
+				<description>&lt;h1 id=&#34;detection-as-code-a-maturity-framework&#34;&gt;Detection as Code: A Maturity Framework&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&amp;rsquo;ve come to realize that it&amp;rsquo;s not simply a matter of whether or not to adopt DaC.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>There are Only Two Rules</title>
+				<link>https://catscrdl.io/blog/thereareonlytworules/</link>
+				<pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/thereareonlytworules/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&amp;rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Building Resilient Detection Suppressions</title>
+				<link>https://catscrdl.io/blog/buildingresilientsuppressions/</link>
+				<pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/buildingresilientsuppressions/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;Raise your hand if you&amp;rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&amp;rsquo;s back in your &amp;ldquo;fix&amp;rdquo; queue with another false positive. I&amp;rsquo;d expect almost everyone who&amp;rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&amp;rsquo;t very good and it&amp;rsquo;s alerting on a lot of benign behavior. But sometimes, the answer is that the suppression that was implemented was too specific and wasn&amp;rsquo;t properly generalized to capture the benign behavior.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>How to Write an Actionable Alert</title>
+				<link>https://catscrdl.io/blog/howtowriteanactionablealert/</link>
+				<pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/howtowriteanactionablealert/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;&amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts. The target audience of this blog post is security professionals who write custom detections in their SIEM or other similar system.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Real Time vs Scheduled Query Detections - A Guide For Detection Engineers</title>
+				<link>https://catscrdl.io/blog/streamingvsscheduling/</link>
+				<pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/streamingvsscheduling/</guid>
+				<description>&lt;p&gt;Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&amp;rsquo;s clarify what we mean by each.&lt;/p&gt;&#xA;&lt;h1 id=&#34;definitions&#34;&gt;Definitions&lt;/h1&gt;&#xA;&lt;p&gt;A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data. It&amp;rsquo;s important to note that these are actually more accurately &amp;ldquo;near&amp;rdquo; real time rules. There&amp;rsquo;s delays due to log generation, ingestion, parsing, running the rule logic, and delivering the results. Let&amp;rsquo;s take a look at some examples.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Azure Flow Log Analysis</title>
+				<link>https://catscrdl.io/blog/azureflowloganalysis/</link>
+				<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/azureflowloganalysis/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;Disclaimer&lt;/em&gt; I currently work at Snowflake and use the product on a daily basis for log analysis and threat detection. At the time of this writing, that probably adds bias to my article.&lt;/p&gt;&#xA;&lt;p&gt;At Snowflake, we&amp;rsquo;re a multi-cloud environment. As part of the threat detection team, it&amp;rsquo;s my job to ensure that we&amp;rsquo;re monitoring. One of my tasks was to monitor our Azure flow logs for unusual behavior. Information on Azure Network Security Group (NSG) flow logs can be found &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-overview&#34;&gt;at this link.&lt;/a&gt; When I started exploring this data source, I was frustrated to learn that, unlike the AWS VPC flow logs, there was no &lt;a href=&#34;https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html&#34;&gt;field that ties the flow log to the instance ID&lt;/a&gt;, or in the case of Azure, the Virtual Machine. The recommended solution from Microsoft was to use the IP address. However, the architecture I was working in had thousands of worker nodes created and destroyed frequently meaning that we would often see duplicate IP addresses within a short period of time due to NATing. If I couldn&amp;rsquo;t automatically tie the IP to a VM, the logs would be useless as our IR team needed that information in order to conduct automated response in case of a malicious event.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Regarding SMS 2FA</title>
+				<link>https://catscrdl.io/blog/regardingsms2fa/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+				<description>&lt;p&gt;I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm. However, if Tavis is instead simply stating &amp;ldquo;SMS 2FA is ineffective&amp;rdquo; with no caveats, I would disagree.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</title>
+				<link>https://catscrdl.io/blog/opensourceredteamtooling/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/opensourceredteamtooling/</guid>
+				<description>&lt;p&gt;Update 1 - I&amp;rsquo;m clarifying the definition of Advanced Persistent Threats (APTs) and Financially Motivated Actors (FMAs). I combined the two groups in the previous version. The content and focus of the discussion primarily centers on FMAs. APTs and FMAs can overlap in terms of TTPs, capabilities, personnel, countries, etc. What distinguishes them is motivation. FMAs, as their name implies, are financially motivated. APTs can have a number of motivations including financial, political, etc.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+				<link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
+				<pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
+				<description>&lt;p&gt;On a recent &lt;a href=&#34;https://www.praetorian.com/corporate-security/purple-team-detection-response&#34;&gt;Purple Team&lt;/a&gt; engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.&#xA;To backup a little, a key part of an offensive campaign (and many say the most critical part) is recon. During this phase, the Red Team or malicious actor tries to obtain as much information about the target as possible. Key items of interest include organizational charts, employee lists, email formats, external address space, and technologies utilized by the organization. During this phase, the attacker wants to limit their interaction with the target as much as possible in order to avoid tipping off defenders. Most attackers avoid active scanning or interaction with the target during this phase.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Getting Started with Praetorian’s ATT&amp;CK™ Automation</title>
+				<link>https://catscrdl.io/blog/gettingstartedwithautomation/</link>
+				<pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/gettingstartedwithautomation/</guid>
+				<description>&lt;p&gt;Blog link: &lt;a href=&#34;https://www.praetorian.com/blog/getting-started-with-praetorians-attack-automation/&#34;&gt;Getting Started with Praetorian&amp;rsquo;s ATT&amp;amp;CK Automation&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Why Praetorian Benchmarks to MITRE ATT&amp;CK™ and Why You Should Too</title>
+				<link>https://catscrdl.io/blog/attackbenchmark/</link>
+				<pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/attackbenchmark/</guid>
+				<description>&lt;p&gt;Blog link: &lt;a href=&#34;https://www.praetorian.com/blog/why-praetorian-benchmarks-to-mitre-attack/&#34;&gt;Why Praetorian Benchmarks to MITRE ATT&amp;amp;CK™ and Why You Should Too&lt;/a&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Demonstrating the Future of Command and Control with Wikipedia</title>
+				<link>https://catscrdl.io/blog/wikipediac2/</link>
+				<pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/wikipediac2/</guid>
+				<description>&lt;p&gt;This work was inspired by my coworker&amp;rsquo;s (&lt;a href=&#34;https://twitter.com/Jabra&#34;&gt;Josh Abraham&lt;/a&gt;) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.&lt;/p&gt;&#xA;&lt;p&gt;In addition, there was a recent Twitter post from &lt;a href=&#34;https://twitter.com/randomuserid/status/1113088976263569408&#34;&gt;@randomuserid&lt;/a&gt; that got me thinking about what other sites besides Slack could be utilized. So, I browsed through the &lt;a href=&#34;https://www.alexa.com/topsites&#34;&gt;Alexa top sites&lt;/a&gt; and started seeing what features could be abused to facilitate C2 traffic. The first few were all linked in @randomuserid&amp;rsquo;s Google sheet, so I moved onto &lt;a href=&#34;wikipedia.org&#34;&gt;wikipedia.org&lt;/a&gt;. It didn&amp;rsquo;t take me long to stumble onto the &lt;a href=&#34;https://en.wikipedia.org/w/api.php&#34;&gt;Wikipedia API&lt;/a&gt; page.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

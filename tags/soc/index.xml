@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Soc on Catscrdl</title>
+		<link>https://catscrdl.io/tags/soc/</link>
+		<description>Recent content in Soc on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/soc/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Stop Making Your Detection Engineers Triage Alerts</title>
+				<link>https://catscrdl.io/blog/whotriagesthealerts/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/whotriagesthealerts/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;There was a question I saw the other day asking if detection engineers (DE), the folks who author alerts, should also be primarily responsible for their triage. There was large support for having the detection authors also play a large role in initial triage, often as part of the oncall. I largely disagree with this stance and am going to use some time Friday to quickly argue why you&amp;rsquo;re likely compensating for technology and process failures if you do that.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

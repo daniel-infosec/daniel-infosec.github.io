@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Real Time vs Scheduled Query Detections - A Guide For Detection Engineers">
   <meta property="og:description" content="Many SIEM tools nowadays offer the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why? This blog post is designed to serve as a guide to those designing their detection architecture.">
   <meta property="description" content="Many SIEM tools nowadays offer the opportunity for you to write rules on streaming data or run scheduled queries on a periodic basis. But when should you use which and why? This blog post is designed to serve as a guide to those designing their detection architecture.">
@@ -18,7 +18,7 @@
       <meta property="og:image:alt" content="Analysis">
     
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -291,31 +291,31 @@
       <p>Most modern SIEMs offer 2 primary methods for running their queries: real time rules and scheduled queries. Each option offers a variety of pros and cons that you should consider as you develop your detection. Before we dive into that, let&rsquo;s clarify what we mean by each.</p>
 <h1 id="definitions">Definitions</h1>
 <p>A real time rule, often called a streaming rule, runs on a stream of data. Essentially, as the data enters the SIEM, each data point will get processed against the rules that correspond with that kind of data. It&rsquo;s important to note that these are actually more accurately &ldquo;near&rdquo; real time rules. There&rsquo;s delays due to log generation, ingestion, parsing, running the rule logic, and delivering the results. Let&rsquo;s take a look at some examples.</p>
-<pre><code>OKTA_SUPPORT_ACCESS_EVENTS = [
-    &quot;user.session.impersonation.grant&quot;,
-    &quot;user.session.impersonation.initiate&quot;,
+<pre tabindex="0"><code>OKTA_SUPPORT_ACCESS_EVENTS = [
+    &#34;user.session.impersonation.grant&#34;,
+    &#34;user.session.impersonation.initiate&#34;,
 ]
 
 
 def rule(event):
-    return event.get(&quot;eventType&quot;) in OKTA_SUPPORT_ACCESS_EVENTS
+    return event.get(&#34;eventType&#34;) in OKTA_SUPPORT_ACCESS_EVENTS
 
 
 def title(event):
-    return f&quot;Okta Support Access Granted by {event.udm('actor_user')}&quot;
+    return f&#34;Okta Support Access Granted by {event.udm(&#39;actor_user&#39;)}&#34;
 
 
 def alert_context(event):
     context = {
-        &quot;user&quot;: event.udm(&quot;actor_user&quot;),
-        &quot;ip&quot;: event.udm(&quot;source_ip&quot;),
-        &quot;event&quot;: event.get(&quot;eventType&quot;),
+        &#34;user&#34;: event.udm(&#34;actor_user&#34;),
+        &#34;ip&#34;: event.udm(&#34;source_ip&#34;),
+        &#34;event&#34;: event.get(&#34;eventType&#34;),
     }
     return context
 </code></pre><p>The above rule is from Panther and can be found at <a href="https://github.com/panther-labs/panther-analysis/blob/master/okta_rules/okta_account_support_access.py">okta account support access</a>.</p>
 <p>The rule is configured to run on Okta logs. For every event, it determines if the event type was in a list of defined Okta support access events. This rule runs as the Okta logs are ingested into Panther and is near-real time: as soon as the logs are shipped to Panther, the rule runs.</p>
 <p>Now, let&rsquo;s take a look at a scheduled query.</p>
-<pre><code>AnalysisType: scheduled_query
+<pre tabindex="0"><code>AnalysisType: scheduled_query
 QueryName: Okta Investigate MFA and Password resets
 Enabled: true
 Description: &gt;
@@ -328,13 +328,13 @@ SnowflakeQuery: &gt;
     eventType,client:ipAddress as ip_address
   FROM panther_logs.public.okta_systemlog
   WHERE eventType IN
-    ('user.mfa.factor.reset_all',
-    'user.mfa.factor.deactivate',
-    'user.mfa.factor.suspend',
-    'user.account.reset_password',
-    'user.account.update_password',
-    'user.mfa.factor.update')
-  and p_occurs_since('1 hour')
+    (&#39;user.mfa.factor.reset_all&#39;,
+    &#39;user.mfa.factor.deactivate&#39;,
+    &#39;user.mfa.factor.suspend&#39;,
+    &#39;user.account.reset_password&#39;,
+    &#39;user.account.update_password&#39;,
+    &#39;user.mfa.factor.update&#39;)
+  and p_occurs_since(&#39;1 hour&#39;)
   ORDER by p_event_time DESC
 Schedule:
   RateMinutes: 60
@@ -362,23 +362,23 @@ Schedule:
 <li>Streaming rule on firewall logs looking for IoC IPs</li>
 </ol>
 <p>Let&rsquo;s look at some example code.</p>
-<pre><code>from ioc_library import lookup_ioc
+<pre tabindex="0"><code>from ioc_library import lookup_ioc
 
 def rule(event):
-    return lookup_ioc(event.udm(&quot;source_ip&quot;)) or lookup_ioc(event.udm(&quot;dest_ip&quot;))
+    return lookup_ioc(event.udm(&#34;source_ip&#34;)) or lookup_ioc(event.udm(&#34;dest_ip&#34;))
 
 
 def title(event):
-    if lookup_ioc(event.udm(&quot;source_ip&quot;)):
-      return f&quot;Source IP ({event.udm('source_ip')}) matched a known IoC&quot;
+    if lookup_ioc(event.udm(&#34;source_ip&#34;)):
+      return f&#34;Source IP ({event.udm(&#39;source_ip&#39;)}) matched a known IoC&#34;
     else:
-      return f&quot;Dest IP ({event.udm('dest_ip')}) matched a known IoC&quot;
+      return f&#34;Dest IP ({event.udm(&#39;dest_ip&#39;)}) matched a known IoC&#34;
 </code></pre><p>In this sample code, we have a library that allows us to pass in an IP and query an API to see if the IP matches a known IoC. What potential costs could we have?</p>
 <p>We&rsquo;re going to have real time analytic and enrichment costs. Especially concerning is the fact that we&rsquo;re calling the lookup_ioc function up to 3 times. (Note that this is a naive implementation to serve as an example.) Depending on the volume of our firewall traffic, it&rsquo;s very likely we could run into a rate limit on the API.</p>
 <ol start="2">
 <li>Scheduled query matching AWS logins with Okta usernames with Jamf IPs</li>
 </ol>
-<pre><code>AnalysisType: scheduled_query
+<pre tabindex="0"><code>AnalysisType: scheduled_query
 QueryName: Okta AWS Console Logins from Non-Laptops
 Enabled: true
 Description: &gt;
@@ -387,11 +387,11 @@ SnowflakeQuery: &gt;
   SELECT *
   FROM panther_logs.public.cloudtrail ct
   INNER JOIN panther_logs.public.okta_users okta on
-    okta:email like CONCAT('%', lower(ct:userIdentity.userName), '%')
+    okta:email like CONCAT(&#39;%&#39;, lower(ct:userIdentity.userName), &#39;%&#39;)
   LEFT OUTER JOIN panther_logs.public.jamf_inventory jamf on
     jamf:externalIP = ct:sourceIPAddress
-  WHERE ct:eventName = 'ConsoleLogin'
-  and p_occurs_since('1 hour')
+  WHERE ct:eventName = &#39;ConsoleLogin&#39;
+  and p_occurs_since(&#39;1 hour&#39;)
   and jamf:externalIP is NULL
   ORDER by p_event_time DESC
 Schedule:
@@ -518,6 +518,16 @@ Schedule:
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -549,14 +559,6 @@ Schedule:
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -576,7 +578,7 @@ Schedule:
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -652,14 +654,14 @@ Schedule:
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

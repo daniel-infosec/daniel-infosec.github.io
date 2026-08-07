@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>wikipedia on Catscrdl</title>
-    <link>https://catscrdl.io/tags/wikipedia/</link>
-    <description>Recent content in wikipedia on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/tags/wikipedia/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Demonstrating the Future of Command and Control with Wikipedia</title>
-      <link>https://catscrdl.io/blog/wikipediac2/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/wikipediac2/</guid>
-      <description>This work was inspired by my coworker&amp;rsquo;s (Josh Abraham) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.
-In addition, there was a recent Twitter post from @randomuserid that got me thinking about what other sites besides Slack could be utilized.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Wikipedia on Catscrdl</title>
+		<link>https://catscrdl.io/tags/wikipedia/</link>
+		<description>Recent content in Wikipedia on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/wikipedia/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Demonstrating the Future of Command and Control with Wikipedia</title>
+				<link>https://catscrdl.io/blog/wikipediac2/</link>
+				<pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/wikipediac2/</guid>
+				<description>&lt;p&gt;This work was inspired by my coworker&amp;rsquo;s (&lt;a href=&#34;https://twitter.com/Jabra&#34;&gt;Josh Abraham&lt;/a&gt;) work to demonstrate alternative forms of Command and Control. Some of his POCs included demonstrations using Slack and ICMP for C2. While these techniques aren&amp;rsquo;t revolutionary, the simplicity of the POC and how hard it was to detect confirmed my suspicion that the future of C2 is going to be tunneling traffic via features of well-known applications.&lt;/p&gt;&#xA;&lt;p&gt;In addition, there was a recent Twitter post from &lt;a href=&#34;https://twitter.com/randomuserid/status/1113088976263569408&#34;&gt;@randomuserid&lt;/a&gt; that got me thinking about what other sites besides Slack could be utilized. So, I browsed through the &lt;a href=&#34;https://www.alexa.com/topsites&#34;&gt;Alexa top sites&lt;/a&gt; and started seeing what features could be abused to facilitate C2 traffic. The first few were all linked in @randomuserid&amp;rsquo;s Google sheet, so I moved onto &lt;a href=&#34;wikipedia.org&#34;&gt;wikipedia.org&lt;/a&gt;. It didn&amp;rsquo;t take me long to stumble onto the &lt;a href=&#34;https://en.wikipedia.org/w/api.php&#34;&gt;Wikipedia API&lt;/a&gt; page.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

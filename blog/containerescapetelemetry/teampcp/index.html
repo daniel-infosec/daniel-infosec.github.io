@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Container Escape Telemetry, Part 6: TeamPCP and What the Lab Predicted">
   <meta property="og:description" content="A real threat actor is doing exactly what our lab scenarios simulate. Mapping TeamPCP&#39;s container escape kill chain against Tetragon, Falco, and Tracee telemetry to answer: would these tools have caught it?">
   <meta property="description" content="A real threat actor is doing exactly what our lab scenarios simulate. Mapping TeamPCP&#39;s container escape kill chain against Tetragon, Falco, and Tracee telemetry to answer: would these tools have caught it?">
@@ -15,7 +15,7 @@
   
     <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -348,66 +348,66 @@
 <p><strong>Detection verdict:</strong> Runtime tools see the connection. They don&rsquo;t understand the protocol. Network detection (TLS fingerprinting, JA3/JA4 hashes, destination reputation) is the right layer for this signal.</p>
 <h1 id="the-scorecard">The Scorecard</h1>
 <table>
-<thead>
-<tr>
-<th>TeamPCP Technique</th>
-<th>S-Mapping</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Docker API scan + privileged container</td>
-<td>S04, S13</td>
-<td>Full chain</td>
-<td>Partial (misses socket attribution)</td>
-<td>Full chain</td>
-</tr>
-<tr>
-<td>Host filesystem via chroot /mnt/host</td>
-<td>S05, S13</td>
-<td>Detected</td>
-<td>Detected</td>
-<td>Detected</td>
-</tr>
-<tr>
-<td>/proc/*/environ credential harvest</td>
-<td>S14</td>
-<td>Detected (custom policy)</td>
-<td>Detected (custom rule)</td>
-<td>Detected (custom policy)</td>
-</tr>
-<tr>
-<td>SSH key harvesting from host</td>
-<td>S05</td>
-<td>Detected</td>
-<td>Detected</td>
-<td>Detected</td>
-</tr>
-<tr>
-<td>K8s DaemonSet in kube-system</td>
-<td>&ndash;</td>
-<td>Not visible (K8s audit log)</td>
-<td>Not visible (K8s audit log)</td>
-<td>Not visible (K8s audit log)</td>
-</tr>
-<tr>
-<td>systemd persistence on host</td>
-<td>&ndash;</td>
-<td>Gap (path filter needed)</td>
-<td>Detected (default rule)</td>
-<td>Gap (path filter needed)</td>
-</tr>
-<tr>
-<td>ICP canister C2</td>
-<td>&ndash;</td>
-<td>Connection visible, protocol opaque</td>
-<td>Connection visible, protocol opaque</td>
-<td>Connection visible, protocol opaque</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>TeamPCP Technique</th>
+					<th>S-Mapping</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Docker API scan + privileged container</td>
+					<td>S04, S13</td>
+					<td>Full chain</td>
+					<td>Partial (misses socket attribution)</td>
+					<td>Full chain</td>
+			</tr>
+			<tr>
+					<td>Host filesystem via chroot /mnt/host</td>
+					<td>S05, S13</td>
+					<td>Detected</td>
+					<td>Detected</td>
+					<td>Detected</td>
+			</tr>
+			<tr>
+					<td>/proc/*/environ credential harvest</td>
+					<td>S14</td>
+					<td>Detected (custom policy)</td>
+					<td>Detected (custom rule)</td>
+					<td>Detected (custom policy)</td>
+			</tr>
+			<tr>
+					<td>SSH key harvesting from host</td>
+					<td>S05</td>
+					<td>Detected</td>
+					<td>Detected</td>
+					<td>Detected</td>
+			</tr>
+			<tr>
+					<td>K8s DaemonSet in kube-system</td>
+					<td>&ndash;</td>
+					<td>Not visible (K8s audit log)</td>
+					<td>Not visible (K8s audit log)</td>
+					<td>Not visible (K8s audit log)</td>
+			</tr>
+			<tr>
+					<td>systemd persistence on host</td>
+					<td>&ndash;</td>
+					<td>Gap (path filter needed)</td>
+					<td>Detected (default rule)</td>
+					<td>Gap (path filter needed)</td>
+			</tr>
+			<tr>
+					<td>ICP canister C2</td>
+					<td>&ndash;</td>
+					<td>Connection visible, protocol opaque</td>
+					<td>Connection visible, protocol opaque</td>
+					<td>Connection visible, protocol opaque</td>
+			</tr>
+	</tbody>
 </table>
 <p>Out of TeamPCP&rsquo;s seven documented techniques, a tuned three-tool stack catches five at the runtime level. The Kubernetes control plane activity and the C2 protocol identification require different detection layers.</p>
 <h1 id="what-this-validates">What This Validates</h1>
@@ -542,6 +542,16 @@
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -573,14 +583,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -600,7 +602,7 @@
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -676,14 +678,14 @@
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

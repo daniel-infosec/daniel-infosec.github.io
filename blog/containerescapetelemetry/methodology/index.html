@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Container Escape Telemetry, Part 2: Methodology and Tool Architecture">
   <meta property="og:description" content="The lab setup, scenario matrix, and tool comparison framework behind the container escape telemetry research. Three eBPF tools, 15 scenarios, one tool per VM, and a PowerShell harness that ties it all together.">
   <meta property="description" content="The lab setup, scenario matrix, and tool comparison framework behind the container escape telemetry research. Three eBPF tools, 15 scenarios, one tool per VM, and a PowerShell harness that ties it all together.">
@@ -15,7 +15,7 @@
   
     <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -304,166 +304,166 @@
 <h2 id="misconfiguration-based-escapes-s01-s05">Misconfiguration-Based Escapes (S01-S05)</h2>
 <p>These work on any kernel version because they exploit configuration mistakes, not kernel vulnerabilities.</p>
 <table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Technique</th>
-<th>Result</th>
-<th>What Happened</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S01</td>
-<td>cgroup release_agent</td>
-<td>ESCAPED</td>
-<td>Mounted cgroupfs v1, wrote release_agent, triggered host code execution</td>
-</tr>
-<tr>
-<td>S02</td>
-<td>CVE-2022-0492 + fallback</td>
-<td>ESCAPED</td>
-<td>unshare to user/cgroup ns failed (patched), privileged fallback succeeded</td>
-</tr>
-<tr>
-<td>S03</td>
-<td>nsenter &ndash;pid=host</td>
-<td>ESCAPED</td>
-<td>nsenter -t 1 -m -u -i -p joined all host namespaces</td>
-</tr>
-<tr>
-<td>S04</td>
-<td>Docker socket mount</td>
-<td>ESCAPED</td>
-<td>Used mounted docker.sock to spawn container with host root filesystem</td>
-</tr>
-<tr>
-<td>S05</td>
-<td>Host /proc access</td>
-<td>ESCAPED</td>
-<td>Read /proc/1/root, core_pattern, mountinfo, environ from privileged container</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>ID</th>
+					<th>Technique</th>
+					<th>Result</th>
+					<th>What Happened</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S01</td>
+					<td>cgroup release_agent</td>
+					<td>ESCAPED</td>
+					<td>Mounted cgroupfs v1, wrote release_agent, triggered host code execution</td>
+			</tr>
+			<tr>
+					<td>S02</td>
+					<td>CVE-2022-0492 + fallback</td>
+					<td>ESCAPED</td>
+					<td>unshare to user/cgroup ns failed (patched), privileged fallback succeeded</td>
+			</tr>
+			<tr>
+					<td>S03</td>
+					<td>nsenter &ndash;pid=host</td>
+					<td>ESCAPED</td>
+					<td>nsenter -t 1 -m -u -i -p joined all host namespaces</td>
+			</tr>
+			<tr>
+					<td>S04</td>
+					<td>Docker socket mount</td>
+					<td>ESCAPED</td>
+					<td>Used mounted docker.sock to spawn container with host root filesystem</td>
+			</tr>
+			<tr>
+					<td>S05</td>
+					<td>Host /proc access</td>
+					<td>ESCAPED</td>
+					<td>Read /proc/1/root, core_pattern, mountinfo, environ from privileged container</td>
+			</tr>
+	</tbody>
 </table>
 <p>S01 is the classic. Mount the cgroup filesystem, create a child cgroup, write to <code>notify_on_release</code> and <code>release_agent</code>, trigger it by writing to <code>cgroup.procs</code>. The host kernel executes your payload. S02 tries the same thing through the CVE-2022-0492 path first (unshare into new user + cgroup namespaces), fails because the kernel is patched, then falls back to the privileged container path. S03 is the simplest: <code>nsenter -t 1 -m -u -i -p</code> joins the host&rsquo;s namespaces directly. S04 mounts the Docker socket and uses it to spawn a new container with the host filesystem. S05 reads sensitive files through the host&rsquo;s /proc filesystem that a privileged container can access.</p>
 <p>All five succeed. All five generate distinct telemetry signatures. The value of having all five is that they exercise different kernel mechanisms (mount, setns, socket_connect, file_open) and produce different event patterns across the three tools.</p>
 <h2 id="baseline-control-s06">Baseline Control (S06)</h2>
 <table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Technique</th>
-<th>Result</th>
-<th>What Happened</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S06</td>
-<td>Unprivileged container</td>
-<td>NO ESCAPE</td>
-<td>mount and unshare denied, no escape signals</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>ID</th>
+					<th>Technique</th>
+					<th>Result</th>
+					<th>What Happened</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S06</td>
+					<td>Unprivileged container</td>
+					<td>NO ESCAPE</td>
+					<td>mount and unshare denied, no escape signals</td>
+			</tr>
+	</tbody>
 </table>
 <p>S06 runs a standard unprivileged container that performs normal operations: file reads, process spawning, network lookups. No escape attempt. This is the noise floor. Tetragon generated 1,127 events from its policy hooks, Falco generated 76, Tracee generated 29. Anything a real escape generates needs to be distinguishable from this baseline.</p>
 <h2 id="cve-based-exploits-s07-s12">CVE-Based Exploits (S07-S12)</h2>
 <p>These generate the exploit syscall patterns. Some actually exploit the vulnerability (S08), some fire the pattern on a patched kernel (S09, S10), and some are blocked by the runtime (S11, S12).</p>
 <table>
-<thead>
-<tr>
-<th>ID</th>
-<th>CVE</th>
-<th>Result</th>
-<th>What Happened</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S07</td>
-<td>CVE-2024-21626 (Leaky Vessels)</td>
-<td>PATTERN</td>
-<td>runc 1.1.11 WORKDIR /proc/self/fd/7; fd leak didn&rsquo;t manifest in this environment</td>
-</tr>
-<tr>
-<td>S08</td>
-<td>CVE-2022-0847 (DirtyPipe)</td>
-<td>EXPLOITED</td>
-<td>Real exploit: splice() overwrote /etc/passwd via page cache corruption</td>
-</tr>
-<tr>
-<td>S09</td>
-<td>CVE-2022-0185 (fsconfig)</td>
-<td>PATTERN</td>
-<td>unshare(CLONE_NEWUSER), fsopen(&ldquo;ext4&rdquo;), fsconfig(). Kernel patched.</td>
-</tr>
-<tr>
-<td>S10</td>
-<td>CVE-2021-22555 (Netfilter)</td>
-<td>PATTERN</td>
-<td>unshare(USER|NET), NETLINK_NETFILTER socket, raw socket creation</td>
-</tr>
-<tr>
-<td>S11</td>
-<td>CVE-2025-31133 (maskedPaths)</td>
-<td>BLOCKED</td>
-<td>Symlinks to /proc/sysrq-trigger and core_pattern; writes blocked by read-only /proc</td>
-</tr>
-<tr>
-<td>S12</td>
-<td>CVE-2019-5736 (runc overwrite)</td>
-<td>BLOCKED</td>
-<td>/proc/self/exe write returned ETXTBSY. Patched runc prevented overwrite.</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>ID</th>
+					<th>CVE</th>
+					<th>Result</th>
+					<th>What Happened</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S07</td>
+					<td>CVE-2024-21626 (Leaky Vessels)</td>
+					<td>PATTERN</td>
+					<td>runc 1.1.11 WORKDIR /proc/self/fd/7; fd leak didn&rsquo;t manifest in this environment</td>
+			</tr>
+			<tr>
+					<td>S08</td>
+					<td>CVE-2022-0847 (DirtyPipe)</td>
+					<td>EXPLOITED</td>
+					<td>Real exploit: splice() overwrote /etc/passwd via page cache corruption</td>
+			</tr>
+			<tr>
+					<td>S09</td>
+					<td>CVE-2022-0185 (fsconfig)</td>
+					<td>PATTERN</td>
+					<td>unshare(CLONE_NEWUSER), fsopen(&ldquo;ext4&rdquo;), fsconfig(). Kernel patched.</td>
+			</tr>
+			<tr>
+					<td>S10</td>
+					<td>CVE-2021-22555 (Netfilter)</td>
+					<td>PATTERN</td>
+					<td>unshare(USER|NET), NETLINK_NETFILTER socket, raw socket creation</td>
+			</tr>
+			<tr>
+					<td>S11</td>
+					<td>CVE-2025-31133 (maskedPaths)</td>
+					<td>BLOCKED</td>
+					<td>Symlinks to /proc/sysrq-trigger and core_pattern; writes blocked by read-only /proc</td>
+			</tr>
+			<tr>
+					<td>S12</td>
+					<td>CVE-2019-5736 (runc overwrite)</td>
+					<td>BLOCKED</td>
+					<td>/proc/self/exe write returned ETXTBSY. Patched runc prevented overwrite.</td>
+			</tr>
+	</tbody>
 </table>
 <p>S07 and S12 use a helper script to swap in vulnerable runc versions (1.1.11 and 1.0.0-rc2) for the duration of the scenario, then restore the patched version afterward. S07&rsquo;s fd leak didn&rsquo;t manifest in our Docker/containerd version, the leaked file descriptor existed but pointed to a non-exploitable target, so the syscall pattern fires but the escape doesn&rsquo;t complete. S08 is the standout: a real DirtyPipe exploit that corrupts the page cache via splice() and overwrites /etc/passwd with a root entry. The telemetry difference between &ldquo;pattern on patched kernel&rdquo; and &ldquo;actual exploitation&rdquo; turns out to matter a lot, and I&rsquo;ll dig into that in Part 3.</p>
 <h2 id="capability-abuse-s13-s14">Capability Abuse (S13-S14)</h2>
 <p>These came from reviewer feedback: &ldquo;I would have loved if one of your scenarios was taking a privileged container that isn&rsquo;t a straight break out.&rdquo; Fair point. Not every dangerous container action crosses a namespace boundary. Sometimes the damage happens entirely within the container&rsquo;s existing privileges.</p>
 <table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Technique</th>
-<th>Result</th>
-<th>What Happened</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S13</td>
-<td><code>--privileged</code> post-exploit</td>
-<td>ABUSED</td>
-<td>Mounted host block device, loaded kernel module, read /dev/kmsg, enumerated keyrings, accessed BPF subsystem</td>
-</tr>
-<tr>
-<td>S14</td>
-<td>Excessive capabilities</td>
-<td>ABUSED</td>
-<td>Read /proc/1/environ and /proc/1/maps via CAP_SYS_PTRACE+&ndash;pid=host, raw sockets via CAP_NET_RAW, mounts via CAP_SYS_ADMIN</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>ID</th>
+					<th>Technique</th>
+					<th>Result</th>
+					<th>What Happened</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S13</td>
+					<td><code>--privileged</code> post-exploit</td>
+					<td>ABUSED</td>
+					<td>Mounted host block device, loaded kernel module, read /dev/kmsg, enumerated keyrings, accessed BPF subsystem</td>
+			</tr>
+			<tr>
+					<td>S14</td>
+					<td>Excessive capabilities</td>
+					<td>ABUSED</td>
+					<td>Read /proc/1/environ and /proc/1/maps via CAP_SYS_PTRACE+&ndash;pid=host, raw sockets via CAP_NET_RAW, mounts via CAP_SYS_ADMIN</td>
+			</tr>
+	</tbody>
 </table>
 <p>S13 is the &ldquo;someone ran <code>--privileged</code> because their eBPF tool told them to&rdquo; scenario. The container gets all capabilities, all devices, no seccomp, no AppArmor. It doesn&rsquo;t try to escape, it doesn&rsquo;t need to. It mounts the host&rsquo;s block device, loads a kernel module, reads the kernel log buffer, enumerates keyrings (which are not namespace-aware, so any container can read the root keyring), and loads an eBPF program. S14 is the subtler case: specific dangerous capabilities (<code>CAP_SYS_PTRACE</code>, <code>CAP_NET_RAW</code>, <code>CAP_SYS_ADMIN</code>) without full <code>--privileged</code>. Teams try to be granular but still over-grant.</p>
 <p>The key question these answer: if something has dangerous privileges and isn&rsquo;t doing a textbook namespace escape, do these tools even notice?</p>
 <h2 id="stress-test-s15">Stress Test (S15)</h2>
 <table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Technique</th>
-<th>Result</th>
-<th>What Happened</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S15</td>
-<td>Syscall flood + concurrent escape</td>
-<td>TELEMETRY_TEST</td>
-<td>7-phase flood measuring ring buffer resilience under adversarial load</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>ID</th>
+					<th>Technique</th>
+					<th>Result</th>
+					<th>What Happened</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S15</td>
+					<td>Syscall flood + concurrent escape</td>
+					<td>TELEMETRY_TEST</td>
+					<td>7-phase flood measuring ring buffer resilience under adversarial load</td>
+			</tr>
+	</tbody>
 </table>
 <p>S15 answers the question from <a href="../isolation">Part 1</a>: can an attacker actually blind a security tool by flooding syscalls? Seven phases in two groups. Phases 1-3 flood <code>getpid()</code> at 1K, 100K, and 1M calls (unhooked: no tool generates events). Phases 4-5 and 7 flood <code>openat(/dev/null)</code> at 100K, 1M, and 10M calls (hooked: generates real ring buffer pressure). Phase 6 is the critical test: 1M openat flood running concurrently with an <code>nsenter -t 1 -m -u -i -p</code> escape. Can the tool see the escape during the flood?</p>
 <p>The results were the most operationally significant finding in the research. I&rsquo;ll cover them in detail in Part 4.</p>
@@ -483,196 +483,196 @@
 <p>The tradeoff is that Tracee&rsquo;s broad hook coverage creates a larger attack surface for ring buffer flooding. With 30 event types in our policy (and 330+ in its default set), an attacker has many possible syscalls to flood. This is manageable with proper policy tuning, particularly path-filtering <code>security_file_open</code>, but it requires understanding which events are high-frequency and scoping them appropriately. I&rsquo;ll cover the S15 stress test results and what they mean for Tracee deployments in Part 4.</p>
 <h2 id="architecture-comparison">Architecture Comparison</h2>
 <table>
-<thead>
-<tr>
-<th>Dimension</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Collection method</td>
-<td>Custom kprobes via TracingPolicy</td>
-<td>eBPF syscall driver + rule engine</td>
-<td>eBPF tracepoints + behavioral signatures</td>
-</tr>
-<tr>
-<td>Where filtering happens</td>
-<td>In-kernel BPF</td>
-<td>Userspace rule engine</td>
-<td>In-kernel + userspace behavioral</td>
-</tr>
-<tr>
-<td>Namespace context</td>
-<td>Full 10-ns inode set + is_host</td>
-<td>Container name/image/id, no raw inodes</td>
-<td>mountNs + pidNs inodes, container metadata</td>
-</tr>
-<tr>
-<td>Credential detail</td>
-<td>Full uid/gid/euid + capability sets</td>
-<td>user.uid, cap_effective, cap_permitted</td>
-<td>userId, commit_creds old/new structs</td>
-</tr>
-<tr>
-<td>Process ancestry</td>
-<td>Full tree with binary paths + args</td>
-<td>proc.aname[N] up to configurable depth</td>
-<td>hostParentProcessId chain, parentEntityId</td>
-</tr>
-<tr>
-<td>Enforcement</td>
-<td>In-kernel SIGKILL or syscall return override</td>
-<td>Alert only</td>
-<td>Alert only</td>
-</tr>
-<tr>
-<td>Avg event size</td>
-<td>~14,600 bytes</td>
-<td>~3,500 bytes</td>
-<td>~1,400 bytes</td>
-</tr>
-<tr>
-<td>Default detection coverage</td>
-<td>None (author your own policies)</td>
-<td>400+ community rules</td>
-<td>330+ syscall hooks + TRC-* behavioral sigs</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Dimension</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Collection method</td>
+					<td>Custom kprobes via TracingPolicy</td>
+					<td>eBPF syscall driver + rule engine</td>
+					<td>eBPF tracepoints + behavioral signatures</td>
+			</tr>
+			<tr>
+					<td>Where filtering happens</td>
+					<td>In-kernel BPF</td>
+					<td>Userspace rule engine</td>
+					<td>In-kernel + userspace behavioral</td>
+			</tr>
+			<tr>
+					<td>Namespace context</td>
+					<td>Full 10-ns inode set + is_host</td>
+					<td>Container name/image/id, no raw inodes</td>
+					<td>mountNs + pidNs inodes, container metadata</td>
+			</tr>
+			<tr>
+					<td>Credential detail</td>
+					<td>Full uid/gid/euid + capability sets</td>
+					<td>user.uid, cap_effective, cap_permitted</td>
+					<td>userId, commit_creds old/new structs</td>
+			</tr>
+			<tr>
+					<td>Process ancestry</td>
+					<td>Full tree with binary paths + args</td>
+					<td>proc.aname[N] up to configurable depth</td>
+					<td>hostParentProcessId chain, parentEntityId</td>
+			</tr>
+			<tr>
+					<td>Enforcement</td>
+					<td>In-kernel SIGKILL or syscall return override</td>
+					<td>Alert only</td>
+					<td>Alert only</td>
+			</tr>
+			<tr>
+					<td>Avg event size</td>
+					<td>~14,600 bytes</td>
+					<td>~3,500 bytes</td>
+					<td>~1,400 bytes</td>
+			</tr>
+			<tr>
+					<td>Default detection coverage</td>
+					<td>None (author your own policies)</td>
+					<td>400+ community rules</td>
+					<td>330+ syscall hooks + TRC-* behavioral sigs</td>
+			</tr>
+	</tbody>
 </table>
 <p>The &ldquo;where filtering happens&rdquo; row is the single most important architectural distinction for understanding the tools&rsquo; behavior under load. Tetragon&rsquo;s in-kernel filtering means irrelevant events never consume buffer space. Falco&rsquo;s userspace filtering means all syscalls hit the buffer, but the rule engine decides what to emit. Tracee&rsquo;s model is somewhere between: its eBPF programs do per-event-type filtering in-kernel, but event-type prioritization under buffer pressure is not implemented. That distinction drives the S15 results.</p>
 <h1 id="detection-coverage">Detection Coverage</h1>
 <p>The table below shows which tools generated escape-specific telemetry for each scenario. I&rsquo;m not counting generic process lifecycle events; only signals that actually indicate the escape technique was used. The Falco column reflects the final state after my twelve custom rule additions. S15 is a stress test, not an escape scenario, so it&rsquo;s scored separately.</p>
 <p>Legend: ✓ = detected the escape technique, ✗ = missed, △ = partial detection (tool saw related activity but not the core escape mechanism, which counts as detected in scoring since it could trigger an investigation).</p>
 <table>
-<thead>
-<tr>
-<th>Scenario</th>
-<th>Technique</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S01</td>
-<td>cgroup release_agent</td>
-<td>✓ mount + cgroup_mkdir + file_open</td>
-<td>✓ release_agent write</td>
-<td>✓ mount + magic_write</td>
-</tr>
-<tr>
-<td>S02</td>
-<td>CVE-2022-0492 + fallback</td>
-<td>✓ unshare + mount + task_alloc</td>
-<td>✓ release_agent + ns change</td>
-<td>✓ switch_task_ns + magic_write</td>
-</tr>
-<tr>
-<td>S03</td>
-<td>nsenter</td>
-<td>✓ setns() x4 with ns type flags</td>
-<td>✓ Namespace Change x5 + Nsenter Execution</td>
-<td>✓ setns x4 + switch_task_ns x4</td>
-</tr>
-<tr>
-<td>S04</td>
-<td>Docker socket</td>
-<td>✓ socket_connect to docker.sock</td>
-<td>△ Docker Socket Access (runc init only)</td>
-<td>✓ security_socket_connect x5</td>
-</tr>
-<tr>
-<td>S05</td>
-<td>Host /proc</td>
-<td>✓ file_open on /proc/1/root/*, core_pattern</td>
-<td>✓ Sensitive Host File Read x3</td>
-<td>✓ security_file_open</td>
-</tr>
-<tr>
-<td>S07</td>
-<td>Leaky Vessels</td>
-<td>✗ No fd-leak hook</td>
-<td>✗ No fd-leak rule</td>
-<td>✗ No fd-leak signature</td>
-</tr>
-<tr>
-<td>S08</td>
-<td>DirtyPipe</td>
-<td>✓ splice/do_splice with file paths</td>
-<td>✓ splice (custom rule)</td>
-<td>✓ splice + 961 magic_write</td>
-</tr>
-<tr>
-<td>S09</td>
-<td>fsconfig</td>
-<td>✓ fsopen + fsconfig + cap_capable</td>
-<td>✓ fsconfig (custom rule)</td>
-<td>✓ unshare + commit_creds</td>
-</tr>
-<tr>
-<td>S10</td>
-<td>Netfilter</td>
-<td>✓ setsockopt + unshare</td>
-<td>✓ netlink socket (custom rule)</td>
-<td>✓ unshare + commit_creds + setsockopt</td>
-</tr>
-<tr>
-<td>S11</td>
-<td>maskedPaths</td>
-<td>✓ symlink() x2 to /proc targets</td>
-<td>✓ symlink (custom rule)</td>
-<td>✓ symlink x2</td>
-</tr>
-<tr>
-<td>S12</td>
-<td>runc overwrite</td>
-<td>✓ bprm_check + file_open /proc/self/exe</td>
-<td>✗ Write blocked before observation</td>
-<td>△* openat(/proc/self/exe) ret=ETXTBSY</td>
-</tr>
-<tr>
-<td>S13</td>
-<td>Privileged post-exploit</td>
-<td>✓ mount + keyctl + security_file_open</td>
-<td>✓ Keyctl + Kernel Log + Mount + Raw Socket</td>
-<td>✓ mount + security_file_open + keyctl + commit_creds</td>
-</tr>
-<tr>
-<td>S14</td>
-<td>Excessive capabilities</td>
-<td>✓ mount + keyctl + security_file_open</td>
-<td>✓ Host Environ + Host Maps + Mount + Packet socket</td>
-<td>✓ security_file_open + mount + tcpdump exec</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Scenario</th>
+					<th>Technique</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S01</td>
+					<td>cgroup release_agent</td>
+					<td>✓ mount + cgroup_mkdir + file_open</td>
+					<td>✓ release_agent write</td>
+					<td>✓ mount + magic_write</td>
+			</tr>
+			<tr>
+					<td>S02</td>
+					<td>CVE-2022-0492 + fallback</td>
+					<td>✓ unshare + mount + task_alloc</td>
+					<td>✓ release_agent + ns change</td>
+					<td>✓ switch_task_ns + magic_write</td>
+			</tr>
+			<tr>
+					<td>S03</td>
+					<td>nsenter</td>
+					<td>✓ setns() x4 with ns type flags</td>
+					<td>✓ Namespace Change x5 + Nsenter Execution</td>
+					<td>✓ setns x4 + switch_task_ns x4</td>
+			</tr>
+			<tr>
+					<td>S04</td>
+					<td>Docker socket</td>
+					<td>✓ socket_connect to docker.sock</td>
+					<td>△ Docker Socket Access (runc init only)</td>
+					<td>✓ security_socket_connect x5</td>
+			</tr>
+			<tr>
+					<td>S05</td>
+					<td>Host /proc</td>
+					<td>✓ file_open on /proc/1/root/*, core_pattern</td>
+					<td>✓ Sensitive Host File Read x3</td>
+					<td>✓ security_file_open</td>
+			</tr>
+			<tr>
+					<td>S07</td>
+					<td>Leaky Vessels</td>
+					<td>✗ No fd-leak hook</td>
+					<td>✗ No fd-leak rule</td>
+					<td>✗ No fd-leak signature</td>
+			</tr>
+			<tr>
+					<td>S08</td>
+					<td>DirtyPipe</td>
+					<td>✓ splice/do_splice with file paths</td>
+					<td>✓ splice (custom rule)</td>
+					<td>✓ splice + 961 magic_write</td>
+			</tr>
+			<tr>
+					<td>S09</td>
+					<td>fsconfig</td>
+					<td>✓ fsopen + fsconfig + cap_capable</td>
+					<td>✓ fsconfig (custom rule)</td>
+					<td>✓ unshare + commit_creds</td>
+			</tr>
+			<tr>
+					<td>S10</td>
+					<td>Netfilter</td>
+					<td>✓ setsockopt + unshare</td>
+					<td>✓ netlink socket (custom rule)</td>
+					<td>✓ unshare + commit_creds + setsockopt</td>
+			</tr>
+			<tr>
+					<td>S11</td>
+					<td>maskedPaths</td>
+					<td>✓ symlink() x2 to /proc targets</td>
+					<td>✓ symlink (custom rule)</td>
+					<td>✓ symlink x2</td>
+			</tr>
+			<tr>
+					<td>S12</td>
+					<td>runc overwrite</td>
+					<td>✓ bprm_check + file_open /proc/self/exe</td>
+					<td>✗ Write blocked before observation</td>
+					<td>△* openat(/proc/self/exe) ret=ETXTBSY</td>
+			</tr>
+			<tr>
+					<td>S13</td>
+					<td>Privileged post-exploit</td>
+					<td>✓ mount + keyctl + security_file_open</td>
+					<td>✓ Keyctl + Kernel Log + Mount + Raw Socket</td>
+					<td>✓ mount + security_file_open + keyctl + commit_creds</td>
+			</tr>
+			<tr>
+					<td>S14</td>
+					<td>Excessive capabilities</td>
+					<td>✓ mount + keyctl + security_file_open</td>
+					<td>✓ Host Environ + Host Maps + Mount + Packet socket</td>
+					<td>✓ security_file_open + mount + tcpdump exec</td>
+			</tr>
+	</tbody>
 </table>
 <p>*△* for Tracee S12 requires the <code>openat</code> event to be explicitly enabled in the policy; it is not in Tracee&rsquo;s default event set.</p>
 <p><strong>Detection Scores</strong> (S01-S14 escape scenarios only; S15 is a stress test; △ counts as detected, △* does not in the base score):</p>
 <table>
-<thead>
-<tr>
-<th>Tool</th>
-<th>Real-Time Detection</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Tetragon</td>
-<td><strong>12/13</strong></td>
-</tr>
-<tr>
-<td>Tracee</td>
-<td><strong>11/13</strong> (12/13 with openat event enabled)</td>
-</tr>
-<tr>
-<td>Falco</td>
-<td><strong>11/13</strong> (5/13 before custom rules)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Tool</th>
+					<th>Real-Time Detection</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Tetragon</td>
+					<td><strong>12/13</strong></td>
+			</tr>
+			<tr>
+					<td>Tracee</td>
+					<td><strong>11/13</strong> (12/13 with openat event enabled)</td>
+			</tr>
+			<tr>
+					<td>Falco</td>
+					<td><strong>11/13</strong> (5/13 before custom rules)</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="what-the-scores-dont-tell-you">What the Scores Don&rsquo;t Tell You</h2>
 <p>The aggregate scores are useful for a quick comparison, but they flatten out qualitative differences that matter enormously in practice. A checkmark in the detection column doesn&rsquo;t tell you:</p>
@@ -817,6 +817,16 @@
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -848,14 +858,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -875,7 +877,7 @@
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -951,14 +953,14 @@
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

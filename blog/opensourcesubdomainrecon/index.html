@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Open Source SaaS Reconnaissance Utilizing Subdomains">
   <meta property="og:description" content="Investigations into enumeration of an organization&#39;s SaaS tooling">
   <meta property="description" content="Investigations into enumeration of an organization&#39;s SaaS tooling">
@@ -18,7 +18,7 @@
       <meta property="og:image:alt" content="SaaS">
     
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -233,7 +233,7 @@
     
   </div>
   <div class="meta">
-    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">January 1, 0001</time>
+    <time datetime="2019-07-03 00:00:00 &#43;0000 UTC">July 3, 2019</time>
     <p>Daniel Wyleczuk-Stern</p>
     <p>4-Minute Read</p>
   </div>
@@ -299,7 +299,7 @@ To backup a little, a key part of an offensive campaign (and many say the most c
 <p>Utilizing my same top 150 list with some adjustments, I found that 31 of the top 150 Fortune 500 companies are using Okta. (Some false positives may be in there.)</p>
 <p>For Slack, I simply had to look for the phrase “There’s been a glitch” which was returned on invalid subdomains. My list yielded quite a few false positives so I had to grep based on email addresses to ensure I had the right organization.</p>
 <p><code>while read p; do echo $p; curl -L $p.slack.com | tr -d &lsquo;\n&rsquo; | grep -v &ldquo;There&rsquo;s been a glitch&rdquo; ; done &lt; ~/top150.txt &gt; top150_slack.txt
-cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&lsquo;</code></p>
+cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&rsquo;</code></p>
 <p>I’d like to give a special shout-out to the folks at 1password.com. As far as I could tell, valid and invalid login pages presented the exact same content.</p>
 <p>So what should you take away from this? As an attacker, build a list of SaaS applications to check prior to each engagement and add that to your playbook. As a defender, unless the vendor makes changes, I don’t see many options for preventing this type of recon. I’d be happy to receive emails if you have ideas. Make sure to monitor for logins to all your SaaS applications. Utilize a robust IAM solution. You could also consider setting up honey services. Say your a Microsoft Teams organization (some do exist, trust me), you could register for a basic Slack account and monitor for attempted logins. I haven’t done the research, but I’d bet that most failed logins would likely be a part of an advanced campaign as opposed to merely bots.</p>
 <p>If you have experience in this area (either defending against this or using it on your Red Teams), I’d be happy to hear your stories!</p>
@@ -387,8 +387,10 @@ cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&l
   
   <div class="pagination">
     
-      <a href="/blog/wikipediac2/" class="button left"><span>Demonstrating the Future of Command and Control with Wikipedia</span></a>
+      <a href="/blog/opensourceredteamtooling/" class="button left"><span>Adding to the Dialogue - On the Release of Offensive Security Tools (OST)</span></a>
     
+    
+      <a href="/blog/gettingstartedwithautomation/" class="button right"><span>Getting Started with Praetorian’s ATT&amp;CK™ Automation</span></a>
     
   </div>
 
@@ -399,6 +401,16 @@ cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&l
       <header>
         <h1>Recent Posts</h1>
       </header>
+      
+      <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
       
       <article class="mini-post">
           
@@ -432,14 +444,6 @@ cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&l
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -459,7 +463,7 @@ cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&l
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -535,14 +539,14 @@ cat top150_slack.txt | grep -o &lsquo;data-team-email-domains-formatted.{0,30}&l
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

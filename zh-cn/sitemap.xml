@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://catscrdl.io/zh-cn/categories/</loc>
     <xhtml:link
@@ -11,13 +10,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/categories/"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/categories/"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -36,7 +35,12 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
+                hreflang="zh-CN"
+                href="https://catscrdl.io/zh-cn/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
                 href="https://catscrdl.io/zh-tw/categories/"
                 />
     <xhtml:link
@@ -49,14 +53,7 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/categories/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/categories/"
-                />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://catscrdl.io/zh-cn/</loc>
     <xhtml:link
                 rel="alternate"
@@ -90,7 +87,12 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
+                hreflang="zh-CN"
+                href="https://catscrdl.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
                 href="https://catscrdl.io/zh-tw/"
                 />
     <xhtml:link
@@ -103,14 +105,7 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/"
-                />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://catscrdl.io/zh-cn/tags/</loc>
     <xhtml:link
                 rel="alternate"
@@ -119,13 +114,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/tags/"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/tags/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/tags/"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -144,7 +139,12 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
+                hreflang="zh-CN"
+                href="https://catscrdl.io/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
                 href="https://catscrdl.io/zh-tw/tags/"
                 />
     <xhtml:link
@@ -157,11 +157,5 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/tags/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://catscrdl.io/zh-cn/tags/"
-                />
   </url>
-  
 </urlset>

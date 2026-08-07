@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>2fa on Catscrdl</title>
-    <link>https://catscrdl.io/tags/2fa/</link>
-    <description>Recent content in 2fa on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/tags/2fa/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Regarding SMS 2FA</title>
-      <link>https://catscrdl.io/blog/regardingsms2fa/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
-      <description>I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm.</description>
-    </item>
-    
-    <item>
-      <title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
-      <link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
-      <description>On a recent Purple Team engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>2fa on Catscrdl</title>
+		<link>https://catscrdl.io/tags/2fa/</link>
+		<description>Recent content in 2fa on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/2fa/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Regarding SMS 2FA</title>
+				<link>https://catscrdl.io/blog/regardingsms2fa/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/regardingsms2fa/</guid>
+				<description>&lt;p&gt;I think an important question that Tavis either explicitly or accidentally omitted is &amp;ldquo;for whom&amp;rdquo;. I am not sure why he did not include this as it&amp;rsquo;s a critical component to his argument. If Tavis is stating that &amp;ldquo;SMS 2FA is ineffective for an enterprise&amp;rdquo;, then I would agree. The threat model that he is operating from is that an organization is being explicitly targeted by a motivated (though not necessarily extremely capable) attacker, who only needs minimal access to cause great harm. However, if Tavis is instead simply stating &amp;ldquo;SMS 2FA is ineffective&amp;rdquo; with no caveats, I would disagree.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Open Source SaaS Reconnaissance Utilizing Subdomains</title>
+				<link>https://catscrdl.io/blog/opensourcesubdomainrecon/</link>
+				<pubDate>Wed, 03 Jul 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/opensourcesubdomainrecon/</guid>
+				<description>&lt;p&gt;On a recent &lt;a href=&#34;https://www.praetorian.com/corporate-security/purple-team-detection-response&#34;&gt;Purple Team&lt;/a&gt; engagement, I was accessing the client’s Splunk cloud instance. Being my normal typo-filled self, I fat fingered the URL and went to clieent.splunkcloud.com instead of the correct client.splunkcloud.com. Instead of being redirected to the login portal, I received a DNS resolution error, fixed the typo, and moved on. A little while later, I was thinking about the typo again and wondered how this information leakage could be utilized by an attacker.&#xA;To backup a little, a key part of an offensive campaign (and many say the most critical part) is recon. During this phase, the Red Team or malicious actor tries to obtain as much information about the target as possible. Key items of interest include organizational charts, employee lists, email formats, external address space, and technologies utilized by the organization. During this phase, the attacker wants to limit their interaction with the target as much as possible in order to avoid tipping off defenders. Most attackers avoid active scanning or interaction with the target during this phase.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://catscrdl.io/zh-tw/categories/</loc>
     <xhtml:link
@@ -36,8 +35,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh-CN"
                 href="https://catscrdl.io/zh-cn/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
+                href="https://catscrdl.io/zh-tw/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -49,14 +53,7 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/categories/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://catscrdl.io/zh-tw/categories/"
-                />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://catscrdl.io/zh-tw/</loc>
     <xhtml:link
                 rel="alternate"
@@ -90,8 +87,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh-CN"
                 href="https://catscrdl.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
+                href="https://catscrdl.io/zh-tw/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -103,14 +105,7 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://catscrdl.io/zh-tw/"
-                />
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://catscrdl.io/zh-tw/tags/</loc>
     <xhtml:link
                 rel="alternate"
@@ -144,8 +139,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh-CN"
                 href="https://catscrdl.io/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-TW"
+                href="https://catscrdl.io/zh-tw/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -157,11 +157,5 @@
                 hreflang="nl"
                 href="https://catscrdl.io/nl/tags/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://catscrdl.io/zh-tw/tags/"
-                />
   </url>
-  
 </urlset>

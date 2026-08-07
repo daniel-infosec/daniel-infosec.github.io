@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="How to Write an Actionable Alert">
   <meta property="og:description" content="Writing a powerful detection is great, but if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.">
   <meta property="description" content="Writing a powerful detection is great, but if your SOC/IR team can&#39;t act upon it, how useful is it really? This article will serve as a guide on how to write an actionable alert.">
@@ -18,7 +18,7 @@
       <meta property="og:image:alt" content="Writing Rules">
     
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -321,7 +321,7 @@
 <p>Let&rsquo;s dive into how to achieve these properties.</p>
 <h2 id="human-actionable">Human Actionable</h2>
 <p>In my opinion, one of the most important properties a good alert should have is that it needs to be &ldquo;human&rdquo; actionable. For this to be true, a human needs to be able to review the content of the alert, know what their next steps should be, and have the tools necessary to take those next steps. A key qualifier in this section is &ldquo;human&rdquo; actionable. A good alert should require a human to make a decision as the next step in the response process. This differs from &ldquo;machine&rdquo; actionable where the next steps could be automated or executed by code. Let&rsquo;s take a look at a bad alert that does not demonstrate this property.</p>
-<pre><code>Title: Login from New Device
+<pre tabindex="0"><code>Title: Login from New Device
 User: jane.doe@snowflake.com
 Details: Identified user logged in from a new device. IPs were 123.34.12.11.
 Timestamps: 14:33 UTC
@@ -331,23 +331,23 @@ Playbook: Reach out to user and confirm if the login was from them. If not,
 <p>On the subject of automation, I personally believe that any automation that is designed to improve the fidelity or the quality of information of an alert should be done by detection engineers. Incident response automation should focus on response and remediation.</p>
 <p>There&rsquo;s a term I use with alert analysis that I call &ldquo;friction&rdquo;. Friction is anything that slows down analysis in an unhelpful way. For example, having to go to another system to look something up, not knowing what playbook to use, a swarm of false positives, etc. All of these add friction to the alert triage process slowing it down and increasing the possibility of errors. As a threat detection engineer, you should strive to reduce friction when designing your alerts.</p>
 <p>So what does a good alert look like?</p>
-<pre><code>Title: Phishing Reported by User
+<pre tabindex="0"><code>Title: Phishing Reported by User
 User: john.doe@snowflake.com
 Details: The attached email was reported as phishing by the user. The email
-  has been removed from the user's inboxes. Similar emails were found in
-  the following user's inboxes and have been temporarily quarantined:
+  has been removed from the user&#39;s inboxes. Similar emails were found in
+  the following user&#39;s inboxes and have been temporarily quarantined:
   jane.doe@snowflake.com, bob.human@snowflake.com, lee.user@snowflake.com.
 Information on the attachment and URLs in the email is attached to the ticket.
 Timestamps: 14:33 UTC
 Playbook: Review the attached phishing emails and analysis. To remove the similar
-  emails from the associated user's inboxes, click here &lt;link&gt;. To release from
-  quarantine back into the users' inbox, click here &lt;link&gt;.
+  emails from the associated user&#39;s inboxes, click here &lt;link&gt;. To release from
+  quarantine back into the users&#39; inbox, click here &lt;link&gt;.
 Attachments: &lt;simulated analysis&gt;
 </code></pre><p>This alert does a few things right: first, it has automated analysis of the phishing email and attached it to the ticket. This reduces the friction an analyst experiences when working a ticket. Second, it&rsquo;s clear what has already been done: the reported email has been removed from the user&rsquo;s inbox. Third, it presents a call to action: the system has identified similar emails and requires human analysis to determine what the next steps should be. Finally, it makes it easy to take the next steps by presenting links that trigger a playbook. When designing alerts, make sure to consider that you should reduce analysis friction and make it easy to take the next steps.</p>
 <h2 id="automatically-enriched">Automatically Enriched</h2>
 <p>This property is highly related to the one above, and is arguably a subset; however, I believe it&rsquo;s important enough where I&rsquo;ve decided to specifically call it out. This property can be summed up succinctly by answering the following question: Does the human analyst need to go into another system to gather additional information? If the answer is yes, you can improve the alert.</p>
 <p>With that in mind, let&rsquo;s revisit the example above.</p>
-<pre><code>Title: Phishing Reported by User
+<pre tabindex="0"><code>Title: Phishing Reported by User
 User: john.doe@snowflake.com
 Timestamps: 14:33 UTC
 </code></pre><p>When an analyst gets an alert about phishing, it&rsquo;s your job as a detection engineer to understand what questions the SOC/IR will have and work to answer as many of those in the alert as you can. (The best way to know what questions they&rsquo;ll ask is to go talk to them.) In this case, some common questions when triaging phishing are:</p>
@@ -360,24 +360,24 @@ Timestamps: 14:33 UTC
 <h2 id="well-prioritized">Well Prioritized</h2>
 <p>Doing good work is easy. You just have to do the right things in the right order. With the previous example, we&rsquo;ve helped the SOC/IR do the right things by providing them the tools they need to execute. The next part we need to help with is alert prioritization. Most SOCs have some sort of SLA when it comes to alerts that varies by severity. A basic example could be</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th>Critical</th>
-<th>High</th>
-<th>Medium</th>
-<th>Low</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SLA</td>
-<td>Pageable</td>
-<td>1 hour</td>
-<td>12 hours</td>
-<td>24 hours</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Critical</th>
+					<th>High</th>
+					<th>Medium</th>
+					<th>Low</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>SLA</td>
+					<td>Pageable</td>
+					<td>1 hour</td>
+					<td>12 hours</td>
+					<td>24 hours</td>
+			</tr>
+	</tbody>
 </table>
 <p>If you write the most accurate alert for someone running <code>whoami</code> on a laptop and you set it as a critical paging your IR at 3 AM, you&rsquo;re going to have some very unhappy responders. As a detection engineer, you can&rsquo;t forget that you have a customer and that&rsquo;s the individuals responding to your alerts. It is of utmost importance that you equip them with the information they need to make the correct decisions quickly. And that means helping them prioritize their work.</p>
 <p>When it comes to severity, I&rsquo;d recommend that your team decide on a framework on how it&rsquo;s set. The goal is that if two different engineers write the same rule, they would end up with the same severity. Some guiding questions could be:</p>
@@ -397,7 +397,7 @@ Timestamps: 14:33 UTC
 <p>Depending on your SIEM, it is often the responsibility of the detection engineer to decide how alerts are deduplicated. For instance, <a href="https://docs.panther.com/writing-detections#dedup">Panther offers deduplication as part of its Python functionality</a>. As a detection engineer, you can solve for deduplication by asking yourself the following questions: what key properties identify a unique instance of this event? What do I want to show IR if the same event fires multiple times? At Snowflake, we often structure our alerts as &ldquo;Actor&rdquo; did &ldquo;Action&rdquo; to &ldquo;Object&rdquo;. Our default deduplication says if the &ldquo;actor&rdquo; and &ldquo;action&rdquo; or &ldquo;actor&rdquo; and &ldquo;object&rdquo; are the same for a particular alert, then deduplicate. To illustrate with an example, let&rsquo;s say we have an alert for an action having permission denied in AWS. We say our &ldquo;actor&rdquo; is the IAM user, the &ldquo;action&rdquo; is the AWS API, and the &ldquo;object&rdquo; is the request parameters. Let&rsquo;s say a particular user triggers the alert on &ldquo;DeleteObject&rdquo; 10,000 times across 10,000 different buckets. Because the user and API action are the same, these would be deduplicated and the 10,000 events would be presented in one ticket. Similarly, if a user did a number of reconnaissance actions (let&rsquo;s say GetObject, GetObjectACL, etc) against a particular bucket, these would also be grouped. That being said, as a detection engineer, you should feel free to be flexible with deduplication and choose the properties that work best for your detection.</p>
 <p>A similar property is alert grouping/correlation. Let&rsquo;s revisit the above example about permission denied for an AWS user. Let&rsquo;s say we also have a detection for multiple failed logins for an AWS user. In this example, both of these alerts trigger about 3 hours apart (with permission denied occurring second) in the middle of changeover for our SOC. Without alert correlation/grouping, the analyst working the second alert may be unaware that there was previously an alert for multiple failed logins for the same user. However, if our system is able to group these alerts and show them together, then the analyst has the context they need to make smart response decisions. This capability is also a critical first step to successfully implementing Risk Based Alerting for your SOC.</p>
 <h1 id="making-it-happen">Making it Happen</h1>
-<p>Much of what I discussed in this article centers on correlation and enrichment. At Snowflake, we accomplish this through our use of Snowflake as a security data lake. By ingesting <strong>all</strong> of our enterprise data into Snowflake, we&rsquo;re able to execute complex correlation and enrichment queries as part of our detection pipeline. Haider and I did a talk on this and the detection lifecylce in our talk <a href="https://www.snowflake.com/webinar/thought-leadership/unlocking-the-magic-to-high-fidelity-alerts/?utm_source=snowflake&amp;utm_medium=social&amp;utm_campaign=na-us-en-unlocking-the-magic-organic-social&amp;utm_content=Oktopost-Webinars+-+General">Unlocking the Magic to High-Fidelity Alerts</a> if you want to learn more. For the areas where we can&rsquo;t accomplish this for one reason or other, we rely on <a href="https://www.tines.com/">Tines</a> to execute further automation.</p>
+<p>Much of what I discussed in this article centers on correlation and enrichment. At Snowflake, we accomplish this through our use of Snowflake as a security data lake. By ingesting <strong>all</strong> of our enterprise data into Snowflake, we&rsquo;re able to execute complex correlation and enrichment queries as part of our detection pipeline. Haider and I did a talk on this and the detection lifecylce in our talk <a href="https://www.snowflake.com/webinar/thought-leadership/unlocking-the-magic-to-high-fidelity-alerts/?utm_source=snowflake&amp;utm_medium=social&amp;utm_campaign=na-us-en-unlocking-the-magic-organic-social&amp;utm_content=Oktopost-Webinars&#43;-&#43;General">Unlocking the Magic to High-Fidelity Alerts</a> if you want to learn more. For the areas where we can&rsquo;t accomplish this for one reason or other, we rely on <a href="https://www.tines.com/">Tines</a> to execute further automation.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>I think this piece can best be summarized by remembering that if alerts are not properly triaged, then the detections are not effective. And you, as a detection engineer, have many tools to empower analysts to make the timely and correct decisions.</p>
 
@@ -496,6 +496,16 @@ Timestamps: 14:33 UTC
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -527,14 +537,6 @@ Timestamps: 14:33 UTC
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -554,7 +556,7 @@ Timestamps: 14:33 UTC
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -630,14 +632,14 @@ Timestamps: 14:33 UTC
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

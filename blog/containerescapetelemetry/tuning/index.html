@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection">
   <meta property="og:description" content="What Tetragon, Falco, and Tracee ship with out of the box, what you have to build yourself, and every configuration pitfall we hit along the way. The practical tuning guide for container runtime security tools.">
   <meta property="description" content="What Tetragon, Falco, and Tracee ship with out of the box, what you have to build yourself, and every configuration pitfall we hit along the way. The practical tuning guide for container runtime security tools.">
@@ -15,7 +15,7 @@
   
     <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -286,59 +286,59 @@
       <p>This is Part 5 of the container escape telemetry series (<a href="../intro">overview</a>). <a href="../isolation">Part 1</a> covered isolation primitives. <a href="../methodology">Part 2</a> covered the lab and tools. <a href="../deepdives">Part 3</a> was the per-scenario data. <a href="../production">Part 4</a> covered volume, signal-to-noise, and tool selection. This post is for the practitioner who just installed one of these tools and wants to know what to do next.</p>
 <p>The gap between &ldquo;tool installed&rdquo; and &ldquo;tool detecting container escapes&rdquo; is larger than any of these projects&rsquo; documentation suggests. Here&rsquo;s what that gap actually looks like and how to close it.</p>
 <h1 id="what-you-get-out-of-the-box">What You Get Out of the Box</h1>
-<h2 id="tetragon-powerful-engine-no-seats">Tetragon: Powerful Engine, No Seats</h2>
-<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch. (Or your LLM is.)</p>
+<h2 id="tetragon-powerful-engine-empty-hangar">Tetragon: Powerful Engine, Empty Hangar</h2>
+<p>Tetragon ships with zero escape-detection policies. The TracingPolicy CRD system is genuinely powerful. You can hook arbitrary kernel functions, filter on arguments in-kernel, and enforce SIGKILL on match, but the default install observes process lifecycle events and nothing else. No kprobes for <code>setns</code>, no hooks for <code>splice</code>, no file access monitoring. You&rsquo;re writing YAML from scratch.</p>
 <p>I wrote 8 TracingPolicy files covering 31 kernel function hooks for this research:</p>
 <table>
-<thead>
-<tr>
-<th>Policy</th>
-<th>What It Hooks</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00-baseline-collection</td>
-<td>cap_capable, wake_up_new_task, security_bprm_check, cgroup_mkdir/rmdir/attach, setuid/setgid/setresuid, dup3</td>
-<td>Ambient kernel behavior baseline. The cap_capable hook alone generated 55.8% of total Tetragon volume.</td>
-</tr>
-<tr>
-<td>01-namespace-changes</td>
-<td>sys_unshare, sys_setns, sys_clone3, security_task_alloc</td>
-<td>Core escape detection. Any setns from container to host namespace is near-certain escape.</td>
-</tr>
-<tr>
-<td>02-cgroup-manipulation</td>
-<td>sys_mount, security_file_open (release_agent, notify_on_release, cgroup.procs)</td>
-<td>S01/S02 cgroup escapes. The mount + write(release_agent) chain is the canonical pattern.</td>
-</tr>
-<tr>
-<td>03-privilege-escalation</td>
-<td>security_bprm_check, cap_capable, sys_ptrace</td>
-<td>Binary execution context and privilege checks during exploitation.</td>
-</tr>
-<tr>
-<td>04-sensitive-file-access</td>
-<td>security_file_open (/proc/1/root/*, /etc/shadow, docker.sock, core_pattern), security_socket_connect</td>
-<td>S04/S05 sensitive path monitoring. Namespace annotations make host-vs-container filtering trivial.</td>
-</tr>
-<tr>
-<td>05-network-activity</td>
-<td>tcp_connect, tcp_close</td>
-<td>Network connection tracking. Lower priority for escape detection but useful for lateral movement.</td>
-</tr>
-<tr>
-<td>06-cve-specific</td>
-<td>do_splice, sys_splice, sys_fsopen, sys_fsconfig, sys_setsockopt, sys_symlinkat, sys_symlink, security_file_open (/proc/self/exe)</td>
-<td>CVE-specific hooks: DirtyPipe (S08), fsconfig (S09), Netfilter (S10), maskedPaths (S11), runc overwrite (S12).</td>
-</tr>
-<tr>
-<td>07-capability-abuse</td>
-<td>sys_mount, sys_finit_module, sys_init_module, sys_bpf, sys_keyctl, security_file_open (/dev/kmsg)</td>
-<td>S13/S14 in-namespace capability abuse. These are the operations a <code>--privileged</code> container can do without ever calling setns.</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Policy</th>
+					<th>What It Hooks</th>
+					<th>Why</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>00-baseline-collection</td>
+					<td>cap_capable, wake_up_new_task, security_bprm_check, cgroup_mkdir/rmdir/attach, setuid/setgid/setresuid, dup3</td>
+					<td>Ambient kernel behavior baseline. The cap_capable hook alone generated 55.8% of total Tetragon volume.</td>
+			</tr>
+			<tr>
+					<td>01-namespace-changes</td>
+					<td>sys_unshare, sys_setns, sys_clone3, security_task_alloc</td>
+					<td>Core escape detection. Any setns from container to host namespace is near-certain escape.</td>
+			</tr>
+			<tr>
+					<td>02-cgroup-manipulation</td>
+					<td>sys_mount, security_file_open (release_agent, notify_on_release, cgroup.procs)</td>
+					<td>S01/S02 cgroup escapes. The mount + write(release_agent) chain is the canonical pattern.</td>
+			</tr>
+			<tr>
+					<td>03-privilege-escalation</td>
+					<td>security_bprm_check, cap_capable, sys_ptrace</td>
+					<td>Binary execution context and privilege checks during exploitation.</td>
+			</tr>
+			<tr>
+					<td>04-sensitive-file-access</td>
+					<td>security_file_open (/proc/1/root/*, /etc/shadow, docker.sock, core_pattern), security_socket_connect</td>
+					<td>S04/S05 sensitive path monitoring. Namespace annotations make host-vs-container filtering trivial.</td>
+			</tr>
+			<tr>
+					<td>05-network-activity</td>
+					<td>tcp_connect, tcp_close</td>
+					<td>Network connection tracking. Lower priority for escape detection but useful for lateral movement.</td>
+			</tr>
+			<tr>
+					<td>06-cve-specific</td>
+					<td>do_splice, sys_splice, sys_fsopen, sys_fsconfig, sys_setsockopt, sys_symlinkat, sys_symlink, security_file_open (/proc/self/exe)</td>
+					<td>CVE-specific hooks: DirtyPipe (S08), fsconfig (S09), Netfilter (S10), maskedPaths (S11), runc overwrite (S12).</td>
+			</tr>
+			<tr>
+					<td>07-capability-abuse</td>
+					<td>sys_mount, sys_finit_module, sys_init_module, sys_bpf, sys_keyctl, security_file_open (/dev/kmsg)</td>
+					<td>S13/S14 in-namespace capability abuse. These are the operations a <code>--privileged</code> container can do without ever calling setns.</td>
+			</tr>
+	</tbody>
 </table>
 <p>Writing these took multiple iterations. The YAML is straightforward once you understand the schema, but choosing <em>which</em> kernel functions to hook and <em>which</em> arguments to filter on requires understanding both the exploit chain and the kernel internals. You&rsquo;re effectively writing eBPF programs through a YAML abstraction layer. That&rsquo;s powerful, but the authoring cost is real.</p>
 <h2 id="falco-broad-coverage-with-gaps">Falco: Broad Coverage With Gaps</h2>
@@ -362,7 +362,7 @@
 </ul>
 <p>The engine supports every one of these syscalls. The gap is rule coverage, not capability. Closing it required 12 custom rules and rule changes, which I covered in detail in <a href="../production">Part 4</a>.</p>
 <h2 id="tracee-behavioral-depth-configuration-required">Tracee: Behavioral Depth, Configuration Required</h2>
-<p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature. They detect exploit *consequences* rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
+<p>Tracee ships with 330+ syscall hooks and the TRC-* behavioral signature engine. The behavioral signatures (<code>magic_write</code>, <code>commit_creds</code>, <code>switch_task_ns</code>) are Tracee&rsquo;s standout feature. They detect exploit <em>consequences</em> rather than specific syscall sequences. But the default event set and filtering configuration matter enormously.</p>
 <p>The policy file I built enables 30 event types:</p>
 <p><strong>Process lifecycle:</strong> <code>sched_process_exec</code>, <code>sched_process_exit</code>, <code>clone</code>, <code>clone3</code></p>
 <p><strong>Namespace operations:</strong> <code>unshare</code>, <code>setns</code>, <code>switch_task_ns</code></p>
@@ -375,7 +375,7 @@
 <p>The migration from CLI flags to policy YAML was necessary because <code>--events</code> doesn&rsquo;t support inline argument filters. You can&rsquo;t do <code>--events openat.args.pathname=/proc/self/exe</code> on the command line; you need a policy YAML file with a <code>filters</code> block under the event entry.</p>
 <h1 id="what-we-had-to-enable-or-customize">What We Had to Enable or Customize</h1>
 <h2 id="tetragon-flags-that-change-everything">Tetragon Flags That Change Everything</h2>
-<pre><code>--enable-process-ns
+<pre tabindex="0"><code>--enable-process-ns
 --enable-process-cred
 --enable-ancestors base,kprobe,tracepoint
 --rb-size-total 67108864
@@ -390,23 +390,23 @@
 <p>This is the single most important Falco configuration change for detection engineering, and discovering it was one of the more frustrating debugging sessions in this project.</p>
 <p>By default, Falco uses <code>rule_matching=first</code>: when multiple rules match the same event, only the first matching rule fires. I discovered this when the &ldquo;Keyctl Invocation from Container&rdquo; rule never fired on S13 despite keyctl clearly executing 504 times. The reason: &ldquo;Drop and execute new binary&rdquo; matched the same <code>execve_exit</code> event first (keyctl was freshly installed by <code>apt-get</code>), and Falco stopped evaluating.</p>
 <p>Setting <code>rule_matching=all</code> makes all matching rules fire on the same event. This is essential if you have overlapping rules at different priority levels. A process that triggers both &ldquo;Drop and execute new binary&rdquo; (WARNING) and &ldquo;Keyctl Invocation from Container&rdquo; (WARNING) should fire both, because they represent different threat signals from the same event.</p>
-<h2 id="tracee-the-data-vs-args-trap">Tracee: The <code>data.</code> vs <code>args.</code> Trap</h2>
+<h2 id="tracee-the-data-vs-args-trap">Tracee: The data. vs args. Trap</h2>
 <p>Tracee&rsquo;s policy YAML supports argument filtering under each event&rsquo;s <code>filters</code> block. The syntax looks like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
-  <span style="color:#66d9ef">filters</span>:
-    - data.pathname=/etc/shadow*
-</code></pre></div><p>The <code>data.</code> prefix is required. An earlier version of Tracee used <code>args.</code> as the prefix. Here&rsquo;s what makes this dangerous: <code>args.pathname=/etc/shadow*</code> passes YAML validation, the policy loads without error, Tracee starts normally, and the filter is <strong>silently ignored at runtime</strong>. Every <code>security_file_open</code> event passes through as if unfiltered.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">event</span>: <span style="color:#ae81ff">security_file_open</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">filters</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/etc/shadow*</span>
+</span></span></code></pre></div><p>The <code>data.</code> prefix is required. An earlier version of Tracee used <code>args.</code> as the prefix. Here&rsquo;s what makes this dangerous: <code>args.pathname=/etc/shadow*</code> passes YAML validation, the policy loads without error, Tracee starts normally, and the filter is <strong>silently ignored at runtime</strong>. Every <code>security_file_open</code> event passes through as if unfiltered.</p>
 <p>I discovered this when Tracee generated 3.76M events instead of the expected ~15K. The policy file looked correct. Tracee reported no errors. The only symptom was a 248x event volume explosion. If I hadn&rsquo;t been comparing against expected numbers, this misconfiguration would have been invisible.</p>
 <p>The <code>--events</code> CLI flag and policy YAML <code>rules</code> block share keyword names but use different filter syntaxes. If you&rsquo;re migrating from CLI to policy YAML (which you should, because CLI flags don&rsquo;t support argument-level filtering), verify your filters are actually working by checking event counts, not just that the container starts.</p>
 <h1 id="configuration-pitfalls">Configuration Pitfalls</h1>
 <p>These are the bugs that cost hours. Every one was silent until it caused a visible failure.</p>
 <h2 id="falco-folded-scalar-yaml-bombs">Falco: Folded Scalar YAML Bombs</h2>
 <p>Falco rules use YAML folded scalars (<code>&gt;</code>) for multi-line <code>condition</code> and <code>output</code> fields. The syntax is:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">condition</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">    container and evt.type = splice</span>
-<span style="color:#66d9ef">output</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">    splice() from container (user=%user.name)</span>
-</code></pre></div><p>If the <code>output: &gt;</code> line ends up on the same line as the last line of the condition block, which can happen easily during copy-paste editing, Falco doesn&rsquo;t report a parse error. Instead, it rejects the <strong>entire</strong> custom-rules.yaml file with a <code>LOAD_ERR</code> that appears only in the container log. All custom rules silently fail to load. The default rules still work, so Falco appears healthy.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">condition</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    container and evt.type = splice</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">output</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    splice() from container (user=%user.name)</span>
+</span></span></code></pre></div><p>If the <code>output: &gt;</code> line ends up on the same line as the last line of the condition block, which can happen easily during copy-paste editing, Falco doesn&rsquo;t report a parse error. Instead, it rejects the <strong>entire</strong> custom-rules.yaml file with a <code>LOAD_ERR</code> that appears only in the container log. All custom rules silently fail to load. The default rules still work, so Falco appears healthy.</p>
 <p>I hit this twice in the same file. The first time, I noticed because the splice rule wasn&rsquo;t firing on S08. The second time, Falco crash-looped 27 times before I checked <code>docker logs falco</code> and found the error. The fix was a single newline both times.</p>
 <p><strong>Recommendation:</strong> After any custom rule change, check <code>docker logs falco 2&gt;&amp;1 | grep LOAD_ERR</code> before running scenarios.</p>
 <h2 id="falco-evtdir-deprecation">Falco: evt.dir Deprecation</h2>
@@ -415,38 +415,38 @@
 <h2 id="falco-event-file-accumulation">Falco: Event File Accumulation</h2>
 <p>The harness uses <code>touch</code> to create the Falco output file before starting the container. If Falco appends to an existing file (the default behavior with <code>file_output</code>), events from previous runs contaminate your analysis. Between runs, you need to truncate with <code>: &gt; falco-events.json</code>, not just <code>touch</code>.</p>
 <p>This is a lab-specific issue, but the same principle applies in production if you&rsquo;re rotating Falco output files. Stale events in the current file will confuse any analysis pipeline that assumes the file only contains events from the current session.</p>
-<h2 id="tracee---events-doesnt-support-argument-filters">Tracee: <code>--events</code> Doesn&rsquo;t Support Argument Filters</h2>
+<h2 id="tracee-events-doesnt-support-argument-filters">Tracee: &ndash;events Doesn&rsquo;t Support Argument Filters</h2>
 <p>You can&rsquo;t do:</p>
-<pre><code>--events openat.args.pathname=/proc/self/exe
+<pre tabindex="0"><code>--events openat.args.pathname=/proc/self/exe
 </code></pre><p>Tracee will silently ignore the filter part and enable <code>openat</code> with no filtering. To get argument-level filtering, you need a policy YAML file. The documentation mentions this, but the error mode is silent acceptance rather than a parse error, so it&rsquo;s easy to miss.</p>
 <h2 id="tetragon-policy-file-timing">Tetragon: Policy File Timing</h2>
 <p>Tetragon loads TracingPolicy YAML files from a directory mounted into the container. The policies must be on disk <em>before</em> the container starts. If you SCP policy files to the VM and start Tetragon in the same script, there&rsquo;s a race condition: the SCP might not complete before <code>docker run</code> reads the policy directory.</p>
 <p>I hit this with <code>07-capability-abuse.yaml</code>. The file was created after the Tetragon container was already running. Tetragon loaded 7 of 8 policies, and the capability abuse hooks were silently missing from the entire S13/S14 run. The only way I caught it was comparing the <code>docker logs tetragon | grep &quot;Added TracingPolicy&quot;</code> count against the number of YAML files on disk.</p>
 <p><strong>Recommendation:</strong> After starting Tetragon, verify the loaded policy count matches the file count:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">policy_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>find /path/to/policies -name <span style="color:#e6db74">&#39;*.yaml&#39;</span> | wc -l<span style="color:#66d9ef">)</span>
-loaded_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker logs tetragon 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -c <span style="color:#e6db74">&#34;Added TracingPolicy with success&#34;</span><span style="color:#66d9ef">)</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$loaded_count<span style="color:#e6db74">&#34;</span> -lt <span style="color:#e6db74">&#34;</span>$policy_count<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    echo <span style="color:#e6db74">&#34;WARNING: </span>$loaded_count<span style="color:#e6db74">/</span>$policy_count<span style="color:#e6db74"> policies loaded&#34;</span>
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><h2 id="the---restartalways--skip-guard-bug">The <code>--restart=always</code> + Skip Guard Bug</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>policy_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>find /path/to/policies -name <span style="color:#e6db74">&#39;*.yaml&#39;</span> | wc -l<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>loaded_count<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker logs tetragon 2&gt;&amp;<span style="color:#ae81ff">1</span> | grep -c <span style="color:#e6db74">&#34;Added TracingPolicy with success&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$loaded_count<span style="color:#e6db74">&#34;</span> -lt <span style="color:#e6db74">&#34;</span>$policy_count<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;WARNING: </span>$loaded_count<span style="color:#e6db74">/</span>$policy_count<span style="color:#e6db74"> policies loaded&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><h2 id="the-restartalways--skip-guard-bug">The &ndash;restart=always + Skip Guard Bug</h2>
 <p>This one cost two full re-runs. All three install functions originally had a guard:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> docker ps --format <span style="color:#e6db74">&#39;{{.Names}}&#39;</span> | grep -q <span style="color:#e6db74">&#34;^toolname</span>$<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
-    echo <span style="color:#e6db74">&#34;Tool is already running -- skipping reinstall.&#34;</span>
-    <span style="color:#66d9ef">return</span>
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>Combined with <code>--restart=always</code> on the container, here&rsquo;s what happened after a VM reboot: Docker auto-restarted the old container with the old configuration. The install function saw the container running and returned early. The new configuration (updated policies, new filters, different flags) was never applied. The scenario ran against the old config.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> docker ps --format <span style="color:#e6db74">&#39;{{.Names}}&#39;</span> | grep -q <span style="color:#e6db74">&#34;^toolname</span>$<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Tool is already running -- skipping reinstall.&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>Combined with <code>--restart=always</code> on the container, here&rsquo;s what happened after a VM reboot: Docker auto-restarted the old container with the old configuration. The install function saw the container running and returned early. The new configuration (updated policies, new filters, different flags) was never applied. The scenario ran against the old config.</p>
 <p>The symptom was subtle: event counts and timestamps matched a previous run exactly. Not &ldquo;similar&rdquo;, identical. The container log&rsquo;s start timestamp was from three hours ago, not from the current run. If I hadn&rsquo;t been comparing timestamps, I&rsquo;d have analyzed stale data and drawn wrong conclusions.</p>
 <p>The fix was removing the skip guard entirely and always recreating:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always recreate -- the container may have been auto-restarted after</span>
-<span style="color:#75715e"># reboot (--restart=always) with a stale config.</span>
-docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
-</code></pre></div><p>This applies to any containerized tool with <code>--restart=always</code> where you expect configuration changes to take effect on restart. The container restart and the configuration update are separate operations, and the skip guard conflates &ldquo;container is running&rdquo; with &ldquo;container is running <em>with the right config</em>.&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Always recreate -- the container may have been auto-restarted after</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># reboot (--restart=always) with a stale config.</span>
+</span></span><span style="display:flex;"><span>docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
+</span></span></code></pre></div><p>This applies to any containerized tool with <code>--restart=always</code> where you expect configuration changes to take effect on restart. The container restart and the configuration update are separate operations, and the skip guard conflates &ldquo;container is running&rdquo; with &ldquo;container is running <em>with the right config</em>.&rdquo;</p>
 <h1 id="false-positives-and-noise-sources">False Positives and Noise Sources</h1>
 <p>Every tool generates noise. Understanding the noise sources is how you tune effectively.</p>
 <h2 id="runc-init-18-false-positives-per-container-start">runc Init: 18 False Positives Per Container Start</h2>
 <p>runc, the OCI runtime that Docker uses to create containers, calls <code>fsopen</code>, <code>fsconfig</code>, <code>symlink</code>, and creates netlink sockets during normal container initialization. These are exactly the syscalls that CVE-specific rules target. Without exclusions, every <code>docker run</code> generates ~18 false positive events across the CVE rules.</p>
 <p>The required Falco exclusion:</p>
-<pre><code>not proc.name in (runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;)
+<pre tabindex="0"><code>not proc.name in (runc, &#34;runc:[0:PARENT]&#34;, &#34;runc:[1:CHILD]&#34;, &#34;runc:[2:INIT]&#34;)
 </code></pre><p>This needs to be on every CVE-specific rule. The four runc process names correspond to different stages of the container creation process: parent, child, and init. Missing any one of them leaks false positives.</p>
 <p>Tetragon and Tracee have the same problem but handle it differently. Tetragon&rsquo;s namespace metadata lets you filter in post-processing: runc init processes have <code>is_host: true</code> because they&rsquo;re running in the host&rsquo;s namespaces before the container&rsquo;s namespaces are created. Tracee&rsquo;s container scope (<code>scope: container</code> in the policy) filters out most runc init activity, but some events from <code>runc:[2:INIT]</code> still appear because it executes after the container&rsquo;s namespaces are created but before the container&rsquo;s entrypoint runs.</p>
 <h2 id="tetragon-cap_capable-558-of-all-volume">Tetragon cap_capable: 55.8% of All Volume</h2>
@@ -460,21 +460,21 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
 <h2 id="tracee-security_file_open-the-biggest-knob">Tracee security_file_open: The Biggest Knob</h2>
 <p>Without path filters, <code>security_file_open</code> is the single biggest source of Tracee event volume. During S13, <code>apt-get install keyutils</code> alone generated 12,000+ <code>security_file_open</code> events from the package manager reading every file in the dpkg database. Across all 15 scenarios, unfiltered <code>security_file_open</code> accounted for ~98% of total events.</p>
 <p>Path-prefix filtering reduced total events from 3.76M to 15,169, a 99.6% reduction, with zero detection regressions. The filters I used match the same sensitive paths as Tetragon&rsquo;s TracingPolicies:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">event</span>: security_file_open
-  <span style="color:#66d9ef">filters</span>:
-    - data.pathname=/etc/shadow*
-    - data.pathname=/proc/<span style="color:#ae81ff">1</span>/*
-    - data.pathname=/proc/self/*
-    - data.pathname=/var/run/docker.sock*
-    - data.pathname=/proc/sys/kernel/core_pattern*
-    - data.pathname=/dev/kmsg*
-    - data.pathname=/dev/sda*
-    - data.pathname=/etc/passwd*
-    <span style="color:#75715e"># ... (full list in the install-tools.sh source)</span>
-</code></pre></div><p>This is not optional for production. Without these filters, Tracee is vulnerable to adversarial openat flooding (S15 demonstrated 10.1M dropped events and a missed escape). With them, Tracee handled the same flood with zero drops.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">event</span>: <span style="color:#ae81ff">security_file_open</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">filters</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/etc/shadow*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/proc/1/*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/proc/self/*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/var/run/docker.sock*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/proc/sys/kernel/core_pattern*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/dev/kmsg*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/dev/sda*</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">data.pathname=/etc/passwd*</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... (full list in the install-tools.sh source)</span>
+</span></span></code></pre></div><p>This is not optional for production. Without these filters, Tracee is vulnerable to adversarial openat flooding (S15 demonstrated 10.1M dropped events and a missed escape). With them, Tracee handled the same flood with zero drops.</p>
 <h2 id="falco-drop-and-execute-new-binary">Falco &ldquo;Drop and execute new binary&rdquo;</h2>
 <p>This rule fires on any binary that was written to disk and then executed. It&rsquo;s high-confidence for supply chain attacks (attacker drops a binary and runs it). It&rsquo;s noisy in containers that install packages at runtime: <code>apt-get install keyutils</code> followed by <code>keyctl</code> triggers it, and so does every other freshly-installed package.</p>
-<p>In production, this rule is valuable but needs context-dependent tuning. If your containers never install packages at runtime (immutable images: which you should be doing), leave it at CRITICAL. If they do, either suppress it for known package managers or downgrade to INFORMATIONAL for containers with known install-at-runtime patterns.</p>
+<p>In production, this rule is valuable but needs context-dependent tuning. If your containers never install packages at runtime (immutable images), leave it at CRITICAL. If they do, either suppress it for known package managers or downgrade to INFORMATIONAL for containers with known install-at-runtime patterns.</p>
 <h1 id="tuning-recommendations">Tuning Recommendations</h1>
 <h2 id="tetragon">Tetragon</h2>
 <ol>
@@ -611,6 +611,16 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -642,14 +652,6 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -669,7 +671,7 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -745,14 +747,14 @@ docker rm -f toolname 2&gt;/dev/null <span style="color:#f92672">||</span> true
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

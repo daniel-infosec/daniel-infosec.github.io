@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="generator" content="Hugo 0.68.3" /><meta property="og:site_name" content="Catscrdl">
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Container Escape Telemetry, Part 4: Volume, Signal-to-Noise, and Choosing a Tool">
   <meta property="og:description" content="How much telemetry do Tetragon, Falco, and Tracee actually generate? Per-scenario volume breakdowns, signal-to-noise analysis, production rate estimates, the Falco rule gap, S15 stress test results, and recommendations by threat model.">
   <meta property="description" content="How much telemetry do Tetragon, Falco, and Tracee actually generate? Per-scenario volume breakdowns, signal-to-noise analysis, production rate estimates, the Falco rule gap, S15 stress test results, and recommendations by threat model.">
@@ -15,7 +15,7 @@
   
     <meta property="og:image" content="https://catscrdl.io/static/img/main/catscrdllogo.png">
   
-  <link rel="stylesheet" href="/css/bundle.min.d9e04ae08c9b3049b766dbd4aeab7d862c5ea1d13679b621490e0f5df5507497.css" integrity="sha256-2eBK4IybMEm3ZtvUrqt9hixeodE2ebYhSQ4PXfVQdJc="><link rel="stylesheet" href="/css/add-on.css">
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
 </head>
 
   <body>
@@ -289,46 +289,46 @@
 <p><img src="../images/event-volume.svg" alt="Total telemetry volume across 15 scenarios: Tetragon 1.2 GB, Falco 36 MB, Tracee 20 MB"></p>
 <h2 id="aggregate-numbers">Aggregate Numbers</h2>
 <table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Total events</td>
-<td>86,275</td>
-<td>10,892</td>
-<td>15,169</td>
-</tr>
-<tr>
-<td>Total data size</td>
-<td>1.2 GB</td>
-<td>36 MB</td>
-<td>~20 MB</td>
-</tr>
-<tr>
-<td>Avg bytes per event</td>
-<td>~14,600</td>
-<td>~3,500</td>
-<td>~1,400</td>
-</tr>
-<tr>
-<td>Events inside scenario windows</td>
-<td>~64,000</td>
-<td>~9,700</td>
-<td>~15,100</td>
-</tr>
-<tr>
-<td>Events outside scenario windows</td>
-<td>~22,300</td>
-<td>~1,200</td>
-<td>~60</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Metric</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Total events</td>
+					<td>86,275</td>
+					<td>10,892</td>
+					<td>15,169</td>
+			</tr>
+			<tr>
+					<td>Total data size</td>
+					<td>1.2 GB</td>
+					<td>36 MB</td>
+					<td>~20 MB</td>
+			</tr>
+			<tr>
+					<td>Avg bytes per event</td>
+					<td>~14,600</td>
+					<td>~3,500</td>
+					<td>~1,400</td>
+			</tr>
+			<tr>
+					<td>Events inside scenario windows</td>
+					<td>~64,000</td>
+					<td>~9,700</td>
+					<td>~15,100</td>
+			</tr>
+			<tr>
+					<td>Events outside scenario windows</td>
+					<td>~22,300</td>
+					<td>~1,200</td>
+					<td>~60</td>
+			</tr>
+	</tbody>
 </table>
 <p>A naive reading says Tetragon is wildly wasteful at 1.2 GB to monitor 15 short-lived scenarios versus Falco&rsquo;s 36 MB and Tracee&rsquo;s ~20 MB. But when you decompose the data size gaps, they factor into two independent architectural decisions: event count and event size. Tetragon generates ~6x more events than Tracee <em>and</em> each event is ~10x larger. Those two multipliers compound into the ~60x difference, and they reflect fundamentally different design philosophies rather than inefficiency. Falco&rsquo;s per-event size (~3,500 bytes) reflects the twelve custom rules and <code>rule_matching=all</code>, which produce richer output fields and multiple rule firings per event.</p>
 <p>The out-of-scenario event count is particularly revealing. Tracee captured only ~60 events outside the scenario windows because its eBPF programs are scoped tightly to container-namespaced processes. Tetragon generated ~22,300, because its baseline policies (particularly <code>cap_capable</code> and <code>wake_up_new_task</code>) plus the capability-abuse kprobes continuously observe kernel-wide behavior. That ambient stream is valuable for baselining but expensive in volume.</p>
@@ -348,122 +348,122 @@
 <h2 id="per-scenario-volume">Per-Scenario Volume</h2>
 <p>This is where it gets interesting, because the volume story shifts depending on the escape type.</p>
 <table>
-<thead>
-<tr>
-<th>Scenario</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-<th>Most Verbose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S06 Baseline</td>
-<td>1,127</td>
-<td>76</td>
-<td>29</td>
-<td>Tetragon (39x)</td>
-</tr>
-<tr>
-<td>S01 cgroup release_agent</td>
-<td>1,235</td>
-<td>102</td>
-<td>59</td>
-<td>Tetragon (21x)</td>
-</tr>
-<tr>
-<td>S02 CVE-2022-0492</td>
-<td>1,263</td>
-<td>143</td>
-<td>166</td>
-<td>Tetragon (8x)</td>
-</tr>
-<tr>
-<td>S03 nsenter</td>
-<td>571</td>
-<td>114</td>
-<td>90</td>
-<td>Tetragon (6x)</td>
-</tr>
-<tr>
-<td>S04 Docker socket</td>
-<td>1,895</td>
-<td>213</td>
-<td>176</td>
-<td>Tetragon (11x)</td>
-</tr>
-<tr>
-<td>S05 Host /proc</td>
-<td>547</td>
-<td>96</td>
-<td>54</td>
-<td>Tetragon (10x)</td>
-</tr>
-<tr>
-<td>S07 Leaky Vessels</td>
-<td>1,746</td>
-<td>68</td>
-<td>8</td>
-<td>Tetragon (218x)</td>
-</tr>
-<tr>
-<td>S08 DirtyPipe</td>
-<td>3,521</td>
-<td>128</td>
-<td>1,422</td>
-<td>Tetragon (2x)</td>
-</tr>
-<tr>
-<td>S09 fsconfig</td>
-<td>5,711</td>
-<td>81</td>
-<td>2,305</td>
-<td>Tetragon (2x)</td>
-</tr>
-<tr>
-<td>S10 Netfilter</td>
-<td>5,585</td>
-<td>83</td>
-<td>2,305</td>
-<td>Tetragon (2x)</td>
-</tr>
-<tr>
-<td>S11 maskedPaths</td>
-<td>890</td>
-<td>110</td>
-<td>65</td>
-<td>Tetragon (14x)</td>
-</tr>
-<tr>
-<td>S12 runc overwrite</td>
-<td>1,233</td>
-<td>53</td>
-<td>32</td>
-<td>Tetragon (39x)</td>
-</tr>
-<tr>
-<td>S13 <code>--privileged</code> post-exploit</td>
-<td>9,986</td>
-<td>5,623</td>
-<td>7,437</td>
-<td>Tetragon (1.3x)</td>
-</tr>
-<tr>
-<td>S14 Excessive capabilities</td>
-<td>1,045</td>
-<td>611</td>
-<td>920</td>
-<td>Tetragon (1.1x)</td>
-</tr>
-<tr>
-<td>S15 Syscall flood</td>
-<td>15,637</td>
-<td>623</td>
-<td>41</td>
-<td>Tetragon (381x)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Scenario</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+					<th>Most Verbose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>S06 Baseline</td>
+					<td>1,127</td>
+					<td>76</td>
+					<td>29</td>
+					<td>Tetragon (39x)</td>
+			</tr>
+			<tr>
+					<td>S01 cgroup release_agent</td>
+					<td>1,235</td>
+					<td>102</td>
+					<td>59</td>
+					<td>Tetragon (21x)</td>
+			</tr>
+			<tr>
+					<td>S02 CVE-2022-0492</td>
+					<td>1,263</td>
+					<td>143</td>
+					<td>166</td>
+					<td>Tetragon (8x)</td>
+			</tr>
+			<tr>
+					<td>S03 nsenter</td>
+					<td>571</td>
+					<td>114</td>
+					<td>90</td>
+					<td>Tetragon (6x)</td>
+			</tr>
+			<tr>
+					<td>S04 Docker socket</td>
+					<td>1,895</td>
+					<td>213</td>
+					<td>176</td>
+					<td>Tetragon (11x)</td>
+			</tr>
+			<tr>
+					<td>S05 Host /proc</td>
+					<td>547</td>
+					<td>96</td>
+					<td>54</td>
+					<td>Tetragon (10x)</td>
+			</tr>
+			<tr>
+					<td>S07 Leaky Vessels</td>
+					<td>1,746</td>
+					<td>68</td>
+					<td>8</td>
+					<td>Tetragon (218x)</td>
+			</tr>
+			<tr>
+					<td>S08 DirtyPipe</td>
+					<td>3,521</td>
+					<td>128</td>
+					<td>1,422</td>
+					<td>Tetragon (2x)</td>
+			</tr>
+			<tr>
+					<td>S09 fsconfig</td>
+					<td>5,711</td>
+					<td>81</td>
+					<td>2,305</td>
+					<td>Tetragon (2x)</td>
+			</tr>
+			<tr>
+					<td>S10 Netfilter</td>
+					<td>5,585</td>
+					<td>83</td>
+					<td>2,305</td>
+					<td>Tetragon (2x)</td>
+			</tr>
+			<tr>
+					<td>S11 maskedPaths</td>
+					<td>890</td>
+					<td>110</td>
+					<td>65</td>
+					<td>Tetragon (14x)</td>
+			</tr>
+			<tr>
+					<td>S12 runc overwrite</td>
+					<td>1,233</td>
+					<td>53</td>
+					<td>32</td>
+					<td>Tetragon (39x)</td>
+			</tr>
+			<tr>
+					<td>S13 <code>--privileged</code> post-exploit</td>
+					<td>9,986</td>
+					<td>5,623</td>
+					<td>7,437</td>
+					<td>Tetragon (1.3x)</td>
+			</tr>
+			<tr>
+					<td>S14 Excessive capabilities</td>
+					<td>1,045</td>
+					<td>611</td>
+					<td>920</td>
+					<td>Tetragon (1.1x)</td>
+			</tr>
+			<tr>
+					<td>S15 Syscall flood</td>
+					<td>15,637</td>
+					<td>623</td>
+					<td>41</td>
+					<td>Tetragon (381x)</td>
+			</tr>
+	</tbody>
 </table>
 <p>Tetragon dominates every scenario. That&rsquo;s a direct consequence of its always-on kprobe policies. The S06 baseline, a clean unprivileged container doing nothing suspicious, still generated 1,127 Tetragon events versus 29 from Tracee. That 39x ratio on a clean container is the clearest measure of Tetragon&rsquo;s observability philosophy: observe everything, filter later.</p>
 <p>S07 (Leaky Vessels) shows this even more starkly: 1,746 Tetragon events versus 8 from Tracee (218x), driven by the capability-abuse policy&rsquo;s <code>sys_mount</code> kprobe firing during container creation. Every <code>mount()</code> syscall during runc init becomes a Tetragon event, even though it&rsquo;s completely benign.</p>
@@ -473,28 +473,28 @@
 <h2 id="signal-to-noise">Signal-to-Noise</h2>
 <p>The operational question: what percentage of each tool&rsquo;s output is actually escape-relevant?</p>
 <table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Tetragon</th>
-<th>Falco</th>
-<th>Tracee</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Dominant noise source</td>
-<td>cap_capable + sys_mount kprobes (~50%)</td>
-<td>Process lifecycle + runc init (~40%)</td>
-<td>Process lifecycle from subprocess trees (~60%)</td>
-</tr>
-<tr>
-<td>Signal density (escape events/MB)</td>
-<td>~5</td>
-<td>~3</td>
-<td>~80</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Metric</th>
+					<th>Tetragon</th>
+					<th>Falco</th>
+					<th>Tracee</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Dominant noise source</td>
+					<td>cap_capable + sys_mount kprobes (~50%)</td>
+					<td>Process lifecycle + runc init (~40%)</td>
+					<td>Process lifecycle from subprocess trees (~60%)</td>
+			</tr>
+			<tr>
+					<td>Signal density (escape events/MB)</td>
+					<td>~5</td>
+					<td>~3</td>
+					<td>~80</td>
+			</tr>
+	</tbody>
 </table>
 <p>Tracee&rsquo;s signal density is the highest at roughly 80 escape-relevant events per megabyte versus Tetragon&rsquo;s ~5 and Falco&rsquo;s ~3. With path-filtered <code>security_file_open</code>, Tracee&rsquo;s output is almost entirely behaviorally relevant events: process exec/exit, namespace transitions, credential changes, and security-sensitive file access. The noise that remains is mostly process lifecycle events from container subprocess trees (apt-get, dpkg, etc.), which is unavoidable for any tool that tracks process creation.</p>
 <p><strong>Critical caveat:</strong> This signal density advantage depends on proper policy tuning. Without path filters on <code>security_file_open</code>, Tracee&rsquo;s signal density collapses: the unfiltered configuration generated 248x more events, with <code>security_file_open</code> noise accounting for ~98% of total volume. Under adversarial conditions (S15 syscall flood), the unfiltered configuration caused 10.1M dropped events including the escape itself. See the S15 section below.</p>
@@ -503,118 +503,118 @@
 <h2 id="production-rate-estimates">Production Rate Estimates</h2>
 <p>If you extrapolate the observed rates to a production cluster with moderate container churn:</p>
 <table>
-<thead>
-<tr>
-<th>Tool</th>
-<th>Estimated Production Rate</th>
-<th>With Tuning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Tetragon</td>
-<td>60-120 MB/hour/node</td>
-<td>10-25 MB/hour (disable baseline cap_capable, rate-limit sys_mount)</td>
-</tr>
-<tr>
-<td>Falco</td>
-<td>3-8 MB/hour/node</td>
-<td>&lt;2 MB/hour (runc exclusions + drop Debug rules)</td>
-</tr>
-<tr>
-<td>Tracee</td>
-<td>5-20 MB/hour/node</td>
-<td>2-8 MB/hour (path-filter security_file_open)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Tool</th>
+					<th>Estimated Production Rate</th>
+					<th>With Tuning</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Tetragon</td>
+					<td>60-120 MB/hour/node</td>
+					<td>10-25 MB/hour (disable baseline cap_capable, rate-limit sys_mount)</td>
+			</tr>
+			<tr>
+					<td>Falco</td>
+					<td>3-8 MB/hour/node</td>
+					<td>&lt;2 MB/hour (runc exclusions + drop Debug rules)</td>
+			</tr>
+			<tr>
+					<td>Tracee</td>
+					<td>5-20 MB/hour/node</td>
+					<td>2-8 MB/hour (path-filter security_file_open)</td>
+			</tr>
+	</tbody>
 </table>
 <p>These are rough estimates from 15 short-lived scenarios, not sustained production measurements. But they give you the right order of magnitude for capacity planning. The volume data makes the architectural tradeoffs concrete and measurable. Tetragon gives you forensically complete events at the cost of storage. Falco gives you rule-driven alerting at moderate overhead. Tracee gives you the best signal-to-noise ratio with compact events, but this depends on proper policy tuning &ndash; without path filtering on <code>security_file_open</code>, volume explodes to 2.6 GB with catastrophic event loss under adversarial conditions.</p>
 <h1 id="the-falco-rule-gap-was-configuration-not-engine">The Falco Rule Gap Was Configuration, Not Engine</h1>
 <p>This might be the most actionable finding from the entire project. Falco&rsquo;s default ruleset detected only 5 of 13 scoreable scenarios (S01-S14, excluding S06 baseline and S15 stress test). But the gaps were entirely configuration-driven, not engine limitations. Every syscall that Tetragon and Tracee used for detection, <code>splice</code>, <code>fsopen</code>, <code>symlink</code>, <code>setns</code>, is supported by Falco&rsquo;s event model. The difference is that Tetragon and Tracee ship with CVE-specific hooks and behavioral signatures, while Falco relies on rules that must be authored.</p>
 <p>I wrote twelve custom rules and rule changes, enabled <code>rule_matching=all</code> (so overlapping rules fire on the same event instead of just the first match), and took Falco from 5/13 to 11/13. Scoring note: S04 counts as detected (5/13 baseline) because Falco&rsquo;s default &ldquo;Docker Socket Access from Container&rdquo; rule fired on runc init, even though my custom rule targeting the in-container socket abuse didn&rsquo;t work. S12&rsquo;s custom rule was not validated because the kernel blocked the write before Falco could observe it, the score counts S12 as missed. S07 is missed by all tools.</p>
 <table>
-<thead>
-<tr>
-<th>Change</th>
-<th>Scenario</th>
-<th>Type</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Add openat2 + open_read/open_write to Docker socket rule</td>
-<td>S04</td>
-<td>Bug fix</td>
-<td>Still missed; fd.name path resolution issue</td>
-</tr>
-<tr>
-<td>New rule: evt.type = splice from container</td>
-<td>S08</td>
-<td>New rule</td>
-<td>Detected (2 CRITICAL alerts)</td>
-</tr>
-<tr>
-<td>New rule: evt.type in (fsconfig, fsopen, fsmount)</td>
-<td>S09</td>
-<td>New rule</td>
-<td>Detected</td>
-</tr>
-<tr>
-<td>New rule: AF_NETLINK/SOCK_RAW socket from container</td>
-<td>S10</td>
-<td>New rule</td>
-<td>Detected</td>
-</tr>
-<tr>
-<td>New rule: symlink/symlinkat targeting /proc or /sys</td>
-<td>S11</td>
-<td>New rule</td>
-<td>Detected</td>
-</tr>
-<tr>
-<td>New rule: open_write on /proc/self/exe</td>
-<td>S12</td>
-<td>New rule</td>
-<td>Not validated (write blocked before Falco observed)</td>
-</tr>
-<tr>
-<td>New rule: Keyctl Invocation from Container</td>
-<td>S13</td>
-<td>New rule</td>
-<td>Detected (504 alerts)</td>
-</tr>
-<tr>
-<td>New rule: Kernel Module Load from Container</td>
-<td>S13</td>
-<td>New rule</td>
-<td>Did not fire (modprobe fails before init_module)</td>
-</tr>
-<tr>
-<td>New rule: BPF Syscall from Container</td>
-<td>S13</td>
-<td>New rule</td>
-<td>Did not fire (S13 reads /proc/kallsyms, not bpf())</td>
-</tr>
-<tr>
-<td>New rule: Kernel Log Buffer Read from Container</td>
-<td>S13</td>
-<td>New rule</td>
-<td>Detected (1 alert for /dev/kmsg)</td>
-</tr>
-<tr>
-<td>New rule: Host Process Environ Read from Container</td>
-<td>S14</td>
-<td>New rule</td>
-<td>Detected (3 alerts for /proc/1/environ)</td>
-</tr>
-<tr>
-<td>New rule: Host Process Maps Read from Container</td>
-<td>S14</td>
-<td>New rule</td>
-<td>Detected (3 alerts for /proc/1/maps)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Change</th>
+					<th>Scenario</th>
+					<th>Type</th>
+					<th>Result</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Add openat2 + open_read/open_write to Docker socket rule</td>
+					<td>S04</td>
+					<td>Bug fix</td>
+					<td>Still missed; fd.name path resolution issue</td>
+			</tr>
+			<tr>
+					<td>New rule: evt.type = splice from container</td>
+					<td>S08</td>
+					<td>New rule</td>
+					<td>Detected (2 CRITICAL alerts)</td>
+			</tr>
+			<tr>
+					<td>New rule: evt.type in (fsconfig, fsopen, fsmount)</td>
+					<td>S09</td>
+					<td>New rule</td>
+					<td>Detected</td>
+			</tr>
+			<tr>
+					<td>New rule: AF_NETLINK/SOCK_RAW socket from container</td>
+					<td>S10</td>
+					<td>New rule</td>
+					<td>Detected</td>
+			</tr>
+			<tr>
+					<td>New rule: symlink/symlinkat targeting /proc or /sys</td>
+					<td>S11</td>
+					<td>New rule</td>
+					<td>Detected</td>
+			</tr>
+			<tr>
+					<td>New rule: open_write on /proc/self/exe</td>
+					<td>S12</td>
+					<td>New rule</td>
+					<td>Not validated (write blocked before Falco observed)</td>
+			</tr>
+			<tr>
+					<td>New rule: Keyctl Invocation from Container</td>
+					<td>S13</td>
+					<td>New rule</td>
+					<td>Detected (504 alerts)</td>
+			</tr>
+			<tr>
+					<td>New rule: Kernel Module Load from Container</td>
+					<td>S13</td>
+					<td>New rule</td>
+					<td>Did not fire (modprobe fails before init_module)</td>
+			</tr>
+			<tr>
+					<td>New rule: BPF Syscall from Container</td>
+					<td>S13</td>
+					<td>New rule</td>
+					<td>Did not fire (S13 reads /proc/kallsyms, not bpf())</td>
+			</tr>
+			<tr>
+					<td>New rule: Kernel Log Buffer Read from Container</td>
+					<td>S13</td>
+					<td>New rule</td>
+					<td>Detected (1 alert for /dev/kmsg)</td>
+			</tr>
+			<tr>
+					<td>New rule: Host Process Environ Read from Container</td>
+					<td>S14</td>
+					<td>New rule</td>
+					<td>Detected (3 alerts for /proc/1/environ)</td>
+			</tr>
+			<tr>
+					<td>New rule: Host Process Maps Read from Container</td>
+					<td>S14</td>
+					<td>New rule</td>
+					<td>Detected (3 alerts for /proc/1/maps)</td>
+			</tr>
+	</tbody>
 </table>
 <p>A critical lesson from validation: runc itself calls <code>fsopen</code>, <code>fsconfig</code>, <code>symlink</code>, and creates netlink sockets during normal container initialization. All new rules need the exclusion <code>not proc.name in (runc, &quot;runc:[0:PARENT]&quot;, &quot;runc:[1:CHILD]&quot;, &quot;runc:[2:INIT]&quot;)</code>. Without this, each container start generates approximately 18 false positive events. If you&rsquo;ve read my post on <a href="https://catscrdl.io/blog/buildingresilientsuppressions/">building resilient suppressions</a>, you know this is exactly the kind of suppression that needs to be well-documented and regularly validated.</p>
 <p>The runc noise problem exists in every tool, not just Falco. Tetragon&rsquo;s <code>cap_capable</code> kprobe and <code>sys_mount</code> kprobe generate roughly half its total volume from routine capability checks and container lifecycle mounts. Tracee&rsquo;s <code>security_file_open</code> accounts for the majority of events when unfiltered, mostly from package managers and compilers. Detection rules that look precise in a lab become noisy the moment they encounter real container lifecycle activity. The gap between &ldquo;rule works&rdquo; and &ldquo;rule is production-ready&rdquo; is where most operational effort goes.</p>
@@ -629,45 +629,45 @@
 <p><strong>Phase 6 (the critical test):</strong> 1M <code>openat()</code> flood running concurrently with an <code>nsenter -t 1 -m -u -i -p</code> escape attempt. The question: can the tool see the escape during the flood?</p>
 <h2 id="results">Results</h2>
 <table>
-<thead>
-<tr>
-<th>Tool</th>
-<th>S15 Events</th>
-<th>Events Dropped</th>
-<th>Drop Rate</th>
-<th>nsenter Captured?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Tetragon</strong></td>
-<td>15,637</td>
-<td><strong>0</strong></td>
-<td>0%</td>
-<td><strong>Yes</strong> (full chain)</td>
-</tr>
-<tr>
-<td><strong>Falco</strong></td>
-<td>623</td>
-<td>895,813</td>
-<td>~68% at peak</td>
-<td><strong>Yes</strong> (4 nsenter alerts)</td>
-</tr>
-<tr>
-<td><strong>Tracee (filtered)</strong></td>
-<td>41</td>
-<td><strong>0</strong></td>
-<td>0%</td>
-<td><strong>Yes</strong> (exec + 4x setns)</td>
-</tr>
-<tr>
-<td><strong>Tracee (unfiltered)</strong></td>
-<td>1,940,289</td>
-<td>10,127,573</td>
-<td>~84%</td>
-<td><strong>No</strong> (escape events lost)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Tool</th>
+					<th>S15 Events</th>
+					<th>Events Dropped</th>
+					<th>Drop Rate</th>
+					<th>nsenter Captured?</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Tetragon</strong></td>
+					<td>15,637</td>
+					<td><strong>0</strong></td>
+					<td>0%</td>
+					<td><strong>Yes</strong> (full chain)</td>
+			</tr>
+			<tr>
+					<td><strong>Falco</strong></td>
+					<td>623</td>
+					<td>895,813</td>
+					<td>~68% at peak</td>
+					<td><strong>Yes</strong> (4 nsenter alerts)</td>
+			</tr>
+			<tr>
+					<td><strong>Tracee (filtered)</strong></td>
+					<td>41</td>
+					<td><strong>0</strong></td>
+					<td>0%</td>
+					<td><strong>Yes</strong> (exec + 4x setns)</td>
+			</tr>
+			<tr>
+					<td><strong>Tracee (unfiltered)</strong></td>
+					<td>1,940,289</td>
+					<td>10,127,573</td>
+					<td>~84%</td>
+					<td><strong>No</strong> (escape events lost)</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Tetragon lost zero events.</strong> Its in-kernel filtering means events that don&rsquo;t match a TracingPolicy never enter the ring buffer. The openat floods generated only process lifecycle events (exec/exit), not per-syscall events, because no TracingPolicy matched openat on <code>/dev/null</code>. The nsenter escape was captured with full forensic detail: process_exec for the nsenter command, process_kprobe events for the namespace operations, and the complete process tree.</p>
 <p><strong>Falco dropped ~896K events but preserved all security-critical detections.</strong> Its buffer management prioritizes process lifecycle events (execve, clone/fork) over file operation events (open, close). During peak flood, 68% of events were dropped, but <code>execve_exit</code> and <code>clone_fork_exit</code> drops were <strong>zero</strong>. The nsenter escape fired 4 &ldquo;Nsenter Execution in Container&rdquo; alerts. This is a good engineering tradeoff: you lose visibility into <em>which files</em> were accessed during a flood, but you don&rsquo;t miss the attacker spawning nsenter.</p>
@@ -831,6 +831,16 @@
       </header>
       
       <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
           
         <header>
           <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
@@ -862,14 +872,6 @@
         </header>
       </article>
       
-      <article class="mini-post">
-          
-        <header>
-          <h2><a href="/blog/containerescapetelemetry/tuning/">Container Escape Telemetry, Part 5: Tuning eBPF Tools From Defaults to Detection</a></h2>
-          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
-        </header>
-      </article>
-      
       
         <footer>
           <a href="/blog/" class="button">See More</a>
@@ -889,7 +891,7 @@
           
           
           <li>
-              <a href="/categories/infosec/">infosec<span class="count">20</span></a>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
           
           <li>
               <a href="/categories/food/">food<span class="count">1</span></a>
@@ -965,14 +967,14 @@
   <p class="copyright">
     © 2026 Catscrdl
       <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.68.3' target='_blank' rel='noopener'>Hugo</a>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
       <script src="/js/highlight.js"></script>
     
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.bbba6b424a8ac5b6858cd5fc80eabc9c5277945cc2dc349204646b84891b4b58.js" integrity="sha256-u7prQkqKxbaFjNX8gOq8nFJ3lFzC3DSSBGRrhIkbS1g="></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
     <script src="/js/add-on.js"></script>
     </div>
   </body>

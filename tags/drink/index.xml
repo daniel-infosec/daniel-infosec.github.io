@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>drink on Catscrdl</title>
-    <link>https://catscrdl.io/tags/drink/</link>
-    <description>Recent content in drink on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 26 Mar 2022 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/tags/drink/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>A Shmoo&#39;s Guide to DC</title>
-      <link>https://catscrdl.io/blog/ashmoosguidetodc/</link>
-      <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/ashmoosguidetodc/</guid>
-      <description>Some of these recommendtions work best for Shmoocon in March vs Shmoocon in the cold of January.
-Orienting Yourself
-Below is a map of the neighborhoods. The gold star is the Hilton hotel. When you hear someone reference a neighborhood, hopefully this helps. The most common ones you&amp;rsquo;ll probably hear are Adams Morgan (Admo), Dupont Circle (Dupont), U St, The Mall, and Capitol Hill.
-Getting Around
-Metro
- Dupont station is going to be closest and that&amp;rsquo;ll get you to the red line.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Drink on Catscrdl</title>
+		<link>https://catscrdl.io/tags/drink/</link>
+		<description>Recent content in Drink on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Sat, 26 Mar 2022 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/drink/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>A Shmoo&#39;s Guide to DC</title>
+				<link>https://catscrdl.io/blog/ashmoosguidetodc/</link>
+				<pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/ashmoosguidetodc/</guid>
+				<description>&lt;p&gt;Some of these recommendtions work best for Shmoocon in March vs Shmoocon in the cold of January.&lt;/p&gt;&#xA;&lt;p&gt;Orienting Yourself &lt;br&gt;&#xA;Below is a map of the neighborhoods. The gold star is the Hilton hotel. When you hear someone reference a neighborhood, hopefully this helps. The most common ones you&amp;rsquo;ll probably hear are Adams Morgan (Admo), Dupont Circle (Dupont), U St, The Mall, and Capitol Hill.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://catscrdl.io/static/img/2022/DC_neighborhoods_map.png&#34; alt=&#34;Neighborhood Map&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Getting Around&lt;/strong&gt; &lt;br&gt;&#xA;Metro&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Dupont station is going to be closest and that&amp;rsquo;ll get you to the red line.&lt;/li&gt;&#xA;&lt;li&gt;You probably won&amp;rsquo;t need to take the Metro unless you&amp;rsquo;re heading to Amtrak or heading out to Virginia or DCA (Airport).&#xA;&lt;img src=&#34;https://catscrdl.io/static/img/2022/MetroMap.jpg&#34; alt=&#34;Metro Map&#34;&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Buses&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

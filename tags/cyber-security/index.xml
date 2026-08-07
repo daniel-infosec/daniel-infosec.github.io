@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>cyber security on Catscrdl</title>
-    <link>https://catscrdl.io/tags/cyber-security/</link>
-    <description>Recent content in cyber security on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 03 Aug 2024 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/tags/cyber-security/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>The Pillars of Security Monitoring: A Comprehensive Guide</title>
-      <link>https://catscrdl.io/blog/typesofsecuritymonitoring/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/typesofsecuritymonitoring/</guid>
-      <description>The Pillars of Security Monitoring: A Comprehensive Guide As you may know by now if you&amp;rsquo;ve read a few of my blog articles, I&amp;rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&amp;rsquo;re part of a larger &amp;ldquo;security monitoring&amp;rdquo; capability which consists of related but distinct pillars.</description>
-    </item>
-    
-    <item>
-      <title>Detection as Code: A Maturity Framework</title>
-      <link>https://catscrdl.io/blog/detectionascodematurity/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/detectionascodematurity/</guid>
-      <description>Detection as Code: A Maturity Framework Introduction In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&amp;rsquo;ve come to realize that it&amp;rsquo;s not simply a matter of whether or not to adopt DaC.</description>
-    </item>
-    
-    <item>
-      <title>There are Only Two Rules</title>
-      <link>https://catscrdl.io/blog/thereareonlytworules/</link>
-      <pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/thereareonlytworules/</guid>
-      <description>Intro In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&amp;rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.</description>
-    </item>
-    
-    <item>
-      <title>Building Resilient Detection Suppressions</title>
-      <link>https://catscrdl.io/blog/buildingresilientsuppressions/</link>
-      <pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/buildingresilientsuppressions/</guid>
-      <description>Intro Raise your hand if you&amp;rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&amp;rsquo;s back in your &amp;ldquo;fix&amp;rdquo; queue with another false positive. I&amp;rsquo;d expect almost everyone who&amp;rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&amp;rsquo;t very good and it&amp;rsquo;s alerting on a lot of benign behavior.</description>
-    </item>
-    
-    <item>
-      <title>How to Write an Actionable Alert</title>
-      <link>https://catscrdl.io/blog/howtowriteanactionablealert/</link>
-      <pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/blog/howtowriteanactionablealert/</guid>
-      <description>Intro &amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;
-This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts.</description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Cyber Security on Catscrdl</title>
+		<link>https://catscrdl.io/tags/cyber-security/</link>
+		<description>Recent content in Cyber Security on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/cyber-security/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Stop Making Your Detection Engineers Triage Alerts</title>
+				<link>https://catscrdl.io/blog/whotriagesthealerts/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/whotriagesthealerts/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;There was a question I saw the other day asking if detection engineers (DE), the folks who author alerts, should also be primarily responsible for their triage. There was large support for having the detection authors also play a large role in initial triage, often as part of the oncall. I largely disagree with this stance and am going to use some time Friday to quickly argue why you&amp;rsquo;re likely compensating for technology and process failures if you do that.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>The Pillars of Security Monitoring: A Comprehensive Guide</title>
+				<link>https://catscrdl.io/blog/typesofsecuritymonitoring/</link>
+				<pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/typesofsecuritymonitoring/</guid>
+				<description>&lt;h1 id=&#34;the-pillars-of-security-monitoring-a-comprehensive-guide&#34;&gt;The Pillars of Security Monitoring: A Comprehensive Guide&lt;/h1&gt;&#xA;&lt;p&gt;As you may know by now if you&amp;rsquo;ve read a few of my blog articles, I&amp;rsquo;m a big fan of decomposing ideas in threat detection into various frameworks. This latest blog post will touch on another area that I feel strongly about - specifically, that detection engineers need to take a step back and realize that they&amp;rsquo;re part of a larger &amp;ldquo;security monitoring&amp;rdquo; capability which consists of related but distinct pillars. We&amp;rsquo;ll explore these interrelated pillars of security monitoring: threat detection, posture management, compliance monitoring, abuse detection, insider threat, and vulnerability management. Understanding these differences isn&amp;rsquo;t just academic – it&amp;rsquo;s essential for crafting an effective, nuanced security strategy. Importantly, it will lead into an often opinionated discussion on SOC vs SOC-less models.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Detection as Code: A Maturity Framework</title>
+				<link>https://catscrdl.io/blog/detectionascodematurity/</link>
+				<pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/detectionascodematurity/</guid>
+				<description>&lt;h1 id=&#34;detection-as-code-a-maturity-framework&#34;&gt;Detection as Code: A Maturity Framework&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the ever-evolving landscape of cybersecurity, the methodologies and tools we rely on are continually advancing. One of the latest trends is Detection as Code (DaC), which promises to revolutionize threat detection by integrating software engineering practices into security operations. Having worked in an organization that practices DaC for several years, I&amp;rsquo;ve come to realize that it&amp;rsquo;s not simply a matter of whether or not to adopt DaC.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>There are Only Two Rules</title>
+				<link>https://catscrdl.io/blog/thereareonlytworules/</link>
+				<pubDate>Fri, 22 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/thereareonlytworules/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;In the field of detection engineering, understanding and applying the right frameworks is crucial for effectively identifying and responding to threats. Mental models provide a structured way of categorizing and approaching the myriad of security alerts and anomalies we face daily. These models help us dissect and understand the behavior of potential threats, allowing for a more targeted and effective defense strategy. In this blog post, I&amp;rsquo;ll explain how I use one mental model to clearly classify every detection rule into one of two categories and how that helps shape the decision of what kind of detections I build.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Building Resilient Detection Suppressions</title>
+				<link>https://catscrdl.io/blog/buildingresilientsuppressions/</link>
+				<pubDate>Wed, 20 Dec 2023 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/buildingresilientsuppressions/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;Raise your hand if you&amp;rsquo;ve worked on suppressing a false positive for a detector and then the very next day, it&amp;rsquo;s back in your &amp;ldquo;fix&amp;rdquo; queue with another false positive. I&amp;rsquo;d expect almost everyone who&amp;rsquo;s worked in detection engineering for any period of time has their hand raised or is nodding along. Why does this happen? Well, sometimes the detector itself isn&amp;rsquo;t very good and it&amp;rsquo;s alerting on a lot of benign behavior. But sometimes, the answer is that the suppression that was implemented was too specific and wasn&amp;rsquo;t properly generalized to capture the benign behavior.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>How to Write an Actionable Alert</title>
+				<link>https://catscrdl.io/blog/howtowriteanactionablealert/</link>
+				<pubDate>Mon, 03 Oct 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/blog/howtowriteanactionablealert/</guid>
+				<description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;&#xA;&lt;p&gt;&amp;ldquo;If a tree falls in a forest and no one is around to hear it, does it make a sound?&amp;rdquo;&lt;/p&gt;&#xA;&lt;p&gt;This mantra about possibly non-existent trees very much applies to detection engineers. If you write a great rule to detect malicious behavior, but no one (or nothing) acts upon the alert, did you really catch the threat actor? Or worse, an analyst acts on the alert but responds incorrectly. In this article, I will cover the importance of not only writing solid detections, but also solid alerts. The target audience of this blog post is security professionals who write custom detections in their SIEM or other similar system.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

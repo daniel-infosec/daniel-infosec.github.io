@@ -1,285 +1,241 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tags on Catscrdl</title>
-    <link>https://catscrdl.io/tags/</link>
-    <description>Recent content in Tags on Catscrdl</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://catscrdl.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>container security</title>
-      <link>https://catscrdl.io/tags/container-security/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/container-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>detection</title>
-      <link>https://catscrdl.io/tags/detection/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/detection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>detection engineering</title>
-      <link>https://catscrdl.io/tags/detection-engineering/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/detection-engineering/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>eBPF</title>
-      <link>https://catscrdl.io/tags/ebpf/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/ebpf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>runtime security</title>
-      <link>https://catscrdl.io/tags/runtime-security/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/runtime-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>TeamPCP</title>
-      <link>https://catscrdl.io/tags/teampcp/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/teampcp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>threat intelligence</title>
-      <link>https://catscrdl.io/tags/threat-intelligence/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/threat-intelligence/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tuning</title>
-      <link>https://catscrdl.io/tags/tuning/</link>
-      <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/tuning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cyber security</title>
-      <link>https://catscrdl.io/tags/cyber-security/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/cyber-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>information security</title>
-      <link>https://catscrdl.io/tags/information-security/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/information-security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>security monitoring</title>
-      <link>https://catscrdl.io/tags/security-monitoring/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/security-monitoring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>threat detection</title>
-      <link>https://catscrdl.io/tags/threat-detection/</link>
-      <pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/threat-detection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>detection as code</title>
-      <link>https://catscrdl.io/tags/detection-as-code/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/detection-as-code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>drink</title>
-      <link>https://catscrdl.io/tags/drink/</link>
-      <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/drink/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>food</title>
-      <link>https://catscrdl.io/tags/food/</link>
-      <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/food/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>shmoocon</title>
-      <link>https://catscrdl.io/tags/shmoocon/</link>
-      <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/shmoocon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>zure</title>
-      <link>https://catscrdl.io/tags/zure/</link>
-      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/zure/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>2fa</title>
-      <link>https://catscrdl.io/tags/2fa/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/2fa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mfa</title>
-      <link>https://catscrdl.io/tags/mfa/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/mfa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sms</title>
-      <link>https://catscrdl.io/tags/sms/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/sms/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>twitter</title>
-      <link>https://catscrdl.io/tags/twitter/</link>
-      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/twitter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>att&amp;ck</title>
-      <link>https://catscrdl.io/tags/attck/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/attck/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>attack emulation</title>
-      <link>https://catscrdl.io/tags/attack-emulation/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/attack-emulation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>automation</title>
-      <link>https://catscrdl.io/tags/automation/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/automation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>benchmark</title>
-      <link>https://catscrdl.io/tags/benchmark/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/benchmark/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>metasploit</title>
-      <link>https://catscrdl.io/tags/metasploit/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/metasploit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mitre</title>
-      <link>https://catscrdl.io/tags/mitre/</link>
-      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/mitre/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>c2</title>
-      <link>https://catscrdl.io/tags/c2/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/c2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>domainfronting</title>
-      <link>https://catscrdl.io/tags/domainfronting/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/domainfronting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>wikipedia</title>
-      <link>https://catscrdl.io/tags/wikipedia/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://catscrdl.io/tags/wikipedia/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>Tags on Catscrdl</title>
+		<link>https://catscrdl.io/tags/</link>
+		<description>Recent content in Tags on Catscrdl</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 07 Aug 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://catscrdl.io/tags/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Alert Triage</title>
+				<link>https://catscrdl.io/tags/alert-triage/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/alert-triage/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Cyber Security</title>
+				<link>https://catscrdl.io/tags/cyber-security/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/cyber-security/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Detection Engineering</title>
+				<link>https://catscrdl.io/tags/detection-engineering/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/detection-engineering/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Information Security</title>
+				<link>https://catscrdl.io/tags/information-security/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/information-security/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Soc</title>
+				<link>https://catscrdl.io/tags/soc/</link>
+				<pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/soc/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Container Security</title>
+				<link>https://catscrdl.io/tags/container-security/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/container-security/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>EBPF</title>
+				<link>https://catscrdl.io/tags/ebpf/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/ebpf/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Runtime Security</title>
+				<link>https://catscrdl.io/tags/runtime-security/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/runtime-security/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>TeamPCP</title>
+				<link>https://catscrdl.io/tags/teampcp/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/teampcp/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Threat Intelligence</title>
+				<link>https://catscrdl.io/tags/threat-intelligence/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/threat-intelligence/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Tuning</title>
+				<link>https://catscrdl.io/tags/tuning/</link>
+				<pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/tuning/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Security Monitoring</title>
+				<link>https://catscrdl.io/tags/security-monitoring/</link>
+				<pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/security-monitoring/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Threat Detection</title>
+				<link>https://catscrdl.io/tags/threat-detection/</link>
+				<pubDate>Sat, 03 Aug 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/threat-detection/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Detection as Code</title>
+				<link>https://catscrdl.io/tags/detection-as-code/</link>
+				<pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/detection-as-code/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Drink</title>
+				<link>https://catscrdl.io/tags/drink/</link>
+				<pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/drink/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Food</title>
+				<link>https://catscrdl.io/tags/food/</link>
+				<pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/food/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Shmoocon</title>
+				<link>https://catscrdl.io/tags/shmoocon/</link>
+				<pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/shmoocon/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Detection</title>
+				<link>https://catscrdl.io/tags/detection/</link>
+				<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/detection/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Zure</title>
+				<link>https://catscrdl.io/tags/zure/</link>
+				<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/zure/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>2fa</title>
+				<link>https://catscrdl.io/tags/2fa/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/2fa/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Mfa</title>
+				<link>https://catscrdl.io/tags/mfa/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/mfa/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Sms</title>
+				<link>https://catscrdl.io/tags/sms/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/sms/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Twitter</title>
+				<link>https://catscrdl.io/tags/twitter/</link>
+				<pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/twitter/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Att&amp;ck</title>
+				<link>https://catscrdl.io/tags/attck/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/attck/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Attack Emulation</title>
+				<link>https://catscrdl.io/tags/attack-emulation/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/attack-emulation/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Automation</title>
+				<link>https://catscrdl.io/tags/automation/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/automation/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Benchmark</title>
+				<link>https://catscrdl.io/tags/benchmark/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/benchmark/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Metasploit</title>
+				<link>https://catscrdl.io/tags/metasploit/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/metasploit/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Mitre</title>
+				<link>https://catscrdl.io/tags/mitre/</link>
+				<pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/mitre/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>C2</title>
+				<link>https://catscrdl.io/tags/c2/</link>
+				<pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/c2/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Domainfronting</title>
+				<link>https://catscrdl.io/tags/domainfronting/</link>
+				<pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/domainfronting/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Wikipedia</title>
+				<link>https://catscrdl.io/tags/wikipedia/</link>
+				<pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/wikipedia/</guid>
+				<description></description>
+			</item>
+	</channel>
 </rss>
