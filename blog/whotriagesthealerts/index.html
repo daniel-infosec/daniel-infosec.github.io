@@ -8,8 +8,8 @@
 
 <meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
   <meta property="og:title" content="Stop Making Your Detection Engineers Triage Alerts">
-  <meta property="og:description" content="When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.">
-  <meta property="description" content="When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.">
+  <meta property="og:description" content="Who should be triaging your initial alerts?">
+  <meta property="description" content="Who should be triaging your initial alerts?">
   <meta property="og:url" content="https://catscrdl.io/blog/whotriagesthealerts/">
   <meta property="og:type" content="article">
   
@@ -229,13 +229,13 @@
       <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
     
     
-      <p>When a false positive occurs, how do you approach tuning your detector? Do you allowlist that one event? That can lead to another false positive tomorrow. This article will provide an example of how we build resilient suppressions.</p>
+      <p>Who should be triaging your initial alerts?</p>
     
   </div>
   <div class="meta">
     <time datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>3-Minute Read</p>
+    <p>4-Minute Read</p>
   </div>
 </header>
 
@@ -300,6 +300,9 @@
 <p>The ultimate goal of a system like this is to encourage high quality to enter the system to discourage floods. And if something does flood the system, the system should gracefully handle it. Having DE share the pain implies that pain is an acceptable part of the system as opposed to something to remove.</p>
 <h1 id="expert-knowledge">Expert Knowledge</h1>
 <p>As referenced earlier, another aspect that&rsquo;s referenced is DE knowledge improving alert triage accuracy and speed. While this is true on its surface, if that&rsquo;s your approach, you&rsquo;re building a system based on human knowledge which is inherently not resilient. If your expert is sick, on PTO, or wins hte lottery, what is your backup plan? In this case, I&rsquo;ll refer to my previous blog <a href="https://catscrdl.io/blog/howtowriteanactionablealert/">&ldquo;how to write an actionable alert&rdquo;</a>. In addition to that, one could have their IR/triage team approve alerts before they hit production. This would be their &ldquo;yes, we&rsquo;re ready to receive this signal and do IR on this system if necessary&rdquo; check off.</p>
+<h1 id="exceptions">Exceptions</h1>
+<p>In a smaller team where your secops function can be counted on one hand, the math for separate teams doesn&rsquo;t quite work out. The exact number of when to split is going to depend on if you need 24/7, complexity of your systems, etc.</p>
+<p>Additionally, I can see my argument completely dissolving in the face of the growing AI wave. I would not be surprised if the &ldquo;detection engineer&rdquo; role disappears entirely and companies have 1-3 &ldquo;security operations&rdquo; engineers again who do it all with AI-enabled tooling.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>In short, I think having your DEs triage alerts is compensation for poor alerts, poor metrics, and poor technology. Work to eliminate pain from your SOC rather than having it suck for everyone.</p>
 
