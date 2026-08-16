@@ -232,7 +232,7 @@
   <div class="meta">
     <time datetime="2026-08-15 00:00:00 &#43;0000 UTC">August 15, 2026</time>
     <p>Daniel Wyleczuk-Stern</p>
-    <p>6-Minute Read</p>
+    <p>7-Minute Read</p>
   </div>
 </header>
 
@@ -286,6 +286,8 @@
       <h1 id="flowwork---an-ai-coding-hardness">Flowwork - An AI Coding Hardness</h1>
 <h2 id="background">Background</h2>
 <p>I&rsquo;m a fairly big believer in the power of GenAI for coding. I know there&rsquo;s active debate in this area. If you&rsquo;re not a fan of LLMs for coding, this blog may not be for you. Personally, I believe that humans will not write code for much longer (with some niche exceptions). For the current capabilities of LLMs, I do not think they&rsquo;re good enough to &ldquo;vibe-code&rdquo; production level code. Harnesses that enforce strict coding standards with multiple, layered approaches to enforce them is essential. After almost a year of iteration, I&rsquo;ve got &ldquo;flowwork&rdquo; in a good enough state where I feel comfortable writing about it. (Why &ldquo;flowwork&rdquo;? It was originally called workflow and I called v2 flowwork because I&rsquo;m not creative.)</p>
+<h3 id="inspiration">Inspiration</h3>
+<p>While I was working on this before I read about <a href="https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04">Gas Town</a>, the blog post inspired me to really level up the capabilities of my harness. However, I don&rsquo;t have unlimited budget, so I really needed to optimize for tight quality loops. I also didn&rsquo;t want the agents to pick up work (yet), but instead, I drive ordering.</p>
 <h2 id="the-flow">The Flow</h2>
 <p>A key aspect of my development philosophy is that it should code like humans code. This means think before code. Thus, I wanted to ensure that my agents always planned before coding. I could enforce this with prompts, but fortunately there&rsquo;s tools for this. After some exploration, I landed on LangChain, which essentially allows you to abstract LLM applications into constituent steps. So, essentially, rather than one massive prompt that says &ldquo;do A, then B, then C&rdquo;, I have multiple prompts for each step of the development process, and LangChain lets me instrument ordering easily. Without further ado, here&rsquo;s the flow</p>
 <h3 id="flowwork-langgraph-architecture">Flowwork LangGraph Architecture</h3>
