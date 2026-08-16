@@ -17,13 +17,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/categories/"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/categories/"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -141,13 +141,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://catscrdl.io/fr/tags/"
+                hreflang="pl"
+                href="https://catscrdl.io/pl/tags/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="pl"
-                href="https://catscrdl.io/pl/tags/"
+                hreflang="fr"
+                href="https://catscrdl.io/fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -233,10 +233,22 @@
     <loc>https://catscrdl.io/tags/threat-detection/</loc>
     <lastmod>2024-08-03T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://catscrdl.io/tags/agentic-coding/</loc>
+    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://catscrdl.io/tags/detection-as-code/</loc>
     <lastmod>2024-07-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/detectionascodematurity/</loc>
+    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/categories/development/</loc>
+    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/blog/flowwork/</loc>
+    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/software-engineering/</loc>
     <lastmod>2024-07-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/thereareonlytworules/</loc>
