@@ -10,13 +10,13 @@
 		
 		
 		
-			<lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate>
 		
 			<atom:link href="https://catscrdl.io/tags/agentic-coding/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Flowwork - My Agentic Coding Hardness</title>
 				<link>https://catscrdl.io/blog/flowwork/</link>
-				<pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+				<pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
 				<guid>https://catscrdl.io/blog/flowwork/</guid>
 				<description>&lt;h1 id=&#34;flowwork---an-ai-coding-hardness&#34;&gt;Flowwork - An AI Coding Hardness&lt;/h1&gt;&#xA;&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;m a fairly big believer in the power of GenAI for coding. I know there&amp;rsquo;s active debate in this area. If you&amp;rsquo;re not a fan of LLMs for coding, this blog may not be for you. Personally, I believe that humans will not write code for much longer (with some niche exceptions). For the current capabilities of LLMs, I do not think they&amp;rsquo;re good enough to &amp;ldquo;vibe-code&amp;rdquo; production level code. Harnesses that enforce strict coding standards with multiple, layered approaches to enforce them is essential. After almost a year of iteration, I&amp;rsquo;ve got &amp;ldquo;flowwork&amp;rdquo; in a good enough state where I feel comfortable writing about it. (Why &amp;ldquo;flowwork&amp;rdquo;? It was originally called workflow and I called v2 flowwork because I&amp;rsquo;m not creative.)&lt;/p&gt;</description>
 			</item>

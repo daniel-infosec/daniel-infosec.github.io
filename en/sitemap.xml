@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://catscrdl.io/tags/alert-triage/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <loc>https://catscrdl.io/tags/agentic-coding/</loc>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/categories/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -62,7 +62,7 @@
                 />
   </url><url>
     <loc>https://catscrdl.io/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -114,26 +114,17 @@
                 href="https://catscrdl.io/nl/"
                 />
   </url><url>
-    <loc>https://catscrdl.io/tags/cyber-security/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <loc>https://catscrdl.io/categories/development/</loc>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://catscrdl.io/tags/detection-engineering/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <loc>https://catscrdl.io/blog/flowwork/</loc>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://catscrdl.io/tags/information-security/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/categories/infosec/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/tags/soc/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/blog/whotriagesthealerts/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <loc>https://catscrdl.io/tags/software-engineering/</loc>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/tags/</loc>
-    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -185,6 +176,27 @@
                 href="https://catscrdl.io/nl/tags/"
                 />
   </url><url>
+    <loc>https://catscrdl.io/tags/alert-triage/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/cyber-security/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/detection-engineering/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/information-security/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/categories/infosec/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/tags/soc/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://catscrdl.io/blog/whotriagesthealerts/</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://catscrdl.io/blog/containerescapetelemetry/isolation/</loc>
     <lastmod>2026-03-31T00:00:00+00:00</lastmod>
   </url><url>
@@ -233,22 +245,10 @@
     <loc>https://catscrdl.io/tags/threat-detection/</loc>
     <lastmod>2024-08-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://catscrdl.io/tags/agentic-coding/</loc>
-    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://catscrdl.io/tags/detection-as-code/</loc>
     <lastmod>2024-07-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/detectionascodematurity/</loc>
-    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/categories/development/</loc>
-    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/blog/flowwork/</loc>
-    <lastmod>2024-07-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://catscrdl.io/tags/software-engineering/</loc>
     <lastmod>2024-07-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://catscrdl.io/blog/thereareonlytworules/</loc>
