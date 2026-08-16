@@ -289,185 +289,203 @@
 <h2 id="the-flow">The Flow</h2>
 <p>A key aspect of my development philosophy is that it should code like humans code. This means think before code. Thus, I wanted to ensure that my agents always planned before coding. I could enforce this with prompts, but fortunately there&rsquo;s tools for this. After some exploration, I landed on LangChain, which essentially allows you to abstract LLM applications into consituent steps. So, essentially, rather than one massive prompt that says &ldquo;do A, then B, then C&rdquo;, I have multiple prompts for each step of the development process, and LangChain lets me instrument ordering easily. Without further ado, here&rsquo;s the flow</p>
 <h3 id="flowwork-langgraph-architecture">Flowwork LangGraph Architecture</h3>
-<p>┌─────────────────────────────────────────────────────────────────────┐
-│                           START                                      │
-└────────────────────────────┬────────────────────────────────────────┘
-│
-▼
-┌────────────────────────────────────────┐
-│           PIPELINE STAGES              │
-│    (Configured via state.json DAG)     │
-└────────────────────────────────────────┘
-│
-┌──────────────────┼──────────────────┐
-▼                  ▼                  ▼
-┌─────────┐        ┌──────────┐      ┌───────────┐
-│ design  │───────▶│design_   │─────▶│   plan    │
-│         │        │  review  │      │           │
-└─────────┘        └──────────┘      └───────────┘
-│
-▼
-┌──────────────┐
-│ plan_review  │
-└──────┬───────┘
-│
-▼
-┌──────────────────┐
-│ execution_scope  │ ◄─── CONTROL NODE
-│ (fullstack/split)│
-└────────┬─────────┘
-│
-┌───────────────────────────────┼────────────────────────┐
-▼                               ▼                        ▼
-┌──────────────┐            ┌──────────────────┐      ┌──────────────┐
-│ test_design  │            │ test_design      │      │ test_design  │
-│ (fullstack)  │            │ (frontend-only)  │      │ (backend-only)
-└──────┬───────┘            └────────┬─────────┘      └──────┬───────┘
-│                             │                       │
-▼                             ▼                       ▼
-┌─────────────────────────────────────────────────────────────────┐
-│        impl_frontend ─────▶ impl_backend ─────▶ test_impl       │
-│          (Kimi)                (Claude)         (Claude)        │
-└─────────────────────────────────────────────────────────────────┘
-│
-┌────────┴────────┐
-▼                 ▼
-┌──────────────────┐   ┌──────────┐
-│ security_review  │──▶│ bazel_   │
-│  (can inline-fix)│   │  suite   │
-└────────┬─────────┘   └──────────┘
-│                  │
-▼                  ▼
-┌──────────────┐    ┌────────────────┐
-│  preflight   │───▶│ preflight_     │  ◄─── CONTROL NODE
-│              │    │ remediation    │
-└──────┬───────┘    └────────────────┘
-│                   │
-└───────┬───────────┘
-▼
-┌────────────────────┐
-│       e2e          │
-│   (browser tests)  │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│     quality        │
-│ (lint/type/format) │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│    validation      │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│    bug_finder      │  ◄─── Optional, CI failures only
-│     (optional)     │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│   pr_creation      │
-│ (push + create PR) │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│    pr_monitor      │
-│  (watch CI gates)  │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│  await_review      │  ◄─── CONTROL NODE: human gate
-│ (human approval)   │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│  retrospective     │
-└────────┬───────────┘
-▼
-┌────────────────────┐
-│    finalize        │  ◄─── CONTROL NODE: cleanup
-└────────┬───────────┘
-▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                            END                                       │
-└─────────────────────────────────────────────────────────────────────┘</p>
-<h2 id="error-recovery-paths">Error Recovery Paths</h2>
-<p>┌─────────────────────────────────────────────────────────────────┐
-│ DESIGN/PLAN/IMPL/TEST/SECURITY/QUALITY  (any stage fails)      │
-└─────────────────────┬───────────────────────────────────────────┘
-│ error
-▼
-┌─────────────────────┐
-│   local_fix         │  ◄─── Reset impl chain + retry
-│ (per-stage budget)  │      (bounded by attempt count)
-└──────┬──────────────┘
-│
-┌─────────┴─────────┐
-▼                   ▼
-retry impl          exhausted:
-budget &gt;0           gate/escalate</p>
-<p>┌─────────────────────────────────────────────────────────────────┐
-│ BAZEL_SUITE / PREFLIGHT  (infra error: rate limit, timeout)    │
-└─────────────────────┬───────────────────────────────────────────┘
-│ infra_error
-▼
-┌──────────────────────┐
-│  infra_retry         │  ◄─── Bounded retry for transients
-│                      │
-└──────┬───────────────┘
-│
-┌─────────┴──────────┐
-▼                    ▼
-retry stage          fail: local_fix</p>
-<p>┌──────────────────────────────────────────────────────────────────┐
-│ PR_MONITOR  (CI fails after PR created)                         │
-└──────────────────────┬────────────────────────────────────────────┘
-│ ci_failure
-▼
-┌──────────────────────┐
-│    ci_fix            │  ◄─── Full pipeline rerun
-│ (reset from design)  │
-└──────┬───────────────┘
-│
-└──────▶ design (restart)</p>
-<p>┌──────────────────────────────────────────────────────────────────┐
-│ QUALITY  (reviewer verdict stale after impl commits)            │
-└──────────────────────┬────────────────────────────────────────────┘
-│ stale_verdict
-▼
-┌──────────────────────┐
-│   reanalysis         │  ◄─── Re-run staleness check
-│                      │
-└──────┬───────────────┘
-│
-└──────▶ test_impl (reset downstream)</p>
-<h2 id="control-flow-nodes">Control Flow Nodes</h2>
-<p>┌──────────────────────────────────────────────────────────────────┐
-│                    CONTROL FLOW NODES                            │
-│             (Deterministic Python logic, not LLM)                │
-└──────────────────────────────────────────────────────────────────┘</p>
-<p>• execution_scope
-└─ Route based on frontend/backend/fullstack lane selection</p>
-<p>• test_phase_scope
-└─ Determine which test stages to run</p>
-<p>• frontend_phase_advance / backend_phase_advance / test_phase_advance
-└─ Serialize multi-lane execution</p>
-<p>• local_fix
-└─ Error recovery: reset impl chain, retry with budget</p>
-<p>• preflight_remediation
-└─ Fix deterministic preflight violations or gate</p>
-<p>• infra_retry
-└─ Handle transient errors (rate limits, timeouts)</p>
-<p>• ci_fix
-└─ Full pipeline rerun for post-PR CI failures</p>
-<p>• reanalysis
-└─ Detect stale verdicts, reset reviewers if code changed</p>
-<p>• plan_replan
-└─ Re-plan if dependencies shift</p>
-<p>• await_review
-└─ Human gate: pause for approval before merge</p>
-<p>• finalize
-└─ Terminal: record telemetry, cleanup</p>
-<h2 id="design-principles">Design Principles</h2>
+<pre tabindex="0"><code>  ┌─────────────────────────────────────────────────────────────────────┐
+  │                           START                                      │
+  └────────────────────────────┬────────────────────────────────────────┘
+                               │
+                               ▼
+          ┌────────────────────────────────────────┐
+          │           PIPELINE STAGES              │
+          │    (Configured via state.json DAG)     │
+          └────────────────────────────────────────┘
+                               │
+            ┌──────────────────┼──────────────────┐
+            ▼                  ▼                  ▼
+       ┌─────────┐        ┌──────────┐      ┌───────────┐
+       │ design  │───────▶│design_   │─────▶│   plan    │
+       │         │        │  review  │      │           │
+       └─────────┘        └──────────┘      └───────────┘
+                                                 │
+                                                 ▼
+                                           ┌──────────────┐
+                                           │ plan_review  │
+                                           └──────┬───────┘
+                                                  │
+                                                  ▼
+                                          ┌──────────────────┐
+                                          │ execution_scope  │ ◄─── CONTROL NODE
+                                          │ (fullstack/split)│
+                                          └────────┬─────────┘
+                                                   │
+                  ┌───────────────────────────────┼────────────────────────┐
+                  ▼                               ▼                        ▼
+          ┌──────────────┐            ┌──────────────────┐      ┌──────────────┐
+          │ test_design  │            │ test_design      │      │ test_design  │
+          │ (fullstack)  │            │ (frontend-only)  │      │ (backend-only)
+          └──────┬───────┘            └────────┬─────────┘      └──────┬───────┘
+                 │                             │                       │
+                 ▼                             ▼                       ▼
+       ┌─────────────────────────────────────────────────────────────────┐
+       │        impl_frontend ─────▶ impl_backend ─────▶ test_impl       │
+       │          (Kimi)                (Claude)         (Claude)        │
+       └─────────────────────────────────────────────────────────────────┘
+                               │
+                      ┌────────┴────────┐
+                      ▼                 ▼
+            ┌──────────────────┐   ┌──────────┐
+            │ security_review  │──▶│ bazel_   │
+            │  (can inline-fix)│   │  suite   │
+            └────────┬─────────┘   └──────────┘
+                     │                  │
+                     ▼                  ▼
+            ┌──────────────┐    ┌────────────────┐
+            │  preflight   │───▶│ preflight_     │  ◄─── CONTROL NODE
+            │              │    │ remediation    │
+            └──────┬───────┘    └────────────────┘
+                   │                   │
+                   └───────┬───────────┘
+                           ▼
+                ┌────────────────────┐
+                │       e2e          │
+                │   (browser tests)  │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │     quality        │
+                │ (lint/type/format) │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │    validation      │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │    bug_finder      │  ◄─── Optional, CI failures only
+                │     (optional)     │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │   pr_creation      │
+                │ (push + create PR) │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │    pr_monitor      │
+                │  (watch CI gates)  │
+                └────────┬───────────┘
+                         ▼
+            ┌────────────────────┐
+            │  await_review      │  ◄─── CONTROL NODE: human gate
+            │ (human approval)   │
+            └────────┬───────────┘
+                     ▼
+            ┌────────────────────┐
+            │  retrospective     │
+            └────────┬───────────┘
+                     ▼
+            ┌────────────────────┐
+            │    finalize        │  ◄─── CONTROL NODE: cleanup
+            └────────┬───────────┘
+                     ▼
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │                            END                                       │
+  └─────────────────────────────────────────────────────────────────────┘
+
+  ## Error Recovery Paths
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │ DESIGN/PLAN/IMPL/TEST/SECURITY/QUALITY  (any stage fails)      │
+  └─────────────────────┬───────────────────────────────────────────┘
+                        │ error
+                        ▼
+             ┌─────────────────────┐
+             │   local_fix         │  ◄─── Reset impl chain + retry
+             │ (per-stage budget)  │      (bounded by attempt count)
+             └──────┬──────────────┘
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+     retry impl          exhausted:
+     budget &gt;0           gate/escalate
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │ BAZEL_SUITE / PREFLIGHT  (infra error: rate limit, timeout)    │
+  └─────────────────────┬───────────────────────────────────────────┘
+                        │ infra_error
+                        ▼
+             ┌──────────────────────┐
+             │  infra_retry         │  ◄─── Bounded retry for transients
+             │                      │
+             └──────┬───────────────┘
+                    │
+          ┌─────────┴──────────┐
+          ▼                    ▼
+     retry stage          fail: local_fix
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │ PR_MONITOR  (CI fails after PR created)                         │
+  └──────────────────────┬────────────────────────────────────────────┘
+                         │ ci_failure
+                         ▼
+            ┌──────────────────────┐
+            │    ci_fix            │  ◄─── Full pipeline rerun
+            │ (reset from design)  │
+            └──────┬───────────────┘
+                   │
+                   └──────▶ design (restart)
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │ QUALITY  (reviewer verdict stale after impl commits)            │
+  └──────────────────────┬────────────────────────────────────────────┘
+                         │ stale_verdict
+                         ▼
+            ┌──────────────────────┐
+            │   reanalysis         │  ◄─── Re-run staleness check
+            │                      │
+            └──────┬───────────────┘
+                   │
+                   └──────▶ test_impl (reset downstream)
+
+  ## Control Flow Nodes
+
+  ┌──────────────────────────────────────────────────────────────────┐
+  │                    CONTROL FLOW NODES                            │
+  │             (Deterministic Python logic, not LLM)                │
+  └──────────────────────────────────────────────────────────────────┘
+
+  • execution_scope
+    └─ Route based on frontend/backend/fullstack lane selection
+
+  • test_phase_scope
+    └─ Determine which test stages to run
+
+  • frontend_phase_advance / backend_phase_advance / test_phase_advance
+    └─ Serialize multi-lane execution
+
+  • local_fix
+    └─ Error recovery: reset impl chain, retry with budget
+
+  • preflight_remediation
+    └─ Fix deterministic preflight violations or gate
+
+  • infra_retry
+    └─ Handle transient errors (rate limits, timeouts)
+
+  • ci_fix
+    └─ Full pipeline rerun for post-PR CI failures
+
+  • reanalysis
+    └─ Detect stale verdicts, reset reviewers if code changed
+
+  • plan_replan
+    └─ Re-plan if dependencies shift
+
+  • await_review
+    └─ Human gate: pause for approval before merge
+
+  • finalize
+    └─ Terminal: record telemetry, cleanup
+</code></pre><h2 id="design-principles">Design Principles</h2>
 <h3 id="flow-like-a-developer">Flow Like a Developer</h3>
 <p>Design, plan, implement, review, test, review, PR. That&rsquo;s the flow in a nutshell. That&rsquo;s how I code major features, and that&rsquo;s how I wanted the agent to perform.</p>
 <h3 id="specificity-matters">Specificity Matters</h3>
