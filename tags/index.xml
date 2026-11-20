@@ -10,20 +10,34 @@
 		
 		
 		
-			<lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Fri, 20 Nov 2026 00:00:00 +0000</lastBuildDate>
 		
 			<atom:link href="https://catscrdl.io/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Agentic Coding</title>
 				<link>https://catscrdl.io/tags/agentic-coding/</link>
-				<pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+				<pubDate>Fri, 20 Nov 2026 00:00:00 +0000</pubDate>
 				<guid>https://catscrdl.io/tags/agentic-coding/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Burnout</title>
+				<link>https://catscrdl.io/tags/burnout/</link>
+				<pubDate>Fri, 20 Nov 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/burnout/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>Llm</title>
+				<link>https://catscrdl.io/tags/llm/</link>
+				<pubDate>Fri, 20 Nov 2026 00:00:00 +0000</pubDate>
+				<guid>https://catscrdl.io/tags/llm/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Software Engineering</title>
 				<link>https://catscrdl.io/tags/software-engineering/</link>
-				<pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate>
+				<pubDate>Fri, 20 Nov 2026 00:00:00 +0000</pubDate>
 				<guid>https://catscrdl.io/tags/software-engineering/</guid>
 				<description></description>
 			</item>

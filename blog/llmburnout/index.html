@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+<title>LLM Fatigue for the AI-Pilled - Catscrdl</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.164.0"><meta property="og:site_name" content="Catscrdl">
+  <meta property="og:title" content="LLM Fatigue for the AI-Pilled">
+  <meta property="og:description" content="Are even the most AI-Pilled amongst us dealing with AI burnout? Probably, yea">
+  <meta property="description" content="Are even the most AI-Pilled amongst us dealing with AI burnout? Probably, yea">
+  <meta property="og:url" content="https://catscrdl.io/blog/llmburnout/">
+  <meta property="og:type" content="article">
+  
+    
+      <meta property="og:image" content="https://catscrdl.io/static/img/2026/llmburnout.png">
+      <meta property="og:image:alt" content="A tired developer at a desk buried in AI-generated pull requests, with a nearly empty battery">
+    
+  
+  <meta property="twitter:site" content="daniel_infosec"><link rel="stylesheet" href="/css/bundle.min.3b4eaac4ede9c71314a3ea051be071f1b47f56265c3a8369e2eef4984ad51090.css" integrity="sha256-O06qxO3pxxMUo&#43;oFG&#43;Bx8bR/ViZcOoNp4u70mErVEJA="><link rel="stylesheet" href="/css/add-on.css">
+</head>
+
+  <body>
+    
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="/" class="nav">
+        
+          Blog
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+        
+      
+        
+          
+          <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+        
+      
+        
+          
+          <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+        
+      
+        
+          
+          <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+        
+      
+      <a href="#share-menu" class="nav link share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav link search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="en" class="nav link active">English (en)</a>
+  
+    
+      
+    
+      
+        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
+      
+    
+      
+        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+      
+        <a href="/nl" lang="nl" class="nav no-lang link">Nederlands (nl)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=LLM%20Fatigue%20for%20the%20AI-Pilled&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;title=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;title=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;description=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="/"><img src="https://catscrdl.io/static/img/main/catscrdllogo.png" class="circle" width="100" alt="CatsCrdl" /></a>
+  <header>
+    <h1>CatsCrdl</h1>
+  </header>
+  <main>
+    <p>Daniel's thoughts on infosec</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="/blog/llmburnout/">LLM Fatigue for the AI-Pilled</a></h2>
+    
+    
+      <p>Are even the most AI-Pilled amongst us dealing with AI burnout? Probably, yea</p>
+    
+  </div>
+  <div class="meta">
+    <time datetime="2026-11-20 00:00:00 &#43;0000 UTC">November 20, 2026</time>
+    <p>Daniel Wyleczuk-Stern</p>
+    <p>4-Minute Read</p>
+  </div>
+</header>
+
+    <div id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=LLM%20Fatigue%20for%20the%20AI-Pilled&amp;url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <p>Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <p>Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;title=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <p>Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;title=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <p>LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f&amp;description=LLM%20Fatigue%20for%20the%20AI-Pilled" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <p>Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=Check%20out%20this%20post%20by Daniel%20Wyleczuk-Stern&amp;body=https%3a%2f%2fcatscrdl.io%2fblog%2fllmburnout%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <p>Email</p>
+        </a>
+  
+
+
+    </div>
+    <div class="content">
+      <a href="/blog/llmburnout/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/llmburnout.png');">
+    <img src="https://catscrdl.io/static/img/2026/llmburnout.png" alt="A tired developer at a desk buried in AI-generated pull requests, with a nearly empty battery">
+  </a>
+      <h1 id="intro">Intro</h1>
+<p>My family has a few mottos. &ldquo;Do Less&rdquo; inspired by one of the greatest films ever (despite the Russell Brand tarnishing. I consider the fact that he&rsquo;s an ass in the movie to just be him playing himself) and &ldquo;Life sucks, then you die&rdquo;. I swear we&rsquo;re actually a cheery lot. So what does this have to do with LLM burnout? Well, it feels like life is a lot more of the later motto. Despite me writing the least amount of code in a year since high school, it feels like I&rsquo;m doing more than ever as an IC. And I&rsquo;m trying to figure out why. I&rsquo;m going to share, in artisanly crafted words (no AI writing here), why I believe life sucks even for the most AI-pilled amongst us.</p>
+<p>Note - my thoughts mainly apply to security and developers at companies that encourage and/or enforce their employees use AI heavily.</p>
+<h1 id="every-ic-is-a-manager">Every IC is a Manager</h1>
+<p>I posted about this on LinkedIn recently, but every IC is now a manager. My job used to be writing code, implementing security features, doing secure designs and reviews, etc. Now, most of my and others knowledge has been encoded into AI skills and my job is to review reports and outputs. If they&rsquo;re not good, I provide coaching and training to improve the capabilities of my &ldquo;subordinates&rdquo;. This is pretty different work from what I&rsquo;ve done for most of my career. I did a year as a manager and went back to being an IC because I enjoyed being hands on. While tech has always rapidly evolved, it mainly changed &ldquo;what&rdquo; we did. This is the largest change in &ldquo;how&rdquo; developers work that I can remember in my career.</p>
+<h1 id="decision-overload">Decision Overload</h1>
+<p>As part of the above, once your AI systems are up and running, decision overload takes over. Two years ago, I&rsquo;d get a ticket for a ticket for a detection fix. I&rsquo;d spend an hour or two deciding on what the fix is and then a couple hours implementing. That implementation time used different brain muscles than the decision muscles. For a lot of experienced coders, this when you&rsquo;d enter &ldquo;flow state&rdquo; and programming could be relaxing. That step is now gone. Instead, LLMs slap you in the face with choice after choice that you have to make. And making these correclty can be exhausting. I&rsquo;m not even talking about manual mode vs auto mode. Tougher decisions like &ldquo;how do you want to handle auto scaling&rdquo; or &ldquo;should we split this module up into two for better testing speed or would that result in too much duplicate code&rdquo;. These are tougher architectural choices that require deliberate thought and doing that all day without the reprieve of implementation is tiring.</p>
+<h1 id="were-all-going-to-die">We&rsquo;re All Going to Die</h1>
+<p>Back in 2024, I almost got a job at Anthropic. I got to the final round when they passed over me to another candidate. (Insert Squidward staring at Spongebob and Patrick playing meme. I&rsquo;m definitely not a little bitter&hellip;) Anyways. One of the reasons I was enthralled with the company was their heavy focus on safety. I wrote that in my cover letter and enjoyed the interview conversations where that came up. Now it seems like the major AI labs care as much about safety as Elizabeth Holmes cares about defrauding investors. It&rsquo;s hard not to look at things like Hugging Face, Artex, or any of the other numerous issues and warnings and think &ldquo;Huh&hellip; maybe teaching sand to think was a mistake.&rdquo;</p>
+<p>On the other side of the coin, if the machines don&rsquo;t kill us all, how can we not be worried about our futures? Many leading tech executives are saying &ldquo;have the LLM replace your rote work so you can work on harder stuff&rdquo;. At some point though, will there be jobs for humans? For those of us with kids, how do you approach teaching them skills and values that matter when it seems like knowledge work may disappear? It&rsquo;s hard to carry around this sense of existential dread into your daily work.</p>
+<p>Relevant YouTube video: youtube.com/watch?v=7Pq-S557XQU&amp;vl=en</p>
+<h1 id="eat-the-rich">Eat the Rich</h1>
+<p>While knowledge workers struggle with all this, the top cats are eating well. The wealth divide is growing exponentially, executives profit off of labor more than ever, and they&rsquo;re bragging about it. I&rsquo;m not doing work I enjoy as much, I have decision fatigue, I&rsquo;m scared about the future, and the rich are profiting off of my misery.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>I think it&rsquo;s pretty easy to understand why folks are getting burned out. Talking with friends and peers, lots of folks are experiencing one or some of the above. I don&rsquo;t have good advice. I&rsquo;m not a therapist. Life sucks, then you die. I hope it gets better though.</p>
+<p>(This isn&rsquo;t a cry for help. I have a support structure. Other people may not. Talk to your friends and family.)</p>
+
+    </div>
+    <footer>
+      <div class="stats">
+  
+    <ul class="categories">
+      
+        
+          <li><a class="article-terms-link" href="/categories/development/">development</a></li>
+        
+      
+    </ul>
+  
+  
+    <ul class="tags">
+      
+        
+          <li><a class="article-terms-link" href="/tags/llm/">llm</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/agentic-coding/">agentic coding</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/burnout/">burnout</a></li>
+        
+          <li><a class="article-terms-link" href="/tags/software-engineering/">software engineering</a></li>
+        
+      
+    </ul>
+  
+</div>
+
+    </footer>
+  </article>
+  
+    
+  <article class="post">
+    
+    <div>
+      <h2 id="say-something">Say Something</h2>
+        <form id="comment-form" class="new-comment" method="POST">
+          
+          <h3 class='reply-notice hidden'>
+            <span class='reply-name'></span>
+          </h3>
+
+          
+          <input type="hidden" name="options[entryId]" value="9b0e8f46b345fcccc74760d1edefdecb">
+          <input type='hidden' name='fields[replyThread]' value=''>
+          <input type='hidden' name='fields[replyID]' value=''>
+          <input type='hidden' name='fields[replyName]' value=''>
+
+          
+          <input required name='fields[name]' type='text' placeholder='Your Name'>
+          <input name='fields[website]' type='text' placeholder='Your Website'>
+          <input required name='fields[email]' type='email' placeholder='Your Email'>
+          <textarea required name='fields[body]' placeholder='Your Message' rows='10'></textarea>
+
+          
+          
+
+          
+          <div class='submit-notice'>
+            <strong class='submit-notice-text submit-success hidden'>Thanks for your comment! It will be shown on the site once it has been approved.</strong>
+            <strong class='submit-notice-text submit-failed hidden'>Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again.</strong>
+          </div>
+
+          
+          <input type='submit' value='Submit' class='button'>
+          <input type='submit' value='Submitted' class='hidden button' disabled>
+          <input type='reset' value='Reset' class='button'>
+        </form>
+    </div>
+
+    
+    <div>
+      <h2>Comments</h2>
+    </div>
+  </article>
+
+
+  
+  <div class="pagination">
+    
+    
+      <a href="/blog/flowwork/" class="button right"><span>Flowwork</span></a>
+    
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>Recent Posts</h1>
+      </header>
+      
+      <article class="mini-post">
+          <a href="/blog/llmburnout/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/llmburnout.png');">
+    <img src="https://catscrdl.io/static/img/2026/llmburnout.png" alt="A tired developer at a desk buried in AI-generated pull requests, with a nearly empty battery">
+  </a>
+        <header>
+          <h2><a href="/blog/llmburnout/">LLM Fatigue for the AI-Pilled</a></h2>
+          <time class="published" datetime="2026-11-20 00:00:00 &#43;0000 UTC">November 20, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/flowwork/">Flowwork</a></h2>
+          <time class="published" datetime="2026-08-15 00:00:00 &#43;0000 UTC">August 15, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          <a href="/blog/whotriagesthealerts/" class="image" style="--bg-image: url('https://catscrdl.io/static/img/2026/triage.jpeg');">
+    <img src="https://catscrdl.io/static/img/2026/triage.jpeg" alt="Guy with a shirt saying IDK how to flirt, but we can triage alerts">
+  </a>
+        <header>
+          <h2><a href="/blog/whotriagesthealerts/">Stop Making Your Detection Engineers Triage Alerts</a></h2>
+          <time class="published" datetime="2026-08-07 00:00:00 &#43;0000 UTC">August 7, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/isolation/">Container Escape Telemetry, Part 1: Isolation Primitives and the eBPF Observability Model</a></h2>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+          
+        <header>
+          <h2><a href="/blog/containerescapetelemetry/methodology/">Container Escape Telemetry, Part 2: Methodology and Tool Architecture</a></h2>
+          <time class="published" datetime="2026-03-31 00:00:00 &#43;0000 UTC">March 31, 2026</time>
+        </header>
+      </article>
+      
+      
+        <footer>
+          <a href="/blog/" class="button">See More</a>
+        </footer>
+      
+    </section>
+  
+
+  
+    
+
+      <section id="categories">
+        <header>
+          <h1><a href="/categories">Categories</a></h1>
+        </header>
+        <ul>
+          
+          
+          <li>
+              <a href="/categories/infosec/">infosec<span class="count">21</span></a>
+          
+          <li>
+              <a href="/categories/development/">development<span class="count">2</span></a>
+          
+          <li>
+              <a href="/categories/food/">food<span class="count">1</span></a>
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>About</h1>
+      </header>
+      <p>A random collection of thoughts on cybersecurity.</p>
+      <footer>
+        <a href="/about" class="button">Learn More</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/catscrdl" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//www.linkedin.com/in/danielwyleczukstern" target="_blank" rel="noopener" title="LinkedIn" class="fab fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//twitter.com/daniel_infosec" target="_blank" rel="noopener" title="Twitter" class="fab fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="mailto:daniel@catscrdl.io" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    © 2026 Catscrdl
+      <br>
+    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.164.0' target='_blank' rel='noopener'>Hugo</a>
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="/js/highlight.js"></script>
+    
+    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.b752dfd57ef918729c41ac996fad9b8fdf418553479d6d97dea74f43e1525fa3.js" integrity="sha256-t1Lf1X75GHKcQayZb62bj99BhVNHnW2X3qdPQ&#43;FSX6M="></script>
+    <script src="/js/add-on.js"></script>
+    </div>
+  </body>
+</html>
